@@ -1,0 +1,21 @@
+{
+  "name": "historyboard",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Ararat Mendez <ararat.mendez@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/camsin/historyBoard",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "animate.css": "^3.5.2"
+  }
+}
