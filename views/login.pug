@@ -1,6 +1,20 @@
 extends layout
 
 block content
-  h1= title
-  p SOY EL LOGIN
-  i.fa.fa-hourglass(aria-hidden='true')
+  body(class="login-view")
+    div(class="dark-cover")
+    div(class="col-md-4 col-xs-12 left-login")
+      div(class="img-container col-xs-12")
+        img(src="/images/logo.png")
+      div(class="register-btn col-xs-12")
+         a(href="#", class="btn-blue") REGISTRATE
+      div(class="col-xs-12")
+          h1 ¿Ya tienes cuenta?
+      div(class="register-btn col-xs-12")
+        a(href="#", class="btn-white") INICIA SESION
+    div(class="col-md-8 col-xs-12 right-login")
+      div(class="title-container")
+        label(class="subtitle") MÉXICO
+        label(class="title") HISTORY BOARD
+        label(class="slogan") "Aprendamos del presente con nuestro pasado"
+

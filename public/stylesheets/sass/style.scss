@@ -1,7 +1,134 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  i {
-    color: blue;
-  }  
+//ESTILOS GENERALES
+a:hover, a:focus {
+  text-decoration: none !important;
 }
+
+//ESTILO DE LOGIN
+.login-view {
+  background-image: url("../../images/login.jpg");
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  padding: 80px 50px;
+
+  .dark-cover {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+  }
+
+  .left-login {
+    //height: 100vh;
+    min-height: 720px;
+
+    border-right: 2px solid gray;
+    h1 {
+      overflow: hidden;
+      text-align: center;
+      color: #D3D3D3;
+      font-size: 14px;
+      margin-top: 0;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+    h1:before,
+    h1:after {
+      background-color: #D3D3D3;
+      content: "";
+      display: inline-block;
+      height: 1px;
+      position: relative;
+      vertical-align: middle;
+      width: 50%;
+    }
+    h1:before {
+      right: 0.5em;
+      margin-left: -50%;
+    }
+    h1:after {
+      left: 0.5em;
+      margin-right: -50%;
+    }
+
+    .img-container {
+      text-align: center;
+      img {
+        width: 275px;
+      }
+    }
+
+    .register-btn {
+      text-align: center;
+      height: 52px;
+      display: flex;
+      margin-bottom: 30px;
+
+      a {
+        margin: auto;
+        width: 258px;
+        font-weight: 500;
+        font-family: arial;
+        border-radius: 100px;
+        font-size: 18px;
+        padding: 14px 65px;
+      }
+      .btn-blue {
+        background: #216096;
+        color: white;
+      }
+
+      .btn-white {
+        background: white;
+        color: #505050;
+      }
+    }
+  }
+
+  .right-login {
+    min-height: 720px;
+    .subtitle {
+      color: white;
+      width:100%;
+      position: relative;
+      text-align: right;
+      font-size: 34px;
+      font-weight: 400;
+      bottom: -19px;
+
+    }
+
+    .title {
+      color: white;
+      width:100%;
+      text-align: left;
+      font-size: 130px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .slogan {
+      color: white;
+      width:100%;
+      text-align: left;
+      font-size: 34px;
+      font-weight: 300;
+      position: relative;
+      top: -13px;
+      line-height: 1.1;
+    }
+
+    .title-container {
+      margin-top: 145px !important;
+      width: 555px;
+      margin: auto;
+    }
+  }
+
+}
+//FIN ESTILO DE LOGIN
