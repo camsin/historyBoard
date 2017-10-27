@@ -3,6 +3,49 @@ a:hover, a:focus {
   text-decoration: none !important;
 }
 
+//MEDIA QUERY
+@media (max-width: 1170px) and (min-width: 991px){
+  .right-login {
+    .subtitle {
+      font-size: 24px !important;
+    }
+
+    .title {
+      font-size: 100px !important;
+    }
+
+    .slogan {
+      font-size: 23px !important;
+      top: 0px !important;
+    }
+
+    .title-container {
+      width: 467px !important;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .right-login {
+    display: none;
+  }
+
+  .left-login {
+    border-right: none !important;
+    min-height: initial !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-view .left-login .img-container img {
+    width: 100% !important;
+  }
+
+  .login-view {
+    padding: 45px 20px !important;
+  }
+}
+
 //ESTILO DE LOGIN
 .login-view {
   background-image: url("../../images/login.jpg");
