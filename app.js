@@ -11,6 +11,7 @@ var ultimasPublicaciones = require('./routes/ultimasPublicaciones');
 var publicaciones = require('./routes/publicaciones');
 var misPublicaciones = require('./routes/misPublicaciones');
 var miPerfil = require('./routes/miPerfil');
+var notificaciones = require('./routes/notificaciones');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use('/ultimasPublicaciones', ultimasPublicaciones);
 app.use('/publicaciones', publicaciones);
 app.use('/misPublicaciones', misPublicaciones);
 app.use('/miPerfil', miPerfil);
+app.use('/notificaciones', notificaciones);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
