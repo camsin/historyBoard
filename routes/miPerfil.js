@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const miPerfilController = require('../controlers/miPerfil/miPerfil');
 
-/* GET users listing. */
-router.get('/', miPerfilController.index);
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('miPerfil', { title: 'miPerfil' });
+});
 
 module.exports = router;
