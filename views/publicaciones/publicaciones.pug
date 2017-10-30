@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
   h1 Yo soi publicaciones
@@ -8,4 +8,4 @@ block content
   a(href='http://localhost:3000/publicaciones/mapa') Mapa
   br
   br
-  a(href='http://localhost:3000/publicaciones/chihuahua') chihuahua
+  a(href=`/publicaciones/byEstado/${estado="durango"}`) Durango

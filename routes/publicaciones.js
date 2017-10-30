@@ -6,29 +6,14 @@ const publicacionesController = require('../controlers/publicaciones/publicacion
 */
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('publicaciones', { title: 'publicaciones' });
+  res.render('publicaciones/publicaciones', { title: 'publicaciones' });
 });
 
-router.get('/byEstado', function(req, res, next) {
+router.get('/byEstado/:estado', function(req, res, next) {
   res.render('publicaciones/byEstado', {
     title: 'publicaciones',
-    state: 'Chihuahuita'});
+    estado:req.params.estado});
 });
 
-
-/*router.get('/byEstado/:state', function(req, res, next) {
-    User.findOne({
-      //params contiene el arreglo de valores que lleguen
-      _id : req.params.id
-    }, (err,user)=>{
-      if(err){
-          res.send("Error");
-      } else {
-        res.render('users/show',{
-          user:user
-        });
-      }
-    });
-});*/
 
 module.exports = router;
