@@ -1,20 +1,115 @@
 extends layout
 
 block content
-  body(class="login-view col-xs-12")
+  div(class="login-view col-xs-12")
+    video#background-video.video-esp(autoplay='', loop='')
+        source(src="/images/video.mp4", type='video/mp4')
     div(class="dark-cover col-xs-12")
     div(class="col-md-4 col-xs-12 left-login")
       div(class="img-container col-xs-12")
         img(src="/images/logo.png")
       div(class="register-btn col-xs-12")
-         a(href="#", class="btn-blue") REGISTRATE
+         a(href="#", class="btn-blue", data-toggle="modal", data-target=".register-modal") REGISTRATE
       div(class="col-xs-12")
           h1 ¿Ya tienes cuenta?
       div(class="register-btn col-xs-12")
-        a(href="#", class="btn-white") INICIA SESION
+        a(href="#", class="btn-white", data-toggle="modal", data-target=".login-modal") INICIA SESION
     div(class="col-md-8 col-xs-12 right-login")
       div(class="title-container")
         label(class="subtitle") MÉXICO
         label(class="title") HISTORY BOARD
         label(class="slogan") "Aprendamos del presente con nuestro pasado"
-
+    .modal.fade.register-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+        .modal-dialog.modal-lg
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4#gridSystemModalLabel.modal-title REGISTRATE
+                .modal-body
+                    .body-message.col-xs-12
+                        .col-xs-12.col-md-4
+                            img(src="/images/logo.png")
+                            .col-xs-12
+                                .col-xs-12
+                                    p(class="social-register") O REGISTRATE CON
+                                .col-xs-4
+                                    a(href="#")
+                                        img(src="/images/fb-icon.png")
+                                .col-xs-4
+                                    a(href="#")
+                                        img(src="/images/tw-icon.png")
+                                .col-xs-4
+                                    a(href="#")
+                                        img(src="/images/gl-icon.png")
+                        .col-xs-12.col-md-8.material-input
+                            .container
+                                form.col-xs-12
+                                    .group
+                                        input(type='text', required='')
+                                        span.highlight
+                                        span.bar
+                                        label Nombre
+                            .container
+                                form.col-xs-12
+                                    .group
+                                        input(type='text', required='')
+                                        span.highlight
+                                        span.bar
+                                        label Correo
+                            .container
+                                form.col-xs-12
+                                    .group
+                                        input(type='text', required='')
+                                        span.highlight
+                                        span.bar
+                                        label Contraseña
+                            .container
+                                form.col-xs-12
+                                    .group
+                                        input(type='text', required='')
+                                        span.highlight
+                                        span.bar
+                                        label Confirmar Contraseña
+                            .col-xs-12.text-center
+                                button.btn.btn-primary(type='button', data-dismiss='modal') CONTINUAR
+    .modal.fade.login-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+        .modal-dialog.modal-lg
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4#gridSystemModalLabel.modal-title INICIA SESION
+                .modal-body
+                    .body-message.col-xs-12
+                        .col-xs-12.col-md-4
+                            img(src="/images/logo.png")
+                            .col-xs-12
+                                .col-xs-12
+                                    p(class="social-register") O INICIA SESION CON
+                                .col-xs-4
+                                    a(href="#")
+                                        img(src="/images/fb-icon.png")
+                                .col-xs-4
+                                    a(href="#")
+                                        img(src="/images/tw-icon.png")
+                                .col-xs-4
+                                    a(href="#")
+                                        img(src="/images/gl-icon.png")
+                        .col-xs-12.col-md-8.material-input
+                            .container
+                                form.col-xs-12
+                                    .group
+                                        input(type='text', required='')
+                                        span.highlight
+                                        span.bar
+                                        label Nombre
+                            .container
+                                form.col-xs-12
+                                    .group
+                                        input(type='text', required='')
+                                        span.highlight
+                                        span.bar
+                                        label Contraseña
+                            .col-xs-12.text-center
+                                button.btn.btn-primary(type='button', data-dismiss='modal') CONTINUAR

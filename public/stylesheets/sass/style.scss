@@ -1,6 +1,106 @@
+//colors
+$primary-blue: #216096;
+$primary-gray: #e5e5e5;
+
+
+
 //ESTILOS GENERALES
 a:hover, a:focus {
   text-decoration: none !important;
+}
+
+textarea:focus, input:focus, a:focus{
+  outline: none;
+}
+
+//------------COMPONENTES---------------//
+.material-input {
+  .container{
+    font-family: 'Roboto';
+    width: 100%;;
+    margin: 0 auto;
+    text-align: center;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+
+  * {
+    box-sizing:border-box;
+  }
+
+  /* form starting stylings ------------------------------- */
+  .group 			  {
+    position:relative;
+    margin-bottom:3em;
+  }
+  input 				{
+    font-size:18px;
+    padding:0.625em  0.625em 0.625em 0.3125em;
+    display:block;
+    width:100%;
+    border:none;
+    border-bottom:1px solid $primary-gray;
+    font-family: arial;
+  }
+  input:focus {
+    outline:none;
+  }
+
+  /* LABEL ======================================= */
+  label {
+    font-family:'Arial';
+    color:#999;
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:0.3125em;
+    top:0.625em;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+  }
+
+  /* active state */
+  input:focus ~ label, input:valid ~ label 		{
+    top:-20px;
+    left: -2px;
+    font-size:14px;
+    color: $primary-blue;
+  }
+
+  /* BOTTOM BARS ================================= */
+  .bar 	{
+    position:relative;
+    display:block;
+  }
+
+  .bar:before, .bar:after 	{
+    content:'';
+    height:2px;
+    width:0;
+    bottom:1px;
+    position:absolute;
+    background: $primary-blue;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+  }
+  .bar:before {
+    left:50%;
+  }
+  .bar:after {
+    right:50%;
+  }
+
+  /* active state */
+  input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width:50%;
+  }
 }
 
 //MEDIA QUERY
@@ -44,6 +144,11 @@ a:hover, a:focus {
   .login-view {
     padding: 45px 20px !important;
   }
+}
+
+//CLASES GENERALES
+.text-center {
+  text-align: center;
 }
 
 //ESTILO DE LOGIN
@@ -122,7 +227,7 @@ a:hover, a:focus {
         padding: 14px 65px;
       }
       .btn-blue {
-        background: #216096;
+        background: $primary-blue;
         color: white;
       }
 
@@ -174,4 +279,58 @@ a:hover, a:focus {
   }
 
 }
+
+#background-video {
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 115%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+}
 //FIN ESTILO DE LOGIN
+.register-modal, .login-modal {
+  .modal-title {
+    text-align: center;
+    font-size: 32px;
+    color: $primary-blue;
+  }
+  .modal-body {
+    display: flex;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+  }
+
+  img {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+  }
+
+  .btn {
+    background: $primary-blue;
+    padding: 8px 27px;
+    font-size: 18px;
+  }
+
+  .social-register {
+    color: $primary-blue;
+    font-size: 15px;
+    font-family: arial;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+
+}
+//FIN MODAL DE LOGIN
+

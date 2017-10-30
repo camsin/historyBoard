@@ -1,6 +1,78 @@
 a:hover, a:focus {
   text-decoration: none !important; }
 
+textarea:focus, input:focus, a:focus {
+  outline: none; }
+
+.material-input {
+  /* form starting stylings ------------------------------- */
+  /* LABEL ======================================= */
+  /* active state */
+  /* BOTTOM BARS ================================= */
+  /* active state */ }
+  .material-input .container {
+    font-family: 'Roboto';
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center; }
+  .material-input * {
+    box-sizing: border-box; }
+  .material-input .group {
+    position: relative;
+    margin-bottom: 3em; }
+  .material-input input {
+    font-size: 18px;
+    padding: 0.625em  0.625em 0.625em 0.3125em;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e5e5e5;
+    font-family: arial; }
+  .material-input input:focus {
+    outline: none; }
+  .material-input label {
+    font-family: 'Arial';
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 0.3125em;
+    top: 0.625em;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all; }
+  .material-input input:focus ~ label, .material-input input:valid ~ label {
+    top: -20px;
+    left: -2px;
+    font-size: 14px;
+    color: #216096; }
+  .material-input .bar {
+    position: relative;
+    display: block; }
+  .material-input .bar:before, .material-input .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #216096;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all; }
+  .material-input .bar:before {
+    left: 50%; }
+  .material-input .bar:after {
+    right: 50%; }
+  .material-input input:focus ~ .bar:before, .material-input input:focus ~ .bar:after {
+    width: 50%; }
+
 @media (max-width: 1170px) and (min-width: 991px) {
   .right-login .subtitle {
     font-size: 24px !important; }
@@ -24,6 +96,9 @@ a:hover, a:focus {
     width: 100% !important; }
   .login-view {
     padding: 45px 20px !important; } }
+
+.text-center {
+  text-align: center; }
 
 .login-view {
   background-image: url("../../images/login.jpg");
@@ -120,3 +195,46 @@ a:hover, a:focus {
       margin-top: 145px !important;
       width: 555px;
       margin: auto; }
+
+#background-video {
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 115%;
+  width: auto;
+  height: auto;
+  z-index: 0; }
+
+.register-modal .modal-title, .login-modal .modal-title {
+  text-align: center;
+  font-size: 32px;
+  color: #216096; }
+
+.register-modal .modal-body, .login-modal .modal-body {
+  display: flex;
+  padding-top: 50px;
+  padding-bottom: 50px; }
+
+.register-modal img, .login-modal img {
+  width: 100%;
+  text-align: center;
+  margin: auto; }
+
+.register-modal .btn, .login-modal .btn {
+  background: #216096;
+  padding: 8px 27px;
+  font-size: 18px; }
+
+.register-modal .social-register, .login-modal .social-register {
+  color: #216096;
+  font-size: 15px;
+  font-family: arial;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 25px; }
