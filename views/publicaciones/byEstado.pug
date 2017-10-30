@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  h1= state
+  h1 Yo soi #{state} de publicaciones
+
+  //-
+    si se envian parametros?
+    a(href=`/publicaciones/byEstado/${state}`, class='btn btn-outline-primary')
+  //

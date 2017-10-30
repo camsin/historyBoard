@@ -5,24 +5,16 @@ function index(req, res, next){
   res.render('publicaciones/publicaciones',{});
 }
 
-function fecha(req, res, next){
-  //res.send("Hola soy la ruta publicacion");
-  res.render('publicaciones/fecha',{});
-}
 
-function mapa(req, res, next){
-  //res.send("Hola soy la ruta publicacion");
-  res.render('publicaciones/mapa',{});
-}
-
-function chihuahua(req, res, next){
-  //res.send("Hola soy la ruta publicacion");
-  res.render('publicaciones/chihuahua',{});
+function byEstado(req, res, next){
+  router.get('/byEstado', function(req, res, next) {
+    res.render('publicaciones/byEstado', {
+      title: 'publicaciones',
+      state: 'Chihuahuita'});
+  }
 }
 
 module.exports = {
   index,
-  fecha,
-  mapa,
-  chihuahua
+  byEstado
 }
