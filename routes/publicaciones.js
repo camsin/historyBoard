@@ -8,7 +8,7 @@ const publicacionesController = require('../controlers/publicaciones/publicacion
 router.get('/', function(req, res, next) {
   res.render('publicaciones/publicaciones', { title: 'publicaciones' });
 });
-
+//probando
 router.get('/byEstado/:estado', function(req, res, next) {
   res.render('publicaciones/byEstado', {
     title: req.params.estado,
