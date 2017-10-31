@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/byEstado/:estado', function(req, res, next) {
   res.render('publicaciones/byEstado', {
-    title: 'publicaciones',
+    title: req.params.estado,
     estado:req.params.estado});
 });
 
