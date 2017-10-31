@@ -15,5 +15,27 @@ router.get('/byEstado/:estado', function(req, res, next) {
     estado:req.params.estado});
 });
 
+////chohuahua >:V
+/*
+router.get('/getBy/:id/:estado/:fecha', (req, res, next)=>{
+ let something = {
+   id: req.params.id,
+   estado: req.params.estado,
+   fecha: req.params.fecha
+ }
+
+if(something.estado != 'null' && something.fecha != 'null')
+  console.log(something);
+else if(something.id != 'null'){
+    console.log(something);
+}
+else if(something.estado != 'null'){
+  console.log(something);
+}
+else if(something.fecha != 'null'){
+  console.log(something);
+}
+ res.render('layout');
+});*/
 
 module.exports = router;
