@@ -1,5 +1,6 @@
 //colors
 $primary-blue: #216096;
+$navbar-blue: rgb(45, 66,80);;
 $primary-gray: #e5e5e5;
 
 
@@ -334,3 +335,85 @@ textarea:focus, input:focus, a:focus{
 }
 //FIN MODAL DE LOGIN
 
+//NAVBAR
+.navbar-board {
+  .container {
+    padding: 0 35px;
+    width: 100%;
+    background: $navbar-blue;
+  }
+
+  .fa-home {
+    font-size: 30px;
+    color: white;
+  }
+
+  .fa-bell {
+    padding-top: 4px;
+    font-size: 25px;
+    color: white;
+  }
+
+  .make-publication {
+    color: white !important;
+    font-size: 15px;
+    border: 1px solid;
+    border-radius: 100px;
+    padding: 6px 19px;
+    margin-top: 13px;
+    margin-right: 15px;
+  }
+
+  #hamburguer {
+    position: relative;
+    top: 0px;
+
+    path {
+      -webkit-transform: translate3d(0, 0, 0);
+      fill: transparent;
+      stroke-width: 2px;
+      stroke: white;
+      stroke-linecap: round;
+      -webkit-transition: all 500ms cubic-bezier(.2,0,0,1);
+      -moz-transition: all 500ms cubic-bezier(.2,0,0,1);
+      -ms-transition: all 500ms cubic-bezier(.2,0,0,1);
+      -o-transition: all 500ms cubic-bezier(.2,0,0,1);
+      transition: all 500ms cubic-bezier(.2,0,0,1);
+    }
+    &:hover .line-top {
+      -ms-transform: translateY(-4x);
+      -webkit-transform: translateY(-4px);
+      transform: translateY(-4px);
+    }
+
+    &:hover .line-bottom {
+      -ms-transform: translateY(4px);
+      -webkit-transform: translateY(4px);
+      transform: translateY(4px);
+    }
+    &.active {
+      .line-center {
+        -moz-transform: translateX(-50px);
+        -webkit-transform: translateX(-50px);
+        -o-transform: translateX(-50px);
+        -ms-transform: translateX(-50px);
+        transform: translateX(-50px);
+      }
+      .line-top {
+        -moz-transform: rotate(45deg) translateX(6px) translateY(-9px);
+        -webkit-transform: rotate(45deg) translateX(6px) translateY(-9px);
+        -o-transform: rotate(45deg) translateX(6px) translateY(-9px);
+        -ms-transform: rotate(45deg) translateX(6px) translateY(-9px);
+        transform: rotate(45deg) translateX(6px) translateY(-9px);
+      }
+      .line-bottom {
+        -moz-transform: rotate(-45deg) translateX(-15px) translateY(0px);
+        -webkit-transform: rotate(-45deg) translateX(-15px) translateY(0px);
+        -o-transform: rotate(-45deg) translateX(-15px) translateY(0px);
+        -ms-transform: rotate(-45deg) translateX(-15px) translateY(0px);
+        transform: rotate(-45deg) translateX(-15px) translateY(0px);
+      }
+    }
+  }
+}
+//FIN NAVBAR
