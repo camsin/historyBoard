@@ -1,19 +1,8 @@
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/lib/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/lib/font-awesome.min.css')
-    link(rel='stylesheet', href='/stylesheets/css/style.css')
-  body
-    block content
-    h1 Yo soi una "nueva" publicacion
+extends ../layout
 
-    a(href='http://localhost:3000/publicacion/id') id
-    br
-    br
-    a(href='http://localhost:3000/publicacion/editar') editar
-
-    a(href='') Link
-    script(src='/javascripts/lib/jquery.min.js')
-    script(src='/javascripts/lib/bootstrap.min.js')
+block content
+  h1 Yo soi una "nueva" publicacion
+  a(href='http://localhost:3000/publicacion/id') id
+  br
+  br
+  a(href='http://localhost:3000/publicacion/editar') editar

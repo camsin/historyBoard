@@ -4,16 +4,24 @@ var router = express.Router();
 Controlador para estado
 const publicacionesController = require('../controlers/publicaciones/publicaciones');
 */
-/* GET home page. */
+//publicaciones
 router.get('/', function(req, res, next) {
   res.render('publicaciones/publicaciones', { title: 'publicaciones' });
 });
-//probando
+//publicaciones por estado
 router.get('/byEstado/:estado', function(req, res, next) {
   res.render('publicaciones/byEstado', {
-    title: req.params.estado,
     estado:req.params.estado});
 });
+
+//publicaciones por año
+router.get('/byFecha/:fecha', function(req, res, next) {
+  res.render('publicaciones/byFecha', {
+    fecha:req.params.fecha});
+});
+
+
+
 
 ////chohuahua >:V
 /*

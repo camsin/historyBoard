@@ -2,10 +2,13 @@ extends ../layout
 
 block content
   h1 Yo soi publicaciones
-  a(href='http://localhost:3000/publicaciones/fecha') Fecha
+  a(href=`/publicaciones/byFecha/${fecha=1950}`) Fecha
   br
   br
   a(href='http://localhost:3000/publicaciones/mapa') Mapa
   br
   br
   a(href=`/publicaciones/byEstado/${estado="durango"}`) Durango
+  br
+  br
+  a(href=`/publicacion/byId/${id=198495}`) Publicacion por ID
