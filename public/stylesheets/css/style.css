@@ -325,3 +325,99 @@ textarea:focus, input:focus, a:focus {
   width: 100%;
   text-align: center;
   color: white; }
+
+.home-page .cards .card-container {
+  margin-top: 30px;
+  background: white;
+  border-radius: 5px;
+  height: 250px; }
+
+.home-page .cards .card-rect {
+  height: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 5px; }
+
+.home-page .cards .header {
+  height: 30px;
+  background: #216096;
+  border-radius: 5px 5px 0px 0px; }
+
+.home-page .cards .img-card {
+  position: absolute;
+  z-index: 0;
+  padding-top: 30px;
+  height: 100%;
+  width: 140px; }
+  .home-page .cards .img-card img {
+    border-radius: 0px 0px 0px 5px; }
+
+.home-page .cards .info-container {
+  padding-left: 155px; }
+
+.home-page .cards .title-card {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  padding-top: 20px;
+  font-size: 19px;
+  padding-right: 15px;
+  font-weight: 500; }
+
+.home-page .cards .header {
+  color: white;
+  padding-top: 5px; }
+  .home-page .cards .header label {
+    font-weight: 400; }
+
+.home-page .cards .user-autor {
+  margin-top: 18px;
+  padding-left: 0; }
+
+.home-page .cards .perfil-img {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%; }
+  .home-page .cards .perfil-img img {
+    border-radius: 50%; }
+
+.home-page .cards .info-card {
+  margin-top: 12px;
+  padding-right: 15px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box; }
+
+.home-page .cards .card-rect {
+  padding: 0px; }
+
+.home-page .cards .p-name {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  position: absolute;
+  top: 6px;
+  left: 38px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+  width: 90%; }
+
+.home-page .cards .p-date {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  position: absolute;
+  top: 21px;
+  left: 38px;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+  width: 90%; }

@@ -450,5 +450,124 @@ textarea:focus, input:focus, a:focus{
     text-align: center;
     color: white;
   }
+
+  .cards {
+    .card-container {
+      margin-top: 30px;
+      background: white;
+      border-radius: 5px;
+      height: 250px;
+      //padding: 0px;
+    }
+
+    .card-rect {
+      height: 100%;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .header {
+      height: 30px;
+      background: $primary-blue;
+      border-radius: 5px 5px 0px 0px;
+    }
+
+    .img-card {
+      position: absolute;
+      z-index: 0;
+      padding-top: 30px;
+      height: 100%;
+      width: 140px;
+      img {
+        border-radius: 0px 0px 0px 5px;
+      }
+    }
+
+    .info-container {
+      padding-left: 155px;
+    }
+
+    .title-card {
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      padding-top: 20px;
+      font-size: 19px;
+      padding-right: 15px;
+      font-weight: 500;
+    }
+
+    .header {
+      color: white;
+      padding-top: 5px;
+      label {
+        font-weight: 400;
+      }
+    }
+
+    .user-autor {
+      margin-top: 18px;
+      padding-left: 0;
+    }
+
+    .perfil-img {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      //display: flex;
+      img {
+        border-radius: 50%;
+      }
+    }
+
+    .info-card {
+      margin-top: 12px;
+
+      padding-right: 15px;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+    }
+
+    .card-rect {
+      padding: 0px;
+    }
+
+    .p-name {
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      position: absolute;
+      top: 6px;
+      left: 38px;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.5);
+      width: 90%;
+
+    }
+
+    .p-date {
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      position: absolute;
+      top: 21px;
+      left: 38px;
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.5);
+      width: 90%;
+
+    }
+  }
 }
 //FIN HOME PAGE
