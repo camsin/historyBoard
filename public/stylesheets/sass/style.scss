@@ -452,6 +452,84 @@ textarea:focus, input:focus, a:focus{
   }
 
   .cards {
+    padding-bottom: 30px;
+    .like-btn, .comment-btn {
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+      height: 30px;
+      position: absolute;
+      right: -15px;
+      padding-top: 5px;
+      padding-left: 1px;
+      width: 30px;
+      bottom: 55px;
+      background: white;
+      overflow: hidden;
+      border-radius: 50px;
+      text-align: center;
+      border: solid 1px #EC407A;
+      transition: 1s;
+      .p-likes {
+        opacity: 0;
+        min-width: 70px;
+        position: absolute;
+        display: initial;
+        color: #EC407A;
+        padding-left: 7px;
+        text-align: center;
+        cursor: default;
+      }
+      i {
+        transition: 1s;
+        color: #EC407A;
+      }
+    }
+
+    .like-btn:hover {
+
+      width: 116px !important;
+      text-align: left !important;
+      padding-left: 14px !important;
+      transition: 1s !important;
+      .p-likes {
+        opacity: 1 !important;
+      }
+      i {
+        transition: 1s;
+        color: #EC407A;
+      }
+    }
+
+    .comment-btn {
+      z-index: 4;
+      bottom: 17px !important;
+      border: solid 1px #64B5F6;
+      padding-top: 3px !important;
+      .p-likes {
+        color: #64B5F6;
+        min-width: 126px !important;
+        cursor: default;
+      }
+      i {
+        transition: 1s;
+        color: #64B5F6;
+      }
+    }
+
+    .comment-btn:hover {
+
+      width: 163px !important;
+      text-align: left !important;
+      padding-left: 14px !important;
+      transition: 1s !important;
+      .p-likes {
+        opacity: 1 !important;
+      }
+      i {
+        transition: 1s;
+        color: #64B5F6;
+      }
+    }
+
     .card-container {
       margin-top: 30px;
       background: white;
@@ -573,5 +651,7 @@ textarea:focus, input:focus, a:focus{
 
     }
   }
+
+
 }
 //FIN HOME PAGE
