@@ -364,6 +364,7 @@ textarea:focus, input:focus, a:focus{
 .navbar-board {
   border: none !important;
   .container {
+    min-height: 60px;
     padding: 0 35px;
     width: 100%;
     background: $navbar-blue;
