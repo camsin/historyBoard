@@ -473,6 +473,7 @@ textarea:focus, input:focus, a:focus{
     }
 
     .img-card {
+      overflow: hidden;
       position: absolute;
       z-index: 0;
       padding-top: 30px;
@@ -508,7 +509,10 @@ textarea:focus, input:focus, a:focus{
     }
 
     .user-autor {
-      margin-top: 18px;
+      position: absolute;
+      bottom: 12px;
+
+      margin-top: 10px;
       padding-left: 0;
     }
 
