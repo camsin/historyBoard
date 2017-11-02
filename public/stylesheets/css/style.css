@@ -91,6 +91,22 @@ textarea:focus, input:focus, a:focus {
     border-right: none !important;
     min-height: initial !important; } }
 
+@media (max-width: 527px) {
+  .user-autor {
+    position: relative !important;
+    bottom: 0px !important;
+    margin-top: 10px !important;
+    padding-left: 0 !important;
+    width: 100% !important; } }
+
+@media (max-width: 700px) {
+  .home-page .img-container, .home-page .black-cover {
+    height: 250px !important; }
+  .home-page .title-class {
+    margin-top: 122px !important;
+    padding: 0 25px !important;
+    font-size: 34px !important; } }
+
 @media (max-width: 400px) {
   .login-view .left-login .img-container img {
     width: 100% !important; }
@@ -409,8 +425,29 @@ textarea:focus, input:focus, a:focus {
     width: 140px; }
     .home-page .cards .img-card img {
       border-radius: 0px 0px 0px 5px; }
+    .home-page .cards .img-card .ref-link {
+      opacity: 0;
+      transition: .5s; }
+    .home-page .cards .img-card .black-link {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 30px;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.6); }
+      .home-page .cards .img-card .black-link img {
+        position: absolute; }
+      .home-page .cards .img-card .black-link p {
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        margin-top: 169px; }
+  .home-page .cards .card-rect:hover .ref-link {
+    opacity: 1 !important;
+    transition: .5s; }
   .home-page .cards .info-container {
-    padding-left: 155px; }
+    padding-left: 155px;
+    color: #333; }
   .home-page .cards .title-card {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -429,6 +466,7 @@ textarea:focus, input:focus, a:focus {
   .home-page .cards .user-autor {
     position: absolute;
     bottom: 12px;
+    cursor: default;
     margin-top: 10px;
     padding-left: 0; }
   .home-page .cards .perfil-img {
@@ -439,6 +477,7 @@ textarea:focus, input:focus, a:focus {
       border-radius: 50%; }
   .home-page .cards .info-card {
     margin-top: 12px;
+    cursor: default;
     padding-right: 15px;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -459,7 +498,7 @@ textarea:focus, input:focus, a:focus {
     font-size: 13px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.5);
-    width: 90%; }
+    width: auto; }
   .home-page .cards .p-date {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;

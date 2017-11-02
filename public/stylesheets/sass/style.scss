@@ -137,6 +137,31 @@ textarea:focus, input:focus, a:focus{
   }
 }
 
+@media (max-width: 527px) {
+  .user-autor {
+    position: relative !important;
+    bottom: 0px !important;
+    margin-top: 10px !important;
+    padding-left: 0 !important;
+    width: 100% !important;
+
+  }
+}
+
+@media (max-width: 700px) {
+  .home-page {
+    .img-container, .black-cover {
+      height: 250px !important;
+    }
+
+    .title-class {
+      margin-top: 122px !important;
+      padding: 0 25px !important;
+      font-size: 34px !important;
+    }
+  }
+}
+
 @media (max-width: 400px) {
   .login-view .left-login .img-container img {
     width: 100% !important;
@@ -560,13 +585,46 @@ textarea:focus, input:focus, a:focus{
       img {
         border-radius: 0px 0px 0px 5px;
       }
+
+      .ref-link {
+        opacity: 0;
+        transition: .5s;
+
+      }
+
+      .black-link {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 30px;
+        z-index: 1;
+        background: rgba(0,0,0,0.6);
+        img {
+          position: absolute;
+        }
+        p {
+          color: white;
+          font-size: 20px;
+          text-align: center;
+          margin-top: 169px;
+        }
+      }
+    }
+
+    .card-rect:hover {
+      .ref-link {
+        opacity: 1 !important;
+        transition: .5s;
+      }
     }
 
     .info-container {
       padding-left: 155px;
+      color: #333;
     }
 
     .title-card {
+      //cursor: pointer;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
@@ -589,7 +647,7 @@ textarea:focus, input:focus, a:focus{
     .user-autor {
       position: absolute;
       bottom: 12px;
-
+      cursor: default;
       margin-top: 10px;
       padding-left: 0;
     }
@@ -606,7 +664,7 @@ textarea:focus, input:focus, a:focus{
 
     .info-card {
       margin-top: 12px;
-
+      cursor: default;
       padding-right: 15px;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
@@ -616,6 +674,7 @@ textarea:focus, input:focus, a:focus{
     }
 
     .card-rect {
+      //cursor: pointer;
       padding: 0px;
     }
 
@@ -631,7 +690,7 @@ textarea:focus, input:focus, a:focus{
       font-size: 13px;
       font-weight: 400;
       color: rgba(0,0,0,0.5);
-      width: 90%;
+      width: auto;
 
     }
 
