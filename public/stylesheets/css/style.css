@@ -209,9 +209,39 @@ textarea:focus, input:focus, a:focus {
     padding: 0 35px;
     width: 100%;
     background: #2d4250; }
+  .navbar-board .notifications-badge {
+    background: red;
+    height: 15px;
+    width: 15px;
+    border-radius: 50px;
+    position: absolute;
+    top: 17px;
+    right: 11px; }
+    .navbar-board .notifications-badge p {
+      color: white;
+      font-size: 9px;
+      text-align: center;
+      position: absolute;
+      width: 15px;
+      top: -2px; }
+  .navbar-board .notifications {
+    height: 64px; }
+    .navbar-board .notifications li {
+      width: 100%; }
+    .navbar-board .notifications .dropdown-toggle {
+      background: transparent !important; }
+    .navbar-board .notifications .name {
+      font-size: 13px;
+      font-weight: 500;
+      margin: 0; }
+    .navbar-board .notifications .action-noti {
+      font-size: 13px;
+      font-weight: 400; }
   .navbar-board .navbar-brand {
     top: -4px;
     left: -37px; }
+  .navbar-board .dropdown-menu {
+    margin-top: -9px !important; }
   .navbar-board .fa-home {
     font-size: 30px;
     color: white; }

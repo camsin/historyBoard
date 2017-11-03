@@ -395,9 +395,51 @@ textarea:focus, input:focus, a:focus{
     background: $navbar-blue;
   }
 
+  .notifications-badge {
+    background: red;
+    height: 15px;
+    width: 15px;
+    border-radius: 50px;
+    position: absolute;
+    top: 17px;
+    right: 11px;
+    p {
+      color: white;
+      font-size: 9px;
+      text-align: center;
+      position: absolute;
+      width: 15px;
+      top: -2px;
+    }
+  }
+
+  .notifications {
+    height: 64px;
+    li {
+      width: 100%;
+    }
+    .dropdown-toggle {
+      background: transparent !important;
+    }
+
+    .name {
+      font-size: 13px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .action-noti {
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
   .navbar-brand {
     top: -4px;
     left: -37px;
+  }
+
+  .dropdown-menu {
+    margin-top: -9px !important;
   }
 
   .fa-home {
