@@ -43,36 +43,21 @@ block content
                                     a(href="#")
                                         img(src="/images/gl-icon.png")
                         .col-xs-12.col-md-8.material-input
-                            .container
-                                form.col-xs-12
-                                    .group
-                                        input(type='text', required='')
-                                        span.highlight
-                                        span.bar
-                                        label Nombre
-                            .container
-                                form.col-xs-12
-                                    .group
-                                        input(type='text', required='')
-                                        span.highlight
-                                        span.bar
-                                        label Correo
-                            .container
-                                form.col-xs-12
-                                    .group
-                                        input(type='text', required='')
-                                        span.highlight
-                                        span.bar
-                                        label Contraseña
-                            .container
-                                form.col-xs-12
-                                    .group
-                                        input(type='text', required='')
-                                        span.highlight
-                                        span.bar
-                                        label Confirmar Contraseña
+                            .input-field.col.s6
+                                input#name(type='text')
+                                label.active(for='name') Nombre
+                            .input-field.col.s6
+                                input#email(type='email')
+                                label.active(for='email') Correo
+                            .input-field.col.s6
+                                input#password(type='password')
+                                label.active(for='password') Contraseña
+                            .input-field.col.s6
+                                input#passwordok(type='password')
+                                label.active(for='passwordok') Confirmar contraseña
+
                             .col-xs-12.text-center
-                                button.btn.btn-primary(type='button', data-dismiss='modal') CONTINUAR
+                                button.waves-effect.waves-light.btn(type='button', data-dismiss='modal') CONTINUAR
     .modal.fade.login-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
         .modal-dialog.modal-lg
             .modal-content
@@ -97,19 +82,11 @@ block content
                                     a(href="#")
                                         img(src="/images/gl-icon.png")
                         .col-xs-12.col-md-8.material-input
-                            .container
-                                form.col-xs-12
-                                    .group
-                                        input(type='text', required='')
-                                        span.highlight
-                                        span.bar
-                                        label Nombre
-                            .container
-                                form.col-xs-12
-                                    .group
-                                        input(type='text', required='')
-                                        span.highlight
-                                        span.bar
-                                        label Contraseña
+                            .input-field.col.s6
+                                input#name(type='text')
+                                label.active(for='name') Nombre
+                            .input-field.col.s6
+                                input#password(type='text')
+                                label.active(for='password') Contraseña
                             .col-xs-12.text-center
                                 button.btn.btn-primary(type='button', data-dismiss='modal') CONTINUAR

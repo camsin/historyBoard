@@ -14,95 +14,103 @@ textarea:focus, input:focus, a:focus{
   outline: none;
 }
 
-//------------COMPONENTES---------------//
-.material-input {
-  .container{
-    font-family: 'Roboto';
-    width: 100%;;
-    margin: 0 auto;
-    text-align: center;
-    display: -webkit-flex;
-    display:         flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-  }
-
-  * {
-    box-sizing:border-box;
-  }
-
-  /* form starting stylings ------------------------------- */
-  .group 			  {
-    position:relative;
-    margin-bottom:3em;
-  }
-  input 				{
-    font-size:18px;
-    padding:0.625em  0.625em 0.625em 0.3125em;
-    display:block;
-    width:100%;
-    border:none;
-    border-bottom:1px solid $primary-gray;
-    font-family: arial;
-  }
-  input:focus {
-    outline:none;
-  }
-
-  /* LABEL ======================================= */
-  label {
-    font-family:'Arial';
-    color:#999;
-    font-size:18px;
-    font-weight:normal;
-    position:absolute;
-    pointer-events:none;
-    left:0.3125em;
-    top:0.625em;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
-  }
-
-  /* active state */
-  input:focus ~ label, input:valid ~ label 		{
-    top:-20px;
-    left: -2px;
-    font-size:14px;
-    color: $primary-blue;
-  }
-
-  /* BOTTOM BARS ================================= */
-  .bar 	{
-    position:relative;
-    display:block;
-  }
-
-  .bar:before, .bar:after 	{
-    content:'';
-    height:2px;
-    width:0;
-    bottom:1px;
-    position:absolute;
-    background: $primary-blue;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
-  }
-  .bar:before {
-    left:50%;
-  }
-  .bar:after {
-    right:50%;
-  }
-
-  /* active state */
-  input:focus ~ .bar:before, input:focus ~ .bar:after {
-    width:50%;
-  }
+.d-initial {
+  display: initial !important;
 }
+
+.m-0 {
+  margin: 0 !important;
+}
+
+//------------COMPONENTES---------------//
+//.material-input {
+//  .container{
+//    font-family: 'Roboto';
+//    width: 100%;;
+//    margin: 0 auto;
+//    text-align: center;
+//    display: -webkit-flex;
+//    display:         flex;
+//    -webkit-align-items: center;
+//    align-items: center;
+//    -webkit-justify-content: center;
+//    justify-content: center;
+//  }
+
+//  * {
+//    box-sizing:border-box;
+//  }
+//
+//  /* form starting stylings ------------------------------- */
+//  .group 			  {
+//    position:relative;
+//    margin-bottom:3em;
+//  }
+//  input 				{
+//    font-size:18px;
+//    padding:0.625em  0.625em 0.625em 0.3125em;
+//    display:block;
+//    width:100%;
+//    border:none;
+//    border-bottom:1px solid $primary-gray;
+//    font-family: arial;
+//  }
+//  input:focus {
+//    outline:none;
+//  }
+//
+//  /* LABEL ======================================= */
+//  label {
+//    font-family:'Arial';
+//    color:#999;
+//    font-size:18px;
+//    font-weight:normal;
+//    position:absolute;
+//    pointer-events:none;
+//    left:0.3125em;
+//    top:0.625em;
+//    transition:0.2s ease all;
+//    -moz-transition:0.2s ease all;
+//    -webkit-transition:0.2s ease all;
+//  }
+//
+//  /* active state */
+//  input:focus ~ label, input:valid ~ label 		{
+//    top:-20px;
+//    left: -2px;
+//    font-size:14px;
+//    color: $primary-blue;
+//  }
+//
+//  /* BOTTOM BARS ================================= */
+//  .bar 	{
+//    position:relative;
+//    display:block;
+//  }
+//
+//  .bar:before, .bar:after 	{
+//    content:'';
+//    height:2px;
+//    width:0;
+//    bottom:1px;
+//    position:absolute;
+//    background: $primary-blue;
+//    transition:0.2s ease all;
+//    -moz-transition:0.2s ease all;
+//    -webkit-transition:0.2s ease all;
+//  }
+//  .bar:before {
+//    left:50%;
+//  }
+//  .bar:after {
+//    right:50%;
+//  }
+//
+//  /* active state */
+//  input:focus ~ .bar:before, input:focus ~ .bar:after {
+//    width:50%;
+//  }
+//}
 
 //MEDIA QUERY
 @media (max-width: 1170px) and (min-width: 991px){
@@ -146,6 +154,11 @@ textarea:focus, input:focus, a:focus{
     width: 100% !important;
 
   }
+
+  .side-nav {
+    width: 100% !important;
+    height: 100%;
+  }
 }
 
 @media (max-width: 700px) {
@@ -159,6 +172,13 @@ textarea:focus, input:focus, a:focus{
       padding: 0 25px !important;
       font-size: 34px !important;
     }
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-brand {
+    top: 3px !important;
+    left: -37px !important;
   }
 }
 
@@ -343,8 +363,12 @@ textarea:focus, input:focus, a:focus{
 
   .btn {
     background: $primary-blue;
-    padding: 8px 27px;
-    font-size: 18px;
+    //padding: 8px 27px;
+    //font-size: 18px;
+  }
+
+  .btn:hover {
+    color: white !important;
   }
 
   .social-register {
@@ -363,11 +387,17 @@ textarea:focus, input:focus, a:focus{
 //NAVBAR
 .navbar-board {
   border: none !important;
-  .container {
-    min-height: 60px;
+  .container-nav {
+    min-height: 64px;
+    max-height: 64px;
     padding: 0 35px;
     width: 100%;
     background: $navbar-blue;
+  }
+
+  .navbar-brand {
+    top: -4px;
+    left: -37px;
   }
 
   .fa-home {
@@ -447,6 +477,7 @@ textarea:focus, input:focus, a:focus{
 
 //HOME PAGE
 .home-page {
+  padding: 0px;
   .img-container {
     height: 500px;
     overflow: hidden;
@@ -626,6 +657,7 @@ textarea:focus, input:focus, a:focus{
 
     .title-card {
       //cursor: pointer;
+      color: rgba(0,0,0,0.7) !important;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
@@ -642,10 +674,17 @@ textarea:focus, input:focus, a:focus{
       padding-top: 5px;
       label {
         font-weight: 400;
+        color: white !important;
+
+      }
+
+      .pull-right {
+        padding-top: 4px;
       }
     }
 
     .user-autor {
+      width: calc(100% - 170px);
       position: absolute;
       bottom: 12px;
       cursor: default;
@@ -715,3 +754,83 @@ textarea:focus, input:focus, a:focus{
 
 }
 //FIN HOME PAGE
+
+.side-nav {
+  display: none;
+  margin-top: 64px !important;
+
+  .circle {
+    box-shadow: 0 0 0 5px white;
+  }
+
+  .name-sidenav {
+    text-align: center;
+    padding-top: 17px !important;
+    margin-bottom: 25px;
+    .name {
+      font-size: 26px !important;
+    }
+
+  }
+
+  .sidenav-link {
+    margin: 18px 0px;
+     a {
+       font-size: 18px;
+       color: #9e9e9e;
+       font-weight: 400;
+     }
+    i {
+      color: #216096;
+      font-size: 22px;
+    }
+
+    a:hover {
+      background: transparent !important;
+      color: #216096 !important;
+    }
+  }
+
+  .perfil-boton {
+    border: solid 1px;
+    border-radius: 50px;
+    width: 165px;
+    text-align: center;
+    /* margin-top: 24px; */
+    margin: auto;
+    padding-top: 6px;
+
+    .button-perfil {
+      padding: 0 !important;
+      font-size: 20px;
+      font-weight: 400;
+    }
+  }
+
+  .perfil-boton:hover {
+    background: white !important;
+    span {
+      color: #216096 !important;
+    }
+  }
+
+  .perfil-boton:hover, .perfil-boton:focus {
+    color: white !important;
+  }
+
+  .black-capa {
+    background-image: linear-gradient(to bottom,#dc4179 , #2d4250);
+    width: 100%;
+    height: 350px;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    opacity: .6;
+  }
+}
+
+
+.drag-target {
+  width: 100% !important;
+  display: none;
+}

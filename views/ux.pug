@@ -2,14 +2,14 @@ extends layout
 
 block content
     nav.navbar.navbar-default.navbar-fixed-top.navbar-board
-        .container
+        .container-nav
             .navbar-header
                 button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
                     span.sr-only Toggle navigation
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                a.navbar-brand(href='#')
+                a.button-collapse.navbar-brand.d-initial(href='#', data-activates='slide-out')
                     svg#hamburguer(xmlns='http://www.w3.org/2000/svg', width='30', height='30', viewbox='0 0 30 30')
                         path.line.line-top(d='M0,9h30')
                         path.line.line-center(d='M0,15h30')
@@ -37,7 +37,51 @@ block content
                     li
                         a(href='z#')
                             i.fa.fa-home(aria-hidden='true')
-    .home-page
+
+            ul#slide-out.side-nav
+                li
+                    .user-view
+                        .background
+                            img(src='/images/sidenav-fondo.jpeg')
+                        a(href='#!user', class='')
+                            img.circle(src='/images/login.jpg')
+                        a(href='#!name',class='name-sidenav')
+                            span.white-text.name John Doe
+                        a(href='#!email',class='perfil-boton')
+                            span.white-text.button-perfil Ver mi perfil
+                    .black-capa
+
+                li.sidenav-link
+                    a.waves-effect(href='#!')
+                        i.fa.fa-user(aria-hidden='true')
+                        | Mis Publicaciones
+                li
+                    .divider.m-0
+                li.sidenav-link
+
+                    a.waves-effect(href='#!')
+                        i.fa.fa-pencil-square-o(aria-hidden='true')
+                        | Hacer Publicación
+                li
+                    .divider.m-0
+                li.sidenav-link
+                    a.waves-effect(href='#!')
+                        i.fa.fa-calendar(aria-hidden='true')
+                        | Buscar Año
+                li
+                    .divider.m-0
+                li.sidenav-link
+                    a.waves-effect(href='#!')
+                        i.fa.fa-globe(aria-hidden='true')
+                        | Mapa Interactivo
+                li
+                    .divider.m-0
+                li.sidenav-link
+                    a.waves-effect(href='#!')
+                        i.fa.fa-power-off(aria-hidden='true')
+                        | Salir
+
+    .home-page.col-xs-12
         .img-container
             //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
             .img-header
@@ -68,7 +112,7 @@ block content
                                 p(class='p-likes') 100 comentarios
                         label(class="title-card") La Triple Alianza y los señorios independientes
                         p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-                        .col-xs-12.user-autor
+                        .user-autor
                             .perfil-img
                                 img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
                             p.col-xs-12.p-name Ararat Mendez
@@ -97,7 +141,7 @@ block content
                                 p(class='p-likes') 100 comentarios
                         label(class="title-card") La Triple Alianza y los señorios independientes
                         p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-                        .col-xs-12.user-autor
+                        .user-autor
                             .perfil-img
                                 img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
                             p.col-xs-12.p-name Ararat Mendez
@@ -126,7 +170,7 @@ block content
                                 p(class='p-likes') 100 comentarios
                         label(class="title-card") La Triple Alianza y los señorios independientes
                         p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-                        .col-xs-12.user-autor
+                        .user-autor
                             .perfil-img
                                 img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
                             p.col-xs-12.p-name Ararat Mendez
@@ -155,7 +199,7 @@ block content
                                 p(class='p-likes') 100 comentarios
                         label(class="title-card") La Triple Alianza y los señorios independientes
                         p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-                        .col-xs-12.user-autor
+                        .user-autor
                             .perfil-img
                                 img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
                             p.col-xs-12.p-name Ararat Mendez
@@ -184,7 +228,7 @@ block content
                                 p(class='p-likes') 100 comentarios
                         label(class="title-card") La Triple Alianza y los señorios independientes
                         p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-                        .col-xs-12.user-autor
+                        .user-autor
                             .perfil-img
                                 img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
                             p.col-xs-12.p-name Ararat Mendez
