@@ -357,7 +357,7 @@ textarea:focus, input:focus, a:focus {
   .home-page .black-cover {
     height: 500px;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     position: absolute;
     top: 0; }
   .home-page .title-class {
