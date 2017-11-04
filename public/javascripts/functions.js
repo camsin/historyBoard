@@ -27,3 +27,10 @@ $("#hamburguer").sideNav();
 $(document).ready(function(){
     $('.tooltipped').tooltip({delay: 50});
 });
+
+tippy('.tippy', {
+    position: 'top',
+    animation: 'scale',
+    arrow: true,
+    followCursor: true
+})

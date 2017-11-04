@@ -34,6 +34,16 @@ gulp.task('materialize', function(){
     .pipe(gulp.dest('public/javascripts/lib'))
 });
 
+gulp.task('tippyjs', function(){
+  return gulp.src('node_modules/tippy.js/dist/tippy.min.js')
+    .pipe(gulp.dest('public/javascripts/lib'))
+});
+
+gulp.task('tippy', function(){
+  return gulp.src('node_modules/tippy.js/dist/tippy.css')
+    .pipe(gulp.dest('public/stylesheets/lib'))
+});
+
 gulp.task('sass', function() {
   gulp.src(sassFiles)
       .pipe(sass().on('error', sass.logError))
@@ -46,4 +56,4 @@ gulp.task('watch',function() {
     gulp.watch(sassFiles,['sass']);
 });
 
-gulp.task('default', [ 'jquery', 'bootstrapcss', 'bootstrapjs', 'icon', 'sass', 'watch', 'materialize' ]);
+gulp.task('default', [ 'jquery', 'bootstrapcss', 'bootstrapjs', 'icon', 'sass', 'watch', 'materialize', 'tippy', 'tippyjs' ]);
