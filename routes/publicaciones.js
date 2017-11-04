@@ -22,7 +22,7 @@ router.get('/byFecha/:fecha', (req, res, next)=> {
 
 //Ultimas publicaciones
 router.get('/ultimasPublicaciones', (req, res, next)=>{
-  res.render('publicaciones/ultimasPublicaciones',{});
+  res.render('publicaciones/ultimasPublicaciones');
 });
 
 //publicacion por ID
