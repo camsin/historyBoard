@@ -22,6 +22,10 @@ textarea:focus, input:focus, a:focus{
   margin: 0 !important;
 }
 
+.text-align-c {
+  text-align: center;
+}
+
 //------------COMPONENTES---------------//
 //.material-input {
 //  .container{
@@ -909,4 +913,34 @@ textarea:focus, input:focus, a:focus{
 #sidenav-overlay {
   pointer-events: none;
   cursor: default;
+}
+
+.mapa-interactivo {
+  use:hover {
+    fill: $primary-blue;
+    cursor: pointer;
+    transition: .5s;
+  }
+
+  use {
+    stroke: $primary-blue;
+    fill: $primary-gray;
+    transition: .5s;
+  }
+
+  .container-map {
+    width: 933px;
+    margin: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 40px;
+    border-radius: 6px;
+    box-shadow: inset 0px 7px $primary-blue, 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .p-mapa {
+    font-size: 25px;
+    margin-top: 50px;
+    color: #505050;
+  }
 }

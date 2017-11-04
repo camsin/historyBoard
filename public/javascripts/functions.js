@@ -23,3 +23,7 @@ $(document).ready(function() {
 });
 
 $("#hamburguer").sideNav();
+
+$(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+});

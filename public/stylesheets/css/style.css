@@ -10,6 +10,9 @@ textarea:focus, input:focus, a:focus {
 .m-0 {
   margin: 0 !important; }
 
+.text-align-c {
+  text-align: center; }
+
 @media (max-width: 1170px) and (min-width: 991px) {
   .right-login .subtitle {
     font-size: 24px !important; }
@@ -574,3 +577,27 @@ textarea:focus, input:focus, a:focus {
 #sidenav-overlay {
   pointer-events: none;
   cursor: default; }
+
+.mapa-interactivo use:hover {
+  fill: #216096;
+  cursor: pointer;
+  transition: .5s; }
+
+.mapa-interactivo use {
+  stroke: #216096;
+  fill: #e5e5e5;
+  transition: .5s; }
+
+.mapa-interactivo .container-map {
+  width: 933px;
+  margin: auto;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 40px;
+  border-radius: 6px;
+  box-shadow: inset 0px 7px #216096, 0 2px 4px 0 rgba(0, 0, 0, 0.1); }
+
+.mapa-interactivo .p-mapa {
+  font-size: 25px;
+  margin-top: 50px;
+  color: #505050; }
