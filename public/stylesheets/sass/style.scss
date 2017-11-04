@@ -149,6 +149,12 @@ textarea:focus, input:focus, a:focus{
   }
 }
 
+@media (max-width: 800px) {
+  .mapa-interactivo .container-map {
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 460px) {
   .navbar-board .make-publication {
     display: none !important;
