@@ -1,6 +1,5 @@
 # historyBoard
 
-===================
 Existe una gran problemática actualmente en México, pocas son las personas que saben la historia de nuestro país. Por eso nace historyBoard, la cual es una red social en donde se pueden compartir publicaciones de historia.
 Para poder utilizarlo debes de cumplir los siguientes requisitos:
 
