@@ -16,17 +16,23 @@ function byFecha(req, res, next) {
   {fecha:req.params.fecha});
 }
 
-//Ultimas publicaciones
-function ultimasPublicaciones (req, res, next){
-  res.render('publicaciones/ultimasPublicaciones',{title: 'ultimas publicaciones'});
-}
-
 //publicacion por ID
 function byId(req, res, next) {
   res.render('publicacion/byId', {
     id: req.params.id
   });
 }
+
+//Ultimas publicaciones
+function ultimasPublicaciones (req, res, next){
+  res.render('publicaciones/ultimasPublicaciones',{title: 'ultimas publicaciones'});
+}
+
+//Mis publicaciones
+function misPublicaciones(req, res, next) {
+  res.render('publicaciones/misPublicaciones', { title: 'misPublicaciones' });
+}
+
 // Editar publicacion
 function editar(req, res, next) {
   res.render('publicacion/editar', {
@@ -38,11 +44,6 @@ function editar(req, res, next) {
 function nueva(req, res, next) {
   res.render('publicacion/nueva',
      { title: 'Nueva publicacion' });
-}
-
-//Mis publicaciones
-function misPublicaciones(req, res, next) {
-  res.render('publicaciones/misPublicaciones', { title: 'misPublicaciones' });
 }
 
 
