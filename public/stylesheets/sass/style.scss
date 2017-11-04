@@ -217,6 +217,18 @@ textarea:focus, input:focus, a:focus{
     width: 100% !important;
     height: 100%;
   }
+
+  .empty-state-holder {
+    p {
+      font-size: 17px !important;
+    }
+    a {
+      font-size: 17px !important;
+    }
+    img {
+      max-width: 159px !important;
+    }
+  }
 }
 
 @media (max-width: 700px) {
@@ -975,5 +987,27 @@ textarea:focus, input:focus, a:focus{
     font-size: 25px;
     margin-top: 50px;
     color: #505050;
+  }
+}
+
+.empty-state-holder {
+  margin-bottom: 40px;
+  p {
+    font-size: 24px;
+
+    color: #505060;
+  margin-bottom: 0px !important;
+  padding: 0 15px;
+  }
+  a {
+    margin: 0 8px;
+    font-size: 24px;
+
+  }
+
+  img {
+    max-width: 259px;
+    margin-top: 48px;
+    margin-bottom: 35px;
   }
 }

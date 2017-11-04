@@ -47,7 +47,7 @@ router.get('/editar/:contenido', function(req, res, next) {
 
 //Mis publicaciones
 router.get('/misPublicaciones', function(req, res, next) {
-  res.render('misPublicaciones', { showSideNav: true, title: 'misPublicaciones' });
+  res.render('publicaciones/misPublicaciones', { showSideNav: true, title: 'misPublicaciones' });
 });
 
 
