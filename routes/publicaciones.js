@@ -1,48 +1,31 @@
-var express = require('express');
-var router = express.Router();
-/*
-Controlador para estado
+const express = require('express');
+const router = express.Router();
+//Controlador
 const publicacionesController = require('../controlers/publicaciones/publicaciones');
-*/
-//publicaciones
+
+/*publicaciones
 router.get('/', (req, res, next)=> {
   res.render('publicaciones/publicaciones', { title: 'publicaciones' });
-});
+});*/
+
+router.get('/', publicacionesController.index);
 //publicaciones por estado
-router.get('/byEstado/:estado', (req, res, next)=> {
-  res.render('publicaciones/byEstado', {
-    estado:req.params.estado});
-});
+router.get('/byEstado/:estado',publicacionesController.byEstado);
 
 //publicaciones por año
-router.get('/byFecha/:fecha', (req, res, next)=> {
-  res.render('publicaciones/byFecha', {
-    fecha:req.params.fecha});
-});
+router.get('/byFecha/:fecha',publicacionesController.byFecha);
 
 //Ultimas publicaciones
-router.get('/ultimasPublicaciones', (req, res, next)=>{
-  res.render('publicaciones/ultimasPublicaciones',{});
-});
+router.get('/ultimasPublicaciones',publicacionesController.ultimasPublicaciones);
 
 //publicacion por ID
-router.get('/byId/:id', function(req, res, next) {
-  res.render('publicacion/byId', {
-    id: req.params.id
-  });
-});
+router.get('/byId/:id',publicacionesController.byId);
 // Editar publicacion
-router.get('/editar/:contenido', function(req, res, next) {
-  console.log(req.params.contenido);
-  res.render('publicacion/editar', {
-    contenido: req.params.contenido
-  });
-});
-
+router.get('/editar/:contenido',publicacionesController.editar);
+// Nueva publicacion
+router.get('/nueva',publicacionesController.nueva);
 //Mis publicaciones
-router.get('/misPublicaciones', function(req, res, next) {
-  res.render('misPublicaciones', { title: 'misPublicaciones' });
-});
+router.get('/misPublicaciones',publicacionesController.misPublicaciones);
 
 
 
