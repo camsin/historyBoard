@@ -5,7 +5,7 @@ $(document).ready(function() {
     });
 
     $(".drag-target").click(function(){
-        $("#hamburguer").toggleClass("active");
+        $("#hamburguer").removeClass("active");
     });
 
     $(".drag-target").click(function(){
@@ -22,4 +22,4 @@ $(document).ready(function() {
 
 });
 
-$(".button-collapse").sideNav();
+$("#hamburguer").sideNav();

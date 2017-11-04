@@ -28,6 +28,19 @@ textarea:focus, input:focus, a:focus {
     border-right: none !important;
     min-height: initial !important; } }
 
+@media (max-width: 460px) {
+  .navbar-board .make-publication {
+    display: none !important; } }
+
+@media (max-width: 768px) {
+  .navbar-board .navbar-collapse {
+    display: initial !important;
+    position: absolute !important;
+    top: -5px !important;
+    right: 14px !important; }
+  .navbar-board button.navbar-toggle {
+    display: none !important; } }
+
 @media (max-width: 527px) {
   .user-autor {
     position: relative !important;
@@ -258,6 +271,7 @@ textarea:focus, input:focus, a:focus {
     margin-top: 13px;
     margin-right: 15px; }
   .navbar-board #hamburguer {
+    cursor: pointer;
     position: relative;
     top: 0px; }
     .navbar-board #hamburguer path {
@@ -549,4 +563,14 @@ textarea:focus, input:focus, a:focus {
 
 .drag-target {
   width: 100% !important;
-  display: none; }
+  display: none;
+  pointer-events: none;
+  cursor: default; }
+
+.hiddendiv {
+  pointer-events: none;
+  cursor: default; }
+
+#sidenav-overlay {
+  pointer-events: none;
+  cursor: default; }
