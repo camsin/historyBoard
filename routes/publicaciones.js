@@ -8,40 +8,46 @@ const publicacionesController = require('../controlers/publicaciones/publicacion
 router.get('/', (req, res, next)=> {
   res.render('publicaciones/publicaciones', { title: 'publicaciones' });
 });
+
+//MAPA
+router.get('/byEstado', (req, res, next)=> {
+  res.render('publicaciones/mapa', {showSideNav: true});
+});
+
 //publicaciones por estado
 router.get('/byEstado/:estado', (req, res, next)=> {
   res.render('publicaciones/byEstado', {
-    estado:req.params.estado});
+    estado:req.params.estado, showSideNav: true});
 });
 
 //publicaciones por año
 router.get('/byFecha/:fecha', (req, res, next)=> {
   res.render('publicaciones/byFecha', {
-    fecha:req.params.fecha});
+    fecha:req.params.fecha, showSideNav: true});
 });
 
 //Ultimas publicaciones
 router.get('/ultimasPublicaciones', (req, res, next)=>{
-  res.render('publicaciones/ultimasPublicaciones');
+  res.render('publicaciones/ultimasPublicaciones',{showSideNav: true});
 });
 
 //publicacion por ID
 router.get('/byId/:id', function(req, res, next) {
   res.render('publicacion/byId', {
-    id: req.params.id
+    id: req.params.id, showSideNav: true
   });
 });
 // Editar publicacion
 router.get('/editar/:contenido', function(req, res, next) {
   console.log(req.params.contenido);
-  res.render('publicacion/editar', {
+  res.render('publicacion/editar', {showSideNav: true,
     contenido: req.params.contenido
   });
 });
 
 //Mis publicaciones
 router.get('/misPublicaciones', function(req, res, next) {
-  res.render('misPublicaciones', { title: 'misPublicaciones' });
+  res.render('misPublicaciones', { showSideNav: true, title: 'misPublicaciones' });
 });
 
 

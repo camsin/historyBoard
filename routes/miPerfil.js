@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('miPerfil', { title: 'miPerfil' });
+  res.render('miPerfil', { showSideNav: true, title: 'miPerfil' });
 });
 
 module.exports = router;
