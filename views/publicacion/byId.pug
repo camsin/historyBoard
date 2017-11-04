@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1 Yo soi una publicacion seleccionada por ID: #{id}
+  
+  br
+  br
+  a(href='http://localhost:3000/publicaciones') publicaciones
+  br
+  br  
+  a(href=`http://localhost:3000/publicacion/editar/${id}`) editar
+  br
+  br
+  a(href='http://localhost:3000/publicacion/nueva') nueva
