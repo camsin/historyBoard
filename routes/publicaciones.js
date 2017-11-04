@@ -38,9 +38,8 @@ router.get('/editar/:contenido', function(req, res, next) {
     contenido: req.params.contenido
   });
 });
-
 //Mis publicaciones
-router.get('/misPublicaciones', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('misPublicaciones', { title: 'misPublicaciones' });
 });
 
