@@ -34,3 +34,8 @@ tippy('.tippy', {
     arrow: true,
     followCursor: true
 })
+
+$(function() {
+    var images = ['login.jpg', 'plaza.jpg'];
+    $('.img-header').css({'background-image': 'url(../../images/' + images[Math.floor(Math.random() * images.length)] + ')'});
+});

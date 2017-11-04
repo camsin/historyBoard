@@ -13,6 +13,21 @@ textarea:focus, input:focus, a:focus {
 .text-align-c {
   text-align: center; }
 
+@font-face {
+  font-family: 'mayan';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/mayan.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'mexcellent';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/mexcellent-rg.ttf") format("truetype"); }
+
+.login-view .right-login .title, .login-view .right-login .subtitle, .home-page .title-class {
+  font-family: mayan !important; }
+
 @media (max-width: 1170px) and (min-width: 991px) {
   .right-login .subtitle {
     font-size: 24px !important; }
@@ -30,6 +45,10 @@ textarea:focus, input:focus, a:focus {
   .left-login {
     border-right: none !important;
     min-height: initial !important; } }
+
+@media (min-width: 1100px) {
+  .home-page .title-class {
+    font-size: 70px !important; } }
 
 @media (max-width: 800px) {
   .mapa-interactivo .container-map {
@@ -326,7 +345,6 @@ textarea:focus, input:focus, a:focus {
     overflow: hidden; }
   .home-page .img-header {
     height: 100%;
-    background-image: url("../../images/login.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover; }
