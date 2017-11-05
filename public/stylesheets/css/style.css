@@ -19,6 +19,15 @@ textarea:focus, input:focus, a:focus {
 .m-b-50 {
   margin-bottom: 50px !important; }
 
+.m-b-70 {
+  margin-bottom: 70px !important; }
+
+.m-t-25 {
+  margin-top: 25px; }
+
+.m-t-30 {
+  margin-top: 30px; }
+
 @font-face {
   font-family: 'mayan';
   font-style: normal;
@@ -368,6 +377,7 @@ textarea:focus, input:focus, a:focus {
     height: 500px;
     overflow: hidden; }
   .home-page .img-header {
+    position: relative;
     height: 100%;
     background-position: center center;
     background-repeat: no-repeat;
@@ -682,7 +692,7 @@ textarea:focus, input:focus, a:focus {
     color: #505050;
     font-size: 19px;
     margin-top: 30px;
-    padding: 0 260px; }
+    padding: 0 50px; }
   .article-container .comment-title {
     color: #216096;
     font-size: 50px;
@@ -692,8 +702,8 @@ textarea:focus, input:focus, a:focus {
   .article-container .material-placeholder {
     height: 100%; }
   .article-container .carousel-cont {
-    padding-bottom: 0px;
-    margin-bottom: 100px; }
+    margin-bottom: 70px;
+    padding-bottom: 0px; }
   .article-container .carousel-item {
     margin-top: 30px;
     margin-bottom: 50px;
@@ -820,3 +830,42 @@ textarea:focus, input:focus, a:focus {
     margin-left: auto;
     border-radius: 50%;
     animation: floatingShadow 3s ease-in-out infinite; }
+
+.like-press {
+  transition: .5s;
+  position: absolute;
+  bottom: -26px;
+  z-index: 1;
+  color: #EC407A;
+  background: white;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 24px;
+  text-align: center;
+  padding-top: 7px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border: 2px solid;
+  right: 50px;
+  cursor: pointer; }
+
+.like-press:hover {
+  transition: .5s;
+  color: white;
+  background: #EC407A;
+  border: 2px solid #EC407A; }
+
+.user-publication {
+  padding-top: 60px; }
+  .user-publication .circle {
+    height: 200px;
+    margin: auto;
+    width: 200px;
+    border: 4px solid white;
+    box-shadow: 0 0 0 5px #216096; }
+  .user-publication .name-autor {
+    font-size: 25px;
+    color: #505050; }
+  .user-publication .name-date {
+    font-size: 15px;
+    color: #505050; }

@@ -34,6 +34,18 @@ textarea:focus, input:focus, a:focus{
   margin-bottom: 50px !important;
 }
 
+.m-b-70 {
+  margin-bottom: 70px !important;
+}
+
+.m-t-25 {
+  margin-top: 25px;
+}
+
+.m-t-30 {
+  margin-top: 30px;
+}
+
 //------------COMPONENTES---------------//
 //.material-input {
 //  .container{
@@ -625,6 +637,7 @@ textarea:focus, input:focus, a:focus{
   }
 
   .img-header {
+    position: relative;
     height: 100%;
     //background-image: url("../../images/login.jpg");
     background-position: center center;
@@ -1062,7 +1075,7 @@ textarea:focus, input:focus, a:focus{
     color: #505050;
     font-size: 19px;
     margin-top: 30px;
-    padding: 0 260px;
+    padding: 0 50px;
   }
 
   .comment-title {
@@ -1078,8 +1091,8 @@ textarea:focus, input:focus, a:focus{
   }
 
   .carousel-cont {
+    margin-bottom: 70px;
     padding-bottom: 0px;
-    margin-bottom: 100px;
     //box-shadow: 0 1px #e5e5e5;
   }
 
@@ -1279,5 +1292,52 @@ textarea:focus, input:focus, a:focus{
     margin-left: auto;
     border-radius: 50%;
     animation: floatingShadow 3s ease-in-out infinite;
+  }
+}
+
+.like-press {
+  transition: .5s;
+  position: absolute;
+  bottom: -26px;
+  z-index: 1;
+  color: #EC407A;
+  background: white;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 24px;
+  text-align: center;
+  padding-top: 7px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border: 2px solid;
+  right: 50px;
+  cursor: pointer;
+}
+
+.like-press:hover {
+  transition: .5s;
+  color: white;
+  background: #EC407A;
+  border: 2px solid #EC407A;
+}
+
+.user-publication {
+  padding-top: 60px;
+  .circle {
+    height: 200px;
+    margin: auto;
+    width: 200px;
+    border: 4px solid white;
+    box-shadow: 0 0 0 5px #216096;
+  }
+
+  .name-autor {
+    font-size: 25px;
+    color: #505050;
+  }
+
+  .name-date {
+    font-size: 15px;
+    color: #505050;
   }
 }
