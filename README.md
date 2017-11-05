@@ -14,7 +14,7 @@ Ahora una vez instalado las herramientas del paso anterior vamos a descargar el 
 
  1. Copiar la url SSH del repositorio de github (git@github.com:camsin/historyBoard).
  2. Utilizar el comando [git clone](https://git-scm.com/docs/git-clone) via terminal.
- 3. Entrar a la carpeta del proyecto (cd DRAW17-punto-venta).
+ 3. Entrar a la carpeta del proyecto.
  4. Utilizar el comando `npm install` .
  5. Utilizar el comando `bower install`.
  6. Correr el comando `gulp`.
