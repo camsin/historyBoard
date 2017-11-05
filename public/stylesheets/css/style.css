@@ -869,3 +869,10 @@ textarea:focus, input:focus, a:focus {
   .user-publication .name-date {
     font-size: 15px;
     color: #505050; }
+
+.new-pub {
+  color: #505050;
+  font-size: 27px;
+  padding: 0 150px;
+  margin-top: 50px;
+  margin-bottom: 51px; }

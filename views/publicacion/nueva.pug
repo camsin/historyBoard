@@ -1,8 +1,81 @@
 extends ../layout
 
 block content
-  h1 Yo soi una "nueva" publicacion
-  a(href='http://localhost:3000/publicacion/id') id
-  br
-  br
-  a(href='http://localhost:3000/publicacion/editar') editar
+
+  .home-page.col-xs-12
+    .img-container
+      //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
+      .img-header
+      .black-cover
+        p(class="title-class") CREA UNA PUBLICACIÓN
+    .col-xs-12.text-align-c.new-pub
+      p.col-xs-12.p-new México se construyó a base de esfuerzo y dedicación, justamente eso queremos hacer eso son historyBoard. Este es tu lienzo en blanco, EMPECEMOS!
+      .row
+        .input-field.col.s12
+          input#title.validate(type='text')
+          label.active(for='title') Titulo cool
+      form.col-md-6(action='#')
+        .file-field.input-field
+          .btn
+            span Img
+            input(type='file')
+          .file-path-wrapper
+            input.file-path.validate(type='text')
+      form.col-md-6(action='#')
+        .file-field.input-field
+          .btn
+            span Img
+            input(type='file')
+          .file-path-wrapper
+            input.file-path.validate(type='text')
+      .row
+        .input-field.col.s12
+          input#title.validate(type='text')
+          label.active(for='title') Titulo cool
+      input.datepicker(type='text')
+      .row
+        form.col.s12
+          .row
+            .input-field.col.s12
+              textarea#textarea1.materialize-textarea
+              label(for='textarea1') Textarea
+      form.col-md-12(action='#')
+        .file-field.input-field
+          .btn
+            span Img
+            input(type='file')
+          .file-path-wrapper
+            input.file-path.validate(type='text')
+      form.col-md-12(action='#')
+        .file-field.input-field
+          .btn
+            span Img
+            input(type='file')
+          .file-path-wrapper
+            input.file-path.validate(type='text')
+      form.col-md-12(action='#')
+        .file-field.input-field
+          .btn
+            span Img
+            input(type='file')
+          .file-path-wrapper
+            input.file-path.validate(type='text')
+      form.col-md-12(action='#')
+        .file-field.input-field
+          .btn
+            span Img
+            input(type='file')
+          .file-path-wrapper
+            input.file-path.validate(type='text')
+      form.col-md-12(action='#')
+        .file-field.input-field
+          .btn
+            span Img
+            input(type='file')
+          .file-path-wrapper
+            input.file-path.validate(type='text')
+
+
+
+
+

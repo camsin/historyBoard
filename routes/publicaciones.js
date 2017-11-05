@@ -44,6 +44,13 @@ router.get('/editar/:contenido', function(req, res, next) {
     contenido: req.params.contenido
   });
 });
+// nueva publicacion
+router.get('/nueva/:contenido', function(req, res, next) {
+  console.log(req.params.contenido);
+  res.render('publicacion/nueva', {showSideNav: true,
+    contenido: req.params.contenido
+  });
+});
 
 //Mis publicaciones
 router.get('/misPublicaciones', function(req, res, next) {
