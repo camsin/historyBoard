@@ -13,6 +13,12 @@ textarea:focus, input:focus, a:focus {
 .text-align-c {
   text-align: center; }
 
+.z-index--1 {
+  z-index: -1; }
+
+.m-b-50 {
+  margin-bottom: 50px !important; }
+
 @font-face {
   font-family: 'mayan';
   font-style: normal;
@@ -45,6 +51,18 @@ textarea:focus, input:focus, a:focus {
   .left-login {
     border-right: none !important;
     min-height: initial !important; } }
+
+@media (max-width: 1080px) and (min-width: 666px) {
+  .article-container .text-container {
+    padding: 0 100px !important; } }
+
+@media (max-width: 666px) {
+  .article-container .text-container {
+    padding: 0 15px !important; }
+  .article-container .comment-title {
+    font-size: 30px !important; }
+  .article-container .comment-container {
+    width: 100% !important; } }
 
 @media (min-width: 1100px) {
   .home-page .title-class {
@@ -361,11 +379,17 @@ textarea:focus, input:focus, a:focus {
     position: absolute;
     top: 0; }
   .home-page .title-class {
+    padding: 0 15px;
     margin-top: 220px;
     font-size: 50px;
     width: 100%;
     text-align: center;
-    color: white; }
+    color: white;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box; }
   .home-page .cards {
     padding-bottom: 30px; }
     .home-page .cards .like-btn, .home-page .cards .comment-btn {
@@ -644,3 +668,57 @@ textarea:focus, input:focus, a:focus {
     max-width: 259px;
     margin-top: 48px;
     margin-bottom: 35px; }
+
+.article-container {
+  text-align: justify;
+  text-justify: inter-word; }
+  .article-container .label-article {
+    text-align: center;
+    width: 100%;
+    color: #505050;
+    margin-top: 51px;
+    font-size: 20px; }
+  .article-container .text-container {
+    color: #505050;
+    font-size: 19px;
+    margin-top: 30px;
+    padding: 0 260px; }
+  .article-container .comment-title {
+    color: #216096;
+    font-size: 50px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: mayan; }
+  .article-container .material-placeholder {
+    height: 100%; }
+  .article-container .carousel-cont {
+    padding-bottom: 0px;
+    margin-bottom: 100px; }
+  .article-container .carousel-item {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    width: 400px;
+    height: 400px; }
+    .article-container .carousel-item img {
+      height: 100%;
+      width: initial !important; }
+  .article-container .comment {
+    box-shadow: 0 1px #e5e5e5;
+    padding-bottom: 20px;
+    margin-bottom: 20px; }
+  .article-container .comment-container {
+    width: 80%;
+    margin: auto; }
+    .article-container .comment-container .input-field {
+      margin-top: 60px; }
+      .article-container .comment-container .input-field label {
+        padding-left: 10px; }
+    .article-container .comment-container .name {
+      color: #216096;
+      margin-bottom: 0px;
+      font-size: 18px;
+      font-weight: 500; }
+    .article-container .comment-container .content {
+      font-size: 15px;
+      color: #505050; }
