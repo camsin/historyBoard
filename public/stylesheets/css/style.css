@@ -28,6 +28,12 @@ textarea:focus, input:focus, a:focus {
 .m-t-30 {
   margin-top: 30px; }
 
+.m-t-60 {
+  margin-top: 60px; }
+
+.m-l-8pct {
+  margin-left: 8.3333333334% !important; }
+
 @font-face {
   font-family: 'mayan';
   font-style: normal;

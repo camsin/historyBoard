@@ -21,10 +21,13 @@ router.get('/byEstado/:estado', (req, res, next)=> {
 });
 
 //publicaciones por año
-router.get('/byFecha/:fecha', (req, res, next)=> {
-  res.render('publicaciones/byFecha', {
-    fecha:req.params.fecha, showSideNav: true});
+router.get('/byFecha', (req, res, next)=> {
+  res.render('publicaciones/byFecha', { showSideNav: true});
 });
+// router.get('/byFecha/:fecha', (req, res, next)=> {
+//   res.render('publicaciones/byFecha', {
+//     fecha:req.params.fecha, showSideNav: true});
+// });
 
 //Ultimas publicaciones
 router.get('/ultimasPublicaciones', (req, res, next)=>{
