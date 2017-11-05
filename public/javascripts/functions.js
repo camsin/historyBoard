@@ -47,3 +47,19 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('.materialboxed').materialbox();
 });
+
+
+(function () {
+    var timeLeft = 8, cinterval;
+    var timeDec = function (){
+        timeLeft--;
+        document.querySelector('#countdown-404').innerHTML = timeLeft;
+
+        if(timeLeft === 0){
+            clearInterval(cinterval);
+            location.href = '/publicaciones/ultimasPublicaciones'; // index page here
+        }
+    };
+
+    cinterval = setInterval(timeDec, 1000);
+})();
