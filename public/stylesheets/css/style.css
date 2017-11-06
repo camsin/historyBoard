@@ -948,3 +948,46 @@ textarea:focus, input:focus, a:focus {
 
 .transform-text {
   text-transform: uppercase; }
+
+.navbar-board .dropdown-menu {
+  width: 301px;
+  padding-top: 0; }
+
+.navbar-board .dropdown-header {
+  text-align: center;
+  font-size: 21px;
+  background: #216096;
+  color: white;
+  padding: 13px 20px; }
+
+.navbar-board .name {
+  font-size: 17px;
+  font-weight: 400;
+  color: #216096;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box; }
+
+.navbar-board .action-noti {
+  color: #505050;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box; }
+
+.navbar-board .dropdown-menu > li > a {
+  padding-top: 15px; }
+
+.navbar-board .see-more p {
+  text-align: center;
+  color: #216096;
+  font-weight: 500; }
+
+.navbar-board .see-more a:hover {
+  background: transparent !important; }
+
+.navbar-board .see-more:hover {
+  background: transparent !important; }
