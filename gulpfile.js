@@ -24,6 +24,16 @@ gulp.task('icon', function(){
     .pipe(gulp.dest('public/stylesheets/lib'))
 });
 
+gulp.task('materialize', function(){
+  return gulp.src('node_modules/materialize-css/dist/css/materialize.min.css')
+    .pipe(gulp.dest('public/stylesheets/lib'))
+});
+
+gulp.task('materialize', function(){
+  return gulp.src('node_modules/materialize-css/dist/js/materialize.min.js')
+    .pipe(gulp.dest('public/javascripts/lib'))
+});
+
 gulp.task('sass', function() {
   gulp.src(sassFiles)
       .pipe(sass().on('error', sass.logError))
@@ -36,4 +46,4 @@ gulp.task('watch',function() {
     gulp.watch(sassFiles,['sass']);
 });
 
-gulp.task('default', [ 'jquery', 'bootstrapcss', 'bootstrapjs', 'icon', 'sass', 'watch' ]);
+gulp.task('default', [ 'jquery', 'bootstrapcss', 'bootstrapjs', 'icon', 'sass', 'watch', 'materialize' ]);
