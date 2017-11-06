@@ -10,72 +10,96 @@ block content
         p(class="title-class") CREA UNA PUBLICACIÓN
     .col-xs-12.text-align-c.new-pub
       p.col-xs-12.p-new México se construyó a base de esfuerzo y dedicación, justamente eso queremos hacer eso son historyBoard. Este es tu lienzo en blanco, EMPECEMOS!
-      .row
+      .row.col-xs-12
         .input-field.col.s12
-          input#title.validate(type='text')
-          label.active(for='title') Titulo cool
-      form.col-md-6(action='#')
-        .file-field.input-field
-          .btn
-            span Img
-            input(type='file')
-          .file-path-wrapper
-            input.file-path.validate(type='text')
-      form.col-md-6(action='#')
-        .file-field.input-field
-          .btn
-            span Img
-            input(type='file')
-          .file-path-wrapper
-            input.file-path.validate(type='text')
-      .row
+          input#title.validate(type='text', placeholder)
+          label.active.label-act(for='title') Antes que nada necesitas un titulo llamativo y genial
+      .col-xs-12
+        form.col-md-6(action='#')
+          p.description-p Vamos a darle vida a tu publicación, selecciona una imágen para la miniatura.
+          .file-field.input-field
+            .btn
+              span Img
+              input(type='file')
+            .file-path-wrapper
+              input.file-path.validate(type='text')
+        form.col-md-6(action='#')
+          p.description-p Ahora selecciona una imágen para mostrarla en grande en tu publicación.
+          .file-field.input-field
+            .btn
+              span Img
+              input(type='file')
+            .file-path-wrapper
+              input.file-path.validate(type='text')
+      .row.col-xs-12.m-t-15
         .input-field.col.s12
-          input#title.validate(type='text')
-          label.active(for='title') Titulo cool
-      input.datepicker(type='text')
-      .row
-        form.col.s12
+          input#title.validate(type='text', placeholder)
+          label.active.label-act(for='title') De qué estado de México es tu publicación?
+      .col-xs-12.p-r-25.p-l-25.m-0
+        p.description-p Introduce la fecha en la que ocurrieron los hechos de tu publicación
+        input.datepicker(type='text')
+      .row.col-xs-12.m-b-0
+        form.col.s12.m-t-25
           .row
-            .input-field.col.s12
-              textarea#textarea1.materialize-textarea
-              label(for='textarea1') Textarea
-      form.col-md-12(action='#')
-        .file-field.input-field
-          .btn
-            span Img
-            input(type='file')
-          .file-path-wrapper
-            input.file-path.validate(type='text')
-      form.col-md-12(action='#')
-        .file-field.input-field
-          .btn
-            span Img
-            input(type='file')
-          .file-path-wrapper
-            input.file-path.validate(type='text')
-      form.col-md-12(action='#')
-        .file-field.input-field
-          .btn
-            span Img
-            input(type='file')
-          .file-path-wrapper
-            input.file-path.validate(type='text')
-      form.col-md-12(action='#')
-        .file-field.input-field
-          .btn
-            span Img
-            input(type='file')
-          .file-path-wrapper
-            input.file-path.validate(type='text')
-      form.col-md-12(action='#')
-        .file-field.input-field
-          .btn
-            span Img
-            input(type='file')
-          .file-path-wrapper
-            input.file-path.validate(type='text')
+            .input-field.col-xs-12.p-0
+              textarea#textarea1.materialize-textarea.m-t-25(placeholder)
+              label.label-act(for='textarea1') Ahora si, dinos todo lo que tengas que decir! (nosotros lo acomodamos).
+      .col-xs-12.p-l-25.p-r-25
+        p.description-p Por último, selecciona 5 imágenes para mostrar en tu publicación
+        form.col-md-12.p-0(action='#')
+          .file-field.input-field
+            .btn
+              span Img
+              input(type='file')
+            .file-path-wrapper
+              input.file-path.validate(type='text')
+        form.col-md-12.p-0(action='#')
+          .file-field.input-field
+            .btn
+              span Img
+              input(type='file')
+            .file-path-wrapper
+              input.file-path.validate(type='text')
+        form.col-md-12.p-0(action='#')
+          .file-field.input-field
+            .btn
+              span Img
+              input(type='file')
+            .file-path-wrapper
+              input.file-path.validate(type='text')
+        form.col-md-12.p-0(action='#')
+          .file-field.input-field
+            .btn
+              span Img
+              input(type='file')
+            .file-path-wrapper
+              input.file-path.validate(type='text')
+        form.col-md-12.p-0(action='#')
+          .file-field.input-field
+            .btn
+              span Img
+              input(type='file')
+            .file-path-wrapper
+              input.file-path.validate(type='text')
+      .col-xs-12.text-center.m-t-30
+        a(href="#", class="btn btn-primary", data-toggle="modal", data-target=".register-modal") PUBLICAR
+
+      .modal.fade.register-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+              h4#gridSystemModalLabel.modal-title GRACIAS
+            .modal-body
+              .body-message.col-xs-12
+                .col-xs-12.col-md-4
+                  img(src="/images/pedro.png")
+
+                .col-xs-12.col-md-8.material-input
+                  input-field.col.s6
+                    label.l-style AJUA! ESTAS A PUNTO DE REALIZAR UNA PUBLICACION Y SER PARTE DE NUESTRA HISTORIA
 
 
-
-
-
+                  .col-xs-12.text-center
+                    a.waves-effect.waves-light.btn(href="../../publicaciones/ultimasPublicaciones") PUBLICAR
