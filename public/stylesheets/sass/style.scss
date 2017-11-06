@@ -18,6 +18,10 @@ textarea:focus, input:focus, a:focus{
   display: initial !important;
 }
 
+.p-initial {
+  position: initial !important;
+}
+
 .m-0 {
   margin: 0 !important;
 }
@@ -222,11 +226,22 @@ textarea:focus, input:focus, a:focus{
   .article-container .text-container {
     padding: 0 100px !important;
   }
+
+  .new-pub {
+    padding: 0px 60px !important;
+  }
 }
 
 @media (max-width: 666px) {
   .article-container .text-container {
     padding: 0 15px !important;
+  }
+
+  .new-pub {
+    .p-new {
+      font-size: 17px !important;
+    }
+    padding: 0px 15px !important;
   }
 
   .article-container .comment-title {
@@ -1385,6 +1400,9 @@ textarea:focus, input:focus, a:focus{
 
   .label-act {
     font-size: 22px;
+    width: 100%;
+    position: relative !important;
+    top: 23px;
     //padding-left: 14px !important;
   }
 

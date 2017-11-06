@@ -7,6 +7,9 @@ textarea:focus, input:focus, a:focus {
 .d-initial {
   display: initial !important; }
 
+.p-initial {
+  position: initial !important; }
+
 .m-0 {
   margin: 0 !important; }
 
@@ -84,11 +87,17 @@ textarea:focus, input:focus, a:focus {
 
 @media (max-width: 1080px) and (min-width: 666px) {
   .article-container .text-container {
-    padding: 0 100px !important; } }
+    padding: 0 100px !important; }
+  .new-pub {
+    padding: 0px 60px !important; } }
 
 @media (max-width: 666px) {
   .article-container .text-container {
     padding: 0 15px !important; }
+  .new-pub {
+    padding: 0px 15px !important; }
+    .new-pub .p-new {
+      font-size: 17px !important; }
   .article-container .comment-title {
     font-size: 30px !important; }
   .article-container .comment-container {
@@ -902,7 +911,10 @@ textarea:focus, input:focus, a:focus {
     padding-bottom: 30px;
     margin-bottom: 30px; }
   .new-pub .label-act {
-    font-size: 22px; }
+    font-size: 22px;
+    width: 100%;
+    position: relative !important;
+    top: 23px; }
   .new-pub .description-p {
     font-size: 18px;
     text-align: left;
