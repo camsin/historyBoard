@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const publicacionesController = require('../controlers/publicaciones/publicaciones');
+const publicacionesController = require('../controllers/publicaciones/publicaciones');
 
 /*
 Controlador para estado
-const publicacionesController = require('../controlers/publicaciones/publicaciones');
+const publicacionesController = require('../controllers/publicaciones/publicaciones');
 */
 //publicaciones
 // router.get('/', (req, res, next)=> {
