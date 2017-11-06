@@ -1,91 +1,35 @@
 var express = require('express');
 var router = express.Router();
-const publicacionesController = require('../controlers/publicaciones/publicaciones');
+const publicacionesController = require('../controllers/publicaciones/publicaciones');
 
-/*
-Controlador para estado
-const publicacionesController = require('../controlers/publicaciones/publicaciones');
-*/
-//publicaciones
-// router.get('/', (req, res, next)=> {
-//   res.render('publicaciones/publicaciones', { title: 'publicaciones' });
-// });
 
 //MAPA
-router.get('/byEstado', (req, res, next)=> {
-  res.render('publicaciones/mapa', {showSideNav: true});
-});
+router.get('/byEstado', publicacionesController.mapa);
 
 //publicaciones por estado
-router.get('/byEstado/:estado', (req, res, next)=> {
-  res.render('publicaciones/byEstado', {
-    estado:req.params.estado, showSideNav: true});
-});
+router.get('/byEstado/:estado', publicacionesController.byEstado);
 
 //publicaciones por año
-router.get('/byFecha', (req, res, next)=> {
-  res.render('publicaciones/byFecha', { showSideNav: true});
-});
-// router.get('/byFecha/:fecha', (req, res, next)=> {
-//   res.render('publicaciones/byFecha', {
-//     fecha:req.params.fecha, showSideNav: true});
-// });
+router.get('/byFecha', publicacionesController.byFecha);
 
 //Ultimas publicaciones
-router.get('/ultimasPublicaciones', (req, res, next)=>{
-  res.render('publicaciones/ultimasPublicaciones',{showSideNav: true});
-});
+router.get('/ultimasPublicaciones', publicacionesController.ultimasPublicaciones);
 
 //publicacion por ID
-router.get('/byId/:id', (req, res, next) => {
-  res.render('publicacion/byId', {
-    id: req.params.id, showSideNav: true
-  });
-});
+router.get('/byId/:id', publicacionesController.byId);
 
 // Editar publicacion
-router.get('/editar/:contenido', (req, res, next) => {
-  console.log(req.params.contenido);
-  res.render('publicacion/editar', {showSideNav: true,
-    contenido: req.params.contenido
-  });
-});
+// router.get('/editar/:contenido', (req, res, next) => {
+//   res.render('publicacion/editar', {showSideNav: true,
+//     contenido: req.params.contenido
+//   });
+// });
+
 // nueva publicacion
-router.get('/nueva/:contenido', (req, res, next) => {
-  console.log(req.params.contenido);
-  res.render('publicacion/nueva', {showSideNav: true,
-    contenido: req.params.contenido
-  });
-});
+router.get('/nueva/:contenido', publicacionesController.nueva);
+
 //Mis publicaciones
-router.get('/misPublicaciones', (req, res, next) => {
-  res.render('publicaciones/misPublicaciones', { showSideNav: true, title: 'misPublicaciones' });
-});
+router.get('/misPublicaciones', publicacionesController.misPublicaciones);
 
-
-
-
-////chohuahua >:V
-/*
-router.get('/getBy/:id/:estado/:fecha', (req, res, next)=>{
- let something = {
-   id: req.params.id,
-   estado: req.params.estado,
-   fecha: req.params.fecha
- }
-
-if(something.estado != 'null' && something.fecha != 'null')
-  console.log(something);
-else if(something.id != 'null'){
-    console.log(something);
-}
-else if(something.estado != 'null'){
-  console.log(something);
-}
-else if(something.fecha != 'null'){
-  console.log(something);
-}
- res.render('layout');
-});*/
 
 module.exports = router;
