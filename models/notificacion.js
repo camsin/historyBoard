@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
+const Comentario  = mongoose.model('Comentario');
 
  const notificacionSchema = schema({
    fecha: Date,

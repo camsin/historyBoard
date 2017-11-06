@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
+const Imagen  = mongoose.model('Imagen');
+const Autor = mongoose.model('Autor');
 
  const publicacionSchema = schema({
   titulo: String,
