@@ -11,7 +11,7 @@ a:hover, a:focus {
 }
 
 textarea:focus, input:focus, a:focus{
-  outline: none;
+  outline: none !important;
 }
 
 .d-initial {
