@@ -1505,3 +1505,21 @@ textarea:focus, input:focus, a:focus{
     background: transparent !important;
   }
 }
+
+.notifications {
+  .label-act {
+    pointer-events: initial !important;
+    a {
+      color: #216096;
+      margin-left: 6px;
+    }
+  }
+
+  .input-field {
+
+    p {
+      text-align: left;
+      font-size: 14px;
+    }
+  }
+}

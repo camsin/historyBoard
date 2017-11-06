@@ -991,3 +991,13 @@ textarea:focus, input:focus, a:focus {
 
 .navbar-board .see-more:hover {
   background: transparent !important; }
+
+.notifications .label-act {
+  pointer-events: initial !important; }
+  .notifications .label-act a {
+    color: #216096;
+    margin-left: 6px; }
+
+.notifications .input-field p {
+  text-align: left;
+  font-size: 14px; }
