@@ -22,8 +22,8 @@ textarea:focus, input:focus, a:focus {
 .text-align-c {
   text-align: center; }
 
-.z-index--1 {
-  z-index: -1; }
+.z-index-9 {
+  z-index: 9; }
 
 .m-b-50 {
   margin-bottom: 50px !important; }
