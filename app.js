@@ -10,7 +10,7 @@ var users = require('./routes/users');
 var ux = require('./routes/ux');
 var publicaciones = require('./routes/publicaciones');
 var publicacion = require('./routes/publicaciones');
-var miPerfil = require('./routes/miPerfil');
+var usuarios = require('./routes/usuarios');
 var notificaciones = require('./routes/notificaciones');
 
 var app = express();
@@ -32,7 +32,7 @@ app.use('/users', users);
 app.use('/ux', ux);
 app.use('/publicaciones', publicaciones);
 app.use('/publicacion', publicaciones);
-app.use('/miPerfil', miPerfil);
+app.use('/usuarios', usuarios);
 app.use('/notificaciones', notificaciones);
 
 // catch 404 and forward to error handler
