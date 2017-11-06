@@ -1,0 +1,5 @@
+mixin input_form(name,type,value)
+  div(class='form-group')
+    label(labelFor=name)
+      | #{name}
+    input(name=name,class='form-control',type=type, value=value)
