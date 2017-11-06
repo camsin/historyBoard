@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var login = require('./routes/login');
 var ux = require('./routes/ux');
 var publicaciones = require('./routes/publicaciones');
-var publicacion = require('./routes/publicaciones');
 var usuarios = require('./routes/usuarios');
 var notificaciones = require('./routes/notificaciones');
 
@@ -29,7 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', login);
 app.use('/ux', ux);
 app.use('/publicaciones', publicaciones);
-app.use('/publicacion', publicaciones);
 app.use('/usuarios', usuarios);
 app.use('/notificaciones', notificaciones);
 
