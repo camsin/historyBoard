@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const imgSch = require('/img');
-const Img  = mongoose.model('Author',imgSchema);
+const Img  = mongoose.model('_id',imgSch.imgSchema);
 const authorSch = require('/user');
-const Author = mongoose.model('Author', authorSchema);
+const Author = mongoose.model('_id', authorSch.userSchema);
 
  const postSchema = schema({
   title: String,
