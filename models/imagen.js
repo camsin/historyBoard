@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
-const postSch = require('/post');
-const Post  = mongoose.model('Post',postSch);
+const publiSch = require('/publicacion');
+const Publicacion  = mongoose.model('Publicacion',publiSch);
 
- const imgSchema = schema({
-   post: { type: Schema.ObjectId, ref:'Post'}
+ const imagenSchema = schema({
+   publicacion: { type: Schema.ObjectId, ref:'Publicacion'}
  });
 
- module.exports = mongoose.model('Img',imgSchema);
+ module.exports = mongoose.model('Imagen',imagenSchema);

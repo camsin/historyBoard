@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
-const postSch = require('/post');
-const Post  = mongoose.model('Post',imgSch);
-const authorSch = require('/user');
-const Author = mongoose.model('Author', authorSch);
+const publiSch = require('/publicacion');
+const Publicacion  = mongoose.model('Publicacion',publiSch);
+const autorSch = require('/usuario');
+const Autor = mongoose.model('Autor', autorSch);
 
- const commentSchema = schema({
-	post: {type: Schema.ObjectId, ref: 'Post'},
-	date: Date,
-	content: String,
-	autor: {type: Schema.ObjectId, ref: 'Author'}
+ const comentarioSchema = schema({
+	publicacion: {type: Schema.ObjectId, ref: 'Publicacion'},
+	fecha: Date,
+	contenido: String,
+	autor: {type: Schema.ObjectId, ref: 'Autor'}
  });
 
- module.exports = mongoose.model('Comment',commentSchema);
+ module.exports = mongoose.model('Comentario',comentarioSchema);

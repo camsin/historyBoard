@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
-const commentSch = require('/comment');
-const Comment  = mongoose.model('Comment',CommentSch);
+const comentarioSch = require('/comentario');
+const Comentario  = mongoose.model('Comentario',comentarioSch);
 
- const notificationSchema = schema({
-   date: Date,
-   conmment: { type: Schema.ObjectId, ref:'Comment'}
+ const notificacionSchema = schema({
+   fecha: Date,
+   comentario: { type: Schema.ObjectId, ref:'Comentario'}
  });
 
- module.exports = mongoose.model('Notification',notificationSchema);
+ module.exports = mongoose.model('Notificacion',notificacionSchema);
