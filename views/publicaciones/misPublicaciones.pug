@@ -1,4 +1,17 @@
-extends layout
+extends ../layout
 
 block content
-  h1 Mis publicaciones
+
+  .home-page.col-xs-12
+    .img-container
+      //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
+      .img-header
+      .black-cover
+        p(class="title-class") Mis publicaciones
+    .col-xs-12.text-align-c
+      .empty-state-holder
+        img(src='/images/pedroSad.png')
+        p Achis achis los mariachis, esto esta mas vacío que un desierto!
+        p puedes hacer
+          a(href='/publicaciones/nueva/1') clic aquí
+          | para crear una nueva publicación

@@ -1,14 +1,63 @@
 extends ../layout
 
 block content
-  h1 Yo soi una publicacion seleccionada por ID: #{id}
-  
-  br
-  br
-  a(href='http://localhost:3000/publicaciones') publicaciones
-  br
-  br  
-  a(href=`http://localhost:3000/publicacion/editar/${id}`) editar
-  br
-  br
-  a(href='http://localhost:3000/publicacion/nueva') nueva
+
+  .home-page.col-xs-12
+    .img-container
+      //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
+      .img-header
+      .black-cover
+        p(class="title-class") La Triple Alianza y los señorios independientes
+        a.like-press
+          i.fa.fa-heart(aria-hidden='true')
+    .col-md-3
+      .user-publication
+        a(href='#', class='col-xs-12 text-align-c')
+          img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
+        a(href='#!name',class='col-xs-12 text-align-c')
+          span.name-autor.m-t-25.col-xs-12  Gal Gadot
+          span.name-date.m-t-10.col-xs-12  12/03/2017
+
+    .col-md-9
+      .article-container
+        label.label-article La Triple Alianza y los señorios independientes
+        p.text-container En el Altiplano, al final del Posclásico se dio el último capítulo de la historia política del mundo prehispánico, próximo a transformarse con motivo de la llegada de los españoles. Después de una larga peregrinación iniciada en Aztlán, los mexicas se asentaron en Tenochtitlan, en 1325. El Valle de México y las zonas aledañas estaban dominados por los tecpanecas de Azcapotzalco, quienes exigían tributo a los pueblos asentados alrededor de los lagos. El señorío deTexcoco se resistió a ese dominio y se convirtió en su enemigo. Los mexicas, al demostrar su capacidad guerrera, obtuvieron un trato privilegiado de los tecpanecas, quienes les cedieron parte de los tributos que cobraban. Cuando Maxtla, hijo de Tezozómoc, asumió el poder, los tecpanecas se dividieron. Esta fragmentación fue aprovechada por mexicas y texcocanos. Los primeros formaron alianza con los de Tlacopan o Tacuba, e incluso llegaron a incorporar a los huexotzincas, habitantes del valle de Puebla-Tlaxcala, en la lucha contra los tecpanecas. Con el triunfo de los aliados se creó la Triple Alianza (Tenochtitlan, Tlacopan y Texcoco), que funcionó para apoyar a sus integrantes y recuperar pueblos que se habían salido de su dominio, así como para expandirse hacia otros lugares. Ya independientes de los tecpanecas, los pueblos aliados celebraron entre ellos las llamadas guerras floridas, que no implicaban dominio territorial ni imposición de tributos, sólo tenían como objetivo capturar prisioneros para ofrendarlos en sacrificio a los dioses. El imperio mexica fue resultado del dominio que los mexicas consiguieron sobre pueblos con orígenes y lenguas distintos. Por medio de conquistas y alianzas, México-Tenochtitlan se reconoció como la ciudad con más poder político, militar y económico de la mayor parte del mundo mesoamericano. Los reinos que permanecieron independientes del dominio de los mexicas fueron Tlaxcala y Míchoacán. El área que los cronistas españoles llamaron “República de Tlaxcala”, se formó por cuatro señoríos desde el año 1348: Tepeticpac, Ocotelolco, Tizatlán y Quiahuiztlán; éstos eran las cabeceras o capitales de otras poblaciones. Cada una contaba con su propio gobierno, pero estaban confederadas, es decir, unidas en lo que podría considerarse una “asamblea de representantes” de cada señorío, la cual tomaba las decisiones de manera conjunta, en beneficio de la “República tlaxcalteca”.
+    .col-xs-12.carousel-cont.article-container.m-b-70.m-t-30
+      .carousel
+        a.carousel-item(href='#one!')
+          img(src='/images/1.jpg', class="materialboxed")
+        a.carousel-item(href='#two!')
+          img(src='/images/2.jpg', class="materialboxed")
+        a.carousel-item(href='#three!')
+          img(src='/images/3.jpg', class="materialboxed")
+        a.carousel-item(href='#four!')
+          img(src='/images/4.jpg', class="materialboxed")
+        a.carousel-item(href='#five!')
+          img(src='/images/5.jpg', class="materialboxed")
+    .col-xs-12.article-container
+      p.comment-title.col-xs-12 COMENTARIOS
+        .comment-container
+          .comment.col-xs-12
+            p.name Ararat Mendez
+            p.content Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          .comment.col-xs-12
+            p.name Kenia Delgado
+            p.content Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          .comment.col-xs-12
+            p.name Juan Perez
+            p.content Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          .comment.col-xs-12
+            p.name Pedro Lopez
+            p.content Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          .row
+            form.col.s12
+              .row
+                .input-field.col.s12
+                  textarea#textarea1.materialize-textarea(data-length="1000")
+                  label(for='textarea1') Escribe un comentario genial
+          .col-xs-12.text-center
+            a.btn.btn-primary.m-b-50(href="publicaciones/ultimasPublicaciones") COMENTAR
+
+
+
+
