@@ -1,4 +1,9 @@
-const express = require('express')
+const express = require('express');
+const Imagen = require('../../models/imagen');
+var fs = require('fs');
+/*var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });*/
+
 
 function mapa(req, res, next){
     res.render('publicaciones/mapa', {showSideNav: true});
@@ -25,9 +30,29 @@ function byId(req, res, next){
 };
 
 function nueva(req, res, next){
+
+   if(req.params.contenido == 2){
+
+        let imgPath = '/images/pedro.png';
+        let imagen = new Imagen();
+        imagen.file_id = "1";
+        imagen.img.data = fs.readFileSync(imgPath);
+        imagen.img.contentType ='image/png';
+
+         imagen.save((err) => {
+           if (err) {
+             res.send('error!!!!');
+           } else {
+             res.send('imagen guardada!!!!');
+           }
+         });
+
+  }else{
     res.render('publicacion/nueva', {showSideNav: true,
         contenido: req.params.contenido});
+  }
 };
+
 
 function misPublicaciones(req, res, next){
     res.render('publicaciones/misPublicaciones', { showSideNav: true, title: 'misPublicaciones' });
