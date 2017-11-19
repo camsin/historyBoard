@@ -33,31 +33,31 @@ block content
                             .col-xs-12
                                 .col-xs-12
                                     p(class="social-register") O REGISTRATE CON
-                                .col-xs-4
-                                    a(href="#")
+                                .col-xs-6
+                                    a(href="/auth/facebook")
                                         img(src="/images/fb-icon.png")
-                                .col-xs-4
-                                    a(href="#")
-                                        img(src="/images/tw-icon.png")
-                                .col-xs-4
-                                    a(href="#")
+                                //.col-xs-4
+                                //    a(href="/auth/twitter")
+                                //        img(src="/images/tw-icon.png")
+                                .col-xs-6
+                                    a(href="/auth/google")
                                         img(src="/images/gl-icon.png")
-                        .col-xs-12.col-md-8.material-input
+                        form.col-xs-12.col-md-8.material-input(method="POST" action="/registrar")
                             .input-field.col.s6
-                                input#name(type='text')
+                                input#name(type='text' name="name")
                                 label.active(for='name') Nombre
                             .input-field.col.s6
-                                input#email(type='email')
+                                input#email(type='email', name="email")
                                 label.active(for='email') Correo
                             .input-field.col.s6
-                                input#password(type='password')
+                                input#password(type='password', name="password")
                                 label.active(for='password') Contraseña
                             .input-field.col.s6
-                                input#passwordok(type='password')
-                                label.active(for='passwordok') Confirmar contraseña
+                                input#confirmPassword(type='password' name="confirmPassword")
+                                label.active(for='confirmPassword') Confirmar contraseña
 
                             .col-xs-12.text-center
-                                a.waves-effect.waves-light.btn(href="publicaciones/ultimasPublicaciones") CONTINUAR
+                                button.waves-effect.waves-light.btn(type="submit") CONTINUAR
     .modal.fade.login-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
         .modal-dialog.modal-lg
             .modal-content
@@ -72,21 +72,21 @@ block content
                             .col-xs-12
                                 .col-xs-12
                                     p(class="social-register") O INICIA SESION CON
-                                .col-xs-4
-                                    a(href="#")
+                                .col-xs-6
+                                    a(href="/auth/facebook")
                                         img(src="/images/fb-icon.png")
-                                .col-xs-4
-                                    a(href="#")
-                                        img(src="/images/tw-icon.png")
-                                .col-xs-4
-                                    a(href="#")
+                                //.col-xs-4
+                                //    a(href="#")
+                                //        img(src="/images/tw-icon.png")
+                                .col-xs-6
+                                    a(href="/auth/google")
                                         img(src="/images/gl-icon.png")
-                        .col-xs-12.col-md-8.material-input
+                        form.col-xs-12.col-md-8.material-input(method="POST" action="/login")
                             .input-field.col.s6
-                                input#name(type='text')
-                                label.active(for='name') Nombre
+                                input#email(type='text' name="email")
+                                label.active(for='name') Correo
                             .input-field.col.s6
-                                input#password(type='text')
+                                input#password(type='text' name="password")
                                 label.active(for='password') Contraseña
                             .col-xs-12.text-center
-                                a.btn.btn-primary(href="publicaciones/ultimasPublicaciones") CONTINUAR
+                                button.btn.btn-primary(type="submit") CONTINUAR
