@@ -1,22 +1,22 @@
 var express = require('express');
 var router = express.Router();
 const publicationsController = require('../controllers/publications/publications');
-
+const isLoggedIn = require('./../auth/passport.js').isLoggedIn;
 
 //MAPA
-router.get('/byState', publicationsController.map);
+router.get('/byState', isLoggedIn, publicationsController.map);
 
 //publications por state
-router.get('/byState/:state', publicationsController.byState);
+router.get('/byState/:state', isLoggedIn, publicationsController.byState);
 
 //publications por año
-router.get('/byDate', publicationsController.byDate);
+router.get('/byDate', isLoggedIn, publicationsController.byDate);
 
 //Ultimas publications
-router.get('/lastPublications', publicationsController.lastPublications);
+router.get('/lastPublications', isLoggedIn, publicationsController.lastPublications);
 
 //publication por ID
-router.get('/byId/:id', publicationsController.byId);
+router.get('/byId/:id', isLoggedIn, publicationsController.byId);
 
 // Editar publication
 // router.get('/editar/:content', (req, res, next) => {
@@ -26,10 +26,10 @@ router.get('/byId/:id', publicationsController.byId);
 // });
 
 // nueva publication
-router.get('/new/:content', publicationsController.newPublication);
+router.get('/new/:content', isLoggedIn, publicationsController.newPublication);
 
 //Mis publications
-router.get('/myPublications', publicationsController.myPublications);
+router.get('/myPublications',isLoggedIn,  publicationsController.myPublications);
 
 
 module.exports = router;
