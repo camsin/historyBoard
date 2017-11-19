@@ -57,7 +57,7 @@ $(document).ready(function(){
 //
 //         if(timeLeft === 0){
 //             clearInterval(cinterval);
-//             location.href = '/publicaciones/ultimasPublicaciones'; // index page here
+//             location.href = '/publications/ultimasPublicaciones'; // index page here
 //         }
 //     };
 //

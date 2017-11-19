@@ -11,9 +11,9 @@ var session = require('express-session');
 
 var login = require('./routes/index');
 var ux = require('./routes/ux');
-var publicaciones = require('./routes/publicaciones');
-var usuarios = require('./routes/usuarios');
-var notificaciones = require('./routes/notificaciones');
+var publications = require('./routes/publications');
+var users = require('./routes/users');
+var notifications = require('./routes/notifications');
 
 var app = express();
 
@@ -39,9 +39,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', login);
 app.use('/ux', ux);
-app.use('/publicaciones', publicaciones);
-app.use('/usuarios', usuarios);
-app.use('/notificaciones', notificaciones);
+app.use('/publications', publications);
+app.use('/users', users);
+app.use('/notifications', notifications);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

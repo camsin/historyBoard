@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
- const imagenSchema = schema({
+ const imageSchema = schema({
    file_id: String
  });
 
- module.exports = mongoose.model('Imagen',imagenSchema);
+ module.exports = mongoose.model('Image',imageSchema);
