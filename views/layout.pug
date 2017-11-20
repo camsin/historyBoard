@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app="historyBoardApp")
   head
     title historyBoard
     meta(id="viewport", name="viewport", content ="width=device-width")
@@ -27,7 +27,7 @@ html
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav.navbar-right
               li
-                a(href='/publicaciones/nueva/1', class='make-publication') Hacer publicacion
+                a(href='/publications/newPublication/1', class='make-publication') Hacer publicacion
               li.dropdown.notifications
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                   i.fa.fa-bell(aria-hidden='true')
@@ -59,7 +59,7 @@ html
                     a(href='/notificaciones')
                       p Ver Mas
               li
-                a(href='/publicaciones/ultimasPublicaciones')
+                a(href='/publications/lastPublications')
                   i.fa.fa-home(aria-hidden='true')
 
           ul#slide-out.side-nav
@@ -67,35 +67,35 @@ html
               .user-view
                 .background
                   img(src='/images/sidenav-fondo.jpeg')
-                a(href='/usuarios/miPerfil', class='')
+                a(href='/users/myProfile', class='')
                   img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
-                a(href='/usuarios/miPerfil',class='name-sidenav')
-                  span.white-text.name Gal Gadot
-                a(href='/usuarios/miPerfil',class='perfil-boton')
+                a(href='/users/myProfile', class='name-sidenav')
+                  span.white-text.name #{user.name}
+                a(href='/users/myProfile', class='perfil-boton')
                   span.white-text.button-perfil Ver mi perfil
               .black-capa
 
             li.sidenav-link
-              a(href='/publicaciones/misPublicaciones')
+              a(href='/publications/myPublications')
                 i.fa.fa-user(aria-hidden='true')
                 | Mis Publicaciones
             li
               .divider.m-0
             li.sidenav-link
 
-              a(href='/publicaciones/nueva/1')
+              a(href='/publications/newPublication/1')
                 i.fa.fa-pencil-square-o(aria-hidden='true')
                 | Hacer Publicación
             li
               .divider.m-0
             li.sidenav-link
-              a(href='/publicaciones/byfecha')
+              a(href='/publications/byDate')
                 i.fa.fa-calendar(aria-hidden='true')
                 | Buscar Año
             li
               .divider.m-0
             li.sidenav-link
-              a(href='/publicaciones/byEstado')
+              a(href='/publications/byState')
                 i.fa.fa-globe(aria-hidden='true')
                 | Mapa Interactivo
             li
@@ -105,9 +105,15 @@ html
                 i.fa.fa-power-off(aria-hidden='true')
                 | Salir
     block content
+    script(src='/javascripts/lib/angular.min.js')
     script(src='/javascripts/lib/jquery.min.js')
+    script(src='/js/app.js')
     script(src='/javascripts/lib/bootstrap.min.js')
     script(src='/javascripts/lib/materialize.min.js')
     script(src='/javascripts/lib/tippy.min.js')
     script(src='/javascripts/functions.js')
+
+    //script(src='/js/app.module.js')
+    //script(src='/js/controllers/panel-control.controller.js')
+
 
