@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const schema = mongoose.Schema;
 const Image = require('../../models/imagen');
 const User = require('../../models/usuario');
 const Post = require('../../models/publicacion');
@@ -109,23 +111,22 @@ function test(req, res, next){
  //Publicacion
    let post = new Post({
      titulo: "req.body.title",
-     imagenPreview: {type: array[0],ref: 'Imagen'},
-     imagenFondo: {type: array[1], ref: 'Imagen'},
+     imagenPreview: array[0],
+     imagenFondo:  array[1],
      estado: "req.body.state",
      fecha: "req.body.date",
      contenido: "req.body.content",
-     imageneSlider:
-      [
-        {type: array[2], ref: 'Imagen'},
-        {type: array[3], ref: 'Imagen'},
-        {type: array[4], ref: 'Imagen'},
-        {type: array[5], ref: 'Imagen'},
-        {type: array[6], ref: 'Imagen'}
-      ],
-     autor: {type: userPost, ref: 'Usuario'}
+     imageneSlider:[array[2],array[3],array[4],array[5],array[6]],
+     autor: userPosts
     });
 
-    post.save();
+    post.save((err) => {
+    if (err) {
+      res.send('error!!!!');
+    } else {
+      res.rendirect('publicaciones/ultimasPublicaciones', {});
+    }
+});
 
 }else{
   res.render('publicacion/test', {});
