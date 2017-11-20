@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const publicacionesController = require('../controllers/publicaciones/publicaciones');
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
+let type = upload.array('img', 7);
+
 
 
 //MAPA
@@ -26,8 +30,12 @@ router.get('/byId/:id', publicacionesController.byId);
 // });
 
 // nueva publicacion
-router.get('/nueva/:contenido', publicacionesController.nueva);
+router.post('/nueva/:contenido',type, publicacionesController.nueva);
+router.get('/nueva',type, publicacionesController.nueva);
 
+///test
+router.post('/test/:contenido',type, publicacionesController.test);
+router.get('/test',type, publicacionesController.test);
 //Mis publicaciones
 router.get('/misPublicaciones', publicacionesController.misPublicaciones);
 

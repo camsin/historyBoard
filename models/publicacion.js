@@ -5,12 +5,12 @@ const Autor = mongoose.model('Autor');
 
  const publicacionSchema = schema({
   titulo: String,
-	imagenPreview: {type: Schema.ObjectId, ref: 'Imagen'},
-	imagenFondo {type: Schema.ObjectId, ref: 'Imagen'}
+	imagenPreview: {type: Schema.ObjectId, ref: 'Imagen'}, //1 imagen
+	imagenFondo {type: Schema.ObjectId, ref: 'Imagen'} //1 imagen
 	estado: String,
 	fecha: Date,
 	contenido: String,
-	imageneSlider: [{type: Schema.ObjectId, ref: 'Imagen'}],
+	imageneSlider: [{type: Schema.ObjectId, ref: 'Imagen'}], // son 5 imagenes
 	autor: {type: Schema.ObjectId, ref: 'Autor'}
  });
 

@@ -15,20 +15,20 @@ block content
           label.active.label-act(for='title') Antes que nada necesitas un titulo llamativo y genial
           input#title.validate(type='text', placeholder)
       .col-xs-12
-        form.col-md-6(action='/publicaciones/nueva/2')
+        form.col-md-6(action='/publicaciones/nueva/2', method="POST",,enctype="multipart/form-data",contentType = false)
           p.description-p Vamos a darle vida a tu publicación, selecciona una imágen para la miniatura.
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="miniatura")
+              input(type='file',name="img")
             .file-path-wrapper
               input.file-path.validate(type='text')
-        form.col-md-6(action='/publicaciones/nueva/2')
+        form.col-md-6(action='/publicaciones/nueva/2', method="POST",enctype="multipart/form-data",contentType = false)
           p.description-p Ahora selecciona una imágen para mostrarla en grande en tu publicación.
           .file-field.input-field
             .btn
               span Img
-              input(type='file')
+              input(type='file',name="img")
             .file-path-wrapper
               input.file-path.validate(type='text')
       .row.col-xs-12.m-t-15
@@ -46,39 +46,39 @@ block content
               textarea#textarea1.materialize-textarea.m-t-25(placeholder)
       .col-xs-12.p-l-25.p-r-25
         p.description-p Por último, selecciona 5 imágenes para mostrar en tu publicación
-        form.col-md-12.p-0(action='/publicaciones/nueva/2')
+        form.col-md-12.p-0(action='/publicaciones/nueva/2', method="POST",enctype="multipart/form-data",contentType = false)
           .file-field.input-field
             .btn
               span Img
-              input(type='file')
+              input(type='file',name="img")
             .file-path-wrapper
               input.file-path.validate(type='text')
-        form.col-md-12.p-0(action='/publicaciones/nueva/2')
+        form.col-md-12.p-0(action='/publicaciones/nueva/2', method="POST",enctype="multipart/form-data",contentType = false)
           .file-field.input-field
             .btn
               span Img
-              input(type='file')
+              input(type='file',name="img")
             .file-path-wrapper
               input.file-path.validate(type='text')
-        form.col-md-12.p-0(action='/publicaciones/nueva/2')
+        form.col-md-12.p-0(action='/publicaciones/nueva/2', method="POST",enctype="multipart/form-data",contentType = false)
           .file-field.input-field
             .btn
               span Img
-              input(type='file')
+              input(type='file',name="img")
             .file-path-wrapper
               input.file-path.validate(type='text')
-        form.col-md-12.p-0(action='/publicaciones/nueva/2')
+        form.col-md-12.p-0(action='/publicaciones/nueva/2', method="POST",enctype="multipart/form-data",contentType = false)
           .file-field.input-field
             .btn
               span Img
-              input(type='file')
+              input(type='file',name="img")
             .file-path-wrapper
               input.file-path.validate(type='text')
-        form.col-md-12.p-0(action='/publicaciones/guardar')
+        form.col-md-12.p-0(action='/publicaciones/nueva/2',enctype="multipart/form-data",contentType = false)
           .file-field.input-field
             .btn
               span Img
-              input(type='file')
+              input(type='file',name="img")
             .file-path-wrapper
               input.file-path.validate(type='text')
       .col-xs-12.text-center.m-t-30
