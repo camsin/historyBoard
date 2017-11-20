@@ -1,6 +1,6 @@
 const express = require('express');
-const Imagen = require('../../models/imagen');
-const Publicacion = require('../../models/publicacion');
+const Image = require('../../models/imagen');
+//const Publicacion = require('../../models/publicacion');
 var fs = require('fs');
 
 /**
@@ -37,6 +37,7 @@ function ultimasPublicaciones(req, res, next){
 function byId(req, res, next){
     res.render('publicacion/byId', {
         id: req.params.id, showSideNav: true});
+        ///Se usa un find que concuerde con el id de la publicacion seleccionada
 };
 /**
  * Función que nos permite la creación de nuevas publicaciones
@@ -44,11 +45,10 @@ function byId(req, res, next){
 function nueva(req, res, next){
 
   if(req.params.contenido == 2){
-
-    for(var i = 0; i < req.files.length;i++){
-        //Primero se recupera el arreglo con7 imagenes y se guardan
-        // Se recupera/guarda el id de cada una de esas imagenes
-        // Despues se establecen esos ids en las referencias
+    //Primero se recupera el arreglo con7 imagenes y se guardan
+    // Se recupera/guarda el id de cada una de esas imagenes
+    // Despues se establecen esos ids en las referencias
+    /*for(var i = 0; i < req.files.length;i++){
         let imagen = new Imagen({
            file_id: "1",
            img: {
@@ -63,8 +63,7 @@ function nueva(req, res, next){
              res.render('publicaciones/ultimasPublicaciones', {});
            }
         });
-
-    }
+    }*/
 
   }else{
     res.render('publicacion/nueva', {});
@@ -72,7 +71,7 @@ function nueva(req, res, next){
 };
 
 /**
- * Función que pŕactica
+ * Función de pŕactica
  */
 function test(req, res, next){
 
@@ -80,31 +79,31 @@ function test(req, res, next){
    var arr = [];
    //Ciclo para guardar todas las imagenes que se envian en el form
    for(var i = 0; i < req.files.length;i++){
-     //Primero se recupera el arreglo con7 imagenes y se guardan
-     // Se recupera/guarda el id de cada una de esas imagenes
-     // Despues se establecen esos ids en las referencias
-     let imagen = new Imagen({
+     let image = new Image({
         file_id: "1",
         img: {
           data: fs.readFileSync(req.files[i].path),
           contentType: 'image/png'
         }
       });
-      imagen.save((err) => {
+      image.save((err) => {
         if (err) {
           res.send('error!!!!');
         } else {
           res.render('publicacion/ultimasPublicaciones', {});
         }
      });
-
    }
    // Se recuperan los id
-   Imagen.find({}, (err, result) => {
-     for(var i = 0,var z = result.length-8; i < result.length;i++,z++){
+   /*Imagen.find({_id:0}, (err, result) => {
+     var z = result.length;
+     z = z - 8;
+     for(var i = 0; i < result.length;i++){
        arr[i] = result[z];
+       z++;
      }
-  });
+
+  });*/
 
 }else{
   res.render('publicacion/test', {});
