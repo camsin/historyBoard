@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
-const userSchema = schema({
+var userSchema = schema({
     name: String,
     password: String,
     email: String,
@@ -53,7 +53,7 @@ class UserClass{
     };
 
     /**
-     * Verifica que la constraseña mandada sea igual que la encriptada en el usuario.
+     * Verifica que la constraseña mandada sea igual que la encriptada en el user.
      *
      * @param password {@code String} texto a comparar
      * @returns {boolean} si coincide o no la contraseña
@@ -68,9 +68,9 @@ class UserClass{
     }
 
     /**
-     * Verifica que el email ingresado no se encuentre utiliado por otro usuario.
+     * Verifica que el email ingresado no se encuentre utiliado por otro user.
      *
-     * @returns {boolean} si el email ya esta siendo utilizado por otro usuario.
+     * @returns {boolean} si el email ya esta siendo utilizado por otro user.
      */
     isDuplicateEmail(next) {
         this.constructor.findOne({email:this.email}).exec(function (err, user) {
@@ -79,10 +79,10 @@ class UserClass{
     }
 
     // /**
-    //  * Verifica que el email ingresado no se encuentre utiliado por otro usuario, que no
+    //  * Verifica que el email ingresado no se encuentre utiliado por otro user, que no
     //  * sea el que se esta editando.
     //  *
-    //  * @returns {boolean} si el email ya esta siendo utilizado por otro usuario.
+    //  * @returns {boolean} si el email ya esta siendo utilizado por otro user.
     //  */
     // isDuplicateEmailShow(userId, next) {
     //     this.constructor.findOne({email:this.email}).exec(function (err, user) {

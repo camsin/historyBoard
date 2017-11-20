@@ -70,7 +70,7 @@ html(ng-app="historyBoardApp")
                 a(href='/users/myProfile', class='')
                   img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
                 a(href='/users/myProfile', class='name-sidenav')
-                  span.white-text.name #{usuario.name}
+                  span.white-text.name #{user.name}
                 a(href='/users/myProfile', class='perfil-boton')
                   span.white-text.button-perfil Ver mi perfil
               .black-capa
@@ -105,13 +105,14 @@ html(ng-app="historyBoardApp")
                 i.fa.fa-power-off(aria-hidden='true')
                 | Salir
     block content
-    script(src='/javascripts/lib/jquery.min.js')
     script(src='/javascripts/lib/angular.min.js')
+    script(src='/javascripts/lib/jquery.min.js')
     script(src='/js/app.js')
     script(src='/javascripts/lib/bootstrap.min.js')
     script(src='/javascripts/lib/materialize.min.js')
     script(src='/javascripts/lib/tippy.min.js')
     script(src='/javascripts/functions.js')
+
     //script(src='/js/app.module.js')
     //script(src='/js/controllers/panel-control.controller.js')
 

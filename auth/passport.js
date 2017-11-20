@@ -154,14 +154,14 @@ passport.use('facebook', new FacebookStrategy({
 
 
 /**
- * Función utilizada para serializar el usuario dentor de la sesión.
+ * Función utilizada para serializar el user dentor de la sesión.
  */
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
 
 /**
- * Función utilizada para desserializar el usuario dentor de la sesión para su utilización..
+ * Función utilizada para desserializar el user dentor de la sesión para su utilización..
  */
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
@@ -170,7 +170,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 /**
- * Revisa si existe un usuario logueado a la aplicación, en caso de no existir redireciona al inicio de sesión.
+ * Revisa si existe un user logueado a la aplicación, en caso de no existir redireciona al inicio de sesión.
  */
 function isLoggedIn(req, res, next) {
     if (req.user){

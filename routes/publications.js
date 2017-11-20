@@ -14,6 +14,7 @@ router.get('/byDate', isLoggedIn, publicationsController.byDate);
 
 //Ultimas publications
 router.get('/lastPublications', isLoggedIn, publicationsController.lastPublications);
+router.get('/getAllPublications', isLoggedIn, publicationsController.getAllPublications);
 
 //publication por ID
 router.get('/byId/:id', isLoggedIn, publicationsController.byId);
@@ -30,6 +31,7 @@ router.get('/new/:content', isLoggedIn, publicationsController.newPublication);
 
 //Mis publications
 router.get('/myPublications',isLoggedIn,  publicationsController.myPublications);
+router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
 
 
 module.exports = router;
