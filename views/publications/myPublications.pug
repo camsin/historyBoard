@@ -2,7 +2,7 @@ extends ../layout
 
 block content
 
-  .home-page.col-xs-12
+  .home-page.col-xs-12(ng-controller="usersController" ng-init="getUser('5a10e40ceea1d7ae1518dc68')")
     .img-container
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
       .img-header
