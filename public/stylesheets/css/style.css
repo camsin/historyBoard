@@ -437,7 +437,7 @@ textarea:focus, input:focus, a:focus {
     display: -webkit-box; }
   .home-page .cards {
     padding-bottom: 30px; }
-    .home-page .cards .like-btn, .home-page .cards .comment-btn {
+    .home-page .cards .like-btn, .home-page .cards .comment-btn, .home-page .cards .edit-btn, .home-page .cards .delete-btn {
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
       height: 30px;
       position: absolute;
@@ -452,7 +452,7 @@ textarea:focus, input:focus, a:focus {
       text-align: center;
       border: solid 1px #EC407A;
       transition: 1s; }
-      .home-page .cards .like-btn .p-likes, .home-page .cards .comment-btn .p-likes {
+      .home-page .cards .like-btn .p-likes, .home-page .cards .comment-btn .p-likes, .home-page .cards .edit-btn .p-likes, .home-page .cards .delete-btn .p-likes {
         opacity: 0;
         min-width: 70px;
         position: absolute;
@@ -461,7 +461,7 @@ textarea:focus, input:focus, a:focus {
         padding-left: 7px;
         text-align: center;
         cursor: default; }
-      .home-page .cards .like-btn i, .home-page .cards .comment-btn i {
+      .home-page .cards .like-btn i, .home-page .cards .comment-btn i, .home-page .cards .edit-btn i, .home-page .cards .delete-btn i {
         transition: 1s;
         color: #EC407A; }
     .home-page .cards .like-btn:hover {
@@ -496,6 +496,55 @@ textarea:focus, input:focus, a:focus {
       .home-page .cards .comment-btn:hover i {
         transition: 1s;
         color: #64B5F6; }
+    .home-page .cards .edit-btn {
+      cursor: pointer;
+      z-index: 4;
+      bottom: 55px !important;
+      border: solid 1px #FBC02D;
+      padding-top: 3px !important; }
+      .home-page .cards .edit-btn .p-likes {
+        color: #FBC02D;
+        min-width: 58px !important;
+        cursor: default; }
+      .home-page .cards .edit-btn i {
+        transition: 1s;
+        color: #FBC02D; }
+    .home-page .cards .edit-btn:hover {
+      width: 100px !important;
+      cursor: pointer;
+      text-align: left !important;
+      padding-left: 14px !important;
+      transition: 1s !important; }
+      .home-page .cards .edit-btn:hover .p-likes {
+        opacity: 1 !important;
+        cursor: pointer; }
+      .home-page .cards .edit-btn:hover i {
+        transition: 1s;
+        color: #FBC02D; }
+    .home-page .cards .delete-btn {
+      cursor: pointer;
+      z-index: 4;
+      bottom: 17px !important;
+      border: solid 1px #C62828;
+      cursor: pointer;
+      padding-top: 3px !important; }
+      .home-page .cards .delete-btn .p-likes {
+        color: #C62828;
+        min-width: 58px !important;
+        cursor: pointer; }
+      .home-page .cards .delete-btn i {
+        transition: 1s;
+        color: #C62828; }
+    .home-page .cards .delete-btn:hover {
+      width: 100px !important;
+      text-align: left !important;
+      padding-left: 14px !important;
+      transition: 1s !important; }
+      .home-page .cards .delete-btn:hover .p-likes {
+        opacity: 1 !important; }
+      .home-page .cards .delete-btn:hover i {
+        transition: 1s;
+        color: #C62828; }
     .home-page .cards .card-container {
       margin-top: 30px;
       background: white;
@@ -1001,3 +1050,25 @@ textarea:focus, input:focus, a:focus {
 .notifications .input-field p {
   text-align: left;
   font-size: 14px; }
+
+.w-145px {
+  width: 145px; }
+
+.m-t-40 {
+  margin-top: 40px; }
+
+.m-b-40 {
+  margin-bottom: 40px; }
+
+.btn-delete-modal {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: white; }
+
+.font-delete-modal {
+  font-size: 20px;
+  color: gray; }
+
+.color-white {
+  color: white; }

@@ -722,7 +722,7 @@ textarea:focus, input:focus, a:focus{
 
   .cards {
     padding-bottom: 30px;
-    .like-btn, .comment-btn {
+    .like-btn, .comment-btn, .edit-btn, .delete-btn {
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
       height: 30px;
       position: absolute;
@@ -754,7 +754,6 @@ textarea:focus, input:focus, a:focus{
     }
 
     .like-btn:hover {
-
       width: 116px !important;
       text-align: left !important;
       padding-left: 14px !important;
@@ -796,6 +795,73 @@ textarea:focus, input:focus, a:focus{
       i {
         transition: 1s;
         color: #64B5F6;
+      }
+    }
+
+    .edit-btn {
+      cursor: pointer;
+      z-index: 4;
+      bottom: 55px !important;
+      border: solid 1px #FBC02D;
+      padding-top: 3px !important;
+      .p-likes {
+        color: #FBC02D;
+        min-width: 58px !important;
+        cursor: default;
+      }
+      i {
+        transition: 1s;
+        color: #FBC02D;
+      }
+    }
+
+    .edit-btn:hover {
+
+      width: 100px !important;
+      cursor: pointer;
+      text-align: left !important;
+      padding-left: 14px !important;
+      transition: 1s !important;
+      .p-likes {
+        opacity: 1 !important;
+        cursor: pointer;
+      }
+      i {
+        transition: 1s;
+        color: #FBC02D;
+      }
+    }
+
+    .delete-btn {
+      cursor: pointer;
+      z-index: 4;
+      bottom: 17px !important;
+      border: solid 1px #C62828;
+      cursor: pointer;
+      padding-top: 3px !important;
+      .p-likes {
+        color: #C62828;
+        min-width: 58px !important;
+        cursor: pointer;
+      }
+      i {
+        transition: 1s;
+        color: #C62828;
+      }
+    }
+
+    .delete-btn:hover {
+
+      width: 100px !important;
+      text-align: left !important;
+      padding-left: 14px !important;
+      transition: 1s !important;
+      .p-likes {
+        opacity: 1 !important;
+      }
+      i {
+        transition: 1s;
+        color: #C62828;
       }
     }
 
@@ -1523,4 +1589,32 @@ textarea:focus, input:focus, a:focus{
       font-size: 14px;
     }
   }
+}
+
+.w-145px {
+  width: 145px;
+}
+
+.m-t-40 {
+  margin-top: 40px;
+}
+
+.m-b-40 {
+  margin-bottom: 40px;
+}
+
+.btn-delete-modal {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: white;
+}
+
+.font-delete-modal {
+  font-size: 20px;
+  color: gray;
+}
+
+.color-white {
+  color: white;
 }
