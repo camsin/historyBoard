@@ -7,3 +7,9 @@ app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
         console.log("user", idUser);
     };
 }]);
+
+app.controller('layoutController', ['$scope', '$http', function ($scope, $http) {
+
+
+
+}]);
