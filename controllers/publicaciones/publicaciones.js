@@ -109,7 +109,7 @@ function test(req, res, next){
      }
    });
  //Publicacion
-   let post = new Post({
+  /* let post = new Post({
      titulo: "req.body.title",
      imagenPreview: array[0],
      imagenFondo:  array[1],
@@ -127,7 +127,7 @@ function test(req, res, next){
       res.rendirect('publicaciones/ultimasPublicaciones', {});
     }
 });
-
+*/
 }else{
   res.render('publicacion/test', {});
   Image.find({},{"_id": 1}, (err, result) => {
