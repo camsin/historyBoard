@@ -1,6 +1,7 @@
 const express = require('express');
 const Image = require('../../models/imagen');
-//const Publicacion = require('../../models/publicacion');
+const User = require('../../models/usuario');
+const Post = require('../../models/publicacion');
 var fs = require('fs');
 
 /**
@@ -86,27 +87,53 @@ function test(req, res, next){
           contentType: 'image/png'
         }
       });
-      image.save((err) => {
-        if (err) {
-          res.send('error!!!!');
-        } else {
-          res.render('publicacion/ultimasPublicaciones', {});
-        }
-     });
+      image.save();
    }
-   // Se recuperan los id
-   /*Imagen.find({_id:0}, (err, result) => {
-     var z = result.length;
-     z = z - 8;
-     for(var i = 0; i < result.length;i++){
-       arr[i] = result[z];
-       z++;
+   // Id del usuario/autor
+  let userPost;
+   User.find({},{"_id": 1}, (err, result) => {
+     userPost = result[0]._id;
+   });
+   // Se recuperan los id de las imagenes subidas
+   let array = [];
+   Image.find({},{"_id": 1}, (err, result) => {
+     //Result de imagenes
+     let sizeImg = result.length;
+     let menos = req.files.length;
+     sizeImg = sizeImg-menos;
+     for(let i = 0; i<menos;i++){
+       array[i] = result[sizeImg]._id;
+       sizeImg++;
      }
+   });
+ //Publicacion
+   let post = new Post({
+     titulo: "req.body.title",
+     imagenPreview: {type: array[0],ref: 'Imagen'},
+     imagenFondo: {type: array[1], ref: 'Imagen'},
+     estado: "req.body.state",
+     fecha: "req.body.date",
+     contenido: "req.body.content",
+     imageneSlider:
+      [
+        {type: array[2], ref: 'Imagen'},
+        {type: array[3], ref: 'Imagen'},
+        {type: array[4], ref: 'Imagen'},
+        {type: array[5], ref: 'Imagen'},
+        {type: array[6], ref: 'Imagen'}
+      ],
+     autor: {type: userPost, ref: 'Usuario'}
+    });
 
-  });*/
+    post.save();
 
 }else{
   res.render('publicacion/test', {});
+  Image.find({},{"_id": 1}, (err, result) => {
+
+      console.log(result[0]._id);
+
+  });
 }
 
 };

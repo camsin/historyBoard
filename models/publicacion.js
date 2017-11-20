@@ -7,13 +7,13 @@ const Autor = mongoose.model('Usuario');
  */
  const publicacionSchema = schema({
   titulo: String,
-	imagenPreview: {type: Schema.ObjectId, ref: 'Imagen'},
-	imagenFondo: {type: Schema.ObjectId, ref: 'Imagen'},
+	imagenPreview: {type: schema.ObjectId, ref: 'Imagen'},
+	imagenFondo: {type: schema.ObjectId, ref: 'Imagen'},
 	estado: String,
-	fecha: Date,
+	fecha: String,
 	contenido: String,
-	imageneSlider: [{type: Schema.ObjectId, ref: 'Imagen'}],
-	autor: {type: Schema.ObjectId, ref: 'Usuario'}
+	imageneSlider: [{type: schema.ObjectId, ref: 'Imagen'}],
+	autor: {type: schema.ObjectId, ref: 'Usuario'}
  });
 
  module.exports = mongoose.model('Publicacion',publicacionSchema);
