@@ -58,6 +58,8 @@ function nueva(req, res, next){
   }
 };
 
+
+
 function test(req, res, next){
 
  if(req.params.contenido == 2){
@@ -84,30 +86,11 @@ function test(req, res, next){
 
    }
    // Se recuperan los id
-   Imagen.find({_id: 0}, (err, result) => {
+   Imagen.find({}, (err, result) => {
      for(var i = 0,var z = result.length-8; i < result.length;i++,z++){
        arr[i] = result[z];
      }
   });
-
-  let publicacion = new Publicacion({
-    titulo: req.body.title,
-    imagenPreview: {type: Schema.ObjectId, ref: 'Imagen'}, //1 imagen
-    imagenFondo {type: Schema.ObjectId, ref: 'Imagen'} //1 imagen
-    estado: String,
-    fecha: Date,
-    contenido: String,
-    imageneSlider: [{type: Schema.ObjectId, ref: 'Imagen'}], // son 5 imagenes
-    autor: {type: Schema.ObjectId, ref: 'Autor'}
-   });
-   publicacion.save((err) => {
-     if (err) {
-       res.send('error!!!!');
-     } else {
-       res.render('publicacion/ultimasPublicaciones', {});
-     }
-  });
-
 
 }else{
   res.render('publicacion/test', {});

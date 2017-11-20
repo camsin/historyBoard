@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const Imagen  = mongoose.model('Imagen');
 const Autor = mongoose.model('Autor');
-
+/**
+ * Modelo de las publicaciones
+ */
  const publicacionSchema = schema({
   titulo: String,
 	imagenPreview: {type: Schema.ObjectId, ref: 'Imagen'}, //1 imagen
