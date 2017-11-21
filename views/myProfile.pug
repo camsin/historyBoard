@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-  .home-page.col-xs-12
+  .home-page.col-xs-12(ng-controller="profileController" ng-init="init()")
     .img-container.img-perfil-responsive
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
       .img-header
@@ -10,34 +10,35 @@ block content
         .user-publication
           a( class='col-xs-12 text-align-c img-perfil-container')
             img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
-          p(class="name-class-perfil") Gal Gadot
+          p(class="name-class-perfil") {{userInfo.name}}
     .col-xs-12.text-align-c.new-pub
       p.col-xs-12.p-new Aqui puedes editar tu Información
-      .row.col-xs-12
-        .input-field.col.s12
-          label.active.label-act(for='title') Nombre
-          input#title.validate(type='text', placeholder, value='Gal gadot')
-      .row.col-xs-12
-        .input-field.col.s12
-          label.active.label-act(for='title') Correo
-          input#title.validate(type='email', placeholder, value='gadot@gmail.com')
-      .row.col-xs-12
-        .input-field.col.s12
-          label.active.label-act(for='title') Contraseña
-          input#title.validate(type='password', placeholder, value='Gal gadot')
-      .row.col-xs-12
-        .input-field.col.s12
-          label.active.label-act(for='title') Confirma Contraseña
-          input#title.validate(type='password', placeholder, value='Gal gadot')
-      .col-xs-12
-        form.col-md-12(action='#')
-          p.description-p Imagen de perfil
-          .file-field.input-field
-            .btn
-              span Img
-              input(type='file')
-            .file-path-wrapper
-              input.file-path.validate(type='text')
-      .col-xs-12.text-center.m-t-30
-        a(href="#", class="btn btn-primary", data-toggle="modal", data-target=".register-modal") GUARDAR
+      form
+        .row.col-xs-12
+          .input-field.col.s12
+            label.active.label-act(for='title') Nombre
+            input#title.validate(type='text', placeholder, value="{{userInfo.name}}")
+        .row.col-xs-12
+          .input-field.col.s12
+            label.active.label-act(for='title') Correo
+            input#title.validate(type='email', placeholder, disabled, value="{{userInfo.email}}")
+        .row.col-xs-12
+          .input-field.col.s12
+            label.active.label-act(for='title') Nueva Contraseña
+            input#title.validate(type='password', placeholder)
+        .row.col-xs-12
+          .input-field.col.s12
+            label.active.label-act(for='title') Confirma Contraseña
+            input#title.validate(type='password', placeholder)
+        .col-xs-12
+          form.col-md-12(action='#')
+            p.description-p Nueva imagen de perfil
+            .file-field.input-field
+              .btn
+                span Img
+                input(type='file')
+              .file-path-wrapper
+                input.file-path.validate(type='text')
+        .col-xs-12.text-center.m-t-30
+          a(href="#", class="btn btn-primary", data-toggle="modal", data-target=".register-modal") GUARDAR
 

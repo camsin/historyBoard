@@ -48,3 +48,20 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
     };
 
 }]);
+
+app.controller('profileController', ['$scope', '$http', function ($scope, $http) {
+    $scope.userInfo = {};
+
+    $scope.init = function(){
+        $scope.getMyProfile();
+    };
+
+    $scope.getMyProfile = function () {
+        $http.get('getMyProfile').success(data => {
+            console.log("DTAA", data);
+            $scope.userInfo = data;
+        }).error(err => {
+            console.log("ERROR ALV", err);
+    });
+    };
+}]);

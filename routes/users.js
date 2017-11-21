@@ -7,4 +7,6 @@ const isLoggedIn = require('./../auth/passport.js').isLoggedIn;
 /* GET home page. */
 router.get('/myProfile', isLoggedIn, usersController.myProfile);
 
+router.get('/getMyProfile', isLoggedIn, usersController.getMyProfile);
+
 module.exports = router;
