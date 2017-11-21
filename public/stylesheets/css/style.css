@@ -414,8 +414,9 @@ textarea:focus, input:focus, a:focus {
 .home-page {
   padding: 0px; }
   .home-page .img-container {
-    height: 500px;
-    overflow: hidden; }
+    height: 370px;
+    overflow: hidden;
+    position: relative; }
   .home-page .img-header {
     position: relative;
     height: 100%;
@@ -430,7 +431,7 @@ textarea:focus, input:focus, a:focus {
     top: 0; }
   .home-page .title-class {
     padding: 0 15px;
-    margin-top: 220px;
+    margin-top: 170px;
     font-size: 50px;
     width: 100%;
     text-align: center;
@@ -667,7 +668,8 @@ textarea:focus, input:focus, a:focus {
 
 .side-nav {
   display: none;
-  margin-top: 64px !important; }
+  margin-top: 64px !important;
+  padding-bottom: 130px; }
   .side-nav .circle {
     box-shadow: 0 0 0 5px white; }
   .side-nav .name-sidenav {
@@ -947,9 +949,9 @@ textarea:focus, input:focus, a:focus {
 .user-publication {
   padding-top: 60px; }
   .user-publication .circle {
-    height: 200px;
+    height: 150px;
     margin: auto;
-    width: 200px;
+    width: 150px;
     border: 4px solid white;
     box-shadow: 0 0 0 5px #216096; }
   .user-publication .name-autor {
@@ -987,18 +989,18 @@ textarea:focus, input:focus, a:focus {
     color: #505050; }
 
 .name-class-perfil {
-  margin-top: 220px;
+  margin-top: 155px;
   font-size: 50px;
   width: 100%;
   text-align: center;
   color: white;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 70px;
+  padding-top: 60px;
   font-family: mayan; }
 
 .img-perfil-container {
-  margin-top: 60px; }
+  margin-top: 45px; }
 
 .transform-text {
   text-transform: uppercase; }
@@ -1098,6 +1100,9 @@ textarea:focus, input:focus, a:focus {
 
 .max-w-230 {
   max-width: 230px; }
+
+.max-w-260 {
+  max-width: 260px; }
 
 .p-t-30 {
   padding-top: 30px !important; }
