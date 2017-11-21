@@ -22,6 +22,9 @@ textarea:focus, input:focus, a:focus {
 .text-align-c {
   text-align: center; }
 
+.text-align-r {
+  text-align: right; }
+
 .z-index-9 {
   z-index: 9; }
 
@@ -86,7 +89,9 @@ textarea:focus, input:focus, a:focus {
     display: none; }
   .left-login {
     border-right: none !important;
-    min-height: initial !important; } }
+    min-height: initial !important; }
+  .responsive-img-cactus {
+    margin-bottom: 30px; } }
 
 @media (max-width: 1080px) and (min-width: 666px) {
   .article-container .text-container {
@@ -1072,3 +1077,27 @@ textarea:focus, input:focus, a:focus {
 
 .color-white {
   color: white; }
+
+.modal {
+  text-align: center; }
+
+@media screen and (min-width: 768px) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%; } }
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle; }
+
+.max-w-40 {
+  max-width: 40px !important; }
+
+.max-w-230 {
+  max-width: 230px; }
+
+.p-t-30 {
+  padding-top: 30px !important; }
