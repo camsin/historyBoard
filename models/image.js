@@ -3,7 +3,7 @@ const schema = mongoose.Schema;
 /**
  * Modelo de las imagenes manejadas en nuestra aplicación
  */
- const imagenSchema = schema({
+ const imageSchema = schema({
    file_id: String,
    img: {
      data: Buffer,
@@ -11,4 +11,4 @@ const schema = mongoose.Schema;
    }
  });
 
- module.exports = mongoose.model('Imagen',imagenSchema);
+ module.exports = mongoose.model('Image',imageSchema);

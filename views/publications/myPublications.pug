@@ -2,7 +2,7 @@ extends ../layout
 
 block content
 
-  .home-page.col-xs-12
+  .home-page.col-xs-12(ng-controller="usersController" ng-init="getUser('5a10e40ceea1d7ae1518dc68')")
     .img-container
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
       .img-header
@@ -13,5 +13,5 @@ block content
         img(src='/images/pedroSad.png')
         p Achis achis los mariachis, esto esta mas vacío que un desierto!
         p puedes hacer
-          a(href='/publicaciones/nueva/1') clic aquí
+          a(href='/publications/nueva/1') clic aquí
           | para crear una nueva publicación
