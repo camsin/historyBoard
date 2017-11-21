@@ -9,4 +9,6 @@ router.get('/myProfile', isLoggedIn, usersController.myProfile);
 
 router.get('/getMyProfile', isLoggedIn, usersController.getMyProfile);
 
+router.post('/updateMyProfile', isLoggedIn, usersController.updateMyProfile);
+
 module.exports = router;

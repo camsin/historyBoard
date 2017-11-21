@@ -62,6 +62,25 @@ app.controller('profileController', ['$scope', '$http', function ($scope, $http)
             $scope.userInfo = data;
         }).error(err => {
             console.log("ERROR ALV", err);
-    });
+        });
+    };
+
+    $scope.saveUser = function () {
+        if($scope.password === $scope.confirmPassword){
+            $http({
+                url:'updateMyProfile',
+                method:'POST',
+                data: {name:$scope.userInfo.name,
+                    password:$scope.password}
+            }).then(function(data){
+                console.log("DATA", data);
+                // $window.location.href = "/detalleProyecto";
+            }, function(data){
+                console.log("NOSE", data);
+                // $window.location.href = "/addReleaseBacklog";
+            });
+        }else{
+            console.log("PASS NO IGUALES");
+        }
     };
 }]);
