@@ -49,21 +49,35 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
 
 }]);
 app.controller('newPublication',['$scope','$http', function($scope, $http){
-    $scope.vm = {object:{}};
+    $scope.vm = {object:{
+      date : new Date()
+    }};
+
+    $scope.savePreview = function(event){
+      console.log("SAVE ALV",event);
+      let input = event;
+      let reader = new FileReader();
+      reader.onload = function(e){
+          var data = e.target.result;
+          $scope.vm.object.preview = new Uint8Array(data);
+          console.log("AHHHHHRCVHIVO",$scope.vm);
+      };
+      reader.readAsArrayBuffer(input.files[0]);
+
+
+    }
 
     $scope.newPost = function(publication){
       console.log("TITULOS ALV", publication.title);
       console.log("IMAGEN CACA", publication.preview);
       console.log("ZDFGHDG", publication);
-      /*'imageURL',fd, {transformRequest: angular.identity,
-                headers: {
-              'Content-Type': undefined
-            }
-          }*/
+
       $http({
+             headers: {'Content-Type': 'application/octet-stream'},
              url:'/publications/test/2',
              method:'POST',
-             data: {publication:publication}
+             data: {publication:publication},
+             transformRequest: []
          }).then(function(data){
              console.log("DATA", data);
              // $window.location.href = "/detalleProyecto";
@@ -73,32 +87,3 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
          });
     }
 }]);
-/*app.controller('newPublication',['$scope','$http', function($scope, $http){
-    $scope.vm = {object:{}};
-
-    $scope.newPost = function(publication){
-
-      console.log("IMAGEN ALV", publication.preview);
-      console.log("TITULO ALV", publication.title);
-
-      $http({
-             url:'/publications/test/2',
-             method:'POST',
-             data: {publication:publication}
-         }).then(function(data){
-             console.log("DATA", data);
-             // $window.location.href = "/detalleProyecto";
-         }, function(data){
-             console.log("NOSE", publication.img);
-             // $window.location.href = "/addReleaseBacklog";
-         });
-          /*$http.post('/publications/test/2').success(data => {
-              publication = publication;
-              console.log("SI TENGO DATA", data);
-          }).error(err => {
-              console.log("ERROR ALV", err);
-          });
-
-
-    }
-}]);*/
