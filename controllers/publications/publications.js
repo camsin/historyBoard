@@ -2,6 +2,7 @@ const express = require('express');
 let Publication = require('../../models/publication.js').Publication;
 let User = require('../../models/user.js').User;
 const Image = require('../../models/image.js');
+var getRawBody = require('raw-body');
 const fs = require('fs');
 
 function map(req, res, next) {
@@ -74,7 +75,25 @@ function myPublications(req, res, next) {
 };
 //Publicaciones controllers
 function test(req, res, next){
-  console.log("SI ENTRO ALV TITULO ALV",req.body.publication);
+//  console.log("SI ENTRO ALV TITULO ALV",req.body.publication);
+//  res.sendStatus(200);
+
+        if (req.headers['content-type'] === 'application/octet-stream') {
+            getRawBody(req, {
+                length: req.headers['content-length'],
+                encoding: this.charset
+            }, function (err, string) {
+                if (err)
+                    return next(err);
+
+                req.body = string;
+                console.log(req.body.publication);
+            })
+        }
+        else {
+            console.log("NO JUE ESO");
+        }
+
   /*let array = [];
   console.log("AQUI", req.files);
 

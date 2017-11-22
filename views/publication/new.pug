@@ -20,7 +20,7 @@ block content
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img", ng-model="vm.object.preview")
+              input(type='file',name="preview", onchange="angular.element(this).scope().savePreview(this)")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-6
@@ -28,7 +28,7 @@ block content
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img", ng-model="vm.object.head")
+              input(type='file',name="head", ng-model="vm.object.head")
             .file-path-wrapper
               input.file-path.validate(type='text')
       .row.col-xs-12.m-t-15
@@ -37,7 +37,7 @@ block content
           input#title.validate(type='text', placeholder, ng-model="vm.object.state")
       .col-xs-12.p-r-25.p-l-25.m-0
         p.description-p Introduce la fecha en la que ocurrieron los hechos de tu publicación
-        input.datepicker(type='text', ng-model="vm.object.date")
+        input(type='date', ng-model="vm.object.date")
       .row.col-xs-12.m-b-0
         .col.s12.m-t-25
           .row
@@ -50,35 +50,35 @@ block content
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img",ng-model="vm.object.img1")
+              input(type='file',name="img1",ng-model="vm.object.img1")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img",ng-model="vm.object.img2")
+              input(type='file',name="img2",ng-model="vm.object.img2")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img",ng-model="vm.object.img2")
+              input(type='file',name="img3",ng-model="vm.object.img3")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img", ng-model="vm.object.img4")
+              input(type='file',name="img4", ng-model="vm.object.img4")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img", ng-model="vm.object.img5")
+              input(type='file',name="img5", ng-model="vm.object.img5")
             .file-path-wrapper
               input.file-path.validate(type='text')
       .col-xs-12.text-center.m-t-30
