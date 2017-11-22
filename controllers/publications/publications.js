@@ -2,7 +2,6 @@ const express = require('express');
 let Publication = require('../../models/publication.js').Publication;
 let User = require('../../models/user.js').User;
 const Image = require('../../models/image.js');
-var getRawBody = require('raw-body');
 const fs = require('fs');
 
 function map(req, res, next) {
@@ -75,28 +74,8 @@ function myPublications(req, res, next) {
 };
 //Publicaciones controllers
 function test(req, res, next){
-//  console.log("SI ENTRO ALV TITULO ALV",req.body.publication);
-//  res.sendStatus(200);
-
-        if (req.headers['content-type'] === 'application/octet-stream') {
-            getRawBody(req, {
-                length: req.headers['content-length'],
-                encoding: this.charset
-            }, function (err, string) {
-                if (err)
-                    return next(err);
-
-                req.body = string;
-                console.log(req.body.publication);
-            })
-        }
-        else {
-            console.log("NO JUE ESO");
-        }
-
-  /*let array = [];
-  console.log("AQUI", req.files);
-
+  console.log("SI ENTRO ALV TITULO ALV",req.files.length);
+  let array = [];
    //Ciclo para guardar todas las imagenes que se envian en el form
    for(let i = 0; i < req.files.length;i++){
      console.log(i);
@@ -104,7 +83,7 @@ function test(req, res, next){
         file_id: "1",
         img: {
           data: fs.readFileSync(req.files[i].path),
-          contentType: req.files.mimetype
+          contentType: req.files[i].mimetype
         }
       });
       array.push(image._id);
@@ -120,13 +99,13 @@ function test(req, res, next){
 
  //Publicacion
    let post = new Publication({
-     title: "Un titulo",
+     title: req.body.title,
      imagePreview: array[0],
-     imageBackground:  array[0],
-     state: "Un Estado",
-     date: Date.now(),
-     content: "Un contenido",
-     imageSlider:[array[0],array[0],array[0],array[0],array[0],array[0]],
+     imageBackground:  array[1],
+     state: req.body.state,
+     date: req.body.date,
+     content: req.body.content,
+     imageSlider:[array[2],array[3],array[4],array[5],array[6]],
      author: userPost
     });
 
@@ -136,7 +115,7 @@ function test(req, res, next){
     } else {
       res.sendStatus(200);
     }
-});*/
+});
 };
 module.exports = {
     map,

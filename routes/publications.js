@@ -4,7 +4,7 @@ const publicationsController = require('../controllers/publications/publications
 const isLoggedIn = require('./../auth/passport.js').isLoggedIn;
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
-let type = upload.array('img', 7);
+let type = upload.any();
 router.get('/test', publicationsController.test);
 
 router.post('/test/:contenido',type, publicationsController.test);
