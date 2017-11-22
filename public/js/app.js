@@ -55,6 +55,11 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
       console.log("TITULOS ALV", publication.title);
       console.log("IMAGEN CACA", publication.preview);
       console.log("ZDFGHDG", publication);
+      /*'imageURL',fd, {transformRequest: angular.identity,
+                headers: {
+              'Content-Type': undefined
+            }
+          }*/
       $http({
              url:'/publications/test/2',
              method:'POST',

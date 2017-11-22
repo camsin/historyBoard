@@ -28,7 +28,7 @@ block content
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img", ng-model="vm.object.img")
+              input(type='file',name="img", ng-model="vm.object.head")
             .file-path-wrapper
               input.file-path.validate(type='text')
       .row.col-xs-12.m-t-15
@@ -42,43 +42,43 @@ block content
         .col.s12.m-t-25
           .row
             .input-field.col-xs-12.p-0
-              label.label-act(for='textarea1', ng-model="vm.object.content") Ahora si, dinos todo lo que tengas que decir! (nosotros lo acomodamos).
-              textarea#textarea1.materialize-textarea.m-t-25(placeholder)
+              label.label-act(for='textarea1') Ahora si, dinos todo lo que tengas que decir! (nosotros lo acomodamos).
+              textarea#textarea1.materialize-textarea.m-t-25(type='text',placeholder, ng-model="vm.object.content")
       .col-xs-12.p-l-25.p-r-25
         p.description-p Por último, selecciona 5 imágenes para mostrar en tu publicación
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img",ng-model="vm.object.img")
+              input(type='file',name="img",ng-model="vm.object.img1")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img",ng-model="vm.object.img")
+              input(type='file',name="img",ng-model="vm.object.img2")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img",ng-model="vm.object.img")
+              input(type='file',name="img",ng-model="vm.object.img2")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img", ng-model="vm.object.img")
+              input(type='file',name="img", ng-model="vm.object.img4")
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img", ng-model="vm.object.img")
+              input(type='file',name="img", ng-model="vm.object.img5")
             .file-path-wrapper
               input.file-path.validate(type='text')
       .col-xs-12.text-center.m-t-30

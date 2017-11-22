@@ -74,7 +74,7 @@ function myPublications(req, res, next) {
 };
 //Publicaciones controllers
 function test(req, res, next){
-  console.log("SI ENTRO ALV",req.data);
+  console.log("SI ENTRO ALV TITULO ALV",req.body.publication);
   /*let array = [];
   console.log("AQUI", req.files);
 
