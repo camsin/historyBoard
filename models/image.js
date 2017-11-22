@@ -11,4 +11,4 @@ const schema = mongoose.Schema;
    }
  });
 
- module.exports = mongoose.model('Image',imageSchema);
+ module.exports = Image = mongoose.model('Image',imageSchema);

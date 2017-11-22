@@ -48,3 +48,52 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
     };
 
 }]);
+app.controller('newPublication',['$scope','$http', function($scope, $http){
+    $scope.vm = {object:{}};
+
+    $scope.newPost = function(publication){
+      console.log("TITULOS ALV", publication.title);
+      console.log("IMAGEN CACA", publication.preview);
+      console.log("ZDFGHDG", publication);
+      $http({
+             url:'/publications/test/2',
+             method:'POST',
+             data: {publication:publication}
+         }).then(function(data){
+             console.log("DATA", data);
+             // $window.location.href = "/detalleProyecto";
+         }, function(data){
+             console.log("NOSE", $scope.vm.img);
+             // $window.location.href = "/addReleaseBacklog";
+         });
+    }
+}]);
+/*app.controller('newPublication',['$scope','$http', function($scope, $http){
+    $scope.vm = {object:{}};
+
+    $scope.newPost = function(publication){
+
+      console.log("IMAGEN ALV", publication.preview);
+      console.log("TITULO ALV", publication.title);
+
+      $http({
+             url:'/publications/test/2',
+             method:'POST',
+             data: {publication:publication}
+         }).then(function(data){
+             console.log("DATA", data);
+             // $window.location.href = "/detalleProyecto";
+         }, function(data){
+             console.log("NOSE", publication.img);
+             // $window.location.href = "/addReleaseBacklog";
+         });
+          /*$http.post('/publications/test/2').success(data => {
+              publication = publication;
+              console.log("SI TENGO DATA", data);
+          }).error(err => {
+              console.log("ERROR ALV", err);
+          });
+
+
+    }
+}]);*/
