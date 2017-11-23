@@ -89,12 +89,6 @@ function uploadPublication(req, res, next){
       array.push(image._id);
       image.save();
    }
-   // Id del usuario/autor
-   console.log(array);
-  let userPost;
-   User.find({}, (err, result) => {
-     userPost = result[0]._id;
-   });
    // Se recuperan los id de las imagenes subidas
 
  //Publicacion
@@ -106,13 +100,15 @@ function uploadPublication(req, res, next){
      date: req.body.date,
      content: req.body.content,
      imageSlider:[array[2],array[3],array[4],array[5],array[6]],
-     author: userPost
+     author: req.user._id
+     //author: userPost
     });
 
     post.save((err) => {
     if (err) {
       res.send(err);
     } else {
+      console.log(post);
       res.sendStatus(200);
     }
 });
