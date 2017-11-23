@@ -49,15 +49,12 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
 
 }]);
 app.controller('newPublication',['$scope','$http', function($scope, $http){
+
     $scope.vm = {object:{
       date : new Date()
     }};
 
-
     $scope.newPost = function(publication){
-      console.log("TITULOS ALV", publication.title);
-      console.log("IMAGEN CACA", publication.preview);
-      console.log("PUBLICATION", publication);
 
       let formData = new FormData();
       formData.append("title", publication.title);
@@ -67,7 +64,6 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
 
       formData.append("preview", document.querySelector("[name='preview']").files[0]);
       formData.append("head", document.querySelector("[name='head']").files[0]);
-      console.log("CARAMBOLAS",document.querySelector("[name='preview']").files[0]);
       formData.append("img1", document.querySelector("[name='img1']").files[0]);
       formData.append("img2", document.querySelector("[name='img2']").files[0]);
       formData.append("img3", document.querySelector("[name='img3']").files[0]);
