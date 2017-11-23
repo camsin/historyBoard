@@ -2,7 +2,12 @@ var express = require('express');
 var router = express.Router();
 const publicationsController = require('../controllers/publications/publications');
 const isLoggedIn = require('./../auth/passport.js').isLoggedIn;
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+let type = upload.any();
+router.get('/uploadPublication', publicationsController.uploadPublication);
 
+router.post('/uploadPublication/:contenido',type, publicationsController.uploadPublication);
 //MAPA
 router.get('/byState', isLoggedIn, publicationsController.map);
 

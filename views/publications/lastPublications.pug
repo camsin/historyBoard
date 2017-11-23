@@ -17,7 +17,7 @@ block content
         .card-rect.col-xs-12
           .header.col-xs-12
             label {{publication.state}}
-            label.pull-right {{publication.date}}
+            label.pull-right {{publication.date | date}}
           .img-card
             a(href='/publications/byId/{{publication._id}}')
 

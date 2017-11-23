@@ -1,20 +1,15 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
-// const Image  = mongoose.model('Image');
 const User = mongoose.model('User');
-
+const Image = require('./image');
 var publicationSchema = schema({
-  	title: String,
-	// imagePreview: {type: Schema.ObjectId, ref: 'Image'},
-	imagePreview: String,
-	imageBackground: String,
-	// imageBackground: {type: Schema.ObjectId, ref: 'Image'},
+  title: String,
+	imagePreview: {type: schema.ObjectId, ref: 'Image'},
+	imageBackground:{type: schema.ObjectId, ref: 'Image'},
 	state: String,
-	// date: Date,
-	date: String,
+	date: Date,
 	content: String,
-	imageSlider: [String],
-	// imageSlider: [{type: Schema.ObjectId, ref: 'Image'}],
+	imageSlider: [{type: schema.ObjectId, ref: 'Image'}],
 	author: {type: schema.ObjectId, ref: 'User'}
  });
 
