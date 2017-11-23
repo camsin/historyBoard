@@ -71,7 +71,7 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
       formData.append("img5", document.querySelector("[name='img5']").files[0]);
 
       let request = new XMLHttpRequest();
-      request.open('POST','/publications/test/2');
+      request.open('POST','/publications/uploadPublication/2');
       request.send(formData);
 
       /*$http({

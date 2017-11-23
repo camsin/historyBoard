@@ -73,7 +73,7 @@ function myPublications(req, res, next) {
     res.render('publications/myPublications', {showSideNav: true, title: 'myPublications', user: req.user});
 };
 //Publicaciones controllers
-function test(req, res, next){
+function uploadPublication(req, res, next){
   console.log("SI ENTRO ALV TITULO ALV",req.files.length);
   let array = [];
    //Ciclo para guardar todas las imagenes que se envian en el form
@@ -127,5 +127,5 @@ module.exports = {
     byId,
     newPublication,
     myPublications,
-    test
+    uploadPublication
 };
