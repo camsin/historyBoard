@@ -3,7 +3,7 @@ const schema = mongoose.Schema;
 const User = mongoose.model('User');
 const Image = require('./image');
 var publicationSchema = schema({
-  	title: String,
+  title: String,
 	imagePreview: {type: schema.ObjectId, ref: 'Image'},
 	imageBackground:{type: schema.ObjectId, ref: 'Image'},
 	state: String,
