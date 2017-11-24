@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
+
 /**
  * Modelo de las imagenes manejadas en nuestra aplicación
  */

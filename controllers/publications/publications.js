@@ -1,6 +1,6 @@
 const express = require('express');
-let Publication = require('../../models/publication.js').Publication;
-let User = require('../../models/user.js').User;
+const Publication = require('../../models/publication.js').Publication;
+const User = require('../../models/user.js').User;
 const Image = require('../../models/image.js');
 const fs = require('fs');
 
@@ -24,38 +24,21 @@ function lastPublications(req, res, next) {
 };
 
 function getMyPublications(req, res, next) {
-    console.log("SI ENTRE A ESTO", req.user);
-    Publication.find({"author": req.user._id}).populate('author').exec(function (err, publications) {
+    Publication.find({"author": req.user._id}).populate('author').exec((err, publications) => {
         if (err) {
             return res.json(err);
         }
-        // if (publications.length != 0) {
-        console.log("PUBLICATIONS ", publications);
-        //     console.log("NO ES CERO");
-            return res.json(publications);
-        // } else {
-        //     console.log("ES CERO ALB");
-        //     return res.json("{}");
-        // }
-
+        return res.json(publications);
     });
 };
 
 function getAllPublications(req, res, next) {
-    console.log("SI ENTRE A ESTO", req.user);
-    Publication.find({}).populate('author').exec(function (err, publications) {
+    Publication.find({}).populate('author').exec((err, publications) => {
         if (err) {
             return res.json(err);
         }
-        // if (publications.length != 0) {
-        console.log("PUBLICATIONS ", publications);
-        //     console.log("NO ES CERO");
-            return res.json(publications);
-        // } else {
-        //     console.log("ES CERO ALB");
-        //     return res.json("{}");
-        // }
 
+        return res.json(publications);
     });
 };
 
@@ -72,13 +55,10 @@ function newPublication(req, res, next) {
 function myPublications(req, res, next) {
     res.render('publications/myPublications', {showSideNav: true, title: 'myPublications', user: req.user});
 };
-//Publicaciones controllers
+
 function uploadPublication(req, res, next){
-  console.log("SI ENTRO ALV TITULO ALV",req.files.length);
   let array = [];
-   //Ciclo para guardar todas las imagenes que se envian en el form
    for(let i = 0; i < req.files.length;i++){
-     console.log(i);
      let image = new Image({
         file_id: "1",
         img: {
@@ -89,15 +69,11 @@ function uploadPublication(req, res, next){
       array.push(image._id);
       image.save();
    }
-   // Id del usuario/autor
-   console.log(array);
   let userPost;
    User.find({}, (err, result) => {
      userPost = result[0]._id;
    });
-   // Se recuperan los id de las imagenes subidas
 
- //Publicacion
    let post = new Publication({
      title: req.body.title,
      imagePreview: array[0],
@@ -110,13 +86,14 @@ function uploadPublication(req, res, next){
     });
 
     post.save((err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.sendStatus(200);
-    }
-});
+        if (err) {
+          res.send(err);
+        } else {
+          res.sendStatus(200);
+        }
+    });
 };
+
 module.exports = {
     map,
     byState,

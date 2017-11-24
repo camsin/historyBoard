@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-let passport = require('./../auth/passport.js').passport;
-let User = require('../models/user.js').User;
+const express = require('express');
+const router = express.Router();
+const passport = require('./../auth/passport.js').passport;
+const User = require('../models/user.js').User;
 
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
     res.render('login', {showSideNav: false});
 });
 
@@ -29,15 +29,8 @@ router.get('/auth/facebook/callback',
         failureRedirect: '/'
     }));
 
-// =====================================
-// GOOGLE ROUTES =======================
-// =====================================
-// send to google to do the authentication
-// profile gets us their basic information including their name
-// email gets their emails
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
-// the callback after google has authenticated the user
 router.get('/auth/google/callback',
     passport.authenticate('google', {
         successRedirect: '/publications/lastPublications',
@@ -46,7 +39,6 @@ router.get('/auth/google/callback',
 
 router.get('/auth/twitter', passport.authenticate('twitter'));
 
-// handle the callback after twitter has authenticated the user
 router.get('/auth/twitter/callback',
     passport.authenticate('twitter', {
         successRedirect: '/publications/lastPublications',
@@ -56,42 +48,38 @@ router.get('/auth/twitter/callback',
 
 router.post('/registrar', function (req, res) {
     let body = req.body;
-    console.log("BOSY!!!!!!", body);
+
     let user = new User({
         name: body.name,
         email: body.email
     });
 
-    console.log("USER ASDFSD", user);
+    if(user.verifyEmail()){
+        user.duplicatedEmail((duplicate) => {
+            if(duplicate){
+                res.render('login', {object: user, errorMessage: "Email already in use"});
+            } else {
+                if(body.password === body.confirmPassword){
+                    user.generateHash(body.password);
+                    user.save((err) => {
+                        if(err) {
+                            res.render('login', {object: user, errorMessage: "Please complete all the fields"});
+                        }else{
+                            res.redirect("/publications/lastPublications");
+                        }
+                            //         let emailUtilities = new EmailUtilities(user.email, "Welcome email");
+                            // emailUtilities.sendWelcomeEmail(user.id);
 
-    // user.verifyPassword(body.confirmPassword);
-    // if (user.confrimPassword(body.password)) {
-    user.isDuplicateEmail((duplicate) => {
-        if(duplicate){
-            console.log("EMAIL YA");
-            res.render('login', {object: user, errorMessage: "Email already in use"});
-        } else {
-            if(body.password === body.confirmPassword){
-                // console.log("USER", user);
-                user.generateHash(body.password);
-                user.save((err) => {
-                    if(err) {
-                        console.log("ABL ERROR", err);
-                        res.render('login', {object: user, errorMessage: "Please complete all the fields"});
-                    }else{
-                        res.redirect("/publications/lastPublications");
-                    }
-                        //         let emailUtilities = new EmailUtilities(user.email, "Welcome email");
-                        // emailUtilities.sendWelcomeEmail(user.id);
+                    });
+                }else{
+                    res.render('login', {object: user, errorMessage: "Passwords are not equals."});
+                }
 
-                });
-            }else{
-                console.log("ERROR PASS");
-                res.render('login', {object: user, errorMessage: "Passwords are not equals."});
             }
-
-        }
-    });
+        });
+    }else{
+        res.render('login', {object: user, errorMessage: "Email is not valid."});
+    }
 });
 
 
