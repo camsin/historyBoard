@@ -47,8 +47,18 @@ function getAllPublications(req, res, next) {
         if (err) {
             return res.json(err);
         }
-        // if (publications.length != 0) {
-        //     console.log("NO ES CERO");
+        // for(let i=0;i<publications.length;i++){
+        //   let array = [publications[i].imagePreview];
+        //   Image.find({_id: array[0]}, function(err,images){
+        //
+        //       //let array = [publications[i].imagePreview];
+        //       array.push(images[0]);
+        //       console.log(publications[i].imagePreview);
+        //
+        //
+        // });
+        // }
+            console.log(publications);
             return res.json(publications);
         // } else {
         //     console.log("ES CERO ALB");
@@ -89,7 +99,6 @@ function uploadPublication(req, res, next){
       array.push(image._id);
       image.save();
    }
-   // Se recuperan los id de las imagenes subidas
 
  //Publicacion
    let post = new Publication({
@@ -113,6 +122,25 @@ function uploadPublication(req, res, next){
     }
 });
 };
+
+function getImages(req, res, next) {
+
+        let id = [req.params.id];
+        console.log(id[0]);
+       Image.find({_id : req.params.id}, function(err,imgSrc){
+
+         console.log("imgSrc ", imgSrc);
+         //res.contentType(imgSrc.img.type);
+          res.contentType(imgSrc[0].img.contentType);
+          res.send(imgSrc[0].img.data);
+         //return res.json(imgSrc);
+
+      });
+
+
+
+};
+
 module.exports = {
     map,
     byState,
@@ -123,5 +151,6 @@ module.exports = {
     byId,
     newPublication,
     myPublications,
-    uploadPublication
+    uploadPublication,
+    getImages
 };
