@@ -12,6 +12,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', function ($scop
 
     $scope.userId = "";
     $scope.lastPublications = [];
+    $scope.publication = [];
     $scope.imagesId = [];
 
     $scope.init = function () {
@@ -29,7 +30,6 @@ app.controller('lastPublicationsController', ['$scope', '$http', function ($scop
 
 
     };
-
 
 
 }]);

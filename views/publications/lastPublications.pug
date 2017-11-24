@@ -19,6 +19,7 @@ block content
             label {{publication.state}}
             label.pull-right {{publication.date | date}}
           .img-card
+            //aqui seria enviarlo mejor con angular
             a(href='/publications/byId/{{publication._id}}')
 
               img(ng-src='/publications/getImages/{{publication.imagePreview}}', height='100%')

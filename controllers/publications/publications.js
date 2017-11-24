@@ -1,7 +1,7 @@
 const express = require('express');
 let Publication = require('../../models/publication.js').Publication;
 let User = require('../../models/user.js').User;
-let Comment = require('../../models/comment.js');
+let Comments = require('../../models/comment.js');
 const Image = require('../../models/image.js');
 const fs = require('fs');
 
@@ -63,9 +63,14 @@ function byId(req, res, next) {
   Publication.find({_id : req.params.id}, function(err,publication){
     console.log(publication[0].imageSlider[0]);
     User.find({_id : publication[0].author}, function(err,userData){
+      let commentsFilter = [];
       console.log(userData);
+      Comments.find({publication : req.params.id}, function(err,comments){
+        commentsFilter.push(comments);
+        console.log(comments);
+      });
       res.render('publication/byId', {
-          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
+          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData, comments : commentsFilter
 
       });
 
@@ -135,19 +140,6 @@ function getImages(req, res, next) {
 
 };
 
-function getComments(req, res, next) {
-
-       Comment.find({}, function(err,comments){
-         if(error){
-            console.log(err);
-         }else{
-            return res.json(comments);
-         }
-
-      });
-
-};
-
 
 module.exports = {
     map,
@@ -160,6 +152,5 @@ module.exports = {
     newPublication,
     myPublications,
     uploadPublication,
-    getImages,
-    getComments
+    getImages
 };
