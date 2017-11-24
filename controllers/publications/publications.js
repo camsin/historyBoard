@@ -1,6 +1,8 @@
 const express = require('express');
 let Publication = require('../../models/publication.js').Publication;
 let User = require('../../models/user.js').User;
+const Image = require('../../models/image.js');
+const fs = require('fs');
 
 function map(req, res, next) {
     res.render('publications/map', {showSideNav: true, user: req.user});
@@ -70,7 +72,51 @@ function newPublication(req, res, next) {
 function myPublications(req, res, next) {
     res.render('publications/myPublications', {showSideNav: true, title: 'myPublications', user: req.user});
 };
+//Publicaciones controllers
+function uploadPublication(req, res, next){
+  console.log("SI ENTRO ALV TITULO ALV",req.files.length);
+  let array = [];
+   //Ciclo para guardar todas las imagenes que se envian en el form
+   for(let i = 0; i < req.files.length;i++){
+     console.log(i);
+     let image = new Image({
+        file_id: "1",
+        img: {
+          data: fs.readFileSync(req.files[i].path),
+          contentType: req.files[i].mimetype
+        }
+      });
+      array.push(image._id);
+      image.save();
+   }
+   // Id del usuario/autor
+   console.log(array);
+  let userPost;
+   User.find({}, (err, result) => {
+     userPost = result[0]._id;
+   });
+   // Se recuperan los id de las imagenes subidas
 
+ //Publicacion
+   let post = new Publication({
+     title: req.body.title,
+     imagePreview: array[0],
+     imageBackground:  array[1],
+     state: req.body.state,
+     date: req.body.date,
+     content: req.body.content,
+     imageSlider:[array[2],array[3],array[4],array[5],array[6]],
+     author: userPost
+    });
+
+    post.save((err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.sendStatus(200);
+    }
+});
+};
 module.exports = {
     map,
     byState,
@@ -80,5 +126,6 @@ module.exports = {
     getAllPublications,
     byId,
     newPublication,
-    myPublications
+    myPublications,
+    uploadPublication
 };
