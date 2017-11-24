@@ -8,6 +8,8 @@ let type = upload.any();
 
 router.get('/getImages/:id', publicationsController.getImages);
 
+router.get('/getUserData/:id', publicationsController.getUserData);
+
 router.get('/uploadPublication', publicationsController.uploadPublication);
 
 router.post('/uploadPublication/:contenido',type, publicationsController.uploadPublication);
