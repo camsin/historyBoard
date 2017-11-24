@@ -6,12 +6,11 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 let type = upload.any();
 
+//images display
 router.get('/getImages/:id', publicationsController.getImages);
-
-router.get('/getUserData/:id', publicationsController.getUserData);
-
+//publication save
 router.get('/uploadPublication', publicationsController.uploadPublication);
-
+//publication upload
 router.post('/uploadPublication/:contenido',type, publicationsController.uploadPublication);
 //MAPA
 router.get('/byState', isLoggedIn, publicationsController.map);
