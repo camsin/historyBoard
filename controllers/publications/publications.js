@@ -47,17 +47,6 @@ function getAllPublications(req, res, next) {
         if (err) {
             return res.json(err);
         }
-        // for(let i=0;i<publications.length;i++){
-        //   let array = [publications[i].imagePreview];
-        //   Image.find({_id: array[0]}, function(err,images){
-        //
-        //       //let array = [publications[i].imagePreview];
-        //       array.push(images[0]);
-        //       console.log(publications[i].imagePreview);
-        //
-        //
-        // });
-        // }
             console.log(publications);
             return res.json(publications);
         // } else {
@@ -70,9 +59,18 @@ function getAllPublications(req, res, next) {
 };
 
 function byId(req, res, next) {
-    res.render('publication/byId', {
-        id: req.params.id, showSideNav: true, user: req.user
-    });
+  Publication.find({_id : req.params.id}, function(err,publication){
+    console.log(publication[0].imageSlider[0]);
+    User.find({_id : publication[0].author}, function(err,userData){
+      console.log(userData);
+      res.render('publication/byId', {
+          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
+
+      });
+
+   });
+ });
+
 };
 
 function newPublication(req, res, next) {
@@ -84,7 +82,6 @@ function myPublications(req, res, next) {
 };
 //Publicaciones controllers
 function uploadPublication(req, res, next){
-  console.log("SI ENTRO ALV TITULO ALV",req.files.length);
   let array = [];
    //Ciclo para guardar todas las imagenes que se envian en el form
    for(let i = 0; i < req.files.length;i++){
@@ -125,8 +122,6 @@ function uploadPublication(req, res, next){
 
 function getImages(req, res, next) {
 
-        let id = [req.params.id];
-        console.log(id[0]);
        Image.find({_id : req.params.id}, function(err,imgSrc){
 
          console.log("imgSrc ", imgSrc);
@@ -137,9 +132,8 @@ function getImages(req, res, next) {
 
       });
 
-
-
 };
+
 
 module.exports = {
     map,
