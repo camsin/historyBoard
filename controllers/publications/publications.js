@@ -25,36 +25,36 @@ function lastPublications(req, res, next) {
 
 function getMyPublications(req, res, next) {
     console.log("SI ENTRE A ESTO", req.user);
-    Publication.find({"author": req.user._id}).exec(function (err, publications) {
+    Publication.find({"author": req.user._id}).populate('author').exec(function (err, publications) {
         if (err) {
             return res.json(err);
         }
         // if (publications.length != 0) {
+        console.log("PUBLICATIONS ", publications);
         //     console.log("NO ES CERO");
             return res.json(publications);
         // } else {
         //     console.log("ES CERO ALB");
         //     return res.json("{}");
         // }
-        console.log("PUBLICATIONS ", publications);
 
     });
 };
 
 function getAllPublications(req, res, next) {
     console.log("SI ENTRE A ESTO", req.user);
-    Publication.find({}).exec(function (err, publications) {
+    Publication.find({}).populate('author').exec(function (err, publications) {
         if (err) {
             return res.json(err);
         }
         // if (publications.length != 0) {
+        console.log("PUBLICATIONS ", publications);
         //     console.log("NO ES CERO");
             return res.json(publications);
         // } else {
         //     console.log("ES CERO ALB");
         //     return res.json("{}");
         // }
-        console.log("PUBLICATIONS ", publications);
 
     });
 };
