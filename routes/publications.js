@@ -5,6 +5,9 @@ const isLoggedIn = require('./../auth/passport.js').isLoggedIn;
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 let type = upload.any();
+
+router.get('/getImages/:id', publicationsController.getImages);
+
 router.get('/uploadPublication', publicationsController.uploadPublication);
 
 router.post('/uploadPublication/:contenido',type, publicationsController.uploadPublication);
