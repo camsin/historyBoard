@@ -1,6 +1,7 @@
 const express = require('express');
 let Publication = require('../../models/publication.js').Publication;
 let User = require('../../models/user.js').User;
+let Comment = require('../../models/comment.js');
 const Image = require('../../models/image.js');
 const fs = require('fs');
 
@@ -134,6 +135,19 @@ function getImages(req, res, next) {
 
 };
 
+function getComments(req, res, next) {
+
+       Comment.find({}, function(err,comments){
+         if(error){
+            console.log(err);
+         }else{
+            return res.json(comments);
+         }
+
+      });
+
+};
+
 
 module.exports = {
     map,
@@ -146,5 +160,6 @@ module.exports = {
     newPublication,
     myPublications,
     uploadPublication,
-    getImages
+    getImages,
+    getComments
 };
