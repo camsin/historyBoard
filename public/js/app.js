@@ -12,6 +12,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', function ($scop
 
     $scope.userId = "";
     $scope.lastPublications = [];
+    $scope.imagesId = [];
 
     $scope.init = function () {
         $scope.getAllPublications();
@@ -20,12 +21,16 @@ app.controller('lastPublicationsController', ['$scope', '$http', function ($scop
 
     $scope.getAllPublications = function(){
         $http.get('getAllPublications').success(data => {
-            $scope.lastPublications = data;
-            console.log("SI TENGO DATA", data);
+             $scope.lastPublications = data;
+
         }).error(err => {
             console.log("ERROR ALV", err);
         });
+
+
     };
+
+
 
 }]);
 
@@ -41,11 +46,16 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
     $scope.getMyPublications = function(){
         $http.get('getMyPublications').success(data => {
             $scope.lastPublications = data;
-            console.log("SI TENGO DATA", data);
+            console.log("Success");
         }).error(err => {
-            console.log("ERROR ALV", err);
+            console.log("ERROR", err);
         });
+
+
     };
+
+
+
 
 }]);
 app.controller('newPublication',['$scope','$http', function($scope, $http){
@@ -74,16 +84,5 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
       request.open('POST','/publications/uploadPublication/2');
       request.send(formData);
 
-      /*$http({
-             url:'/publications/test/2',
-             method:'POST',
-             data: {publication:publication}
-         }).then(function(data){
-             console.log("DATA", data);
-             // $window.location.href = "/detalleProyecto";
-         }, function(data){
-             console.log("NOSE", $scope.vm.img);
-             // $window.location.href = "/addReleaseBacklog";
-         });*/
     }
 }]);
