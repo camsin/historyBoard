@@ -6,6 +6,7 @@
     "start": "supervisor ./bin/www"
   },
   "dependencies": {
+    "angular-toastr": "^2.1.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.17.1",
     "connect-flash": "^0.1.1",

@@ -1,5 +1,5 @@
 
-var app = angular.module('historyBoardApp', []);
+var app = angular.module('historyBoardApp', ['toastr']);
 
 app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
 
@@ -8,7 +8,7 @@ app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
     };
 }]);
 
-app.controller('lastPublicationsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('lastPublicationsController', ['$scope', '$http', 'toastr', function ($scope, $http, toastr) {
 
     $scope.userId = "";
     $scope.lastPublications = [];
@@ -21,15 +21,14 @@ app.controller('lastPublicationsController', ['$scope', '$http', function ($scop
     $scope.getAllPublications = function(){
         $http.get('getAllPublications').success(data => {
             $scope.lastPublications = data;
-            console.log("SI TENGO DATA", data);
         }).error(err => {
-            console.log("ERROR ALV", err);
+            toastr.error('Hubo un error obteniendo publicaciones', 'Error');
         });
     };
 
 }]);
 
-app.controller('myPublicationsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('myPublicationsController', ['$scope', '$http', 'toastr', function ($scope, $http, toastr) {
 
     $scope.userId = "";
     $scope.lastPublications = [];
@@ -41,15 +40,14 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
     $scope.getMyPublications = function(){
         $http.get('getMyPublications').success(data => {
             $scope.lastPublications = data;
-            console.log("SI TENGO DATA", data);
         }).error(err => {
-            console.log("ERROR ALV", err);
-        });
+            toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
+    });
     };
 
 }]);
 
-app.controller('profileController', ['$scope', '$http', function ($scope, $http) {
+app.controller('profileController', ['$scope', '$http', 'toastr', function ($scope, $http, toastr) {
     $scope.userInfo = {};
 
     $scope.init = function(){
@@ -58,10 +56,9 @@ app.controller('profileController', ['$scope', '$http', function ($scope, $http)
 
     $scope.getMyProfile = function () {
         $http.get('getMyProfile').success(data => {
-            console.log("DTAA", data);
             $scope.userInfo = data;
         }).error(err => {
-            console.log("ERROR ALV", err);
+            toastr.error('Hubo un error obteniendo tu perfil', 'Error');
         });
     };
 
@@ -73,14 +70,13 @@ app.controller('profileController', ['$scope', '$http', function ($scope, $http)
                 data: {name:$scope.userInfo.name,
                     password:$scope.password}
             }).then(function(data){
-                console.log("DATA", data);
-                // $window.location.href = "/detalleProyecto";
-            }, function(data){
-                console.log("NOSE", data);
-                // $window.location.href = "/addReleaseBacklog";
+                if(data.err){
+                    toastr.error('Tu perfil no se actualizo correctamente', 'Error');
+                }
+                toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
             });
         }else{
-            console.log("PASS NO IGUALES");
+            toastr.error('Las contraseñas no coinciden', 'Error');
         }
     };
 }]);

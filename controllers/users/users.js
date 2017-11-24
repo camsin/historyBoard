@@ -18,19 +18,12 @@ function getMyProfile(req, res, next){
 };
 
 function updateMyProfile(req, res, next) {
-    console.log("SI ENTRE AL METODO");
-    console.log("CAA");
-    console.log("User.generateHash(req.body.password)");
     User.update({"_id": req.user._id},
         {$set:{"name":req.body.name, "password": bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)}}, function (err) {
             if (err) {
-                console.log("ERROR ALV");
                 res.json({error:true, message: err});
-                // response.redirect("/home");
             } else {
-                console.log("SALIO BIEN :3 ")
                 res.json({error:false, message: "Se guardo exitosamente"});
-                // response.redirect("/detalleProyecto");
             }
         });
 };

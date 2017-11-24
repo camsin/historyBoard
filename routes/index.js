@@ -63,6 +63,7 @@ router.post('/registrar', function (req, res) {
                     user.generateHash(body.password);
                     user.save((err) => {
                         if(err) {
+                            req.flash("ALV");
                             res.render('login', {object: user, errorMessage: "Please complete all the fields"});
                         }else{
                             res.redirect("/publications/lastPublications");
@@ -72,12 +73,14 @@ router.post('/registrar', function (req, res) {
 
                     });
                 }else{
+                    req.flash("ALV");
                     res.render('login', {object: user, errorMessage: "Passwords are not equals."});
                 }
 
             }
         });
     }else{
+        req.flash("ALV");
         res.render('login', {object: user, errorMessage: "Email is not valid."});
     }
 });
