@@ -21,7 +21,7 @@ block content
           .img-card
             a(href='/publications/byId/{{publication._id}}')
 
-              img(src='/images/1.jpg', height='100%')
+              img(ng-src='/publications/getImages/{{publication.imagePreview}}', height='100%')
               div(class='ref-link')
                 .black-link
                   img(src='/images/logo.png', width='100%')
