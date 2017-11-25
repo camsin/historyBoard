@@ -86,3 +86,44 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
 
     }
 }]);
+
+app.controller('commentsController', ['$scope', '$http', function ($scope, $http) {
+
+    $scope.cosa;
+    $scope.vm = {object:{
+      date : new Date(),
+    }};
+    $scope.comments = [];
+
+    $scope.init = function (id) {
+      $scope.vm.object.publication = id;
+      $scope.getComments(id);
+    };
+
+    $scope.getComments = function(id){
+        $http.get('/publications/getComments/' + id).success(data => {
+            $scope.comments = data;
+            console.log("Success",data);
+        }).error(err => {
+            console.log("ERROR", err);
+        });
+    };
+        $scope.newComment = function(comment){
+          $http({
+            method: 'POST',
+            url: '/publications/newComment/1',
+            data: comment
+          }).then(function successCallback(response) {
+              // this callback will be called asynchronously
+              // when the response is available
+            }, function errorCallback(response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+            });
+        };
+
+
+    }]);
+
+///Fecth data de la barra de direccniones para enviarselo a angular, ya con eso llamar a una funcion que trar el json de la publicacion con el
+// bind
