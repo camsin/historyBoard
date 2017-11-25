@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
+const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 var userSchema = schema({
     name: String,
@@ -20,7 +21,6 @@ class UserClass{
     constructor(){}
 
     generateHash(password) {
-        console.log("ALV");
         this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     };
 
@@ -37,16 +37,6 @@ class UserClass{
     verifyEmail(){
         return re.test(this.email);
     }
-
-    // /**
-    //  * Verifica si los campos name y lastName no se encuentran vacíos y que su longitud
-    //  * sea mayor a 3.
-    //  *
-    //  * @returns {boolean} si cumple con las validaciones especificadas.
-    //  */
-    // verifyNotEmptyStringFields(){
-    //     return (this.name != undefined && this.name.length > 3) && (this.lastName != undefined && this.lastName.length > 3);
-    // }
 
 }
 

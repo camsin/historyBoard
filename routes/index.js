@@ -4,7 +4,7 @@ const passport = require('./../auth/passport.js').passport;
 const User = require('../models/user.js').User;
 
 router.get('/', (req, res, next) => {
-    res.render('login', {showSideNav: false});
+    res.render('login', {showSideNav: false, error: req.flash('error')});
 });
 
 router.post('/login', passport.authenticate('local-login', {
@@ -26,7 +26,8 @@ router.get('/auth/facebook', passport.authenticate('facebook', {
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
         successRedirect: '/publications/lastPublications',
-        failureRedirect: '/'
+        failureRedirect: '/',
+        failureFlash : true // allow flash messages
     }));
 
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
@@ -34,17 +35,9 @@ router.get('/auth/google', passport.authenticate('google', {scope: ['profile', '
 router.get('/auth/google/callback',
     passport.authenticate('google', {
         successRedirect: '/publications/lastPublications',
-        failureRedirect: '/'
+        failureRedirect: '/',
+        failureFlash : true // allow flash messages
     }));
-
-router.get('/auth/twitter', passport.authenticate('twitter'));
-
-router.get('/auth/twitter/callback',
-    passport.authenticate('twitter', {
-        successRedirect: '/publications/lastPublications',
-        failureRedirect: '/'
-    }));
-
 
 router.post('/registrar', function (req, res) {
     let body = req.body;
@@ -57,14 +50,13 @@ router.post('/registrar', function (req, res) {
     if(user.verifyEmail()){
         user.duplicatedEmail((duplicate) => {
             if(duplicate){
-                res.render('login', {object: user, errorMessage: "Email already in use"});
+                res.render('login', {object: user, error: "Email already in use"});
             } else {
                 if(body.password === body.confirmPassword){
                     user.generateHash(body.password);
                     user.save((err) => {
                         if(err) {
-                            req.flash("ALV");
-                            res.render('login', {object: user, errorMessage: "Please complete all the fields"});
+                            res.render('login', {object: user, error: "Please complete all the fields"});
                         }else{
                             res.redirect("/publications/lastPublications");
                         }
@@ -73,15 +65,13 @@ router.post('/registrar', function (req, res) {
 
                     });
                 }else{
-                    req.flash("ALV");
-                    res.render('login', {object: user, errorMessage: "Passwords are not equals."});
+                    res.render('login', {object: user, error: "Passwords are not equals."});
                 }
 
             }
         });
     }else{
-        req.flash("ALV");
-        res.render('login', {object: user, errorMessage: "Email is not valid."});
+        res.render('login', {object: user, error: "Email is not valid."});
     }
 });
 

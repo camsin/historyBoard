@@ -40,8 +40,7 @@ passport.use('google', new GoogleStrategy({
                 } else {
                     User.findOne({"email": profile.emails[0].value}, function (err, userEmail) {
                         if(err){
-                            req.flash("ALV");
-                            res.render('login', {errorMessage: "Ocurrio un error en el found"});
+                            res.render('login', {message: "Ocurrio un error en el found"});
                         }
                         if(userEmail){
                             userEmail.socialNetworks.google = profile._json;
@@ -82,8 +81,6 @@ passport.use('facebook', new FacebookStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOne({ "socialNetworks.facebook.id": profile.id, provider:"facebook"}, function (err, user) {
-            console.log("ERR", err);
-            console.log("USER", user);
             if(err) {
                 return done(err, null);
             } else {
@@ -92,8 +89,7 @@ passport.use('facebook', new FacebookStrategy({
                 } else {
                     User.findOne({"email": profile.emails[0].value}, function (err, userEmail) {
                         if(err){
-                            console.log("ERR", err);
-                            res.render('login', {errorMessage: "Ocurrio un error en el found"});
+                            res.render('login', {message: "Ocurrio un error en el found"});
                         }
                         if(userEmail){
                             userEmail.socialNetworks.facebook = profile._json;

@@ -1662,3 +1662,10 @@ textarea:focus, input:focus, a:focus{
 .p-t-30 {
   padding-top: 30px !important;
 }
+
+
+.alert {
+  z-index: 9999999;
+  position: absolute;
+  width: 100%;
+}
