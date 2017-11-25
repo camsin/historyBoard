@@ -7,6 +7,14 @@ const upload = multer({ dest: 'uploads/' });
 let type = upload.any();
 
 //images display
+router.get('/getComments/:id', publicationsController.getComments);
+
+//images display
+router.get('/newComment', publicationsController.newComment);
+//images display
+router.post('/newComment/:comment', publicationsController.newComment);
+
+//images display
 router.get('/getImages/:id', publicationsController.getImages);
 
 //publication save
