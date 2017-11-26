@@ -37,7 +37,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', function ($scop
 app.controller('myPublicationsController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.userId = "";
-    $scope.lastPublications = [];
+    $scope.myPublications = [];
 
     $scope.init = function () {
         $scope.getPublications();
@@ -45,7 +45,7 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
 
     $scope.getMyPublications = function(){
         $http.get('getMyPublications').success(data => {
-            $scope.lastPublications = data;
+            $scope.myPublications = data;
             console.log("Success");
         }).error(err => {
             console.log("ERROR", err);
