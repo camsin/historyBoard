@@ -49,6 +49,7 @@ class UserClass{
      * @param password {@code String} a encriptar
      */
     generateHash(password) {
+        console.log("ALV");
         this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     };
 
