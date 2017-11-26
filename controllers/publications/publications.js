@@ -166,8 +166,6 @@ function getComments(req, res, next) {
             return res.json(array);
         }
      });
-
-
     }
   });
 };
