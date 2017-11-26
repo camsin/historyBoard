@@ -5,13 +5,13 @@ const Image = require('./image');
 
 var publicationSchema = schema({
   title: String,
-	imagePreview: {type: schema.ObjectId, ref: 'Image'},
-	imageBackground:{type: schema.ObjectId, ref: 'Image'},
-	state: String,
-	date: Date,
-	content: String,
-	imageSlider: [{type: schema.ObjectId, ref: 'Image'}],
-	author: {type: schema.ObjectId, ref: 'User'}
+	imagePreview: {type: schema.ObjectId, ref: 'Image', required:true},
+	imageBackground:{type: schema.ObjectId, ref: 'Image', required:true},
+	state: {type: String, required:true},
+	date: {type: Date, required:true},
+	content: {type:String, required:true},
+	imageSlider: [{type: schema.ObjectId, ref: 'Image', required:true}],
+	author: {type: schema.ObjectId, ref: 'User', required:true}
  });
 
 let Publication = mongoose.model('Publication',publicationSchema);

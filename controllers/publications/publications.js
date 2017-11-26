@@ -1,6 +1,7 @@
 const express = require('express');
 const Publication = require('../../models/publication.js').Publication;
 const User = require('../../models/user.js').User;
+const Comment = require('../../models/comment.js');
 const Image = require('../../models/image.js');
 const fs = require('fs');
 
@@ -43,9 +44,16 @@ function getAllPublications(req, res, next) {
 };
 
 function byId(req, res, next) {
-    res.render('publication/byId', {
-        id: req.params.id, showSideNav: true, user: req.user
-    });
+  Publication.find({_id : req.params.id}, function(err,publication){
+    console.log(publication[0].imageSlider[0]);
+    User.find({_id : publication[0].author}, function(err,userData){
+      res.render('publication/byId', {
+          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
+      });
+
+   });
+ });
+
 };
 
 function newPublication(req, res, next) {
@@ -82,17 +90,96 @@ function uploadPublication(req, res, next){
      date: req.body.date,
      content: req.body.content,
      imageSlider:[array[2],array[3],array[4],array[5],array[6]],
-     author: userPost
+     author: req.user._id
+     //author: userPost
     });
 
     post.save((err) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.sendStatus(200);
-        }
-    });
+    if (err) {
+      res.send(err);
+    } else {
+      console.log(post);res.sendStatus(200);
+    }
+});
 };
+
+function getImages(req, res, next) {
+
+       Image.find({_id : req.params.id}, function(err,imgSrc){
+
+         console.log("imgSrc ", imgSrc);
+         //res.contentType(imgSrc.img.type);
+          res.contentType(imgSrc[0].img.contentType);
+          res.send(imgSrc[0].img.data);
+         //return res.json(imgSrc);
+
+      });
+
+};
+
+function newComment(req, res, next) {
+    console.log("request",req.body);
+    let commment = new Comments({
+      publication: req.body.publication,
+      date: req.body.date,
+      content: req.body.content,
+      author: req.user._id
+   });
+   commment.save((err) => {
+       if (err) {
+         res.send(err);
+       } else {
+         res.sendStatus(200);
+       }
+    });
+
+};
+
+function getComments(req, res, next) {
+  // let array = [];
+  //   Publication.find({"author": req.user._id}).populate('author').exec(function (err, publications) {
+  //       if (err) {
+  //           return res.json(err);
+  //       }
+  //       // if (publications.length != 0) {
+  //       //     console.log("NO ES CERO");
+  //       console.log(publications);
+  //       return res.json(publications);
+  //       // } else {
+  //       //     console.log("ES CERO ALB");
+  //       //     return res.json("{}");
+  //       // }
+  //
+  //   });
+
+    Comment.find({"publication": req.params.id}).populate('author').exec(function(err, comments){
+        if (err) {
+            return res.json(err);
+        }
+        console.log(comments);
+        return res.json(comments);
+
+    });
+
+
+  // Comments.find({publication : req.params.id}, function(err,comments){
+  //   for(let i=0;i<comments.length;i++){
+  //     User.find({_id : comments[i].author}, function(err,user){
+  //       array.push({
+  //         content: comments[i].content,
+  //         name: user[0].name,
+  //         userId: user[0]._id
+  //       });
+  //       if ((i+1)==comments.length) {
+  //           console.log(array);
+  //           //res.sendStatus(200);
+  //           return res.json(array);
+  //       }
+  //    });
+  //   }
+  // });
+};
+
 
 module.exports = {
     map,
@@ -104,5 +191,8 @@ module.exports = {
     byId,
     newPublication,
     myPublications,
-    uploadPublication
+    uploadPublication,
+    getImages,
+    newComment,
+    getComments
 };

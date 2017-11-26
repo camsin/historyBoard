@@ -12,6 +12,8 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr', funct
 
     $scope.userId = "";
     $scope.lastPublications = [];
+    $scope.publication = [];
+    $scope.imagesId = [];
 
     $scope.init = function () {
         $scope.getAllPublications();
@@ -20,7 +22,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr', funct
 
     $scope.getAllPublications = function(){
         $http.get('getAllPublications').success(data => {
-            $scope.lastPublications = data;
+             $scope.lastPublications = data;
         }).error(err => {
             toastr.error('Hubo un error obteniendo publicaciones', 'Error');
         });
@@ -42,7 +44,7 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', functio
             $scope.lastPublications = data;
         }).error(err => {
             toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
-    });
+        });
     };
 
 }]);
@@ -106,16 +108,41 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
       request.open('POST','/publications/uploadPublication/2');
       request.send(formData);
 
-      /*$http({
-             url:'/publications/test/2',
-             method:'POST',
-             data: {publication:publication}
-         }).then(function(data){
-             console.log("DATA", data);
-             // $window.location.href = "/detalleProyecto";
-         }, function(data){
-             console.log("NOSE", $scope.vm.img);
-             // $window.location.href = "/addReleaseBacklog";
-         });*/
     }
 }]);
+
+app.controller('commentsController', ['$scope', '$http', function ($scope, $http) {
+
+    $scope.vm = {object:{
+      date : new Date(),
+    }};
+    $scope.comments = [];
+
+    $scope.init = function (id) {
+      $scope.vm.object.publication = id;
+      $scope.getComments(id);
+    };
+
+    $scope.getComments = function(id){
+        $scope.comments = [];
+        $http.get('/publications/getComments/' + id).success(data => {
+            $scope.comments = data;
+            console.log("Success",data);
+        }).error(err => {
+            console.log("ERROR", err);
+        });
+    };
+
+    $scope.newComment = function(newComment){
+      $http({
+        method: 'POST',
+        url: '/publications/newComment/1',
+        data: newComment
+      }).then(function successCallback(res) {
+          console.log("Success");
+        }, function errorCallback(err) {
+            console.log("ERR",err);
+          });
+    };
+
+    }]);
