@@ -22,6 +22,9 @@ textarea:focus, input:focus, a:focus {
 .text-align-c {
   text-align: center; }
 
+.text-align-r {
+  text-align: right; }
+
 .z-index-9 {
   z-index: 9; }
 
@@ -86,7 +89,9 @@ textarea:focus, input:focus, a:focus {
     display: none; }
   .left-login {
     border-right: none !important;
-    min-height: initial !important; } }
+    min-height: initial !important; }
+  .responsive-img-cactus {
+    margin-bottom: 30px; } }
 
 @media (max-width: 1080px) and (min-width: 666px) {
   .article-container .text-container {
@@ -409,8 +414,9 @@ textarea:focus, input:focus, a:focus {
 .home-page {
   padding: 0px; }
   .home-page .img-container {
-    height: 500px;
-    overflow: hidden; }
+    height: 370px;
+    overflow: hidden;
+    position: relative; }
   .home-page .img-header {
     position: relative;
     height: 100%;
@@ -425,7 +431,7 @@ textarea:focus, input:focus, a:focus {
     top: 0; }
   .home-page .title-class {
     padding: 0 15px;
-    margin-top: 220px;
+    margin-top: 170px;
     font-size: 50px;
     width: 100%;
     text-align: center;
@@ -437,7 +443,7 @@ textarea:focus, input:focus, a:focus {
     display: -webkit-box; }
   .home-page .cards {
     padding-bottom: 30px; }
-    .home-page .cards .like-btn, .home-page .cards .comment-btn {
+    .home-page .cards .like-btn, .home-page .cards .comment-btn, .home-page .cards .edit-btn, .home-page .cards .delete-btn {
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
       height: 30px;
       position: absolute;
@@ -452,7 +458,7 @@ textarea:focus, input:focus, a:focus {
       text-align: center;
       border: solid 1px #EC407A;
       transition: 1s; }
-      .home-page .cards .like-btn .p-likes, .home-page .cards .comment-btn .p-likes {
+      .home-page .cards .like-btn .p-likes, .home-page .cards .comment-btn .p-likes, .home-page .cards .edit-btn .p-likes, .home-page .cards .delete-btn .p-likes {
         opacity: 0;
         min-width: 70px;
         position: absolute;
@@ -461,7 +467,7 @@ textarea:focus, input:focus, a:focus {
         padding-left: 7px;
         text-align: center;
         cursor: default; }
-      .home-page .cards .like-btn i, .home-page .cards .comment-btn i {
+      .home-page .cards .like-btn i, .home-page .cards .comment-btn i, .home-page .cards .edit-btn i, .home-page .cards .delete-btn i {
         transition: 1s;
         color: #EC407A; }
     .home-page .cards .like-btn:hover {
@@ -496,6 +502,55 @@ textarea:focus, input:focus, a:focus {
       .home-page .cards .comment-btn:hover i {
         transition: 1s;
         color: #64B5F6; }
+    .home-page .cards .edit-btn {
+      cursor: pointer;
+      z-index: 4;
+      bottom: 55px !important;
+      border: solid 1px #FBC02D;
+      padding-top: 3px !important; }
+      .home-page .cards .edit-btn .p-likes {
+        color: #FBC02D;
+        min-width: 58px !important;
+        cursor: default; }
+      .home-page .cards .edit-btn i {
+        transition: 1s;
+        color: #FBC02D; }
+    .home-page .cards .edit-btn:hover {
+      width: 100px !important;
+      cursor: pointer;
+      text-align: left !important;
+      padding-left: 14px !important;
+      transition: 1s !important; }
+      .home-page .cards .edit-btn:hover .p-likes {
+        opacity: 1 !important;
+        cursor: pointer; }
+      .home-page .cards .edit-btn:hover i {
+        transition: 1s;
+        color: #FBC02D; }
+    .home-page .cards .delete-btn {
+      cursor: pointer;
+      z-index: 4;
+      bottom: 17px !important;
+      border: solid 1px #C62828;
+      cursor: pointer;
+      padding-top: 3px !important; }
+      .home-page .cards .delete-btn .p-likes {
+        color: #C62828;
+        min-width: 58px !important;
+        cursor: pointer; }
+      .home-page .cards .delete-btn i {
+        transition: 1s;
+        color: #C62828; }
+    .home-page .cards .delete-btn:hover {
+      width: 100px !important;
+      text-align: left !important;
+      padding-left: 14px !important;
+      transition: 1s !important; }
+      .home-page .cards .delete-btn:hover .p-likes {
+        opacity: 1 !important; }
+      .home-page .cards .delete-btn:hover i {
+        transition: 1s;
+        color: #C62828; }
     .home-page .cards .card-container {
       margin-top: 30px;
       background: white;
@@ -613,7 +668,8 @@ textarea:focus, input:focus, a:focus {
 
 .side-nav {
   display: none;
-  margin-top: 64px !important; }
+  margin-top: 64px !important;
+  padding-bottom: 130px; }
   .side-nav .circle {
     box-shadow: 0 0 0 5px white; }
   .side-nav .name-sidenav {
@@ -893,9 +949,9 @@ textarea:focus, input:focus, a:focus {
 .user-publication {
   padding-top: 60px; }
   .user-publication .circle {
-    height: 200px;
+    height: 150px;
     margin: auto;
-    width: 200px;
+    width: 150px;
     border: 4px solid white;
     box-shadow: 0 0 0 5px #216096; }
   .user-publication .name-autor {
@@ -933,18 +989,18 @@ textarea:focus, input:focus, a:focus {
     color: #505050; }
 
 .name-class-perfil {
-  margin-top: 220px;
+  margin-top: 155px;
   font-size: 50px;
   width: 100%;
   text-align: center;
   color: white;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 70px;
+  padding-top: 60px;
   font-family: mayan; }
 
 .img-perfil-container {
-  margin-top: 60px; }
+  margin-top: 45px; }
 
 .transform-text {
   text-transform: uppercase; }
@@ -1001,3 +1057,52 @@ textarea:focus, input:focus, a:focus {
 .notifications .input-field p {
   text-align: left;
   font-size: 14px; }
+
+.w-145px {
+  width: 145px; }
+
+.m-t-40 {
+  margin-top: 40px; }
+
+.m-b-40 {
+  margin-bottom: 40px; }
+
+.btn-delete-modal {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: white; }
+
+.font-delete-modal {
+  font-size: 20px;
+  color: gray; }
+
+.color-white {
+  color: white; }
+
+.modal {
+  text-align: center; }
+
+@media screen and (min-width: 768px) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%; } }
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle; }
+
+.max-w-40 {
+  max-width: 40px !important; }
+
+.max-w-230 {
+  max-width: 230px; }
+
+.max-w-260 {
+  max-width: 260px; }
+
+.p-t-30 {
+  padding-top: 30px !important; }
