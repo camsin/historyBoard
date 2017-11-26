@@ -2,7 +2,7 @@ extends ../layout
 
 block content
 
-  .home-page.col-xs-12(ng-controller="newPublication")
+  .home-page.col-xs-12(ng-controller="newPublication" ng-init="init()")
     .img-container
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
       .img-header
