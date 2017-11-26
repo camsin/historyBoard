@@ -1,6 +1,7 @@
 const express = require('express');
 let User = require('../../models/user.js').User;
 var bcrypt = require('bcrypt-nodejs');
+const fs = require('fs');
 
 
 function myProfile(req, res, next){
@@ -33,6 +34,9 @@ function updateMyProfile(req, res, next) {
                 // response.redirect("/detalleProyecto");
             }
         });
+        if(req.files.length > 0){
+            console.log(req.files.length);
+        }
 };
 
 module.exports = {
