@@ -4,7 +4,7 @@ block content
 
   .home-page.col-xs-12(ng-controller="commentsController" ng-init=`init('${id}')`)
     .img-container
-      //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
+      img(src=`/publications/getImages/${publication[0].imageBackground}`, alt='Smiley face', height='100%', width='100%')
       .img-header
       .black-cover
         p(class="title-class") #{publication[0].title} {{cosa}}
