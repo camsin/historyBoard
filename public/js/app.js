@@ -137,6 +137,7 @@ app.controller('commentsController', ['$scope', '$http', function ($scope, $http
 
     $scope.getComments = function(id){
         $http.get('/publications/getComments/' + id).success(data => {
+            $scope.comments = [];
             $scope.comments = data;
             console.log("Success",data);
         }).error(err => {
