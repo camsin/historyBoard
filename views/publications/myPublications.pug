@@ -2,13 +2,37 @@ extends ../layout
 
 block content
 
-  .home-page.col-xs-12(ng-controller="usersController" ng-init="getUser('5a10e40ceea1d7ae1518dc68')")
+  .home-page.col-xs-12(ng-controller="myPublicationsController" ng-init="getMyPublications()")
     .img-container
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
       .img-header
       .black-cover
         p(class="title-class") Mis publicaciones
-    .col-xs-12.text-align-c
+    .cards.col-xs-12(ng-show="myPublications.length > 0")
+      .card-container.col-md-4(ng-repeat="myPublication in myPublications")
+        .card-rect.col-xs-12
+          .header.col-xs-12
+            label {{myPublication.state}}
+            label.pull-right {{myPublication.date | date}}
+          .img-card
+            a(href='/publications/byId/{{myPublication._id}}')
+              img(ng-src='/publications/getImages/{{myPublication.imagePreview}}', height='100%')
+              div(class='ref-link')
+                .black-link
+                  img(src='/images/logo.png', width='100%')
+                  p Ver mas
+          .info-container
+            .like-btn
+              div(class="")
+                i.fa.fa-heart(aria-hidden='true')
+                p(class='p-likes') 100 likes
+            .comment-btn
+              div(class="")
+                i.fa.fa-comment(aria-hidden='true')
+                p(class='p-likes') 100 comentarios
+            label(class="title-card") {{myPublication.title}}
+            p(class="info-card") {{myPublication.content}}
+    .col-xs-12.text-align-c(ng-show="myPublications.length == 0")
       .empty-state-holder
         img(src='/images/pedroSad.png')
         p Achis achis los mariachis, esto esta mas vacío que un desierto!
