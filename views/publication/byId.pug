@@ -7,13 +7,13 @@ block content
       img(src=`/publications/getImages/${publication[0].imageBackground}`, alt='Smiley face', height='100%', width='100%')
       .img-header
       .black-cover
-        p(class="title-class") #{publication[0].title} {{cosa}}
+        p(class="title-class") #{publication[0].title}
         a.like-press
           i.fa.fa-heart(aria-hidden='true')
     .col-md-3
       .user-publication
         a(href='#', class='col-xs-12 text-align-c')
-          img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
+          img.circle(src=`/publications/getImages/${userData[0].profilePicture}`)
         a(href='#!name',class='col-xs-12 text-align-c')
           span.name-autor.m-t-25.col-xs-12   #{userData[0].name}
           span.name-date.m-t-10.col-xs-12  12/03/2017
@@ -48,4 +48,4 @@ block content
                   textarea#textarea1.materialize-textarea(data-length="1000", ng-model="vm.object.content")
                   label(for='textarea1') Escribe un comentario genial
           .col-xs-12.text-center
-            a.btn.btn-primary.m-b-50(href="#",ng-click="newComment(vm.object)") COMENTAR
+            a.btn.btn-primary.m-b-50(href="#",ng-click="newComment(vm.object)",ng-show="vm.object.content") COMENTAR
