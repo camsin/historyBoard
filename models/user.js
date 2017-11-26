@@ -1,18 +1,19 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
+const Image = require('./image');
 
 var userSchema = schema({
     name: String,
     password: String,
     email: String,
+    profilePicture : {type: schema.ObjectId, ref: 'Image'},
     socialNetworks: {
         facebook: {},
         twitter: {},
         google: {}
     },
     provider: String
-
 });
 
 /**
