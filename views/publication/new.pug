@@ -13,73 +13,73 @@ block content
       .row.col-xs-12
         .input-field.col.s12
           label.active.label-act(for='title') Antes que nada necesitas un titulo llamativo y genial
-          input#title.validate(type='text', placeholder, name="title", ng-model="vm.object.title")
+          input#title.validate(type='text', placeholder, name="title", ng-model="vm.object.title",required)
       .col-xs-12
         .col-md-6
           p.description-p Vamos a darle vida a tu publicación, selecciona una imágen para la miniatura.
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="preview")
+              input(type='file',name="preview",required)
             .file-path-wrapper
-              input.file-path.validate(type='text')
+              input.file-path.validate(type='text',required)
         .col-md-6
           p.description-p Ahora selecciona una imágen para mostrarla en grande en tu publicación.
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="head", ng-model="vm.object.head")
+              input(type='file',name="head", ng-model="vm.object.head", required)
             .file-path-wrapper
               input.file-path.validate(type='text')
       .row.col-xs-12.m-t-15
         .input-field.col.s12
           label.active.label-act(for='title') De qué estado de México es tu publicación?
-          input#title.validate(type='text', placeholder, ng-model="vm.object.state")
+          input#title.validate(type='text', placeholder, ng-model="vm.object.state", required)
       .col-xs-12.p-r-25.p-l-25.m-0
         p.description-p Introduce la fecha en la que ocurrieron los hechos de tu publicación
         //input.datepicker(type='date', ng-model="vm.object.date")
-        input(type='date', ng-model="vm.object.date")
+        input(type='date', ng-model="vm.object.date",required)
       .row.col-xs-12.m-b-0
         .col.s12.m-t-25
           .row
             .input-field.col-xs-12.p-0
               label.label-act(for='textarea1') Ahora si, dinos todo lo que tengas que decir! (nosotros lo acomodamos).
-              textarea#textarea1.materialize-textarea.m-t-25(type='text',placeholder, ng-model="vm.object.content")
+              textarea#textarea1.materialize-textarea.m-t-25(type='text',placeholder, ng-model="vm.object.content",required)
       .col-xs-12.p-l-25.p-r-25
         p.description-p Por último, selecciona 5 imágenes para mostrar en tu publicación
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img1",ng-model="vm.object.img1")
+              input(type='file',name="img1",ng-model="vm.object.img1",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img2",ng-model="vm.object.img2")
+              input(type='file',name="img2",ng-model="vm.object.img2",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img3",ng-model="vm.object.img3")
+              input(type='file',name="img3",ng-model="vm.object.img3",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img4", ng-model="vm.object.img4")
+              input(type='file',name="img4", ng-model="vm.object.img4",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img5", ng-model="vm.object.img5")
+              input(type='file',name="img5", ng-model="vm.object.img5",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
       .col-xs-12.text-center.m-t-30
