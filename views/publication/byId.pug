@@ -39,7 +39,7 @@ block content
       p.comment-title.col-xs-12 COMENTARIOS
         .comment-container
           .comment.col-xs-12(ng-repeat="comment in comments")
-              p.name {{comment.name}}
+              p.name {{comment.author.name}}
               p.content {{comment.content}}
           .row
             form.col.s12

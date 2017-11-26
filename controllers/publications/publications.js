@@ -1,7 +1,7 @@
 const express = require('express');
-let Publication = require('../../models/publication.js').Publication;
-let User = require('../../models/user.js').User;
-let Comments = require('../../models/comment.js');
+const Publication = require('../../models/publication.js').Publication;
+const User = require('../../models/user.js').User;
+const Comment = require('../../models/comment.js');
 const Image = require('../../models/image.js');
 const fs = require('fs');
 
@@ -39,8 +39,8 @@ function getMyPublications(req, res, next) {
             return res.json(err);
         }
         // if (publications.length != 0) {
--        //     console.log("NO ES CERO");
-+           console.log(publications);
+        //     console.log("NO ES CERO");
+          console.log(publications);
             return res.json(publications);
         // } else {
         //     console.log("ES CERO ALB");
@@ -164,23 +164,48 @@ function newComment(req, res, next) {
 };
 
 function getComments(req, res, next) {
-  let array = [];
-  Comments.find({publication : req.params.id}, function(err,comments){
-    for(let i=0;i<comments.length;i++){
-      User.find({_id : comments[i].author}, function(err,user){
-        array.push({
-          content: comments[i].content,
-          name: user[0].name,
-          userId: user[0]._id
-        });
-        if ((i+1)==comments.length) {
-            console.log(array);
-            //res.sendStatus(200);
-            return res.json(array);
+  // let array = [];
+  //   Publication.find({"author": req.user._id}).populate('author').exec(function (err, publications) {
+  //       if (err) {
+  //           return res.json(err);
+  //       }
+  //       // if (publications.length != 0) {
+  //       //     console.log("NO ES CERO");
+  //       console.log(publications);
+  //       return res.json(publications);
+  //       // } else {
+  //       //     console.log("ES CERO ALB");
+  //       //     return res.json("{}");
+  //       // }
+  //
+  //   });
+
+    Comment.find({"publication": req.params.id}).populate('author').exec(function(err, comments){
+        if (err) {
+            return res.json(err);
         }
-     });
-    }
-  });
+        console.log(comments);
+        return res.json(comments);
+
+    });
+
+
+  // Comments.find({publication : req.params.id}, function(err,comments){
+  //   for(let i=0;i<comments.length;i++){
+  //     User.find({_id : comments[i].author}, function(err,user){
+  //       array.push({
+  //         content: comments[i].content,
+  //         name: user[0].name,
+  //         userId: user[0]._id
+  //       });
+  //       if ((i+1)==comments.length) {
+  //           console.log(array);
+  //           //res.sendStatus(200);
+  //           return res.json(array);
+  //       }
+  //    });
+  //   }
+  // });
 };
 
 
