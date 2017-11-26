@@ -31,8 +31,8 @@ function getMyPublications(req, res, next) {
             return res.json(err);
         }
         // if (publications.length != 0) {
-        console.log("PUBLICATIONS ", publications);
-        //     console.log("NO ES CERO");
+-        //     console.log("NO ES CERO");
++           console.log(publications);
             return res.json(publications);
         // } else {
         //     console.log("ES CERO ALB");
