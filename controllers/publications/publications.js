@@ -62,15 +62,8 @@ function byId(req, res, next) {
   Publication.find({_id : req.params.id}, function(err,publication){
     console.log(publication[0].imageSlider[0]);
     User.find({_id : publication[0].author}, function(err,userData){
-      let commentsFilter = [];
-      console.log(userData);
-      Comments.find({publication : req.params.id}, function(err,comments){
-        commentsFilter.push(comments);
-        console.log(comments);
-      });
       res.render('publication/byId', {
-          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData, comments : commentsFilter
-
+          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
       });
 
    });
@@ -139,6 +132,44 @@ function getImages(req, res, next) {
 
 };
 
+function newComment(req, res, next) {
+    console.log("request",req.body);
+    let commment = new Comments({
+      publication: req.body.publication,
+      date: req.body.date,
+      content: req.body.content,
+      author: req.user._id
+   });
+   commment.save((err) => {
+       if (err) {
+         res.send(err);
+       } else {
+         res.sendStatus(200);
+       }
+    });
+
+};
+
+function getComments(req, res, next) {
+  let array = [];
+  Comments.find({publication : req.params.id}, function(err,comments){
+    for(let i=0;i<comments.length;i++){
+      User.find({_id : comments[i].author}, function(err,user){
+        array.push({
+          content: comments[i].content,
+          name: user[0].name,
+          userId: user[0]._id
+        });
+        if ((i+1)==comments.length) {
+            console.log(array);
+            //res.sendStatus(200);
+            return res.json(array);
+        }
+     });
+    }
+  });
+};
+
 
 module.exports = {
     map,
@@ -151,5 +182,7 @@ module.exports = {
     newPublication,
     myPublications,
     uploadPublication,
-    getImages
+    getImages,
+    newComment,
+    getComments
 };
