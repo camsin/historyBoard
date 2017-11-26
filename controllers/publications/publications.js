@@ -21,7 +21,15 @@ function byDate(req, res, next) {
 };
 
 function lastPublications(req, res, next) {
-    res.render('publications/lastPublications', {showSideNav: true, user: req.user});
+    //res.render('publications/lastPublications', {showSideNav: true, user: req.user});
+      if(req.user.profilePicture === undefined){
+        let img = "5a1a3cfaf7ba6b73ba129b43";
+        User.update({"_id": req.user._id},{$set:{"profilePicture": img}},{multi:true},
+        function(err, numberAffected){
+        });
+      }
+      res.render('publications/lastPublications', {showSideNav: true, user: req.user});
+
 };
 
 function getMyPublications(req, res, next) {
@@ -119,17 +127,22 @@ function uploadPublication(req, res, next){
 };
 
 function getImages(req, res, next) {
+  if(req.params.id != undefined){
+    Image.find({_id : req.params.id}, function(err,imgSrc){
+      if(err){
+        console.log("ERROR",err);
+      }else{
+        console.log("imgSrc ", imgSrc);
+        //res.contentType(imgSrc.img.type);
 
-       Image.find({_id : req.params.id}, function(err,imgSrc){
-
-         console.log("imgSrc ", imgSrc);
-         //res.contentType(imgSrc.img.type);
           res.contentType(imgSrc[0].img.contentType);
           res.send(imgSrc[0].img.data);
          //return res.json(imgSrc);
+      }
+   });
+ }else{
 
-      });
-
+ }
 };
 
 function newComment(req, res, next) {
