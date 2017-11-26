@@ -9,7 +9,8 @@ block content
       .black-cover
         .user-publication
           a( class='col-xs-12 text-align-c img-perfil-container')
-            img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
+            //img.circle(src='')
+            img.circle(src=`/publications/getImages/${user.profilePicture}`)
           p(class="name-class-perfil") {{userInfo.name}}
     .col-xs-12.text-align-c.new-pub
       p.col-xs-12.p-new Aqui puedes editar tu Información
