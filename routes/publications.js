@@ -8,26 +8,11 @@ let type = upload.any();
 
 module.exports = function(io) {
 
-
-    io.on('connection', function(socket){
-        console.log('**********************************************************');
-        console.log('mensaje desde socket.io en el archivo de rutas publications.js');
-        console.log('**********************************************************');
-        socket.emit('popo');
-
-        socket.emit("getAllPublications");
-
-        // socket.on('newPublication', function(data){
-        //     console.log("NEW PUBLICATION DATA", data);
-        // });
-    });
     //images display
     router.get('/getComments/:id', publicationsController.getComments);
 
     //images display
-    router.get('/newComment', publicationsController.newComment);
-    //images display
-    router.post('/newComment/:comment', publicationsController.newComment);
+    router.post('/newComment', publicationsController.newComment);
 
     //images display
     router.get('/getImages/:id', publicationsController.getImages);
@@ -65,6 +50,29 @@ module.exports = function(io) {
 //Mis publications
     router.get('/myPublications', isLoggedIn, publicationsController.myPublications);
     router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
+
+    io.on('connection', function(socket){
+        console.log('**********************************************************');
+        console.log('mensaje desde socket.io en el archivo de rutas publications.js');
+        console.log('**********************************************************');
+        // socket.emit('popo');
+
+        // socket.emit("getAllPublications");
+
+        socket.on("caquita", function(data){
+            console.log("ESTOY EN LA CAQUITA");
+            io.emit('popo');
+            // publicationsController.getAllPublications;
+        });
+
+        socket.on("newComment", function(data){
+            io.emit('getComments');
+        });
+
+        // socket.on('newPublication', function(data){
+        //     console.log("NEW PUBLICATION DATA", data);
+        // });
+    });
 
 
     return router;

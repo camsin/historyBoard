@@ -38,17 +38,21 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
     // });
 
     $scope.getAllPublications = function(){
+        console.log("HICE EL GET ALL");
         $http.get('getAllPublications').success(data => {
+            console.log("DATA POR SOCKET", data);
              $scope.lastPublications = data;
         }).error(err => {
             toastr.error('Hubo un error obteniendo publicaciones', 'Error');
         });
     };
 
+    // socket.emit('caquita');
+
     socket.on('popo', function (data) {
             console.log("ESTOY ESCUCHANDO ESTE CANAL DE LAST PUBLICATIONS");
             $scope.getAllPublications();
-        // $scope.$apply();
+        $scope.$apply();
     });
 
 
@@ -62,6 +66,12 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', functio
     $scope.init = function () {
         $scope.getPublications();
     };
+
+    socket.on('popo', function (data) {
+        console.log("CACA POPO");
+        $scope.getAllPublications();
+        // $scope.$apply();
+    });
 
     $scope.getMyPublications = function(){
         $http.get('getMyPublications').success(data => {
@@ -132,10 +142,12 @@ app.controller('newPublication',['$scope','$http', 'socket', function($scope, $h
       request.open('POST','/publications/uploadPublication/2');
       request.send(formData);
 
-    }
+      socket.emit('caquita');
+
+    };
 }]);
 
-app.controller('commentsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('commentsController', ['$scope', '$http','socket', function ($scope, $http, socket) {
 
     $scope.vm = {object:{
       date : new Date(),
@@ -143,6 +155,7 @@ app.controller('commentsController', ['$scope', '$http', function ($scope, $http
     $scope.comments = [];
 
     $scope.init = function (id) {
+        $scope.id = id;
       $scope.vm.object.publication = id;
       $scope.getComments(id);
     };
@@ -151,19 +164,24 @@ app.controller('commentsController', ['$scope', '$http', function ($scope, $http
         $scope.comments = [];
         $http.get('/publications/getComments/' + id).success(data => {
             $scope.comments = data;
-            console.log("Success",data);
         }).error(err => {
             console.log("ERROR", err);
         });
     };
 
+    socket.on('getComments', function (data) {
+        $scope.getComments($scope.id);
+        $scope.$apply();
+    });
+
     $scope.newComment = function(newComment){
       $http({
         method: 'POST',
-        url: '/publications/newComment/1',
+        url: '/publications/newComment',
         data: newComment
       }).then(function successCallback(res) {
-          console.log("Success");
+          socket.emit('newComment');
+          $scope.vm.object.content = "";
         }, function errorCallback(err) {
             console.log("ERR",err);
           });

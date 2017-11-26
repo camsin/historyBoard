@@ -65,6 +65,7 @@ function myPublications(req, res, next) {
 };
 
 function uploadPublication(req, res, next){
+    console.log("APENAS ENTRE AQUI");
   let array = [];
    for(let i = 0; i < req.files.length;i++){
      let image = new Image({
@@ -118,15 +119,18 @@ function getImages(req, res, next) {
 };
 
 function newComment(req, res, next) {
-    console.log("request",req.body);
-    let commment = new Comments({
+    console.log("request!!!!!!!!!!!!!!!!!!!",req.body);
+    console.log("USER IN SESSION", req.user);
+    let comment = new Comment({
       publication: req.body.publication,
       date: req.body.date,
       content: req.body.content,
       author: req.user._id
    });
-   commment.save((err) => {
+    console.log("KE BERGA", comment);
+   comment.save((err) => {
        if (err) {
+           console.log("PTM",err);
          res.send(err);
        } else {
          res.sendStatus(200);
