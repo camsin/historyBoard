@@ -66,6 +66,8 @@ app.controller('profileController', ['$scope', '$http', function ($scope, $http)
         $scope.getMyProfile();
     };
 
+    $scope.img = 0;
+
     $scope.getMyProfile = function () {
         $http.get('getMyProfile').success(data => {
             console.log("DTAA", data);
@@ -74,23 +76,36 @@ app.controller('profileController', ['$scope', '$http', function ($scope, $http)
             console.log("ERROR ALV", err);
         });
     };
+    $scope.click= function(){
+      $scope.img++
+    }
 
     $scope.saveUser = function () {
         if($scope.password === $scope.confirmPassword){
-            $http({
-                url:'updateMyProfile',
-                method:'POST',
-                data: {name:$scope.userInfo.name,
-                    password:$scope.password}
-            }).then(function(data){
-                console.log("DATA", data);
-                // $window.location.href = "/detalleProyecto";
-            }, function(data){
-                console.log("NOSE", data);
-                // $window.location.href = "/addReleaseBacklog";
-            });
+          let formData = new FormData();
+          formData.append("name", $scope.userInfo.name);
+          formData.append("password", $scope.password);
+          //     $http({
+          //         url:'updateMyProfile',
+          //         method:'POST',
+          //         data: {name:$scope.userInfo.name,
+          //             password:$scope.password}
+          //     }).then(function(data){
+          //         console.log("DATA", data);
+          //         // $window.location.href = "/detalleProyecto";
+          //     }, function(data){
+          //         console.log("NOSE", data);
+          //         // $window.location.href = "/addReleaseBacklog";
+          //     });
+          //
+          if($scope.img > 0){
+            formData.append("profilePicture", document.querySelector("[name='profilePicture']").files[0]);
+          }
+          let request = new XMLHttpRequest();
+          request.open('POST','updateMyProfile');
+          request.send(formData);
         }else{
-            console.log("PASS NO IGUALES");
+         console.log("PASS NO IGUALES");
         }
     };
 }]);
