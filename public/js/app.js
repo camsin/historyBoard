@@ -1,6 +1,19 @@
 
 var app = angular.module('historyBoardApp', ['toastr']);
 
+app.factory('socket', ['$rootScope', function($rootScope) {
+    var socket = io.connect();
+
+    return {
+        on: function(eventName, callback){
+            socket.on(eventName, callback);
+        },
+        emit: function(eventName, data) {
+            socket.emit(eventName, data);
+        }
+    };
+}]);
+
 app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.getUser = function (idUser) {
@@ -8,7 +21,7 @@ app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
     };
 }]);
 
-app.controller('lastPublicationsController', ['$scope', '$http', 'toastr', function ($scope, $http, toastr) {
+app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socket', function ($scope, $http, toastr, socket) {
 
     $scope.userId = "";
     $scope.lastPublications = [];
@@ -19,6 +32,10 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr', funct
         $scope.getAllPublications();
     };
 
+    // socket.on("getLastPublications", function(data){
+    //     console.log("ESTOY ESCUCHANDO ESTE CANAL DE LAST PUBLICATIONS");
+    //     $scope.getAllPublications();
+    // });
 
     $scope.getAllPublications = function(){
         $http.get('getAllPublications').success(data => {
@@ -27,6 +44,13 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr', funct
             toastr.error('Hubo un error obteniendo publicaciones', 'Error');
         });
     };
+
+    socket.on('popo', function (data) {
+            console.log("ESTOY ESCUCHANDO ESTE CANAL DE LAST PUBLICATIONS");
+            $scope.getAllPublications();
+        // $scope.$apply();
+    });
+
 
 }]);
 
@@ -82,7 +106,7 @@ app.controller('profileController', ['$scope', '$http', 'toastr', function ($sco
         }
     };
 }]);
-app.controller('newPublication',['$scope','$http', function($scope, $http){
+app.controller('newPublication',['$scope','$http', 'socket', function($scope, $http, socket){
 
     $scope.vm = {object:{
       date : new Date()

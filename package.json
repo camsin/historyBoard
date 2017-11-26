@@ -25,6 +25,7 @@
     "passport-twitter": "^1.0.4",
     "pug": "~2.0.0-beta11",
     "serve-favicon": "~2.4.2",
+    "socket.io": "^2.0.4",
     "tippy.js": "^1.4.1"
   },
   "devDependencies": {

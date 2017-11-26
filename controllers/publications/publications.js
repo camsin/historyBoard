@@ -132,7 +132,6 @@ function newComment(req, res, next) {
          res.sendStatus(200);
        }
     });
-
 };
 
 function getComments(req, res, next) {
