@@ -1,5 +1,6 @@
 const express = require('express');
 let User = require('../../models/user.js').User;
+const Image = require('../../models/image.js');
 var bcrypt = require('bcrypt-nodejs');
 const fs = require('fs');
 
@@ -30,13 +31,31 @@ function updateMyProfile(req, res, next) {
                 // response.redirect("/home");
             } else {
                 console.log("SALIO BIEN :3 ")
-                res.json({error:false, message: "Se guardo exitosamente"});
+                if(req.files.length > 0){
+                  let imgId = 0;
+                  let image = new Image({
+                     file_id: "",
+                     img: {
+                       data: fs.readFileSync(req.files[0].path),
+                       contentType: req.files[0].mimetype
+                     }
+                   });
+                   imgId = image._id;
+                   image.save();
+                   User.update({"_id": req.user._id},{$set:{"profilePicture": imgId}},{multi:true},
+                   function(err, numberAffected){
+                   });
+                   
+
+
+                }else{
+                      res.json({error:false, message: "Se guardo exitosamente"});
+                }
+
                 // response.redirect("/detalleProyecto");
             }
         });
-        if(req.files.length > 0){
-            console.log(req.files.length);
-        }
+
 };
 
 module.exports = {
