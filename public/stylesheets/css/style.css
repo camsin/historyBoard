@@ -1143,3 +1143,17 @@ textarea:focus, input:focus, a:focus {
     position: absolute !important;
     left: -245px !important;
     width: 301px !important; } }
+
+.select-wrapper .caret {
+  opacity: 0; }
+
+.select-wrapper li {
+  min-height: 25px !important; }
+
+.select-wrapper .dropdown-content li > a, .select-wrapper .dropdown-content li > span {
+  color: #216096 !important;
+  padding: 7px 16px !important;
+  font-size: 12px !important; }
+
+.select-wrapper .select-dropdown {
+  max-height: 300px; }

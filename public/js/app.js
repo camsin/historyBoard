@@ -131,19 +131,38 @@ app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', func
 }]);
 app.controller('newPublication',['$scope','$http', 'socket', function($scope, $http, socket){
 
+    $scope.init = function () {
+        $scope.reload();
+    };
+
+    $scope.estados = ['Aguascalientes','Baja California','Baja California Sur', 'Campeche', 'Coahuila de Zaragoza', 'Colima',
+        'Chiapas', 'Chihuahua', 'Distrito Federal', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'México',
+        'Michoacán de Ocampo', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo',
+        'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz de Ignacio de la Llave',
+        'Yucatán', 'Zacatecas'];
+
     $scope.vm = {object:{
       date : new Date()
     }};
+
+    $scope.reload = function(){
+        $('select').material_select();
+    };
 
     socket.emit('newNotification');
 
     $scope.newPost = function(publication){
 
+        console.log("PUBLICATION", publication);
+
+        let state = $('#state').val();
+        console.log("STATE", state);
+
       let formData = new FormData();
       formData.append("title", publication.title);
       formData.append("content", publication.content);
       formData.append("date", publication.date);
-      formData.append("state", publication.state);
+      formData.append("state", state);
 
       formData.append("preview", document.querySelector("[name='preview']").files[0]);
       formData.append("head", document.querySelector("[name='head']").files[0]);
@@ -233,6 +252,7 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
 
     $scope.getLimitNotifications = function(){
         $http.get('/notifications/getLimit').success(data => {
+            console.log("DATA", data);
             $scope.notifications = data;
         }).error(err => {
                 console.log("ERROR", err);

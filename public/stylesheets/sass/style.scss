@@ -1714,3 +1714,24 @@ textarea:focus, input:focus, a:focus{
     width: 301px !important;
   }
 }
+
+.select-wrapper {
+  .caret {
+    opacity: 0;
+  }
+  li {
+    min-height: 25px !important;
+
+  }
+  .dropdown-content li > a, .dropdown-content li > span {
+    color: $primary-blue !important;
+    padding: 7px 16px !important;
+    font-size: 12px !important;
+  }
+}
+
+.select-wrapper {
+  .select-dropdown {
+    max-height: 300px;
+  }
+}
