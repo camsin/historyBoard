@@ -7,6 +7,7 @@ function index(req, res, next) {
 }
 
 function getNotificationsLimit(req, res, next) {
+
     Notification.find({seen: false}).sort({'date': -1}).populate({
         path: 'comment',
         populate: [{path: 'publication', model: 'Publication'}, {path: 'author', model: 'User'}]
@@ -15,7 +16,7 @@ function getNotificationsLimit(req, res, next) {
         if(err){
             return res.json(err);
         }
-
+        if(notifications[0] != undefined){
           let arrayNotifications = [];
           for (var i = 0; i < 5; i++) {
               if (notifications[i].comment.publication.author.equals(req.user._id)) {
@@ -23,8 +24,7 @@ function getNotificationsLimit(req, res, next) {
               }
           }
           return res.json(arrayNotifications);
-
-
+        }
     });
 }
 

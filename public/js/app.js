@@ -282,7 +282,7 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
     $scope.init = function(){
         $scope.getNotifications();
     };
-
+    //SE LANZA ERROR PORQUE NO EXISTE EN LA BASE DE DATOS notifications
     $scope.getLimitNotifications = function(){
         $http.get('/notifications/getLimit').success(data => {
             $scope.notifications = data;
