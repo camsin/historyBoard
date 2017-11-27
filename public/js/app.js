@@ -1,5 +1,18 @@
 
-var app = angular.module('historyBoardApp', []);
+var app = angular.module('historyBoardApp', ['toastr']);
+
+app.factory('socket', ['$rootScope', function($rootScope) {
+    var socket = io.connect();
+
+    return {
+        on: function(eventName, callback){
+            socket.on(eventName, callback);
+        },
+        emit: function(eventName, data) {
+            socket.emit(eventName, data);
+        }
+    };
+}]);
 
 app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
 
@@ -8,59 +21,78 @@ app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
     };
 }]);
 
-app.controller('lastPublicationsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socket', function ($scope, $http, toastr, socket) {
 
     $scope.userId = "";
     $scope.lastPublications = [];
     $scope.publication = [];
     $scope.imagesId = [];
+    $scope.commentsCount = 0;
 
     $scope.init = function () {
         $scope.getAllPublications();
     };
 
+    socket.emit('newNotification');
+
 
     $scope.getAllPublications = function(){
+        // $http.get('getAllPublications').then(function successCallback(data) {
+        //     $scope.lastPublications = data;
+        // }, function errorCallback(response) {
+        //         toastr.error('Hubo un error obteniendo publicaciones', 'Error');
+        // });
         $http.get('getAllPublications').success(data => {
              $scope.lastPublications = data;
-
         }).error(err => {
-            console.log("ERROR ALV", err);
+            toastr.error('Hubo un error obteniendo publicaciones', 'Error');
         });
-
-
     };
+
+    $scope.getCommentsCount = function(idPublication, index){
+        $http.get('getCommentsCount/'+ idPublication).success(data => {
+            $scope.lastPublications[index].commentsCount = data;
+        });
+    };
+
+    socket.on('getPublications', function (data) {
+            $scope.getAllPublications();
+        $scope.$apply();
+    });
 
 
 }]);
 
-app.controller('myPublicationsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket', function ($scope, $http, toastr, socket) {
 
     $scope.userId = "";
     $scope.lastPublications = [];
 
+    socket.emit('newNotification');
+
     $scope.init = function () {
-        $scope.getPublications();
+        $scope.getMyPublications();
     };
 
     $scope.getMyPublications = function(){
         $http.get('getMyPublications').success(data => {
             $scope.lastPublications = data;
-            console.log("Success");
         }).error(err => {
-            console.log("ERROR", err);
+            toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
         });
-
-
+        // $http.get('getMyPublications').then(function successCallback(data) {
+        //     $scope.lastPublications = data;
+        // }, function errorCallback(response) {
+        //     toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
+        // });
     };
-
-
-
 
 }]);
 
-app.controller('profileController', ['$scope', '$http', function ($scope, $http) {
+app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', function ($scope, $http, toastr, socket) {
     $scope.userInfo = {};
+
+    socket.emit('newNotification');
 
     $scope.init = function(){
         $scope.getMyProfile();
@@ -68,11 +100,15 @@ app.controller('profileController', ['$scope', '$http', function ($scope, $http)
 
     $scope.getMyProfile = function () {
         $http.get('getMyProfile').success(data => {
-            console.log("DTAA", data);
             $scope.userInfo = data;
         }).error(err => {
-            console.log("ERROR ALV", err);
+            toastr.error('Hubo un error obteniendo tu perfil', 'Error');
         });
+        // $http.get('getMyPublications').then(function successCallback(data) {
+        //     $scope.lastPublications = data;
+        // }, function errorCallback(response) {
+        //     toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
+        // });
     };
 
     $scope.saveUser = function () {
@@ -83,22 +119,23 @@ app.controller('profileController', ['$scope', '$http', function ($scope, $http)
                 data: {name:$scope.userInfo.name,
                     password:$scope.password}
             }).then(function(data){
-                console.log("DATA", data);
-                // $window.location.href = "/detalleProyecto";
-            }, function(data){
-                console.log("NOSE", data);
-                // $window.location.href = "/addReleaseBacklog";
+                if(data.err){
+                    toastr.error('Tu perfil no se actualizo correctamente', 'Error');
+                }
+                toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
             });
         }else{
-            console.log("PASS NO IGUALES");
+            toastr.error('Las contraseñas no coinciden', 'Error');
         }
     };
 }]);
-app.controller('newPublication',['$scope','$http', function($scope, $http){
+app.controller('newPublication',['$scope','$http', 'socket', function($scope, $http, socket){
 
     $scope.vm = {object:{
       date : new Date()
     }};
+
+    socket.emit('newNotification');
 
     $scope.newPost = function(publication){
 
@@ -120,10 +157,12 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
       request.open('POST','/publications/uploadPublication/2');
       request.send(formData);
 
-    }
+      socket.emit('newPublication');
+
+    };
 }]);
 
-app.controller('commentsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('commentsController', ['$scope', '$http','socket', function ($scope, $http, socket) {
 
     $scope.vm = {object:{
       date : new Date(),
@@ -131,30 +170,93 @@ app.controller('commentsController', ['$scope', '$http', function ($scope, $http
     $scope.comments = [];
 
     $scope.init = function (id) {
+        $scope.id = id;
       $scope.vm.object.publication = id;
       $scope.getComments(id);
     };
+
+    socket.emit('newNotification');
 
     $scope.getComments = function(id){
         $scope.comments = [];
         $http.get('/publications/getComments/' + id).success(data => {
             $scope.comments = data;
-            console.log("Success",data);
         }).error(err => {
             console.log("ERROR", err);
         });
     };
 
+    socket.on('getComments', function (data) {
+        $scope.getComments($scope.id);
+        $scope.$apply();
+    });
+
     $scope.newComment = function(newComment){
       $http({
         method: 'POST',
-        url: '/publications/newComment/1',
+        url: '/publications/newComment',
         data: newComment
       }).then(function successCallback(res) {
-          console.log("Success");
+          socket.emit('newComment');
+          $http({
+              method: 'POST',
+              url: '/notifications/add',
+              data: {comment: res.data._id}
+          }).then(function successCallback(res) {
+                if(res.data!=="OK"){
+                    socket.emit('newNotification');
+                }
+          }, function errorCallback(err) {
+              console.log("ERR NOTIFICACION",err);
+          });
+          $scope.vm.object.content = "";
         }, function errorCallback(err) {
             console.log("ERR",err);
           });
     };
 
-    }]);
+}]);
+
+
+app.controller('notificationController', ['$scope', '$http','socket','$window', 'toastr', function ($scope, $http, socket, $window, toastr) {
+
+    socket.emit('newNotification');
+
+    socket.on('getLimitNotifications', function (data) {
+        $scope.getLimitNotifications();
+        $scope.$apply();
+    });
+
+    $scope.init = function(){
+        $scope.getNotifications();
+    };
+
+    $scope.getLimitNotifications = function(){
+        $http.get('/notifications/getLimit').success(data => {
+            $scope.notifications = data;
+        }).error(err => {
+                console.log("ERROR", err);
+        });
+    };
+
+    $scope.getNotifications = function(){
+        $http.get('/notifications/get').success(data => {
+            $scope.allNotifications = data;
+        }).error(err => {
+            toastr.error('Hubo un error al obtener tus notificaciones', 'Error');
+        });
+    };
+
+    $scope.redirectPublication = function(idNotification, idPublication){
+        $http({
+            url:'/notifications/update',
+            method:'POST',
+            data: {notification: idNotification}
+        }).then(function(data){
+            if(!data.err){
+                $window.location.href = "/publications/byId/"+idPublication;
+            }
+        });
+    };
+
+}]);
