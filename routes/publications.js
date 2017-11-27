@@ -39,6 +39,7 @@ router.get('/getAllPublications', isLoggedIn, publicationsController.getAllPubli
 //publication por ID
 router.get('/byId/:id', isLoggedIn, publicationsController.byId);
 
+router.get('/edit/:id', isLoggedIn, publicationsController.editPublication);
 // Editar publication
 // router.get('/editar/:content', (req, res, next) => {
 //   res.render('publication/editar', {showSideNav: true,
@@ -52,6 +53,6 @@ router.get('/new/:content', isLoggedIn, publicationsController.newPublication);
 //Mis publications
 router.get('/myPublications',isLoggedIn,  publicationsController.myPublications);
 router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
-
+router.post("/delete/:id", isLoggedIn, publicationsController.deletePublication);
 
 module.exports = router;
