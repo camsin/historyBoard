@@ -42,7 +42,16 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
     $scope.init = function () {
         $scope.getPublications();
     };
-
+    $scope.delete = function(id) {
+      $http.post('delete/'+id).then(
+        function successCallback(){
+          console.log("okey");
+        },
+        function errorCallback(){
+          console.log(error);
+        }
+      );
+    };
     $scope.getMyPublications = function(){
         $http.get('getMyPublications').success(data => {
             $scope.myPublications = data;
@@ -59,7 +68,7 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
 
 }]);
 
-app.controller('profileController', ['$scope', '$http', function ($scope, $http) {
+app.controller('profileController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
     $scope.userInfo = {};
 
     $scope.init = function(){
@@ -104,6 +113,7 @@ app.controller('profileController', ['$scope', '$http', function ($scope, $http)
           let request = new XMLHttpRequest();
           request.open('POST','updateMyProfile');
           request.send(formData);
+          $window.location.reload();
         }else{
          console.log("PASS NO IGUALES");
         }
@@ -116,7 +126,7 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
     }};
 
     $scope.newPost = function(publication){
-
+      let keys = Object.keys(publication);
       let formData = new FormData();
       formData.append("title", publication.title);
       formData.append("content", publication.content);
@@ -131,14 +141,27 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
       formData.append("img4", document.querySelector("[name='img4']").files[0]);
       formData.append("img5", document.querySelector("[name='img5']").files[0]);
 
+      $http.post("/publications/uploadPublication/2",formData,{
+        transformRequest: angular.identity,
+        headers:{'Content-Type':undefined}
+      })
+      .then(function successCallback(object) {
+        console.log(object);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+
+/*
+
       let request = new XMLHttpRequest();
       request.open('POST','/publications/uploadPublication/2');
+      request.setRequestHeader("enctype", "multipart/form-data");
       request.send(formData);
-
+*/
     }
 }]);
 
-app.controller('commentsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('commentsController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
     $scope.vm = {object:{
       date : new Date(),
@@ -160,16 +183,78 @@ app.controller('commentsController', ['$scope', '$http', function ($scope, $http
         });
     };
 
+    $scope.reloadPage = function(){$window.location.reload();}
+
     $scope.newComment = function(newComment){
       $http({
         method: 'POST',
         url: '/publications/newComment/1',
         data: newComment
       }).then(function successCallback(res) {
+          $scope.reloadPage();
+          $window.alert("Comentario agregado");
           console.log("Success");
         }, function errorCallback(err) {
             console.log("ERR",err);
           });
     };
 
+    }]);
+
+app.controller('editPublication',['$scope','$http', function($scope, $http){
+        $scope.publications = {};
+        $scope.init = function(publication){
+          publication = JSON.parse(publication);
+          console.log(publication);
+          let keys = Object.keys(publication);
+          for (var i = 0; i < keys.length; i++) {
+            console.log(keys[i]);
+            if(keys[i]=="date"){
+              let date = new Date(publication.date);
+              $scope.publications.date = new Date(date.getFullYear() +"-"+ date.getMonth() +"-"+ date.getDate());
+              console.log($scope.publications.date);
+            } else {
+              $scope.publications[keys[i]] = publication[keys[i]];
+
+            }
+          }
+        }
+        $scope.vm = {object:{
+          date : new Date()
+        }};
+
+        $scope.newPost = function(publication){
+          let keys = Object.keys(publication);
+          let formData = new FormData();
+          formData.append("title", publication.title);
+          formData.append("content", publication.content);
+          formData.append("date", publication.date);
+          formData.append("state", publication.state);
+
+          formData.append("preview", document.querySelector("[name='preview']").files[0]);
+          formData.append("head", document.querySelector("[name='head']").files[0]);
+          formData.append("img1", document.querySelector("[name='img1']").files[0]);
+          formData.append("img2", document.querySelector("[name='img2']").files[0]);
+          formData.append("img3", document.querySelector("[name='img3']").files[0]);
+          formData.append("img4", document.querySelector("[name='img4']").files[0]);
+          formData.append("img5", document.querySelector("[name='img5']").files[0]);
+
+          $http.post("/publications/uploadPublication/2",formData,{
+            transformRequest: angular.identity,
+            headers:{'Content-Type':undefined}
+          })
+          .then(function successCallback(object) {
+            console.log(object);
+          }, function errorCallback(error) {
+            console.log(error);
+          });
+
+    /*
+
+          let request = new XMLHttpRequest();
+          request.open('POST','/publications/uploadPublication/2');
+          request.setRequestHeader("enctype", "multipart/form-data");
+          request.send(formData);
+    */
+        }
     }]);
