@@ -121,7 +121,9 @@ textarea:focus, input:focus, a:focus {
 
 @media (max-width: 460px) {
   .navbar-board .make-publication {
-    display: none !important; } }
+    opacity: 0;
+    pointer-events: none;
+    cursor: default; } }
 
 @media (max-width: 768px) {
   .navbar-board .navbar-collapse {
@@ -1111,3 +1113,33 @@ textarea:focus, input:focus, a:focus {
   z-index: 9999999;
   position: absolute;
   width: 100%; }
+
+@media (max-width: 767px) and (min-width: 459px) {
+  li.open .dropdown-toggle {
+    display: inline-block;
+    float: right; }
+  .dropdown-menu {
+    background-color: white !important;
+    /* width: 100%; */
+    /* position: absolute; */
+    float: left !important;
+    box-shadow: 0 0 4px 0px gray !important; }
+  .make-publication {
+    opacity: 0;
+    pointer-events: none;
+    cursor: default; } }
+
+@media (max-width: 759px) {
+  .open {
+    width: 56px;
+    position: relative; }
+  .dropdown-menu {
+    width: 100% !important;
+    background: white !important;
+    float: inherit !important;
+    background-color: white !important;
+    box-shadow: 0 0 3px grey !important;
+    margin-left: 6px !important;
+    position: absolute !important;
+    left: -245px !important;
+    width: 301px !important; } }
