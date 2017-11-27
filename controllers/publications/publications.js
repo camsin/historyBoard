@@ -143,6 +143,15 @@ function getComments(req, res, next) {
     });
 };
 
+function getCommentsCount(req, res, next) {
+    Comment.find({"publication": req.params.id}).count(function(err, count){
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(count);
+    });
+};
+
 
 module.exports = {
     map,
@@ -157,5 +166,6 @@ module.exports = {
     uploadPublication,
     getImages,
     newComment,
-    getComments
+    getComments,
+    getCommentsCount
 };

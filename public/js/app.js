@@ -27,6 +27,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
     $scope.lastPublications = [];
     $scope.publication = [];
     $scope.imagesId = [];
+    $scope.commentsCount = 0;
 
     $scope.init = function () {
         $scope.getAllPublications();
@@ -45,6 +46,12 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
              $scope.lastPublications = data;
         }).error(err => {
             toastr.error('Hubo un error obteniendo publicaciones', 'Error');
+        });
+    };
+
+    $scope.getCommentsCount = function(idPublication, index){
+        $http.get('getCommentsCount/'+ idPublication).success(data => {
+            $scope.lastPublications[index].commentsCount = data;
         });
     };
 
@@ -211,18 +218,32 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
 }]);
 
 
-app.controller('notificationController', ['$scope', '$http','socket','$window', function ($scope, $http, socket, $window) {
+app.controller('notificationController', ['$scope', '$http','socket','$window', 'toastr', function ($scope, $http, socket, $window, toastr) {
+
+    socket.emit('newNotification');
 
     socket.on('getLimitNotifications', function (data) {
         $scope.getLimitNotifications();
         $scope.$apply();
     });
 
+    $scope.init = function(){
+        $scope.getNotifications();
+    };
+
     $scope.getLimitNotifications = function(){
         $http.get('/notifications/getLimit').success(data => {
             $scope.notifications = data;
         }).error(err => {
                 console.log("ERROR", err);
+        });
+    };
+
+    $scope.getNotifications = function(){
+        $http.get('/notifications/get').success(data => {
+            $scope.allNotifications = data;
+        }).error(err => {
+            toastr.error('Hubo un error al obtener tus notificaciones', 'Error');
         });
     };
 

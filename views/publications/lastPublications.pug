@@ -13,7 +13,7 @@ block content
       .black-cover
         p(class="title-class") ULTIMAS PUBLICACIONES
     .cards.col-xs-12(ng-show="lastPublications.length > 0")
-      .card-container.col-md-4(ng-repeat="publication in lastPublications track by publication._id")
+      .card-container.col-md-4(ng-repeat="publication in lastPublications track by publication._id", ng-init="getCommentsCount(publication._id, $index)")
         .card-rect.col-xs-12
           .header.col-xs-12
             label {{publication.state}}
@@ -35,7 +35,7 @@ block content
             .comment-btn
               div(class="")
                 i.fa.fa-comment(aria-hidden='true')
-                p(class='p-likes') 100 comentarios
+                p(class='p-likes') {{publication.commentsCount}} comentarios
             label(class="title-card") {{publication.title}}
             p(class="info-card") {{publication.content}}
             .user-autor

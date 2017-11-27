@@ -14,6 +14,8 @@ module.exports = function(io) {
     //images display
     router.post('/newComment', publicationsController.newComment);
 
+    router.get('/getCommentsCount/:id', publicationsController.getCommentsCount);
+
     //images display
     router.get('/getImages/:id', publicationsController.getImages);
 
