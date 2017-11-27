@@ -4,7 +4,20 @@ const passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy;
 let configAuth = require('./../config/auth');
 let User = require('./../models/user.js').User;
+const Image = require('./../models/image.js');
+const fs = require('fs');
 
+function profilePicture() {
+  let img = new Image({
+    data: fs.readFileSync('public/images/default.png'),
+    contentType: 'image/png'
+  });
+  img.save();
+  console.log(img._id);
+
+  return Object.keys(img._id);
+
+}
 passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
@@ -79,6 +92,13 @@ passport.use('google', new GoogleStrategy({
                                 return done(err, userEmail);
                             });
                         }else{
+                            let img = new Image({
+                              img:{
+                                data: fs.readFileSync('public/images/default.png'),
+                                contentType: 'image/png'
+                              }
+                            });
+                            img.save();
                             user = new User({
                                 name: profile.name.givenName,
                                 lastName: profile.name.familyName,
@@ -131,11 +151,19 @@ passport.use('facebook', new FacebookStrategy({
                                 return done(err, userEmail);
                             });
                         }else{
+                            let img = new Image({
+                              img:{
+                                data: fs.readFileSync('public/images/default.png'),
+                                contentType: 'image/png'
+                              }
+                            });
+                            img.save();
                             user = new User({
                                 name: profile.name.givenName,
                                 lastName: profile.name.familyName,
                                 email: profile.emails[0].value,
                                 provider:'facebook',
+                                profilePicture: img._id,
                                 socialNetworks: {
                                     facebook:profile._json
                                 }
