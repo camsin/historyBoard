@@ -32,6 +32,8 @@ block content
                 p(class='p-likes') 100 comentarios
             label(class="title-card") {{myPublication.title}}
             p(class="info-card") {{myPublication.content}}
+            a(href="/publications/edit/{{myPublication._id}}") Editar
+            a(ng-click="delete(myPublication._id)") Eliminar
     .col-xs-12.text-align-c(ng-show="myPublications.length == 0")
       .empty-state-holder
         img(src='/images/pedroSad.png')
