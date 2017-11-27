@@ -39,11 +39,14 @@ block content
                 img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
               p.col-xs-12.p-name {{publication.author.name}}
               p.col-xs-12.p-date 14/01/2017
+    .fixed-action-btn(style='bottom: 45px; right: 24px;')
+      a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
+        i.fa.fa-angle-up.icon-go-top
 
     .col-xs-12.text-align-c(ng-show="lastPublications.length == 0")
       .empty-state-holder
         img(src='/images/pedroSad.png')
         p Achis achis los mariachis, esto esta mas vacío que un desierto!
         p puedes hacer
-          a(href='/publications/nueva/1') clic aquí
+          a(href='/publications/new/publication') clic aquí
           | para crear una nueva publicación

@@ -35,6 +35,12 @@ tippy('.tippy', {
     followCursor: true
 })
 
+tippy('.tippy-up', {
+    position: 'left',
+    animation: 'scale',
+    arrow: true
+})
+
 $(function() {
     var images = ['login.jpg', 'plaza.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg',];
     $('.img-header').css({'background-image': 'url(../../images/' + images[Math.floor(Math.random() * images.length)] + ')'});
@@ -71,4 +77,12 @@ $('.datepicker').pickadate({
     clear: 'Limpiar',
     close: 'Ok',
     closeOnSelect: false // Close upon selecting a date,
+});
+
+
+$('.fixed-action-btn').each(function(){
+    $(this).click(function(){
+        $('html,body').animate({ scrollTop: 0 }, 'slow');
+        return false;
+    });
 });
