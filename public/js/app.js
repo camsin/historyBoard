@@ -1,5 +1,18 @@
 
-var app = angular.module('historyBoardApp', []);
+var app = angular.module('historyBoardApp', ['toastr']);
+
+app.factory('socket', ['$rootScope', function($rootScope) {
+    var socket = io.connect();
+
+    return {
+        on: function(eventName, callback){
+            socket.on(eventName, callback);
+        },
+        emit: function(eventName, data) {
+            socket.emit(eventName, data);
+        }
+    };
+}]);
 
 app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
 
@@ -8,39 +21,57 @@ app.controller('usersController', ['$scope', '$http', function ($scope, $http) {
     };
 }]);
 
-app.controller('lastPublicationsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socket', function ($scope, $http, toastr, socket) {
 
     $scope.userId = "";
     $scope.lastPublications = [];
     $scope.publication = [];
     $scope.imagesId = [];
+    $scope.commentsCount = 0;
 
     $scope.init = function () {
         $scope.getAllPublications();
     };
 
+    socket.emit('newNotification');
+
 
     $scope.getAllPublications = function(){
+        // $http.get('getAllPublications').then(function successCallback(data) {
+        //     $scope.lastPublications = data;
+        // }, function errorCallback(response) {
+        //         toastr.error('Hubo un error obteniendo publicaciones', 'Error');
+        // });
         $http.get('getAllPublications').success(data => {
              $scope.lastPublications = data;
-
         }).error(err => {
-            console.log("ERROR ALV", err);
+            toastr.error('Hubo un error obteniendo publicaciones', 'Error');
         });
-
-
     };
+
+    $scope.getCommentsCount = function(idPublication, index){
+        $http.get('getCommentsCount/'+ idPublication).success(data => {
+            $scope.lastPublications[index].commentsCount = data;
+        });
+    };
+
+    socket.on('getPublications', function (data) {
+            $scope.getAllPublications();
+        $scope.$apply();
+    });
 
 
 }]);
 
-app.controller('myPublicationsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket', function ($scope, $http, toastr, socket) {
 
     $scope.userId = "";
     $scope.myPublications = [];
 
+    socket.emit('newNotification');
+
     $scope.init = function () {
-        $scope.getPublications();
+        $scope.getMyPublications();
     };
     $scope.delete = function(id) {
       $http.post('delete/'+id).then(
@@ -55,21 +86,22 @@ app.controller('myPublicationsController', ['$scope', '$http', function ($scope,
     $scope.getMyPublications = function(){
         $http.get('getMyPublications').success(data => {
             $scope.myPublications = data;
-            console.log("Success");
         }).error(err => {
-            console.log("ERROR", err);
+            toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
         });
-
-
+        // $http.get('getMyPublications').then(function successCallback(data) {
+        //     $scope.lastPublications = data;
+        // }, function errorCallback(response) {
+        //     toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
+        // });
     };
-
-
-
 
 }]);
 
-app.controller('profileController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', function ($scope, $http, toastr, socket) {
     $scope.userInfo = {};
+
+    socket.emit('newNotification');
 
     $scope.init = function(){
         $scope.getMyProfile();
@@ -79,11 +111,15 @@ app.controller('profileController', ['$scope', '$http', '$window', function ($sc
 
     $scope.getMyProfile = function () {
         $http.get('getMyProfile').success(data => {
-            console.log("DTAA", data);
             $scope.userInfo = data;
         }).error(err => {
-            console.log("ERROR ALV", err);
+            toastr.error('Hubo un error obteniendo tu perfil', 'Error');
         });
+        // $http.get('getMyPublications').then(function successCallback(data) {
+        //     $scope.lastPublications = data;
+        // }, function errorCallback(response) {
+        //     toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
+        // });
     };
     $scope.click= function(){
       $scope.img++
@@ -91,39 +127,55 @@ app.controller('profileController', ['$scope', '$http', '$window', function ($sc
 
     $scope.saveUser = function () {
         if($scope.password === $scope.confirmPassword){
-          let formData = new FormData();
-          formData.append("name", $scope.userInfo.name);
-          formData.append("password", $scope.password);
-          //     $http({
-          //         url:'updateMyProfile',
-          //         method:'POST',
-          //         data: {name:$scope.userInfo.name,
-          //             password:$scope.password}
-          //     }).then(function(data){
-          //         console.log("DATA", data);
-          //         // $window.location.href = "/detalleProyecto";
-          //     }, function(data){
-          //         console.log("NOSE", data);
-          //         // $window.location.href = "/addReleaseBacklog";
-          //     });
-          //
-          if($scope.img > 0){
-            formData.append("profilePicture", document.querySelector("[name='profilePicture']").files[0]);
-          }
-          let request = new XMLHttpRequest();
-          request.open('POST','updateMyProfile');
-          request.send(formData);
-          $window.location.reload();
+            $http({
+                url:'updateMyProfile',
+                method:'POST',
+                data: {name:$scope.userInfo.name,
+                    password:$scope.password}
+            }).then(function(data){
+                if(data.err){
+                    toastr.error('Tu perfil no se actualizo correctamente', 'Error');
+                }
+                toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
+            });
         }else{
-         console.log("PASS NO IGUALES");
+            toastr.error('Las contraseñas no coinciden', 'Error');
         }
+
+      //   let formData = new FormData();
+      //   formData.append("name", $scope.userInfo.name);
+      //   formData.append("password", $scope.password);
+      //   //     $http({
+      //   //         url:'updateMyProfile',
+      //   //         method:'POST',
+      //   //         data: {name:$scope.userInfo.name,
+      //   //             password:$scope.password}
+      //   //     }).then(function(data){
+      //   //         console.log("DATA", data);
+      //   //         // $window.location.href = "/detalleProyecto";
+      //   //     }, function(data){
+      //   //         console.log("NOSE", data);
+      //   //         // $window.location.href = "/addReleaseBacklog";
+      //   //     });
+      //   //
+      //   if($scope.img > 0){
+      //     formData.append("profilePicture", document.querySelector("[name='profilePicture']").files[0]);
+      //   }
+      //   let request = new XMLHttpRequest();
+      //   request.open('POST','updateMyProfile');
+      //   request.send(formData);
+      //   $window.location.reload();
+      // }else{
+      //  console.log("PASS NO IGUALES");
     };
 }]);
-app.controller('newPublication',['$scope','$http', function($scope, $http){
+app.controller('newPublication',['$scope','$http', 'socket', function($scope, $http, socket){
 
     $scope.vm = {object:{
       date : new Date()
     }};
+
+    socket.emit('newNotification');
 
     $scope.newPost = function(publication){
       let keys = Object.keys(publication);
@@ -156,12 +208,14 @@ app.controller('newPublication',['$scope','$http', function($scope, $http){
       let request = new XMLHttpRequest();
       request.open('POST','/publications/uploadPublication/2');
       request.setRequestHeader("enctype", "multipart/form-data");
-      request.send(formData);
-*/
-    }
+      request.send(formData);*/
+
+      socket.emit('newPublication');
+
+    };
 }]);
 
-app.controller('commentsController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+app.controller('commentsController', ['$scope', '$http','socket', function ($scope, $http, socket) {
 
     $scope.vm = {object:{
       date : new Date(),
@@ -169,37 +223,95 @@ app.controller('commentsController', ['$scope', '$http', '$window', function ($s
     $scope.comments = [];
 
     $scope.init = function (id) {
+        $scope.id = id;
       $scope.vm.object.publication = id;
       $scope.getComments(id);
     };
+
+    socket.emit('newNotification');
 
     $scope.getComments = function(id){
         $scope.comments = [];
         $http.get('/publications/getComments/' + id).success(data => {
             $scope.comments = data;
-            console.log("Success",data);
         }).error(err => {
             console.log("ERROR", err);
         });
     };
 
-    $scope.reloadPage = function(){$window.location.reload();}
+    socket.on('getComments', function (data) {
+        $scope.getComments($scope.id);
+        $scope.$apply();
+    });
 
     $scope.newComment = function(newComment){
       $http({
         method: 'POST',
-        url: '/publications/newComment/1',
+        url: '/publications/newComment',
         data: newComment
       }).then(function successCallback(res) {
-          $scope.reloadPage();
-          $window.alert("Comentario agregado");
-          console.log("Success");
+          socket.emit('newComment');
+          $http({
+              method: 'POST',
+              url: '/notifications/add',
+              data: {comment: res.data._id}
+          }).then(function successCallback(res) {
+                if(res.data!=="OK"){
+                    socket.emit('newNotification');
+                }
+          }, function errorCallback(err) {
+              console.log("ERR NOTIFICACION",err);
+          });
+          $scope.vm.object.content = "";
         }, function errorCallback(err) {
             console.log("ERR",err);
           });
     };
+}]);
 
-    }]);
+
+app.controller('notificationController', ['$scope', '$http','socket','$window', 'toastr', function ($scope, $http, socket, $window, toastr) {
+
+    socket.emit('newNotification');
+
+    socket.on('getLimitNotifications', function (data) {
+        $scope.getLimitNotifications();
+        $scope.$apply();
+    });
+
+    $scope.init = function(){
+        $scope.getNotifications();
+    };
+
+    $scope.getLimitNotifications = function(){
+        $http.get('/notifications/getLimit').success(data => {
+            $scope.notifications = data;
+        }).error(err => {
+                console.log("ERROR", err);
+        });
+    };
+
+    $scope.getNotifications = function(){
+        $http.get('/notifications/get').success(data => {
+            $scope.allNotifications = data;
+        }).error(err => {
+            toastr.error('Hubo un error al obtener tus notificaciones', 'Error');
+        });
+    };
+
+    $scope.redirectPublication = function(idNotification, idPublication){
+        $http({
+            url:'/notifications/update',
+            method:'POST',
+            data: {notification: idNotification}
+        }).then(function(data){
+            if(!data.err){
+                $window.location.href = "/publications/byId/"+idPublication;
+            }
+        });
+    };
+
+}]);
 
 app.controller('editPublication',['$scope','$http', function($scope, $http){
         $scope.publications = {};

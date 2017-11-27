@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const Comment  = mongoose.model('Comment');
+const User  = mongoose.model('User');
 
  const notificationSchema = schema({
-   date: Date,
-   comment: { type: Schema.ObjectId, ref:'Comment'}
+   date: {type:Date, default: Date.now},
+   comment: { type: schema.ObjectId, ref:'Comment'},
+    seen: {type: Boolean, default:false}
  });
 
- module.exports = mongoose.model('Notification',notificationSchema);
+let Notification = mongoose.model('Notification',notificationSchema);
+module.exports = {Notification};

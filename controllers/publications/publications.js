@@ -1,8 +1,8 @@
 const express = require('express');
-const Publication = require('../../models/publication.js').Publication;
-const User = require('../../models/user.js').User;
-const Comment = require('../../models/comment.js');
-const Image = require('../../models/image.js');
+const Publication = require('../../models/publication').Publication;
+const User = require('../../models/user').User;
+const Comment = require('../../models/comment');
+const Image = require('../../models/image');
 const fs = require('fs');
 
 function map(req, res, next) {
@@ -32,32 +32,22 @@ function lastPublications(req, res, next) {
 };
 
 function getMyPublications(req, res, next) {
-    Publication.find({"author": req.user._id}).populate('author').exec(function (err, publications) {
+    Publication.find({"author": req.user._id}).populate('author').exec((err, publication) => {
         if (err) {
             return res.json(err);
         }
-        // if (publications.length != 0) {
-        //     console.log("NO ES CERO");
-            return res.json(publications);
-        // } else {
-        //     console.log("ES CERO ALB");
-        //     return res.json("{}");
-        // }
-
+        console.log(publication);
+        return res.json(publication);
     });
 };
 
 function getAllPublications(req, res, next) {
-    Publication.find({}).populate('author').exec(function (err, publications) {
+    Publication.find({}).populate('author').exec((err, publications) => {
         if (err) {
             return res.json(err);
         }
-            return res.json(publications);
-        // } else {
-        //     console.log("ES CERO ALB");
-        //     return res.json("{}");
-        // }
 
+        return res.json(publications);
     });
 };
 
@@ -80,7 +70,7 @@ function newPublication(req, res, next) {
 function myPublications(req, res, next) {
     res.render('publications/myPublications', {showSideNav: true, title: 'myPublications', user: req.user});
 };
-//Publicaciones controllers
+
 function uploadPublication(req, res, next){
   let array = [];
   let values = Object.values(req.body);
@@ -150,64 +140,38 @@ function getImages(req, res, next) {
 };
 
 function newComment(req, res, next) {
-    let commment = new Comment({
+    let comment = new Comment({
       publication: req.body.publication,
       date: req.body.date,
       content: req.body.content,
       author: req.user._id
    });
-   commment.save((err) => {
+   comment.save((err, comment) => {
        if (err) {
          res.send(err);
        } else {
-         res.sendStatus(200);
+         res.send(comment);
        }
     });
-
 };
 
 function getComments(req, res, next) {
-  // let array = [];
-  //   Publication.find({"author": req.user._id}).populate('author').exec(function (err, publications) {
-  //       if (err) {
-  //           return res.json(err);
-  //       }
-  //       // if (publications.length != 0) {
-  //       //     console.log("NO ES CERO");
-  //       console.log(publications);
-  //       return res.json(publications);
-  //       // } else {
-  //       //     console.log("ES CERO ALB");
-  //       //     return res.json("{}");
-  //       // }
-  //
-  //   });
-
-    Comment.find({"publication": req.params.id}).populate('author').exec(function(err, comments){
+    Comment.find({"publication": req.params.id}).populate('author').populate('publication').exec(function(err, comments){
         if (err) {
             return res.json(err);
         }
         return res.json(comments);
 
     });
+};
 
-
-  // Comments.find({publication : req.params.id}, function(err,comments){
-  //   for(let i=0;i<comments.length;i++){
-  //     User.find({_id : comments[i].author}, function(err,user){
-  //       array.push({
-  //         content: comments[i].content,
-  //         name: user[0].name,
-  //         userId: user[0]._id
-  //       });
-  //       if ((i+1)==comments.length) {
-  //           console.log(array);
-  //           //res.sendStatus(200);
-  //           return res.json(array);
-  //       }
-  //    });
-  //   }
-  // });
+function getCommentsCount(req, res, next) {
+    Comment.find({"publication": req.params.id}).count(function(err, count){
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(count);
+    });
 };
 
 function editPublication(req,res,next){
@@ -246,5 +210,6 @@ module.exports = {
     newComment,
     getComments,
     editPublication,
-    deletePublication
+    deletePublication,
+    getCommentsCount
 };

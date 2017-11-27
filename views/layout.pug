@@ -9,9 +9,10 @@ html(ng-app="historyBoardApp")
     link(rel='stylesheet', href='/stylesheets/lib/materialize.min.css')
     link(rel='stylesheet', href='/stylesheets/lib/tippy.css')
     link(rel='stylesheet', href='/stylesheets/css/style.css')
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.css")
   body
     if (showSideNav)
-      nav.navbar.navbar-default.navbar-fixed-top.navbar-board
+      nav.navbar.navbar-default.navbar-fixed-top.navbar-board(ng-controller="notificationController")
         .container-nav
           .navbar-header
             button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
@@ -32,29 +33,29 @@ html(ng-app="historyBoardApp")
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                   i.fa.fa-bell(aria-hidden='true')
                   .notifications-badge
-                    p 10
+                    p {{notifications.length}}
                 ul.dropdown-menu
                   li.dropdown-header Notificaciones
-                  li
-                    a(href='#')
-                      p.name Ararat Mendez
-                      p.action-noti Comento 'La tripe alianza'
-                  li
-                    a(href='#')
-                      p.name Ararat Mendez
-                      p.action-noti Comento 'La tripe alianza'
-                  li
-                    a(href='#')
-                      p.name Ararat Mendez
-                      p.action-noti Comento 'La tripe alianza'
-                  li
-                    a(href='#')
-                      p.name Ararat Mendez
-                      p.action-noti Comento 'La tripe alianza'
-                  li
-                    a(href='#')
-                      p.name Ararat Mendez
-                      p.action-noti Comento 'La tripe alianza'
+                  li(ng-repeat="notification in notifications")
+                    a(href='#!' ng-click="redirectPublication(notification._id,notification.comment.publication._id)")
+                      p.name {{notification.comment.author.name}}
+                      p.action-noti Comento '{{notification.comment.publication.title}}'
+                  //li
+                  //  a(href='#')
+                  //    p.name Ararat Mendez
+                  //    p.action-noti Comento 'La tripe alianza'
+                  //li
+                  //  a(href='#')
+                  //    p.name Ararat Mendez
+                  //    p.action-noti Comento 'La tripe alianza'
+                  //li
+                  //  a(href='#')
+                  //    p.name Ararat Mendez
+                  //    p.action-noti Comento 'La tripe alianza'
+                  //li
+                  //  a(href='#')
+                  //    p.name Ararat Mendez
+                  //    p.action-noti Comento 'La tripe alianza'
                   li.see-more
                     a(href='/notifications')
                       p Ver Mas
@@ -112,5 +113,7 @@ html(ng-app="historyBoardApp")
     script(src='/javascripts/lib/materialize.min.js')
     script(src='/javascripts/lib/tippy.min.js')
     script(src='/javascripts/functions.js')
+    script(src="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.tpls.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js")
 
     //script(src='/js/controllers/panel-control.controller.js')

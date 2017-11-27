@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  if(error.length > 0)
+      .alert.alert-danger(role='alert')
+        | #{error}
   div(class="login-view col-xs-12")
     //video#background-video.video-esp(autoplay='', loop='')
         source(src="/images/video.mp4", type='video/mp4')

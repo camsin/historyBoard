@@ -20,15 +20,10 @@ function getMyProfile(req, res, next){
 };
 
 function updateMyProfile(req, res, next) {
-    console.log("SI ENTRE AL METODO");
-    console.log("CAA");
-    console.log("User.generateHash(req.body.password)");
     User.update({"_id": req.user._id},
         {$set:{"name":req.body.name, "password": bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)}}, function (err) {
             if (err) {
-                console.log("ERROR ALV");
                 res.json({error:true, message: err});
-                // response.redirect("/home");
             } else {
                 console.log("SALIO BIEN :3 ")
                 if(req.files.length > 0){
@@ -45,7 +40,7 @@ function updateMyProfile(req, res, next) {
                    User.update({"_id": req.user._id},{$set:{"profilePicture": imgId}},{multi:true},
                    function(err, numberAffected){
                    });
-                   
+
 
 
                 }else{

@@ -2,14 +2,14 @@ extends ../layout
 
 block content
 
-  .home-page.col-xs-12(ng-controller="myPublicationsController" ng-init="getMyPublications()")
+  .home-page.col-xs-12(ng-controller="myPublicationsController" ng-init="init()")
     .img-container
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
       .img-header
       .black-cover
         p(class="title-class") Mis publicaciones
     .cards.col-xs-12(ng-show="myPublications.length > 0")
-      .card-container.col-md-4(ng-repeat="myPublication in myPublications")
+      .card-container.col-md-4(ng-repeat="myPublication in myPublications track by myPublication._id")
         .card-rect.col-xs-12
           .header.col-xs-12
             label {{myPublication.state}}
