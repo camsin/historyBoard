@@ -232,7 +232,7 @@ textarea:focus, input:focus, a:focus {
         font-weight: 500;
         font-family: arial;
         border-radius: 100px;
-        font-size: 18px;
+        font-size: 14px;
         padding: 14px 65px; }
       .login-view .left-login .register-btn .btn-blue {
         background: #216096;
@@ -1143,3 +1143,26 @@ textarea:focus, input:focus, a:focus {
     position: absolute !important;
     left: -245px !important;
     width: 301px !important; } }
+
+.select-wrapper .caret {
+  opacity: 0; }
+
+.select-wrapper li {
+  min-height: 25px !important; }
+
+.select-wrapper .dropdown-content li > a, .select-wrapper .dropdown-content li > span {
+  color: #216096 !important;
+  padding: 7px 16px !important;
+  font-size: 12px !important; }
+
+.select-wrapper .select-dropdown {
+  max-height: 300px; }
+
+.icon-go-top {
+  font-size: 42px !important;
+  position: relative;
+  top: -3px;
+  background-color: #2d4250 !important; }
+
+.bgm-blue {
+  background-color: #2d4250 !important; }

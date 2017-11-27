@@ -4,6 +4,7 @@ const User = require('../../models/user').User;
 const Comment = require('../../models/comment');
 const Image = require('../../models/image');
 const fs = require('fs');
+const enumEstados = require('../../models/publication').enumEstados;
 
 function map(req, res, next) {
     res.render('publications/map', {showSideNav: true, user: req.user});
@@ -57,7 +58,7 @@ function byId(req, res, next) {
 };
 
 function newPublication(req, res, next) {
-    res.render('publication/new', {showSideNav: true, contenido: req.params.content, user: req.user});
+    res.render('publication/new', {showSideNav: true, contenido: req.params.content, user: req.user, enumEstados: enumEstados});
 };
 
 function myPublications(req, res, next) {

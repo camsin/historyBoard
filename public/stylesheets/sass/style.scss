@@ -441,7 +441,7 @@ textarea:focus, input:focus, a:focus{
         font-weight: 500;
         font-family: arial;
         border-radius: 100px;
-        font-size: 18px;
+        font-size: 14px;
         padding: 14px 65px;
       }
       .btn-blue {
@@ -1713,4 +1713,36 @@ textarea:focus, input:focus, a:focus{
     left: -245px !important;
     width: 301px !important;
   }
+}
+
+.select-wrapper {
+  .caret {
+    opacity: 0;
+  }
+  li {
+    min-height: 25px !important;
+
+  }
+  .dropdown-content li > a, .dropdown-content li > span {
+    color: $primary-blue !important;
+    padding: 7px 16px !important;
+    font-size: 12px !important;
+  }
+}
+
+.select-wrapper {
+  .select-dropdown {
+    max-height: 300px;
+  }
+}
+
+.icon-go-top {
+  font-size: 42px !important;
+  position: relative;
+  top: -3px;
+  background-color: $navbar-blue !important;
+}
+
+.bgm-blue {
+  background-color: $navbar-blue !important;
 }
