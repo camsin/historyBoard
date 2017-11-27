@@ -10,7 +10,7 @@ const enumEstados = ['Aguascalientes','Baja California','Baja California Sur', '
 
 
 var publicationSchema = schema({
-  title: String,
+  title: {type: String, required: true},
 	imagePreview: {type: schema.ObjectId, ref: 'Image', required:true},
 	imageBackground:{type: schema.ObjectId, ref: 'Image', required:true},
 	state: {type: String, required:true},
