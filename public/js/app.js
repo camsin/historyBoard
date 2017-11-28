@@ -333,5 +333,11 @@ app.controller('userPublicationsController', ['$scope', '$http', 'toastr', funct
         });
     };
 
+    $scope.getCommentsCount = function(idPublication, index){
+        $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
+            $scope.userPublications[index].commentsCount = data;
+    });
+    };
+
 
 }]);
