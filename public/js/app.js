@@ -63,7 +63,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
 
 }]);
 
-app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket', function ($scope, $http, toastr, socket) {
+app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket','$window', function ($scope, $http, toastr, socket, $window) {
 
     $scope.userId = "";
     $scope.myPublications = [];
@@ -73,12 +73,16 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
     $scope.init = function () {
         $scope.getMyPublications();
     };
+    $scope.id = function(id){
+      $scope.publicationId = id;
+    };
     $scope.delete = function(id) {
       $http.post('delete/'+id).then(
         function successCallback(){
           console.log("okey");
+          $window.location.reload();
         },
-        function errorCallback(){
+        function errorCallback(error){
           console.log(error);
         }
       );
@@ -98,7 +102,7 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
 
 }]);
 
-app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', function ($scope, $http, toastr, socket) {
+app.controller('profileController', ['$scope', '$http', 'toastr', 'socket','$window', function ($scope, $http, toastr, socket, $window) {
     $scope.userInfo = {};
 
     socket.emit('newNotification');
@@ -151,6 +155,7 @@ app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', func
         let request = new XMLHttpRequest();
         request.open('POST','updateMyProfile');
         request.send(formData);
+        setTimeout(() => $window.location.reload(), 2000);
         toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
       }else{
        toastr.error('Las contraseñas no coinciden', 'Error');
