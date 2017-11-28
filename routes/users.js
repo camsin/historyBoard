@@ -14,4 +14,6 @@ router.get('/getMyProfile', isLoggedIn, usersController.getMyProfile);
 
 router.post('/updateMyProfile', isLoggedIn, type, usersController.updateMyProfile);
 
+router.get('/getUserById/:id', isLoggedIn, usersController.getUserById);
+
 module.exports = router;

@@ -7,10 +7,20 @@ const fs = require('fs');
 
 function myProfile(req, res, next){
   res.render('myProfile', { showSideNav: true, title: 'myProfile', user:req.user });
-}
+};
 
 function getMyProfile(req, res, next){
     User.findOne({"_id": req.user._id}).exec(function(err, user){
+        if(err){
+            res.json(err);
+        }
+
+        res.json(user);
+    });
+};
+
+function getUserById(req, res, next){
+    User.findOne({"_id": req.params.id}).exec(function(err, user){
         if(err){
             res.json(err);
         }
@@ -55,5 +65,6 @@ function updateMyProfile(req, res, next) {
 module.exports = {
     myProfile,
     getMyProfile,
-    updateMyProfile
+    updateMyProfile,
+    getUserById
 };

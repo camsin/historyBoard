@@ -12,12 +12,12 @@ block content
           i.fa.fa-heart(aria-hidden='true')
     .col-md-3
       .user-publication
-        a(href='#', class='col-xs-12 text-align-c')
-          img.circle(ng-src="/publications/getImages/{{data.author.profilePicture}}")
-        a(href='#!name',class='col-xs-12 text-align-c')
-          span.name-autor.m-t-25.col-xs-12   {{data.author.name}}
-          span.name-date.m-t-10.col-xs-12  {{data.postDate | date}}
-
+          a(href="/publications/userPublications/{{data.author._id}}", class='col-xs-12 text-align-c')
+            img.circle(ng-src="/publications/getImages/{{data.author.profilePicture}}")
+          a(href='#!name',class='col-xs-12 text-align-c')
+            span.name-autor.m-t-25.col-xs-12   {{data.author.name}}
+            span.name-date.m-t-10.col-xs-12  {{data.postDate | date}}
+            
     .col-md-9
       .article-container
         label.label-article {{data.title}}
@@ -44,6 +44,7 @@ block content
           .comment.col-xs-12(ng-repeat="comment in comments")
               p.name {{comment.author.name}}
               p.content {{comment.content}}
+              a(href="/publications/userPublications/{{data.author._id}}", class='col-xs-12 text-align-c') caca
           .row
             form.col.s12
               .row
