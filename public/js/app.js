@@ -67,6 +67,7 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
 
     $scope.userId = "";
     $scope.lastPublications = [];
+    $scope.commentsCount = 0;
 
     socket.emit('newNotification');
 
@@ -85,6 +86,12 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
         // }, function errorCallback(response) {
         //     toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
         // });
+    };
+
+    $scope.getCommentsCount = function(idPublication, index){
+        $http.get('getCommentsCount/'+ idPublication).success(data => {
+            $scope.lastPublications[index].commentsCount = data;
+        });
     };
 
 }]);
