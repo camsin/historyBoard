@@ -4,6 +4,7 @@ const User = require('../../models/user').User;
 const Comment = require('../../models/comment');
 const Image = require('../../models/image');
 const fs = require('fs');
+const enumEstados = require('../../models/publication').enumEstados;
 
 function map(req, res, next) {
     res.render('publications/map', {showSideNav: true, user: req.user});
@@ -54,6 +55,7 @@ function getAllPublications(req, res, next) {
 function byId(req, res, next) {
   Publication.find({_id : req.params.id}, function(err,publication){
     User.find({_id : publication[0].author}, function(err,userData){
+      console.log(userData);
       res.render('publication/byId', {
           id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
       });
@@ -64,7 +66,7 @@ function byId(req, res, next) {
 };
 
 function newPublication(req, res, next) {
-    res.render('publication/new', {showSideNav: true, contenido: req.params.content, user: req.user});
+    res.render('publication/new', {showSideNav: true, contenido: req.params.content, user: req.user, enumEstados: enumEstados});
 };
 
 function myPublications(req, res, next) {

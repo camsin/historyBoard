@@ -127,63 +127,70 @@ app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', func
 
     $scope.saveUser = function () {
         if($scope.password === $scope.confirmPassword){
-            $http({
-                url:'updateMyProfile',
-                method:'POST',
-                data: {name:$scope.userInfo.name,
-                    password:$scope.password}
-            }).then(function(data){
-                if(data.err){
-                    toastr.error('Tu perfil no se actualizo correctamente', 'Error');
-                }
-                toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
-            });
-        }else{
-            toastr.error('Las contraseñas no coinciden', 'Error');
-        }
+        //     $http({
+        //         url:'updateMyProfile',
+        //         method:'POST',
+        //         data: {name:$scope.userInfo.name,
+        //             password:$scope.password}
+        //     }).then(function(data){
+        //         if(data.err){
+        //             toastr.error('Tu perfil no se actualizo correctamente', 'Error');
+        //         }
+        //         toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
+        //     });
+        // }else{
+        //     toastr.error('Las contraseñas no coinciden', 'Error');
+        // }
 
-      //   let formData = new FormData();
-      //   formData.append("name", $scope.userInfo.name);
-      //   formData.append("password", $scope.password);
-      //   //     $http({
-      //   //         url:'updateMyProfile',
-      //   //         method:'POST',
-      //   //         data: {name:$scope.userInfo.name,
-      //   //             password:$scope.password}
-      //   //     }).then(function(data){
-      //   //         console.log("DATA", data);
-      //   //         // $window.location.href = "/detalleProyecto";
-      //   //     }, function(data){
-      //   //         console.log("NOSE", data);
-      //   //         // $window.location.href = "/addReleaseBacklog";
-      //   //     });
-      //   //
-      //   if($scope.img > 0){
-      //     formData.append("profilePicture", document.querySelector("[name='profilePicture']").files[0]);
-      //   }
-      //   let request = new XMLHttpRequest();
-      //   request.open('POST','updateMyProfile');
-      //   request.send(formData);
-      //   $window.location.reload();
-      // }else{
-      //  console.log("PASS NO IGUALES");
+        let formData = new FormData();
+        formData.append("name", $scope.userInfo.name);
+        formData.append("password", $scope.password);
+        if($scope.img > 0){
+          formData.append("profilePicture", document.querySelector("[name='profilePicture']").files[0]);
+        }
+        let request = new XMLHttpRequest();
+        request.open('POST','updateMyProfile');
+        request.send(formData);
+        toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
+      }else{
+       toastr.error('Las contraseñas no coinciden', 'Error');
+     }
     };
 }]);
 app.controller('newPublication',['$scope','$http', 'socket', function($scope, $http, socket){
+
+    $scope.init = function () {
+        $scope.reload();
+    };
+
+    $scope.estados = ['Aguascalientes','Baja California','Baja California Sur', 'Campeche', 'Coahuila de Zaragoza', 'Colima',
+        'Chiapas', 'Chihuahua', 'Distrito Federal', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'México',
+        'Michoacán de Ocampo', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo',
+        'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz de Ignacio de la Llave',
+        'Yucatán', 'Zacatecas'];
 
     $scope.vm = {object:{
       date : new Date()
     }};
 
+    $scope.reload = function(){
+        $('select').material_select();
+    };
+
     socket.emit('newNotification');
 
     $scope.newPost = function(publication){
-      let keys = Object.keys(publication);
+
+        let keys = Object.keys(publication);
+
+        let state = $('#state').val();
+        console.log("STATE", state);
+
       let formData = new FormData();
       formData.append("title", publication.title);
       formData.append("content", publication.content);
       formData.append("date", publication.date);
-      formData.append("state", publication.state);
+      formData.append("state", state);
 
       formData.append("preview", document.querySelector("[name='preview']").files[0]);
       formData.append("head", document.querySelector("[name='head']").files[0]);
@@ -285,6 +292,7 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
     //SE LANZA ERROR PORQUE NO EXISTE EN LA BASE DE DATOS notifications
     $scope.getLimitNotifications = function(){
         $http.get('/notifications/getLimit').success(data => {
+            console.log("DATA", data);
             $scope.notifications = data;
         }).error(err => {
                 console.log("ERROR", err);

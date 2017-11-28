@@ -34,10 +34,18 @@ block content
             p(class="info-card") {{myPublication.content}}
             a(href="/publications/edit/{{myPublication._id}}") Editar
             a(ng-click="delete(myPublication._id)") Eliminar
+            .user-autor
+              .perfil-img
+                img(src=`/publications/getImages/${user.profilePicture}`, height='100%', width='100%')
+              p.col-xs-12.p-name {{myPublication.author.name}}
+              p.col-xs-12.p-date 14/01/2017
+    .fixed-action-btn(style='bottom: 45px; right: 24px;')
+      a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
+        i.fa.fa-angle-up.icon-go-top
     .col-xs-12.text-align-c(ng-show="myPublications.length == 0")
       .empty-state-holder
         img(src='/images/pedroSad.png')
         p Achis achis los mariachis, esto esta mas vacío que un desierto!
         p puedes hacer
-          a(href='/publications/nueva/1') clic aquí
+          a(href='/publications/new/publication') clic aquí
           | para crear una nueva publicación

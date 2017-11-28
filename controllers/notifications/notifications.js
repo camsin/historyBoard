@@ -16,15 +16,27 @@ function getNotificationsLimit(req, res, next) {
         if(err){
             return res.json(err);
         }
-        if(notifications[0] != undefined){
-          let arrayNotifications = [];
-          for (var i = 0; i < 5; i++) {
-              if (notifications[i].comment.publication.author.equals(req.user._id)) {
-                  arrayNotifications.push(notifications[i]);
-              }
-          }
-          return res.json(arrayNotifications);
+
+        let arrayNotifications = [];
+
+        if(notifications.length > 0){
+            if(notifications.length < 5){
+                for (var i = 0; i < notifications.length; i++) {
+                    console.log("NOTIFICATIONS", notifications[i].comment.publication);
+                        if (notifications[i].comment.publication.author.equals(req.user._id)) {
+                            arrayNotifications.push(notifications[i]);
+                        }
+                }
+            }else{
+                for (var i = 0; i < 5; i++) {
+                    console.log("NOTIFICATIONS", notifications[i].comment.publication);
+                    if (notifications[i].comment.publication.author.equals(req.user._id)) {
+                        arrayNotifications.push(notifications[i]);
+                    }
+                }
+            }
         }
+            return res.json(arrayNotifications);
     });
 }
 

@@ -8,6 +8,9 @@ block content
       .img-header
       .black-cover
         p(class="title-class") CREA UNA PUBLICACIÓN
+    .fixed-action-btn(style='bottom: 45px; right: 24px;')
+      a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
+        i.fa.fa-angle-up.icon-go-top
     .col-xs-12.text-align-c.new-pub
       p.col-xs-12.p-new México se construyó a base de esfuerzo y dedicación, justamente eso queremos hacer eso son historyBoard. Este es tu lienzo en blanco, EMPECEMOS!
       .row.col-xs-12
@@ -33,12 +36,15 @@ block content
               input.file-path.validate(type='text')
       .row.col-xs-12.m-t-15
         .input-field.col.s12
-          label.active.label-act(for='title') De qué estado de México es tu publicación?
-          input#title.validate(type='text', placeholder, ng-model="vm.object.state", required)
+          label.active.label-act(for='state') De qué estado de México es tu publicación?
+          select(ng-model="vm.object.state", name='state', id="state")
+            option(value='', disabled='', selected='') Selecciona tu estado
+            each estado in enumEstados
+              option(value=estado) #{estado}
       .col-xs-12.p-r-25.p-l-25.m-0
         p.description-p Introduce la fecha en la que ocurrieron los hechos de tu publicación
         //input.datepicker(type='date', ng-model="vm.object.date")
-        input(type='date', ng-model="vm.object.date",required)
+        input.datepicker(type='date', ng-model="vm.object.date",required)
       .row.col-xs-12.m-b-0
         .col.s12.m-t-25
           .row

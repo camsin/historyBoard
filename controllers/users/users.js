@@ -20,6 +20,7 @@ function getMyProfile(req, res, next){
 };
 
 function updateMyProfile(req, res, next) {
+  console.log(res.body);
     User.update({"_id": req.user._id},
         {$set:{"name":req.body.name, "password": bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null)}}, function (err) {
             if (err) {
@@ -40,8 +41,6 @@ function updateMyProfile(req, res, next) {
                    User.update({"_id": req.user._id},{$set:{"profilePicture": imgId}},{multi:true},
                    function(err, numberAffected){
                    });
-
-
 
                 }else{
                       res.json({error:false, message: "Se guardo exitosamente"});
