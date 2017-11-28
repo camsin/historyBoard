@@ -190,12 +190,51 @@ function editPublication(req,res,next){
  });
 }
 function deletePublication(req,res,next) {
-  Publication.remove({_id: req.params.id},(err, object)=>{
+  let flag = 0;
+  console.log(req.params.id);
+  //Se eliminan comentarios
+  Comment.remove({publication: req.params.id},(err, object)=>{
     if(err)
-      res.redirect('/');
+      console.log("ERROR COMMENTS");
     else
-      res.redirect('/');
+      console.log("SI SE BORRARON COMMENTS");
   });
+  //Se llena arreglo con ids de imagenes para evitar conflictos
+  let imagesDelete = [];
+  Publication.findOne({_id: req.params.id},(err, publication)=>{
+    if(err){
+      console.log("ERROR ARREGLO");
+    }else{
+      imagesDelete.push(publication.imagePreview);
+      imagesDelete.push(publication.imageBackground);
+      for(let i=0;i<5;i++){
+        imagesDelete.push(publication.imageSlider[i]);
+      }
+        Publication.remove({_id: req.params.id},(err, object)=>{
+          if(err)
+            console.log("ERROR PUBLICATION");
+          else
+            console.log("SI SE BORRO PUBLICATION");
+        });
+      //Se eliminan imagenes
+      for(let i=0;i<7;i++){
+        Image.remove({_id: imagesDelete[i]},(err, object)=>{
+          if(err)
+            console.log("ERROR IMAGES");
+          else
+            console.log("SI SE BORRARON IMAGES");
+        });
+      }
+    }
+  });
+
+  res.redirect('/publications/myPublications');
+  // Publication.remove({_id: req.params.id},(err, object)=>{
+  //   if(err)
+  //     res.redirect('/');
+  //   else
+  //     res.redirect('/');
+  // });
 }
 module.exports = {
     map,
