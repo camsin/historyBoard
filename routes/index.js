@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require('./../auth/passport.js').passport;
 const User = require('../models/user.js').User;
+const Image = require('./../models/image.js');
+const fs = require('fs');
 
 router.get('/', (req, res, next) => {
     res.render('login', {showSideNav: false, error: req.flash('error')});
@@ -41,10 +43,17 @@ router.get('/auth/google/callback',
 
 router.post('/registrar', function (req, res) {
     let body = req.body;
-
+    let img = new Image({
+      img:{
+        data: fs.readFileSync('public/images/default.png'),
+        contentType: 'image/png'
+      }
+    });
+    img.save();
     let user = new User({
         name: body.name,
-        email: body.email
+        email: body.email,
+        profilePicture: img._id
     });
 
     if(user.verifyEmail()){

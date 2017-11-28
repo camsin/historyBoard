@@ -60,6 +60,7 @@ passport.use('google', new GoogleStrategy({
                                 name: profile.name.givenName,
                                 lastName: profile.name.familyName,
                                 email: profile.emails[0].value,
+                                profilePicture: img._id,
                                 provider:'google',
                                 socialNetworks: {
                                     google:profile._json

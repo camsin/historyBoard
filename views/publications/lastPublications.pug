@@ -1,11 +1,6 @@
 extends ../layout
 
 block content
-  script.
-      // injected constants
-      var Constants = {
-          userId: '#{user._id}'
-      };
   .home-page.col-xs-12(ng-controller="lastPublicationsController" ng-init="init()")
     .img-container
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
@@ -40,9 +35,9 @@ block content
             p(class="info-card") {{publication.content}}
             .user-autor
               .perfil-img
-                img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
+                img(ng-src='/publications/getImages/{{publication.author.profilePicture}}', height='100%', width='100%')
               p.col-xs-12.p-name {{publication.author.name}}
-              p.col-xs-12.p-date 14/01/2017
+              p.col-xs-12.p-date {{publication.postDate | date}}
     .fixed-action-btn(style='bottom: 45px; right: 24px;')
       a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
         i.fa.fa-angle-up.icon-go-top

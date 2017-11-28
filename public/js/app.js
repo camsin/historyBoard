@@ -1,5 +1,5 @@
 
-var app = angular.module('historyBoardApp', ['toastr']);
+var app = angular.module('historyBoardApp', ['toastr', 'ngRoute']);
 
 app.factory('socket', ['$rootScope', function($rootScope) {
     var socket = io.connect();
@@ -33,7 +33,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
         $scope.getAllPublications();
     };
 
-    socket.emit('newNotification');
+    // socket.emit('newNotification');
 
 
     $scope.getAllPublications = function(){
@@ -42,7 +42,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
         // }, function errorCallback(response) {
         //         toastr.error('Hubo un error obteniendo publicaciones', 'Error');
         // });
-        $http.get('getAllPublications').success(data => {
+        $http.get('/publications/getAllPublications').success(data => {
              $scope.lastPublications = data;
         }).error(err => {
             toastr.error('Hubo un error obteniendo publicaciones', 'Error');
@@ -50,7 +50,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
     };
 
     $scope.getCommentsCount = function(idPublication, index){
-        $http.get('getCommentsCount/'+ idPublication).success(data => {
+        $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
             $scope.lastPublications[index].commentsCount = data;
         });
     };
@@ -66,9 +66,10 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
 app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket','$window', function ($scope, $http, toastr, socket, $window) {
 
     $scope.userId = "";
-    $scope.myPublications = [];
+    $scope.lastPublications = [];
+    $scope.commentsCount = 0;
 
-    socket.emit('newNotification');
+    // socket.emit('newNotification');
 
     $scope.init = function () {
         $scope.getMyPublications();
@@ -100,12 +101,18 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
         // });
     };
 
+    // $scope.getCommentsCount = function(idPublication, index){
+    //     $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
+    //         $scope.lastPublications[index].commentsCount = data;
+    //     });
+    // };
+
 }]);
 
 app.controller('profileController', ['$scope', '$http', 'toastr', 'socket','$window', function ($scope, $http, toastr, socket, $window) {
     $scope.userInfo = {};
 
-    socket.emit('newNotification');
+    // socket.emit('newNotification');
 
     $scope.init = function(){
         $scope.getMyProfile();
@@ -114,7 +121,7 @@ app.controller('profileController', ['$scope', '$http', 'toastr', 'socket','$win
     $scope.img = 0;
 
     $scope.getMyProfile = function () {
-        $http.get('getMyProfile').success(data => {
+        $http.get('/users/getMyProfile').success(data => {
             $scope.userInfo = data;
         }).error(err => {
             toastr.error('Hubo un error obteniendo tu perfil', 'Error');
@@ -182,14 +189,13 @@ app.controller('newPublication',['$scope','$http', 'socket', function($scope, $h
         $('select').material_select();
     };
 
-    socket.emit('newNotification');
+    // socket.emit('newNotification');
 
     $scope.newPost = function(publication){
 
         let keys = Object.keys(publication);
 
         let state = $('#state').val();
-        console.log("STATE", state);
 
       let formData = new FormData();
       formData.append("title", publication.title);
@@ -237,10 +243,21 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
     $scope.init = function (id) {
         $scope.id = id;
       $scope.vm.object.publication = id;
+      $scope.getData(id);
       $scope.getComments(id);
     };
 
-    socket.emit('newNotification');
+    $scope.getData = function(id){
+        $scope.data = [];
+        $http.get('/publications/getData/' + id).success(data => {
+            $scope.data = data;
+            console.log(data);
+        }).error(err => {
+            console.log("ERROR", err);
+        });
+    };
+
+    // socket.emit('newNotification');
 
     $scope.getComments = function(id){
         $scope.comments = [];
@@ -297,7 +314,6 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
     //SE LANZA ERROR PORQUE NO EXISTE EN LA BASE DE DATOS notifications
     $scope.getLimitNotifications = function(){
         $http.get('/notifications/getLimit').success(data => {
-            console.log("DATA", data);
             $scope.notifications = data;
         }).error(err => {
                 console.log("ERROR", err);
@@ -347,39 +363,28 @@ app.controller('editPublication',['$scope','$http', function($scope, $http){
         $scope.vm = {object:{
           date : new Date()
         }};
-
-        $scope.newPost = function(publication){
-          let keys = Object.keys(publication);
-          let formData = new FormData();
-          formData.append("title", publication.title);
-          formData.append("content", publication.content);
-          formData.append("date", publication.date);
-          formData.append("state", publication.state);
-
-          formData.append("preview", document.querySelector("[name='preview']").files[0]);
-          formData.append("head", document.querySelector("[name='head']").files[0]);
-          formData.append("img1", document.querySelector("[name='img1']").files[0]);
-          formData.append("img2", document.querySelector("[name='img2']").files[0]);
-          formData.append("img3", document.querySelector("[name='img3']").files[0]);
-          formData.append("img4", document.querySelector("[name='img4']").files[0]);
-          formData.append("img5", document.querySelector("[name='img5']").files[0]);
-
-          $http.post("/publications/uploadPublication/2",formData,{
-            transformRequest: angular.identity,
-            headers:{'Content-Type':undefined}
-          })
-          .then(function successCallback(object) {
-            console.log(object);
-          }, function errorCallback(error) {
-            console.log(error);
-          });
-
-    /*
-
-          let request = new XMLHttpRequest();
-          request.open('POST','/publications/uploadPublication/2');
-          request.setRequestHeader("enctype", "multipart/form-data");
-          request.send(formData);
-    */
-        }
     }]);
+app.controller('publicationByStateController', ['$scope','$http', 'socket', 'toastr','$location',function($scope, $http, socket, toastr, $location){
+
+    // socket.emit('newNotification');
+
+    $scope.init = function(){
+        let state = $('#state').val();
+        $scope.getPublicationsByState(state);
+    };
+
+    $scope.getPublicationsByState = function(state){
+        $http.get('/publications/getPublicationsByState/'+state).success(data => {
+            $scope.publications = data;
+        }).error(err => {
+            toastr.error('Hubo un error al obtener las publicaciones', 'Error');
+        });
+    };
+
+    $scope.getCommentsCount = function(idPublication, index){
+        $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
+            $scope.publications[index].commentsCount = data;
+    });
+    };
+
+}]);

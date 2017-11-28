@@ -14,8 +14,8 @@ block content
           .header.col-xs-12
             label {{myPublication.state}}
             label.pull-right {{myPublication.date | date}}
-            a(href="/publications/edit/{{myPublication._id}}") Editar
-            a(data-toggle="modal", data-target=".register-modal", ng-click="id(myPublication._id)") Eliminar
+            //- a(href="/publications/edit/{{myPublication._id}}") Editar
+            //- a(data-toggle="modal", data-target=".register-modal", ng-click="id(myPublication[0]._id)") Eliminar
           .img-card
             a(href='/publications/byId/{{myPublication._id}}')
               img(ng-src='/publications/getImages/{{myPublication.imagePreview}}', height='100%')
@@ -24,24 +24,23 @@ block content
                   img(src='/images/logo.png', width='100%')
                   p Ver mas
           .info-container
-            .like-btn
-              div(class="")
-                i.fa.fa-heart(aria-hidden='true')
-                p(class='p-likes') 100 likes
-            .comment-btn
-              div(class="")
-                i.fa.fa-comment(aria-hidden='true')
-                p(class='p-likes') 100 comentarios
+            a(href='/publications/edit/{{myPublication._id}}')
+                .edit-btn
+                    div(class="")
+                        i.fa.fa-pencil(aria-hidden='true')
+                        p(class='p-likes') Editar
+            a(href='#', data-toggle="modal", data-target="#deleteModal",ng-click="id(myPublication._id)")
+                .delete-btn
+                    div(class="")
+                        i.fa.fa-trash(aria-hidden='true')
+                        p(class='p-likes') Eliminar
             label(class="title-card") {{myPublication.title}}
             p(class="info-card") {{myPublication.content}}
-            //- a(href="/publications/edit/{{myPublication._id}}") Editar
-            //- //a(ng-click="delete(myPublication._id)") Eliminar
-            //- a(data-toggle="modal", data-target=".register-modal", ng-click="id(myPublication._id)") Eliminar
             .user-autor
               .perfil-img
                 img(src=`/publications/getImages/${user.profilePicture}`, height='100%', width='100%')
               p.col-xs-12.p-name {{myPublication.author.name}}
-              p.col-xs-12.p-date 14/01/2017
+              p.col-xs-12.p-date {{myPublication.postDate | date}}
     .fixed-action-btn(style='bottom: 45px; right: 24px;')
       a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
         i.fa.fa-angle-up.icon-go-top
@@ -52,22 +51,35 @@ block content
         p puedes hacer
           a(href='/publications/new/publication') clic aquí
           | para crear una nueva publicación
-    .modal.fade.register-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
-      .modal-dialog.modal-lg
-        .modal-content
-          .modal-header
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
-              span(aria-hidden='true') ×
-            h4#gridSystemModalLabel.modal-title ¡ESPERA!
-          .modal-body
-            .body-message.col-xs-12
-              .col-xs-12.col-md-4.text-align-c
-                img.max-w-260(src="/images/pedroSad.png")
-
-              .col-xs-12.col-md-8.material-input.text-align-c
-                input-field.col.s6
-                  label.l-style EPA'! ESTAS A PUNTO DE ELIMINAR UNA PUBLICACION Y DEJAR DE SER PARTE DE NUESTRA HISTORIA, ¿ESTAS SEGURO?
-
-
-                .col-xs-12.text-center
-                  a.waves-effect.waves-light.btn(ng-click="delete(publicationId)") ELIMINAR
+    #deleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+      .modal-dialog(role='document')
+          .modal-content
+              .modal-header.red.lighten-1
+                  h5#exampleModalLabel.modal-title.color-white BORRAR PUBLICACION
+              .modal-body
+                  .text-align-c.font-delete-modal
+                      | Seguro que quieres eliminar tu publicación?
+                  .text-align-c.m-b-40.m-t-40
+                      img(src='/images/pedroSad.png', class='w-145px')
+              .modal-footer
+                  a.btn.btn-secondary.grey(type='button', data-dismiss='modal') CERRAR
+                  a.btn.btn-danger.red.lighten-1(type='button',ng-click="delete(publicationId)") ELIMINAR
+    //- .modal.fade.register-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+    //-   .modal-dialog.modal-lg
+    //-     .modal-content
+    //-       .modal-header
+    //-         button.close(type='button', data-dismiss='modal', aria-label='Close')
+    //-           span(aria-hidden='true') ×
+    //-         h4#gridSystemModalLabel.modal-title ¡ESPERA!
+    //-       .modal-body
+    //-         .body-message.col-xs-12
+    //-           .col-xs-12.col-md-4.text-align-c
+    //-             img.max-w-260(src="/images/pedroSad.png")
+    //- 
+    //-           .col-xs-12.col-md-8.material-input.text-align-c
+    //-             input-field.col.s6
+    //-               label.l-style EPA'! ESTAS A PUNTO DE ELIMINAR UNA PUBLICACION Y DEJAR DE SER PARTE DE NUESTRA HISTORIA, ¿ESTAS SEGURO?
+    //- 
+    //- 
+    //-             .col-xs-12.text-center
+    //-               a.waves-effect.waves-light.btn(ng-click="delete(publicationId)") ELIMINAR

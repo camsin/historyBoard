@@ -53,15 +53,27 @@ function getAllPublications(req, res, next) {
 };
 
 function byId(req, res, next) {
-  Publication.find({_id : req.params.id}, function(err,publication){
-    User.find({_id : publication[0].author}, function(err,userData){
-      console.log(userData);
-      res.render('publication/byId', {
-          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
-      });
+    res.render('publication/byId', {id: req.params.id,showSideNav: true, user: req.user,});
 
-   });
- });
+};
+
+function getData(req, res, next) {
+  Publication.findOne({"_id": req.params.id}).populate('author').exec((err, publication) => {
+      if (err) {
+          return res.json(err);
+      }
+      console.log(publication);
+      return res.json(publication);
+  });
+ //  Publication.findOne({_id : req.params.id}, function(err,publication){
+ //    User.findOne({_id : publication[0].author}, function(err,userData){
+ //      console.log(userData);
+ //      res.render('publication/byId', {
+ //          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
+ //      });
+ //
+ //   });
+ // });
 
 };
 
@@ -105,7 +117,8 @@ function uploadPublication(req, res, next){
       date: req.body.date,
       content: req.body.content,
       imageSlider:[array[2],array[3],array[4],array[5],array[6]],
-      author: req.user._id
+      author: req.user._id,
+      postDate: new Date()
       //author: userPost
      });
 
@@ -142,6 +155,7 @@ function getImages(req, res, next) {
 };
 
 function newComment(req, res, next) {
+  console.log(req.body);
     let comment = new Comment({
       publication: req.body.publication,
       date: req.body.date,
@@ -236,6 +250,16 @@ function deletePublication(req,res,next) {
   //     res.redirect('/');
   // });
 }
+
+function getPublicationsByState(req, res, next){
+    Publication.find({"state": req.params.state}).populate('author').exec(function(err, publications){
+        if(err){
+            return res.json(err);
+        }
+
+        return res.json(publications);
+    });
+};
 module.exports = {
     map,
     byState,
@@ -252,5 +276,7 @@ module.exports = {
     getComments,
     editPublication,
     deletePublication,
-    getCommentsCount
+    getCommentsCount,
+    getPublicationsByState,
+    getData
 };
