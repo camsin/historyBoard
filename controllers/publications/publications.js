@@ -153,6 +153,16 @@ function getCommentsCount(req, res, next) {
     });
 };
 
+function getPublicationsByState(req, res, next){
+    Publication.find({"state": req.params.state}).populate('author').exec(function(err, publications){
+        if(err){
+            return res.json(err);
+        }
+
+        return res.json(publications);
+    });
+};
+
 
 module.exports = {
     map,
@@ -168,5 +178,6 @@ module.exports = {
     getImages,
     newComment,
     getComments,
-    getCommentsCount
+    getCommentsCount,
+    getPublicationsByState
 };
