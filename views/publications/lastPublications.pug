@@ -1,11 +1,6 @@
 extends ../layout
 
 block content
-  script.
-      // injected constants
-      var Constants = {
-          userId: '#{user._id}'
-      };
   .home-page.col-xs-12(ng-controller="lastPublicationsController" ng-init="init()")
     .img-container
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')

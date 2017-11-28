@@ -29,6 +29,8 @@ module.exports = function(io) {
 //publications por state
     router.get('/byState/:state', isLoggedIn, publicationsController.byState);
 
+    router.get('/getPublicationsByState/:state', isLoggedIn, publicationsController.getPublicationsByState);
+
 //publications por año
     router.get('/byDate', isLoggedIn, publicationsController.byDate);
 
