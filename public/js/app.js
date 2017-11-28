@@ -308,3 +308,30 @@ app.controller('publicationByStateController', ['$scope','$http', 'socket', 'toa
     };
 
 }]);
+
+app.controller('userPublicationsController', ['$scope', '$http', 'toastr', function ($scope, $http, toastr) {
+    $scope.init = function (idUsuario) {
+        $scope.getUserPublications(idUsuario);
+        $scope.getUserInfo(idUsuario);
+    };
+
+    $scope.getUserPublications = function (idUsuario) {
+        console.log("get user pub", idUsuario);
+        $http.get('/publications/getUserPublications/' + idUsuario).success(data => {
+            console.log('data', data);
+           $scope.userPublications = data;
+        }).error(err => {
+            toastr.error('Hubo un error al obtener las publicaciones', 'Error');
+        });
+    };
+
+    $scope.getUserInfo = function (userInfo) {
+        $http.get('/users/getUserById/' + userInfo).success(data => {
+            $scope.userInfo = data;
+        }).error(err => {
+            toastr.error('Hubo un error al obtener las publicaciones', 'Error');
+        });
+    };
+
+
+}]);

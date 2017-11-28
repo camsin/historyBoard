@@ -163,6 +163,21 @@ function getPublicationsByState(req, res, next){
     });
 };
 
+function userPublications(req, res, next){
+    res.render('publications/userPublications', {showSideNav: true, user: req.user, idUsuario:req.params.id});
+
+}
+
+function getUserPublications(req, res, next){
+    Publication.find({"author": req.params.id}).populate('author').exec((err, publications) => {
+        if (err) {
+            return res.json(err);
+        }
+
+        return res.json(publications);
+    });
+}
+
 
 module.exports = {
     map,
@@ -179,5 +194,7 @@ module.exports = {
     newComment,
     getComments,
     getCommentsCount,
-    getPublicationsByState
+    getPublicationsByState,
+    userPublications,
+    getUserPublications,
 };
