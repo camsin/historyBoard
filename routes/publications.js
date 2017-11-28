@@ -55,6 +55,10 @@ module.exports = function(io) {
     router.get('/myPublications', isLoggedIn, publicationsController.myPublications);
     router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
 
+//Publicaciones por usuario especifico
+    router.get('/userPublications/:id', isLoggedIn, publicationsController.userPublications);
+    router.get('/getUserPublications/:id', isLoggedIn, publicationsController.getUserPublications);
+
     io.on('connection', function(socket){
 
         console.log('**********************************************************');
