@@ -1,4 +1,3 @@
-
 var app = angular.module('historyBoardApp', ['toastr', 'ngRoute']);
 
 app.factory('socket', ['$rootScope', function($rootScope) {
@@ -43,20 +42,20 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
         //         toastr.error('Hubo un error obteniendo publicaciones', 'Error');
         // });
         $http.get('/publications/getAllPublications').success(data => {
-             $scope.lastPublications = data;
-        }).error(err => {
+            $scope.lastPublications = data;
+    }).error(err => {
             toastr.error('Hubo un error obteniendo publicaciones', 'Error');
-        });
+    });
     };
 
     $scope.getCommentsCount = function(idPublication, index){
         $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
             $scope.lastPublications[index].commentsCount = data;
-        });
+    });
     };
 
     socket.on('getPublications', function (data) {
-            $scope.getAllPublications();
+        $scope.getAllPublications();
         $scope.$apply();
     });
 
@@ -75,25 +74,27 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
         $scope.getMyPublications();
     };
     $scope.id = function(id){
-      $scope.publicationId = id;
+        $scope.publicationId = id;
     };
     $scope.delete = function(id) {
-      $http.post('delete/'+id).then(
-        function successCallback(){
-          console.log("okey");
-          $window.location.reload();
-        },
-        function errorCallback(error){
-          console.log(error);
-        }
-      );
+        $http.post('delete/'+id).then(
+            function successCallback(){
+                console.log("okey");
+                //$window.location.reload();
+                $scope.getMyPublications();
+                toastr.success("Tu publicacion fue eliminada :(");
+            },
+            function errorCallback(error){
+                console.log(error);
+            }
+        );
     };
     $scope.getMyPublications = function(){
         $http.get('/publications/getMyPublications').success(data => {
             $scope.myPublications = data;
-        }).error(err => {
+    }).error(err => {
             toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
-        });
+    });
         // $http.get('getMyPublications').then(function successCallback(data) {
         //     $scope.lastPublications = data;
         // }, function errorCallback(response) {
@@ -123,9 +124,9 @@ app.controller('profileController', ['$scope', '$http', 'toastr', 'socket','$win
     $scope.getMyProfile = function () {
         $http.get('/users/getMyProfile').success(data => {
             $scope.userInfo = data;
-        }).error(err => {
+    }).error(err => {
             toastr.error('Hubo un error obteniendo tu perfil', 'Error');
-        });
+    });
         // $http.get('getMyPublications').then(function successCallback(data) {
         //     $scope.lastPublications = data;
         // }, function errorCallback(response) {
@@ -133,43 +134,49 @@ app.controller('profileController', ['$scope', '$http', 'toastr', 'socket','$win
         // });
     };
     $scope.click= function(){
-      $scope.img++
+        $scope.img++
     }
 
     $scope.saveUser = function () {
-        if($scope.password === $scope.confirmPassword){
-        //     $http({
-        //         url:'updateMyProfile',
-        //         method:'POST',
-        //         data: {name:$scope.userInfo.name,
-        //             password:$scope.password}
-        //     }).then(function(data){
-        //         if(data.err){
-        //             toastr.error('Tu perfil no se actualizo correctamente', 'Error');
-        //         }
-        //         toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
-        //     });
-        // }else{
-        //     toastr.error('Las contraseñas no coinciden', 'Error');
-        // }
+        if($scope.password !== undefined && $scope.confirmPassword !== undefined){
+            if($scope.password === $scope.confirmPassword){
+                console.log("SIGO ENTRANDO AQUI");
+                //     $http({
+                //         url:'updateMyProfile',
+                //         method:'POST',
+                //         data: {name:$scope.userInfo.name,
+                //             password:$scope.password}
+                //     }).then(function(data){
+                //         if(data.err){
+                //             toastr.error('Tu perfil no se actualizo correctamente', 'Error');
+                //         }
+                //         toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
+                //     });
+                // }else{
+                //     toastr.error('Las contraseñas no coinciden', 'Error');
+                // }
 
-        let formData = new FormData();
-        formData.append("name", $scope.userInfo.name);
-        formData.append("password", $scope.password);
-        if($scope.img > 0){
-          formData.append("profilePicture", document.querySelector("[name='profilePicture']").files[0]);
+                let formData = new FormData();
+                formData.append("name", $scope.userInfo.name);
+                formData.append("password", $scope.password);
+                if($scope.img > 0){
+                    formData.append("profilePicture", document.querySelector("[name='profilePicture']").files[0]);
+                }
+                let request = new XMLHttpRequest();
+                request.open('POST','updateMyProfile');
+                request.send(formData);
+                setTimeout(() => $window.location.reload(), 2000);
+                toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
+            }else{
+                toastr.error('Las contraseñas no coinciden', 'Error');
+            }
+
+        }else{
+            toastr.error('Para guardar tus cambios debes de ingresar tu contraseña y confirmarla', 'Error');
         }
-        let request = new XMLHttpRequest();
-        request.open('POST','updateMyProfile');
-        request.send(formData);
-        setTimeout(() => $window.location.reload(), 2000);
-        toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
-      }else{
-       toastr.error('Las contraseñas no coinciden', 'Error');
-     }
     };
 }]);
-app.controller('newPublication',['$scope','$http', 'socket', function($scope, $http, socket){
+app.controller('newPublication',['$scope','$http', 'socket','toastr', '$window', function($scope, $http, socket, toastr, $window){
 
     $scope.init = function () {
         $scope.reload();
@@ -182,7 +189,7 @@ app.controller('newPublication',['$scope','$http', 'socket', function($scope, $h
         'Yucatán', 'Zacatecas'];
 
     $scope.vm = {object:{
-      date : new Date()
+        date : new Date()
     }};
 
     $scope.reload = function(){
@@ -197,38 +204,52 @@ app.controller('newPublication',['$scope','$http', 'socket', function($scope, $h
 
         let state = $('#state').val();
 
-      let formData = new FormData();
-      formData.append("title", publication.title);
-      formData.append("content", publication.content);
-      formData.append("date", publication.date);
-      formData.append("state", state);
+        let formData = new FormData();
+        formData.append("title", publication.title);
+        formData.append("content", publication.content);
+        formData.append("date", publication.date);
+        formData.append("state", state);
 
-      formData.append("preview", document.querySelector("[name='preview']").files[0]);
-      formData.append("head", document.querySelector("[name='head']").files[0]);
-      formData.append("img1", document.querySelector("[name='img1']").files[0]);
-      formData.append("img2", document.querySelector("[name='img2']").files[0]);
-      formData.append("img3", document.querySelector("[name='img3']").files[0]);
-      formData.append("img4", document.querySelector("[name='img4']").files[0]);
-      formData.append("img5", document.querySelector("[name='img5']").files[0]);
+        formData.append("preview", document.querySelector("[name='preview']").files[0]);
+        formData.append("head", document.querySelector("[name='head']").files[0]);
+        formData.append("img1", document.querySelector("[name='img1']").files[0]);
+        formData.append("img2", document.querySelector("[name='img2']").files[0]);
+        formData.append("img3", document.querySelector("[name='img3']").files[0]);
+        formData.append("img4", document.querySelector("[name='img4']").files[0]);
+        formData.append("img5", document.querySelector("[name='img5']").files[0]);
 
-      $http.post("/publications/uploadPublication/2",formData,{
-        transformRequest: angular.identity,
-        headers:{'Content-Type':undefined}
-      })
-      .then(function successCallback(object) {
-        console.log(object);
-      }, function errorCallback(error) {
-        console.log(error);
-      });
 
-/*
+        // $http({
+        //     method: 'POST',
+        //     url: '/publications/uploadPublication',
+        //     data: {publication:formData}
+        // }).then(function successCallback(res) {
+        //     console.log("RES", res);
+        //     toastr.success("Tu publicacion se guardo exitosamente");
+        // }, function errorCallback(err) {
+        //     console.log("ERR",err);
+        // });
+        $http.post("/publications/uploadPublication",formData,{
+            transformRequest: angular.identity,
+            headers:{'Content-Type':undefined}
+        })
+            .then(function successCallback(object) {
+                console.log(object);
+                $window.location.href = "/publications/lastPublications";
+                toastr.success("Tu publicacion fue guardada exitosamente");
+            }, function errorCallback(error) {
+                console.log(error);
+                toastr.warning("Llena todos los campos");
+            });
 
-      let request = new XMLHttpRequest();
-      request.open('POST','/publications/uploadPublication/2');
-      request.setRequestHeader("enctype", "multipart/form-data");
-      request.send(formData);*/
+        /*
 
-      socket.emit('newPublication');
+         let request = new XMLHttpRequest();
+         request.open('POST','/publications/uploadPublication/2');
+         request.setRequestHeader("enctype", "multipart/form-data");
+         request.send(formData);*/
+
+        socket.emit('newPublication');
 
     };
 }]);
@@ -237,25 +258,25 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
 
     $scope.likes = 0;
     $scope.vm = {object:{
-      date : new Date(),
+        date : new Date(),
     }};
     $scope.comments = [];
 
     $scope.init = function (id) {
         $scope.id = id;
-      $scope.vm.object.publication = id;
-      $scope.getData(id);
-      $scope.getComments(id);
+        $scope.vm.object.publication = id;
+        $scope.getData(id);
+        $scope.getComments(id);
     };
 
     $scope.getData = function(id){
         $scope.data = [];
         $http.get('/publications/getData/' + id).success(data => {
             $scope.data = data;
-            console.log(data);
-        }).error(err => {
+        console.log(data);
+    }).error(err => {
             console.log("ERROR", err);
-        });
+    });
     };
 
     // socket.emit('newNotification');
@@ -264,9 +285,9 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
         $scope.comments = [];
         $http.get('/publications/getComments/' + id).success(data => {
             $scope.comments = data;
-        }).error(err => {
+    }).error(err => {
             console.log("ERROR", err);
-        });
+    });
     };
 
     socket.on('getComments', function (data) {
@@ -275,27 +296,27 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
     });
 
     $scope.newComment = function(newComment){
-      $http({
-        method: 'POST',
-        url: '/publications/newComment',
-        data: newComment
-      }).then(function successCallback(res) {
-          socket.emit('newComment');
-          $http({
-              method: 'POST',
-              url: '/notifications/add',
-              data: {comment: res.data._id}
-          }).then(function successCallback(res) {
+        $http({
+            method: 'POST',
+            url: '/publications/newComment',
+            data: newComment
+        }).then(function successCallback(res) {
+            socket.emit('newComment');
+            $http({
+                method: 'POST',
+                url: '/notifications/add',
+                data: {comment: res.data._id}
+            }).then(function successCallback(res) {
                 if(res.data!=="OK"){
                     socket.emit('newNotification');
                 }
-          }, function errorCallback(err) {
-              console.log("ERR NOTIFICACION",err);
-          });
-          $scope.vm.object.content = "";
+            }, function errorCallback(err) {
+                console.log("ERR NOTIFICACION",err);
+            });
+            $scope.vm.object.content = "";
         }, function errorCallback(err) {
             console.log("ERR",err);
-          });
+        });
     };
 
     $scope.updateLikes = function (idPublicacion) {
@@ -304,12 +325,12 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
         console.log('id de la publicacion aumentada', $scope.likes);
 
         $http({
-           method: 'POST',
+            method: 'POST',
             url: '/publications/updatelikes/'+ idPublicacion,
             data: {likes: $scope.likes}
         }).then(function successCallback(res) {
-            },function errorCallback(err) {
-                console.log("ERR",err);
+        },function errorCallback(err) {
+            console.log("ERR",err);
 
         });
     };
@@ -335,17 +356,17 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
     $scope.getLimitNotifications = function(){
         $http.get('/notifications/getLimit').success(data => {
             $scope.notifications = data;
-        }).error(err => {
-                console.log("ERROR", err);
-        });
+    }).error(err => {
+            console.log("ERROR", err);
+    });
     };
 
     $scope.getNotifications = function(){
         $http.get('/notifications/get').success(data => {
             $scope.allNotifications = data;
-        }).error(err => {
+    }).error(err => {
             toastr.error('Hubo un error al obtener tus notificaciones', 'Error');
-        });
+    });
     };
 
     $scope.redirectPublication = function(idNotification, idPublication){
@@ -363,27 +384,27 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
 }]);
 
 app.controller('editPublication',['$scope','$http', function($scope, $http){
-        $scope.publications = {};
-        $scope.init = function(publication){
-          publication = JSON.parse(publication);
-          console.log(publication);
-          let keys = Object.keys(publication);
-          for (var i = 0; i < keys.length; i++) {
+    $scope.publications = {};
+    $scope.init = function(publication){
+        publication = JSON.parse(publication);
+        console.log(publication);
+        let keys = Object.keys(publication);
+        for (var i = 0; i < keys.length; i++) {
             console.log(keys[i]);
             if(keys[i]=="date"){
-              let date = new Date(publication.date);
-              $scope.publications.date = new Date(date.getFullYear() +"-"+ date.getMonth() +"-"+ date.getDate());
-              console.log($scope.publications.date);
+                let date = new Date(publication.date);
+                $scope.publications.date = new Date(date.getFullYear() +"-"+ date.getMonth() +"-"+ date.getDate());
+                console.log($scope.publications.date);
             } else {
-              $scope.publications[keys[i]] = publication[keys[i]];
+                $scope.publications[keys[i]] = publication[keys[i]];
 
             }
-          }
         }
-        $scope.vm = {object:{
-          date : new Date()
-        }};
-    }]);
+    }
+    $scope.vm = {object:{
+        date : new Date()
+    }};
+}]);
 
 app.controller('publicationByStateController', ['$scope','$http', 'socket', 'toastr','$location',function($scope, $http, socket, toastr, $location){
 
@@ -397,9 +418,9 @@ app.controller('publicationByStateController', ['$scope','$http', 'socket', 'toa
     $scope.getPublicationsByState = function(state){
         $http.get('/publications/getPublicationsByState/'+state).success(data => {
             $scope.publications = data;
-        }).error(err => {
+    }).error(err => {
             toastr.error('Hubo un error al obtener las publicaciones', 'Error');
-        });
+    });
     };
 
     $scope.getCommentsCount = function(idPublication, index){
@@ -420,18 +441,18 @@ app.controller('userPublicationsController', ['$scope', '$http', 'toastr', funct
         console.log("get user pub", idUsuario);
         $http.get('/publications/getUserPublications/' + idUsuario).success(data => {
             console.log('data', data);
-           $scope.userPublications = data;
-        }).error(err => {
+        $scope.userPublications = data;
+    }).error(err => {
             toastr.error('Hubo un error al obtener las publicaciones', 'Error');
-        });
+    });
     };
 
     $scope.getUserInfo = function (userInfo) {
         $http.get('/users/getUserById/' + userInfo).success(data => {
             $scope.userInfo = data;
-        }).error(err => {
+    }).error(err => {
             toastr.error('Hubo un error al obtener las publicaciones', 'Error');
-        });
+    });
     };
 
     $scope.getCommentsCount = function(idPublication, index){

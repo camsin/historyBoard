@@ -8,8 +8,8 @@ let type = upload.any();
 
 module.exports = function(io) {
 
-  router.post("/delete/:id", isLoggedIn, publicationsController.deletePublication);
-  //     router.get('/myPublications', isLoggedIn, publicationsController.myPublications);
+    router.post("/delete/:id", isLoggedIn, publicationsController.deletePublication);
+    //     router.get('/myPublications', isLoggedIn, publicationsController.myPublications);
 
     //images display
     router.get('/getComments/:id', publicationsController.getComments);
@@ -25,7 +25,7 @@ module.exports = function(io) {
     //publication save
     router.get('/uploadPublication', publicationsController.uploadPublication);
 
-    router.post('/uploadPublication/:contenido', type, publicationsController.uploadPublication);
+    router.post('/uploadPublication', type, publicationsController.uploadPublication);
 //MAPA
     router.get('/byState', isLoggedIn, publicationsController.map);
 
@@ -45,7 +45,7 @@ module.exports = function(io) {
     router.get('/getData/:id', isLoggedIn, publicationsController.getData);
     router.get('/byId/:id', isLoggedIn, publicationsController.byId);
 
-router.get('/edit/:id', isLoggedIn, publicationsController.editPublication);
+    // router.get('/edit/:id', isLoggedIn, publicationsController.editPublication);
 // Editar publication
 // router.get('/editar/:content', (req, res, next) => {
 //   res.render('publication/editar', {showSideNav: true,
@@ -57,8 +57,8 @@ router.get('/edit/:id', isLoggedIn, publicationsController.editPublication);
     router.get('/new', isLoggedIn, publicationsController.newPublication);
 
 //Mis publications
-router.get('/myPublications',isLoggedIn,  publicationsController.myPublications);
-router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
+    router.get('/myPublications',isLoggedIn,  publicationsController.myPublications);
+    router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
 
     //router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
 
