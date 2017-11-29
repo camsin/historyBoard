@@ -166,7 +166,7 @@ function getPublicationsByState(req, res, next){
 function userPublications(req, res, next){
     res.render('publications/userPublications', {showSideNav: true, user: req.user, idUsuario:req.params.id});
 
-}
+};
 
 function getUserPublications(req, res, next){
     Publication.find({"author": req.params.id}).populate('author').exec((err, publications) => {
@@ -176,7 +176,17 @@ function getUserPublications(req, res, next){
 
         return res.json(publications);
     });
-}
+};
+
+function updateLikes(req, res, next){
+    Publication.update({"_id": req.params.idPublicacion},{$set:{"likes": req.body.likes}}, function (err) {
+        if (err) {
+            return res.json({error: true, message: err});
+        } else {
+            return res.json({error: false, message: ""});
+        }
+    });
+};
 
 
 module.exports = {
@@ -197,4 +207,5 @@ module.exports = {
     getPublicationsByState,
     userPublications,
     getUserPublications,
+    updateLikes
 };

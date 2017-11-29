@@ -55,6 +55,9 @@ module.exports = function(io) {
     router.get('/myPublications', isLoggedIn, publicationsController.myPublications);
     router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
 
+//likes
+    router.post('/updatelikes/:idPublicacion', isLoggedIn, publicationsController.updateLikes);
+
 //Publicaciones por usuario especifico
     router.get('/userPublications/:id', isLoggedIn, publicationsController.userPublications);
     router.get('/getUserPublications/:id', isLoggedIn, publicationsController.getUserPublications);

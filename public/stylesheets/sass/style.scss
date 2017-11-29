@@ -330,6 +330,10 @@ textarea:focus, input:focus, a:focus{
 }
 
 @media (max-width: 700px) {
+  .like-press {
+    top: 224px !important;
+  }
+
   .home-page {
     .img-container, .black-cover {
       height: 250px !important;
@@ -1427,7 +1431,7 @@ textarea:focus, input:focus, a:focus{
 .like-press {
   transition: .5s;
   position: absolute;
-  bottom: -26px;
+  top: 342px;
   z-index: 1;
   color: #EC407A;
   background: white;
@@ -1448,6 +1452,14 @@ textarea:focus, input:focus, a:focus{
   color: white;
   background: #EC407A;
   border: 2px solid #EC407A;
+}
+
+.like-press-click {
+  color: white !important;
+  background: #EC407A !important;
+  border: 2px solid #EC407A !important;
+  pointer-events: none;
+  cursor: default;
 }
 
 .user-publication {

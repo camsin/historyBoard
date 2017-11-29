@@ -187,6 +187,7 @@ app.controller('newPublication',['$scope','$http', 'socket', function($scope, $h
 
 app.controller('commentsController', ['$scope', '$http','socket', function ($scope, $http, socket) {
 
+    $scope.likes = 0;
     $scope.vm = {object:{
       date : new Date(),
     }};
@@ -237,6 +238,24 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
             console.log("ERR",err);
           });
     };
+
+    $scope.updateLikes = function (idPublicacion) {
+        console.log('id de la publicacion', idPublicacion);
+        $scope.likes++;
+        console.log('id de la publicacion aumentada', $scope.likes);
+
+        $http({
+           method: 'POST',
+            url: '/publications/updatelikes/'+ idPublicacion,
+            data: {likes: $scope.likes}
+        }).then(function successCallback(res) {
+            },function errorCallback(err) {
+                console.log("ERR",err);
+
+        });
+    };
+
+
 
 }]);
 

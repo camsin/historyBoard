@@ -8,8 +8,8 @@ block content
       .img-header
       .black-cover
         p(class="title-class") #{publication[0].title} {{cosa}}
-        a.like-press
-          i.fa.fa-heart(aria-hidden='true')
+    a#like.like-press(ng-click=`updateLikes('${id}')`)
+      i.fa.fa-heart(aria-hidden='true')
     .col-md-3
       .user-publication
         a(href=`/publications/userPublications/${userData[0]._id}`, class='col-xs-12 text-align-c')
