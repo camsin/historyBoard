@@ -46,6 +46,7 @@ module.exports = function(io) {
     router.get('/byId/:id', isLoggedIn, publicationsController.byId);
 
 router.get('/edit/:id', isLoggedIn, publicationsController.editPublication);
+router.post('/saveEdit/:id', isLoggedIn, type, publicationsController.saveEdit);
 // Editar publication
 // router.get('/editar/:content', (req, res, next) => {
 //   res.render('publication/editar', {showSideNav: true,
