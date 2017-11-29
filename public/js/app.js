@@ -343,8 +343,21 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
 }]);
 
 app.controller('editPublication',['$scope','$http', function($scope, $http){
+  // $scope.reload = function(){
+  //     $('select').material_select();
+  // };
+        $scope.vm = {object:{
+          date : new Date()
+        }};
         $scope.publications = {};
+        $scope.estados = ['Aguascalientes','Baja California','Baja California Sur', 'Campeche', 'Coahuila de Zaragoza', 'Colima',
+            'Chiapas', 'Chihuahua', 'Distrito Federal', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'México',
+            'Michoacán de Ocampo', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo',
+            'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz de Ignacio de la Llave',
+            'Yucatán', 'Zacatecas'];
+
         $scope.init = function(publication){
+          //$scope.reload();
           publication = JSON.parse(publication);
           console.log(publication);
           let keys = Object.keys(publication);
@@ -360,9 +373,26 @@ app.controller('editPublication',['$scope','$http', function($scope, $http){
             }
           }
         }
-        $scope.vm = {object:{
-          date : new Date()
-        }};
+        $scope.saveEdit = function(publication){
+          let formData = new FormData();
+          formData.append("title", publication.title);
+          formData.append("content", publication.content);
+          formData.append("date", publication.date);
+          formData.append("state", publication.state);
+
+          formData.append("preview", document.querySelector("[name='preview']").files[0]);
+          formData.append("head", document.querySelector("[name='head']").files[0]);
+          formData.append("img1", document.querySelector("[name='img1']").files[0]);
+          formData.append("img2", document.querySelector("[name='img2']").files[0]);
+          formData.append("img3", document.querySelector("[name='img3']").files[0]);
+          formData.append("img4", document.querySelector("[name='img4']").files[0]);
+          formData.append("img5", document.querySelector("[name='img5']").files[0]);
+          let request = new XMLHttpRequest();
+          request.open('POST','/publications/saveEdit/'+$scope.publications._id);
+          //request.setRequestHeader("enctype", "multipart/form-data");
+          request.send(formData);
+          };
+
     }]);
 app.controller('publicationByStateController', ['$scope','$http', 'socket', 'toastr','$location',function($scope, $http, socket, toastr, $location){
 

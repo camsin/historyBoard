@@ -197,7 +197,7 @@ function editPublication(req,res,next){
     publication = JSON.stringify(publication);
     User.find({_id : publication.author}).exec(function(err,userData){
       res.render('publication/edit', {
-          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
+          id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData, enumEstados: enumEstados
       });
 
    });
@@ -274,7 +274,97 @@ function getUserPublications(req, res, next){
 
         return res.json(publications);
     });
-}
+};
+
+function saveEdit(req, res, next){
+  console.log(req.body);
+    let array = [];
+    let oldImages = [];
+    //Se guardan las nuevas imagenes
+    if(req.files.length != undefined){
+      let nameFiles = Object.keys(req.files);
+      for(let i = 0; i < req.files.length; i++){
+        let image = new Image({
+           file_id: nameFiles[i],
+           img: {
+             data: fs.readFileSync(req.files[i].path),
+             contentType: req.files[i].mimetype
+           }
+         });
+         array.push([
+                id=image._id,
+                name=req.files[i].fieldname]);
+         image.save(function (err) {
+           if(err)
+            console.log(err);
+          else
+            console.log("guardadoooo",array[i][1]);
+         });
+
+      }
+
+    //Se hace comparativa
+    Publication.findOne({"_id": req.params.id},function(err, publications){
+          if(err){
+              return res.json(err);
+          }
+
+            oldImages.push([publications.imagePreview,"preview"]);
+            oldImages.push([publications.imageBackground,"head"]);
+            oldImages.push([publications.imageSlider[0],"img1"]);
+            oldImages.push([publications.imageSlider[1],"img2"]);
+            oldImages.push([publications.imageSlider[2],"img3"]);
+            oldImages.push([publications.imageSlider[3],"img4"]);
+            oldImages.push([publications.imageSlider[4],"img5"]);
+            if(array.length>0){
+              for(let z=0;z<req.files.length;z++){
+                for(let i=0;i<7;i++){
+                  if(oldImages[i][1] == array[z][1]){
+                    oldImages[i][0] = array[z][0];
+                    Image.remove({_id: oldImages[i][0]});
+                  }
+                }
+              }
+            }
+
+            Publication.update({"_id": req.params.id},
+                              {$set:{
+                                "title":req.body.title,
+                                "state":req.body.state,
+                                "date":req.body.date,
+                                "content":req.body.content,
+                                "imagePreview": oldImages[0][0],
+                                "imageBackground": oldImages[1][0],
+                                "imageSlider[0]": oldImages[2][0],
+                                "imageSlider[2]": oldImages[3][0],
+                                "imageSlider[3]": oldImages[4][0],
+                                "imageSlider[4]": oldImages[5][0],
+                                "imageSlider[5]": oldImages[6][0],
+                                "postDate": new Date()}}, function (err) {
+                                  if(err)
+                                    console.log(err);
+                                  else
+                                    console.log("AHUEVO");
+                                });
+
+      });
+    }else{
+        Publication.update({"_id": req.params.id},
+                          {$set:{
+                            "title":req.body.title,
+                            "state":req.body.state,
+                            "date":req.body.date,
+                            "content":req.body.content,
+                            "postDate": new Date()}}, function (err) {
+                              if(err)
+                                console.log(err);
+                              else
+
+                                console.log("AHUEVO");
+                            });
+      }
+
+};
 
 
 module.exports = {
@@ -297,5 +387,6 @@ module.exports = {
     getPublicationsByState,
     getData,
     userPublications,
-    getUserPublications
+    getUserPublications,
+    saveEdit
 };

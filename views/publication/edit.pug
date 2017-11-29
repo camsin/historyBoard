@@ -7,60 +7,88 @@ block content
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
       .img-header
       .black-cover
-        p(class="title-class") CREA UNA PUBLICACIÓN
+        p(class="title-class") EDITA TU PUBLICACIÓN
+    .fixed-action-btn(style='bottom: 45px; right: 24px;')
+      a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
+        i.fa.fa-angle-up.icon-go-top
     .col-xs-12.text-align-c.new-pub
-      p.col-xs-12.p-new México se construyó a base de esfuerzo y dedicación, justamente eso queremos hacer eso son historyBoard. Este es tu lienzo en blanco, EMPECEMOS!
+      p.col-xs-12.p-new Edita la información necesaria para que tu publicion sea grandiosa
       .row.col-xs-12
         .input-field.col.s12
-          label.active.label-act(for='title') Antes que nada necesitas un titulo llamativo y genial
+          label.active.label-act(for='title') Tu titulo llamativo y genial
           input#title(type='text', placeholder, name="title", ng-model="publications.title",required, value="{{publications.title}}")
+      //- .col-xs-12
+        //- .col-md-6
+        //-   p.description-p La imágen para la miniatura de tu publicación.
+        //-   .file-field.input-field
+        //-     .btn
+        //-       span Img
+        //-       input(type='file',name="preview",required)
+        //-     .file-path-wrapper
+        //-       input.file-path.validate(type='text',required)
+        //- .col-md-6
+        //-   p.description-p La gran imagen, fantastica para mostrar en tu publicación.
+        //-   .file-field.input-field
+        //-     .btn
+        //-       span Img
+        //-       input(type='file',name="head", required)
+        //-     .file-path-wrapper
+        //-       input.file-path.validate(type='text')
+        //-     .col-xs-12.text-center
+        //-       a.waves-effect.waves-light.btn(ng-click="newPost(vm.object)") Guardar
       .col-xs-12
         .col-md-6
-          p.description-p Vamos a darle vida a tu publicación, selecciona una imágen para la miniatura.
+          p.description-p La imágen para la miniatura de tu publicación.
           .file-field.input-field
             .btn
               span Img
               input(type='file',name="preview",required)
             .file-path-wrapper
               input.file-path.validate(type='text',required)
+                
         .col-md-6
-          p.description-p Ahora selecciona una imágen para mostrarla en grande en tu publicación.
+          p.description-p La gran imagen, fantastica para mostrar en tu publicación.
           .file-field.input-field
             .btn
               span Img
               input(type='file',name="head", required)
             .file-path-wrapper
               input.file-path.validate(type='text')
-      .row.col-xs-12.m-t-15
+      .row.col-xs-12
         .input-field.col.s12
           label.active.label-act(for='title') De qué estado de México es tu publicación?
           input#title.validate(type='text', placeholder, required,ng-model="publications.state", value="{{publication.state}}")
+      
+              
       .col-xs-12.p-r-25.p-l-25.m-0
         p.description-p Introduce la fecha en la que ocurrieron los hechos de tu publicación
         //input.datepicker(type='date', ng-model="vm.object.date")
-        input(type='date',required,ng-model="publications.date" value="{{publication.date}}")
+        //input(type='date',required,ng-model="publications.date" value="{{publication.date}}")
+        input.datepicker(type='date', ng-value="publications.date",ng-model="publications.date")
       .row.col-xs-12.m-b-0
         .col.s12.m-t-25
           .row
             .input-field.col-xs-12.p-0
               label.label-act(for='textarea1') Ahora si, dinos todo lo que tengas que decir! (nosotros lo acomodamos).
               textarea#textarea1.materialize-textarea.m-t-25(type='text',placeholder,required,ng-model="publications.content", value="{{publication.content}}")
-      .col-xs-12.p-l-25.p-r-25
-        p.description-p Por último, selecciona 5 imágenes para mostrar en tu publicación
+                      
+        .row.col-xs-12                      
         .col-md-12.p-0
-          .file-field.input-field
-            .btn
-              span Img
-              input(type='file',name="img1",ng-model="vm.object.img1",required)
-            .file-path-wrapper
-              input.file-path.validate(type='text')
-        .col-md-12.p-0
+          p.description-p Por último, selecciona 5 imágenes para mostrar en tu publicación
+          .col-md-12.p-0
+            .file-field.input-field
+              .btn
+                span Img
+                input(type='file',name="img1",ng-model="vm.object.img1",required)
+              .file-path-wrapper
+                input.file-path.validate(type='text')
           .file-field.input-field
             .btn
               span Img
               input(type='file',name="img2",ng-model="vm.object.img2",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
+                      
         .col-md-12.p-0
           .file-field.input-field
             .btn
@@ -68,6 +96,7 @@ block content
               input(type='file',name="img3",ng-model="vm.object.img3",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
+                      
         .col-md-12.p-0
           .file-field.input-field
             .btn
@@ -75,6 +104,7 @@ block content
               input(type='file',name="img4", ng-model="vm.object.img4",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
+                      
         .col-md-12.p-0
           .file-field.input-field
             .btn
@@ -82,25 +112,7 @@ block content
               input(type='file',name="img5", ng-model="vm.object.img5",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
-      .col-xs-12.text-center.m-t-30
-        a(href="#", class="btn btn-primary", data-toggle="modal", data-target=".register-modal" ng-click="") PUBLICAR
-
-      .modal.fade.register-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
-        .modal-dialog.modal-lg
-          .modal-content
-            .modal-header
-              button.close(type='button', data-dismiss='modal', aria-label='Close')
-                span(aria-hidden='true') ×
-              h4#gridSystemModalLabel.modal-title GRACIAS
-            .modal-body
-              .body-message.col-xs-12
-                .col-xs-12.col-md-4.text-align-c
-                  img.max-w-260(src="/images/pedro.png")
-
-                .col-xs-12.col-md-8.material-input.text-align-c
-                  input-field.col.s6
-                    label.l-style AJUA! ESTAS A PUNTO DE REALIZAR UNA PUBLICACION Y SER PARTE DE NUESTRA HISTORIA
-
-
-                  .col-xs-12.text-center
-                    a.waves-effect.waves-light.btn(ng-click="newPost(vm.object)") PUBLICAR
+          .col-xs-12.text-center
+            a.waves-effect.waves-light.btn(ng-click="saveEdit(publications)") Guardar
+                      
+    
