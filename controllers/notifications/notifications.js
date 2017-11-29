@@ -55,7 +55,7 @@ function getAllNotifications(req, res, next) {
                 arrayNotifications.push(notifications[i]);
             }
         }
-        return res.json(notifications);
+        return res.json(arrayNotifications);
     });
 }
 
