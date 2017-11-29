@@ -46,7 +46,7 @@ block content
             p(class="info-card") {{publication.content}}
             .user-autor
               .perfil-img
-                img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
+                img(src='/publications/getImages/{{publication.author.profilePicture}}', height='100%', width='100%')
               p.col-xs-12.p-name {{publication.author.name}}
               p.col-xs-12.p-date 14/01/2017
     .fixed-action-btn(style='bottom: 45px; right: 24px;')
