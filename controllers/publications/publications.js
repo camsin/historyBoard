@@ -125,7 +125,7 @@ function uploadPublication(req, res, next){
 
         post.save((err) => {
             if (err) {
-                console.log("NOMAMES", err);
+                console.log("error", err);
                 res.send(err);
             } else {
                 res.redirect("/publications/lastPublications")
