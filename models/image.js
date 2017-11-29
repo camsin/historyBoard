@@ -4,12 +4,12 @@ const schema = mongoose.Schema;
 /**
  * Modelo de las imagenes manejadas en nuestra aplicación
  */
- const imageSchema = schema({
-   file_id: String,
-   img: {
-     data: Buffer,
-     contentType: String
-   }
- });
+const imageSchema = schema({
+    // file_id: String,
+    img: {
+        data: Buffer,
+        contentType: String
+    }
+});
 
- module.exports = Image = mongoose.model('Image',imageSchema);
+module.exports = Image = mongoose.model('Image',imageSchema);
