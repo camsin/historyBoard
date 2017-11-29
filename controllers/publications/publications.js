@@ -58,7 +58,7 @@ function byId(req, res, next) {
 };
 
 function newPublication(req, res, next) {
-    res.render('publication/new', {showSideNav: true, contenido: req.params.content, user: req.user, enumEstados: enumEstados});
+    res.render('publication/new', {showSideNav: true, user: req.user, enumEstados: enumEstados});
 };
 
 function myPublications(req, res, next) {

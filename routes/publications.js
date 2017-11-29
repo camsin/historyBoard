@@ -49,7 +49,7 @@ module.exports = function(io) {
 // });
 
 // nueva publication
-    router.get('/new/:content', isLoggedIn, publicationsController.newPublication);
+    router.get('/new', isLoggedIn, publicationsController.newPublication);
 
 //Mis publications
     router.get('/myPublications', isLoggedIn, publicationsController.myPublications);

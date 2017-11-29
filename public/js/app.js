@@ -360,3 +360,64 @@ app.controller('userPublicationsController', ['$scope', '$http', 'toastr', funct
 
 
 }]);
+
+app.controller('publicationsByDateController', ['$scope', '$http', 'toastr', function($scope, $http, toastr){
+
+    $scope.init = function(){
+        $scope.getAllPublications();
+    };
+
+    $scope.getAllPublications = function(){
+        $http.get('/publications/getAllPublications').success(data => {
+            $scope.publications = data;
+    }).error(err => {
+            toastr.error('Hubo un error obteniendo publicaciones', 'Error');
+    });
+    };
+
+    // $scope.getCommentsCount = function(idPublication, index){
+    //     $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
+    //         $scope.userPublications[index].commentsCount = data;
+    // });
+    // };
+
+}]);
+
+// parse a date in dd-mm-yyyy format
+function parseDate(input) {
+    console.log("INPUT", input);
+    var parts = input.split('-');
+    // Note: months are 0-based
+    return new Date(parts[2], parts[1]-1, parts[0]);
+}
+
+app.filter("myfilter", function($filter) {
+    return function(items, from) {
+        console.log("ITEMS", items);
+        console.log("FROM", from);
+        // var df = parseDate(from);
+        // var dt = parseDate(to);
+        var publications = [];
+        if(!from){
+            publications = items;
+            return publications;
+        }else{
+            for (var i=0; i<items.length; i++){
+                var tf = new Date(items[i].date);
+                // tt = new Date($filter('date')(items[i].date, "dd-MM-yyyy"));
+                var year = tf.getFullYear();
+                console.log("TF", tf);
+                console.log("YEAR", year);
+                if (parseInt(from) === year)  {
+                    console.log("SON IGUALES");
+                    publications.push(items[i]);
+                }
+            }
+
+            // console.log("ARRAY TO RETURN", arrayToReturn);
+
+            return publications;
+
+        }
+    };
+});
