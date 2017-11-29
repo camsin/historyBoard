@@ -191,19 +191,19 @@ function getCommentsCount(req, res, next) {
     });
 };
 
-function editPublication(req,res,next){
-    console.log("PUBLICACION FIND");
-    Publication.findOne({_id : req.params.id}).populate('imagePreview').populate( 'imageSlider').populate('imageBackground').exec(function(err,publication) {
-        console.log("TODA LA PUBLICACION",publication);
-        publication = JSON.stringify(publication);
-        User.find({_id : publication.author}).exec(function(err,userData){
-            res.render('publication/edit', {
-                id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
-            });
-
-        });
-    });
-}
+// function editPublication(req,res,next){
+//     console.log("PUBLICACION FIND");
+//     Publication.findOne({_id : req.params.id}).populate('imagePreview').populate( 'imageSlider').populate('imageBackground').exec(function(err,publication) {
+//         console.log("TODA LA PUBLICACION",publication);
+//         publication = JSON.stringify(publication);
+//         User.find({_id : publication.author}).exec(function(err,userData){
+//             res.render('publication/edit', {
+//                 id: req.params.id, showSideNav: true, user: req.user, publication: publication, userData: userData
+//             });
+//
+//         });
+//     });
+// }
 function deletePublication(req,res,next) {
     let flag = 0;
     console.log(req.params.id);
@@ -302,7 +302,6 @@ module.exports = {
     getImages,
     newComment,
     getComments,
-    editPublication,
     deletePublication,
     getCommentsCount,
     getPublicationsByState,

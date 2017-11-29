@@ -239,6 +239,7 @@ app.controller('newPublication',['$scope','$http', 'socket','toastr', '$window',
                 toastr.success("Tu publicacion fue guardada exitosamente");
             }, function errorCallback(error) {
                 console.log(error);
+                toastr.warning("Llena todos los campos");
             });
 
         /*
