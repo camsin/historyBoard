@@ -7,10 +7,12 @@ function index(req, res, next) {
 }
 
 function getNotificationsLimit(req, res, next) {
+
     Notification.find({seen: false}).sort({'date': -1}).populate({
         path: 'comment',
         populate: [{path: 'publication', model: 'Publication'}, {path: 'author', model: 'User'}]
     }).exec((err, notifications) => {
+
         if(err){
             return res.json(err);
         }

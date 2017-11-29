@@ -63,7 +63,7 @@ app.controller('lastPublicationsController', ['$scope', '$http', 'toastr','socke
 
 }]);
 
-app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket', function ($scope, $http, toastr, socket) {
+app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket','$window', function ($scope, $http, toastr, socket, $window) {
 
     $scope.userId = "";
     $scope.lastPublications = [];
@@ -74,10 +74,23 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
     $scope.init = function () {
         $scope.getMyPublications();
     };
-
+    $scope.id = function(id){
+      $scope.publicationId = id;
+    };
+    $scope.delete = function(id) {
+      $http.post('delete/'+id).then(
+        function successCallback(){
+          console.log("okey");
+          $window.location.reload();
+        },
+        function errorCallback(error){
+          console.log(error);
+        }
+      );
+    };
     $scope.getMyPublications = function(){
-        $http.get('/publications/getMyPublications').success(data => {
-            $scope.lastPublications = data;
+        $http.get('getMyPublications').success(data => {
+            $scope.myPublications = data;
         }).error(err => {
             toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
         });
@@ -88,15 +101,15 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
         // });
     };
 
-    $scope.getCommentsCount = function(idPublication, index){
-        $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
-            $scope.lastPublications[index].commentsCount = data;
-        });
-    };
+    // $scope.getCommentsCount = function(idPublication, index){
+    //     $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
+    //         $scope.lastPublications[index].commentsCount = data;
+    //     });
+    // };
 
 }]);
 
-app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', function ($scope, $http, toastr, socket) {
+app.controller('profileController', ['$scope', '$http', 'toastr', 'socket','$window', function ($scope, $http, toastr, socket, $window) {
     $scope.userInfo = {};
 
     // socket.emit('newNotification');
@@ -104,6 +117,8 @@ app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', func
     $scope.init = function(){
         $scope.getMyProfile();
     };
+
+    $scope.img = 0;
 
     $scope.getMyProfile = function () {
         $http.get('/users/getMyProfile').success(data => {
@@ -117,23 +132,41 @@ app.controller('profileController', ['$scope', '$http', 'toastr', 'socket', func
         //     toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
         // });
     };
+    $scope.click= function(){
+      $scope.img++
+    }
 
     $scope.saveUser = function () {
         if($scope.password === $scope.confirmPassword){
-            $http({
-                url:'/users/updateMyProfile',
-                method:'POST',
-                data: {name:$scope.userInfo.name,
-                    password:$scope.password}
-            }).then(function(data){
-                if(data.err){
-                    toastr.error('Tu perfil no se actualizo correctamente', 'Error');
-                }
-                toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
-            });
-        }else{
-            toastr.error('Las contraseñas no coinciden', 'Error');
+        //     $http({
+        //         url:'updateMyProfile',
+        //         method:'POST',
+        //         data: {name:$scope.userInfo.name,
+        //             password:$scope.password}
+        //     }).then(function(data){
+        //         if(data.err){
+        //             toastr.error('Tu perfil no se actualizo correctamente', 'Error');
+        //         }
+        //         toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
+        //     });
+        // }else{
+        //     toastr.error('Las contraseñas no coinciden', 'Error');
+        // }
+
+        let formData = new FormData();
+        formData.append("name", $scope.userInfo.name);
+        formData.append("password", $scope.password);
+        if($scope.img > 0){
+          formData.append("profilePicture", document.querySelector("[name='profilePicture']").files[0]);
         }
+        let request = new XMLHttpRequest();
+        request.open('POST','updateMyProfile');
+        request.send(formData);
+        setTimeout(() => $window.location.reload(), 2000);
+        toastr.success('CORRECTAMENTE', 'Tu perfil se ha actualizado');
+      }else{
+       toastr.error('Las contraseñas no coinciden', 'Error');
+     }
     };
 }]);
 app.controller('newPublication',['$scope','$http', 'socket', function($scope, $http, socket){
@@ -160,6 +193,8 @@ app.controller('newPublication',['$scope','$http', 'socket', function($scope, $h
 
     $scope.newPost = function(publication){
 
+        let keys = Object.keys(publication);
+
         let state = $('#state').val();
 
       let formData = new FormData();
@@ -176,9 +211,22 @@ app.controller('newPublication',['$scope','$http', 'socket', function($scope, $h
       formData.append("img4", document.querySelector("[name='img4']").files[0]);
       formData.append("img5", document.querySelector("[name='img5']").files[0]);
 
+      $http.post("/publications/uploadPublication/2",formData,{
+        transformRequest: angular.identity,
+        headers:{'Content-Type':undefined}
+      })
+      .then(function successCallback(object) {
+        console.log(object);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+
+/*
+
       let request = new XMLHttpRequest();
       request.open('POST','/publications/uploadPublication/2');
-      request.send(formData);
+      request.setRequestHeader("enctype", "multipart/form-data");
+      request.send(formData);*/
 
       socket.emit('newPublication');
 
@@ -195,7 +243,18 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
     $scope.init = function (id) {
         $scope.id = id;
       $scope.vm.object.publication = id;
+      $scope.getData(id);
       $scope.getComments(id);
+    };
+
+    $scope.getData = function(id){
+        $scope.data = [];
+        $http.get('/publications/getData/' + id).success(data => {
+            $scope.data = data;
+            console.log(data);
+        }).error(err => {
+            console.log("ERROR", err);
+        });
     };
 
     // socket.emit('newNotification');
@@ -237,7 +296,6 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
             console.log("ERR",err);
           });
     };
-
 }]);
 
 
@@ -253,7 +311,7 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
     $scope.init = function(){
         $scope.getNotifications();
     };
-
+    //SE LANZA ERROR PORQUE NO EXISTE EN LA BASE DE DATOS notifications
     $scope.getLimitNotifications = function(){
         $http.get('/notifications/getLimit').success(data => {
             $scope.notifications = data;
@@ -284,6 +342,28 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
 
 }]);
 
+app.controller('editPublication',['$scope','$http', function($scope, $http){
+        $scope.publications = {};
+        $scope.init = function(publication){
+          publication = JSON.parse(publication);
+          console.log(publication);
+          let keys = Object.keys(publication);
+          for (var i = 0; i < keys.length; i++) {
+            console.log(keys[i]);
+            if(keys[i]=="date"){
+              let date = new Date(publication.date);
+              $scope.publications.date = new Date(date.getFullYear() +"-"+ date.getMonth() +"-"+ date.getDate());
+              console.log($scope.publications.date);
+            } else {
+              $scope.publications[keys[i]] = publication[keys[i]];
+
+            }
+          }
+        }
+        $scope.vm = {object:{
+          date : new Date()
+        }};
+    }]);
 app.controller('publicationByStateController', ['$scope','$http', 'socket', 'toastr','$location',function($scope, $http, socket, toastr, $location){
 
     // socket.emit('newNotification');

@@ -8,45 +8,78 @@ block content
       .img-header
       .black-cover
         p(class="title-class") Mis publicaciones
-    .cards.col-xs-12(ng-show="lastPublications.length > 0")
-      .card-container.col-md-4(ng-repeat="publication in lastPublications track by publication._id", ng-init="getCommentsCount(publication._id, $index)")
+    .cards.col-xs-12(ng-show="myPublications.length > 0")
+      .card-container.col-md-4(ng-repeat="myPublication in myPublications track by myPublication._id")
         .card-rect.col-xs-12
           .header.col-xs-12
-            label {{publication.state}}
-            label.pull-right {{publication.date | date}}
+            label {{myPublication.state}}
+            label.pull-right {{myPublication.date | date}}
+            //- a(href="/publications/edit/{{myPublication._id}}") Editar
+            //- a(data-toggle="modal", data-target=".register-modal", ng-click="id(myPublication[0]._id)") Eliminar
           .img-card
-            //aqui seria enviarlo mejor con angular
-            a(href='/publications/byId/{{publication._id}}')
-
-              img(ng-src='/publications/getImages/{{publication.imagePreview}}', height='100%')
+            a(href='/publications/byId/{{myPublication._id}}')
+              img(ng-src='/publications/getImages/{{myPublication.imagePreview}}', height='100%')
               div(class='ref-link')
                 .black-link
                   img(src='/images/logo.png', width='100%')
                   p Ver mas
           .info-container
-            .like-btn
-              div(class="")
-                i.fa.fa-heart(aria-hidden='true')
-                p(class='p-likes') 100 likes
-            .comment-btn
-              div(class="")
-                i.fa.fa-comment(aria-hidden='true')
-                p(class='p-likes') {{publication.commentsCount}} comentarios
-            label(class="title-card") {{publication.title}}
-            p(class="info-card") {{publication.content}}
+            a(href='/publications/edit/{{myPublication._id}}')
+                .edit-btn
+                    div(class="")
+                        i.fa.fa-pencil(aria-hidden='true')
+                        p(class='p-likes') Editar
+            a(href='#', data-toggle="modal", data-target="#deleteModal",ng-click="id(myPublication._id)")
+                .delete-btn
+                    div(class="")
+                        i.fa.fa-trash(aria-hidden='true')
+                        p(class='p-likes') Eliminar
+            label(class="title-card") {{myPublication.title}}
+            p(class="info-card") {{myPublication.content}}
             .user-autor
               .perfil-img
-                img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
-              p.col-xs-12.p-name {{publication.author.name}}
-              p.col-xs-12.p-date 14/01/2017
+                img(src=`/publications/getImages/${user.profilePicture}`, height='100%', width='100%')
+              p.col-xs-12.p-name {{myPublication.author.name}}
+              p.col-xs-12.p-date {{myPublication.postDate | date}}
     .fixed-action-btn(style='bottom: 45px; right: 24px;')
       a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
         i.fa.fa-angle-up.icon-go-top
-
-    .col-xs-12.text-align-c(ng-show="lastPublications.length == 0")
+    .col-xs-12.text-align-c(ng-show="myPublications.length == 0")
       .empty-state-holder
         img(src='/images/pedroSad.png')
         p Achis achis los mariachis, esto esta mas vacío que un desierto!
         p puedes hacer
           a(href='/publications/new/publication') clic aquí
           | para crear una nueva publicación
+    #deleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+      .modal-dialog(role='document')
+          .modal-content
+              .modal-header.red.lighten-1
+                  h5#exampleModalLabel.modal-title.color-white BORRAR PUBLICACION
+              .modal-body
+                  .text-align-c.font-delete-modal
+                      | Seguro que quieres eliminar tu publicación?
+                  .text-align-c.m-b-40.m-t-40
+                      img(src='/images/pedroSad.png', class='w-145px')
+              .modal-footer
+                  a.btn.btn-secondary.grey(type='button', data-dismiss='modal') CERRAR
+                  a.btn.btn-danger.red.lighten-1(type='button',ng-click="delete(publicationId)") ELIMINAR
+    //- .modal.fade.register-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+    //-   .modal-dialog.modal-lg
+    //-     .modal-content
+    //-       .modal-header
+    //-         button.close(type='button', data-dismiss='modal', aria-label='Close')
+    //-           span(aria-hidden='true') ×
+    //-         h4#gridSystemModalLabel.modal-title ¡ESPERA!
+    //-       .modal-body
+    //-         .body-message.col-xs-12
+    //-           .col-xs-12.col-md-4.text-align-c
+    //-             img.max-w-260(src="/images/pedroSad.png")
+    //- 
+    //-           .col-xs-12.col-md-8.material-input.text-align-c
+    //-             input-field.col.s6
+    //-               label.l-style EPA'! ESTAS A PUNTO DE ELIMINAR UNA PUBLICACION Y DEJAR DE SER PARTE DE NUESTRA HISTORIA, ¿ESTAS SEGURO?
+    //- 
+    //- 
+    //-             .col-xs-12.text-center
+    //-               a.waves-effect.waves-light.btn(ng-click="delete(publicationId)") ELIMINAR

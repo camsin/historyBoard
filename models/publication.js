@@ -17,7 +17,8 @@ var publicationSchema = schema({
 	date: {type: Date, required:true},
 	content: {type:String, required:true},
 	imageSlider: [{type: schema.ObjectId, ref: 'Image', required:true}],
-	author: {type: schema.ObjectId, ref: 'User', required:true}
+	author: {type: schema.ObjectId, ref: 'User', required:true},
+	postDate: {type: Date, required:true}
  });
 
 let Publication = mongoose.model('Publication',publicationSchema);

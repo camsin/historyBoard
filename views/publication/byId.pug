@@ -4,37 +4,37 @@ block content
 
   .home-page.col-xs-12(ng-controller="commentsController" ng-init=`init('${id}')`)
     .img-container
-      img(src=`/publications/getImages/${publication[0].imageBackground}`, alt='Smiley face', height='100%', width='100%')
+      img(ng-src="/publications/getImages/{{data.imageBackground}}", alt='Smiley face', height='100%', width='100%')
       .img-header
       .black-cover
-        p(class="title-class") #{publication[0].title} {{cosa}}
+        p(class="title-class") {{data.title}}
         a.like-press
           i.fa.fa-heart(aria-hidden='true')
-    .col-md-3
+    .col-md-3.col-xs-12
       .user-publication
-        a(href=`/publications/userPublications/${userData[0]._id}`, class='col-xs-12 text-align-c')
-          img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
+        a(href="/publications/userPublications/{{data.author._id}}", class='col-xs-12 text-align-c')
+          img.circle(ng-src="/publications/getImages/{{data.author.profilePicture}}")
         a(href='#!name',class='col-xs-12 text-align-c')
-          span.name-autor.m-t-25.col-xs-12   #{userData[0].name}
-          span.name-date.m-t-10.col-xs-12  12/03/2017
-
-    .col-md-9
+          span.name-autor.m-t-25.col-xs-12   {{data.author.name}}
+          span.name-date.m-t-10.col-xs-12  {{data.postDate | date}}
+            
+    .col-md-9.col-xs-12
       .article-container
-        label.label-article #{publication[0].title}
-        p.text-container #{publication[0].content}
+        label.label-article {{data.title}}
+        p.text-container {{data.content}}
     .col-xs-12.carousel-cont.article-container.m-b-70.m-t-30.z-index-9
       .carousel
         a.carousel-item(href='#one!')
           //`/users/show/${user._id}`
-          img(src=`/publications/getImages/${publication[0].imageSlider[0]}`, class="materialboxed")
+          img(ng-src="/publications/getImages/{{data.imageSlider[0]}}", class="materialboxed")
         a.carousel-item(href='#two!')
-          img(src=`/publications/getImages/${publication[0].imageSlider[1]}`, class="materialboxed")
+          img(ng-src="/publications/getImages/{{data.imageSlider[1]}}", class="materialboxed")
         a.carousel-item(href='#three!')
-          img(src=`/publications/getImages/${publication[0].imageSlider[2]}`, class="materialboxed")
+          img(ng-src="/publications/getImages/{{data.imageSlider[2]}}", class="materialboxed")
         a.carousel-item(href='#four!')
-          img(src=`/publications/getImages/${publication[0].imageSlider[3]}`, class="materialboxed")
+          img(ng-src="/publications/getImages/{{data.imageSlider[3]}}", class="materialboxed")
         a.carousel-item(href='#five!')
-          img(src=`/publications/getImages/${publication[0].imageSlider[4]}`, class="materialboxed")
+          img(ng-src="/publications/getImages/{{data.imageSlider[4]}}", class="materialboxed")
     .fixed-action-btn(style='bottom: 45px; right: 24px;')
       a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
         i.fa.fa-angle-up.icon-go-top
