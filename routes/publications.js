@@ -55,13 +55,16 @@ router.post('/saveEdit/:id', isLoggedIn, type, publicationsController.saveEdit);
 // });
 
 // nueva publication
-    router.get('/new/:content', isLoggedIn, publicationsController.newPublication);
+    router.get('/new', isLoggedIn, publicationsController.newPublication);
 
 //Mis publications
 router.get('/myPublications',isLoggedIn,  publicationsController.myPublications);
 router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
 
     //router.get('/getMyPublications', isLoggedIn, publicationsController.getMyPublications);
+
+//likes
+    router.post('/updatelikes/:idPublicacion', isLoggedIn, publicationsController.updateLikes);
 
 //Publicaciones por usuario especifico
     router.get('/userPublications/:id', isLoggedIn, publicationsController.userPublications);

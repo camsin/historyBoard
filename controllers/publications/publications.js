@@ -22,23 +22,15 @@ function byDate(req, res, next) {
 };
 
 function lastPublications(req, res, next) {
-    //res.render('publications/lastPublications', {showSideNav: true, user: req.user});
-      // if(req.user.profilePicture === undefined){
-      //   User.update({"_id": req.user._id},{$set:{"profilePicture": img}},{multi:true},
-      //   function(err, numberAffected){
-      //   });
-      // }
-      res.render('publications/lastPublications', {showSideNav: true, user: req.user});
-
+    res.render('publications/lastPublications', {showSideNav: true, user: req.user});
 };
 
 function getMyPublications(req, res, next) {
-    Publication.find({"author": req.user._id}).populate('author').exec((err, publication) => {
+    Publication.find({"author": req.user._id}).populate('author').exec((err, publications) => {
         if (err) {
             return res.json(err);
         }
-        console.log(publication);
-        return res.json(publication);
+        return res.json(publications);
     });
 };
 
@@ -78,7 +70,7 @@ function getData(req, res, next) {
 };
 
 function newPublication(req, res, next) {
-    res.render('publication/new', {showSideNav: true, contenido: req.params.content, user: req.user, enumEstados: enumEstados});
+    res.render('publication/new', {showSideNav: true, user: req.user, enumEstados: enumEstados});
 };
 
 function myPublications(req, res, next) {
@@ -155,7 +147,6 @@ function getImages(req, res, next) {
 };
 
 function newComment(req, res, next) {
-  console.log(req.body);
     let comment = new Comment({
       publication: req.body.publication,
       date: req.body.date,
@@ -264,7 +255,7 @@ function getPublicationsByState(req, res, next){
 function userPublications(req, res, next){
     res.render('publications/userPublications', {showSideNav: true, user: req.user, idUsuario:req.params.id});
 
-}
+};
 
 function getUserPublications(req, res, next){
     Publication.find({"author": req.params.id}).populate('author').exec((err, publications) => {
@@ -363,7 +354,15 @@ function saveEdit(req, res, next){
                                 console.log("AHUEVO");
                             });
       }
-
+};
+function updateLikes(req, res, next){
+    Publication.update({"_id": req.params.idPublicacion},{$set:{"likes": req.body.likes}}, function (err) {
+        if (err) {
+            return res.json({error: true, message: err});
+        } else {
+            return res.json({error: false, message: ""});
+        }
+    });
 };
 
 
@@ -388,5 +387,6 @@ module.exports = {
     getData,
     userPublications,
     getUserPublications,
-    saveEdit
+    saveEdit,
+    updateLikes
 };

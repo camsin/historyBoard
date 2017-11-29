@@ -11,7 +11,6 @@ var userSchema = schema({
     profilePicture : {type: schema.ObjectId, ref: 'Image'},
     socialNetworks: {
         facebook: {},
-        twitter: {},
         google: {}
     },
     provider: String

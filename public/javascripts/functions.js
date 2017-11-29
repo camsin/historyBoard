@@ -86,3 +86,7 @@ $('.fixed-action-btn').each(function(){
         return false;
     });
 });
+//
+// $(".like-press").click(function(){
+//     $(this).addClass("like-press-click");
+// });
