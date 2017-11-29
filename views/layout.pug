@@ -69,7 +69,7 @@ html(ng-app="historyBoardApp")
                 .background
                   img(src='/images/sidenav-fondo.jpeg')
                 a(href='/users/myProfile', class='')
-                  img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
+                  img.circle(src=`/publications/getImages/${user.profilePicture}`)
                 a(href='/users/myProfile', class='name-sidenav')
                   span.white-text.name #{user.name}
                 a(href='/users/myProfile', class='perfil-boton')

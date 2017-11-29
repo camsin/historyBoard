@@ -8,7 +8,7 @@ block content
             .black-cover
                 .user-publication
                     a( class='col-xs-12 text-align-c img-perfil-container')
-                        img.circle(src='http://images6.fanpop.com/image/photos/40400000/Gal-Gadot-Erroca-Eyewear-Photoshoot-2017-gal-gadot-40483303-500-500.jpg')
+                        img.circle(src='/publications/getImages/{{userInfo.profilePicture}}')
                     p(class="name-class-perfil") {{userInfo.name}}
         .cards.col-xs-12(ng-show="userPublications.length > 0")
             .card-container.col-md-4(ng-repeat="publication in userPublications track by publication._id", ng-init="getCommentsCount(publication._id, $index)")
@@ -38,9 +38,9 @@ block content
                         p(class="info-card") {{publication.content}}
                         .user-autor
                             .perfil-img
-                                img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
+                                img(src='/publications/getImages/{{userInfo.profilePicture}}', height='100%', width='100%')
                             p.col-xs-12.p-name {{publication.author.name}}
-                            p.col-xs-12.p-date 14/01/2017
+                            p.col-xs-12.p-date {{publication.postDate | date}}
         .fixed-action-btn(style='bottom: 45px; right: 24px;')
             a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
                 i.fa.fa-angle-up.icon-go-top

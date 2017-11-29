@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
+const Image = require('./image');
 const bcrypt = require('bcrypt-nodejs');
 const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -7,13 +8,13 @@ var userSchema = schema({
     name: String,
     password: String,
     email: String,
+    profilePicture : {type: schema.ObjectId, ref: 'Image'},
     socialNetworks: {
         facebook: {},
         twitter: {},
         google: {}
     },
     provider: String
-
 });
 
 class UserClass{
