@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const User = mongoose.model('User');
 const Image = require('./image');
-const enumEstados = ['Aguascalientes','Baja California','Baja California Sur', 'Campeche', 'Coahuila de Zaragoza', 'Colima',
-	'Chiapas', 'Chihuahua', 'Distrito Federal', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'México',
-		'Michoacán de Ocampo', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo',
-		'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz de Ignacio de la Llave',
-		'Yucatán', 'Zacatecas'];
+const enumEstados = ['Aguascalientes','BajaCalifornia','BajaCaliforniaSur', 'Campeche', 'Coahuila', 'Colima',
+	'Chiapas', 'Chihuahua', 'DF', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Mexico',
+		'Michoacan', 'Morelos', 'Nayarit', 'NuevoLeon', 'Oaxaca', 'Puebla', 'Queretaro', 'QuintanaRoo',
+		'SanLuisPotosi', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz',
+		'Yucatan', 'Zacatecas'];
 
 
 var publicationSchema = schema({
