@@ -6,7 +6,11 @@ const Image = require('./../models/image.js');
 const fs = require('fs');
 
 router.get('/', (req, res, next) => {
-    res.render('login', {showSideNav: false, error: req.flash('error')});
+    if(req.user){
+        res.render('publications/lastPublications', {showSideNav: true, user: req.user});
+    }else{
+        res.render('login', {showSideNav: false, error: req.flash('error')});
+    }
 });
 
 router.post('/login', passport.authenticate('local-login', {
@@ -67,11 +71,8 @@ router.post('/registrar', function (req, res) {
                         if(err) {
                             res.render('login', {object: user, error: "Please complete all the fields"});
                         }else{
-                            res.redirect("/publications/lastPublications");
+                            res.redirect("/");
                         }
-                            //         let emailUtilities = new EmailUtilities(user.email, "Welcome email");
-                            // emailUtilities.sendWelcomeEmail(user.id);
-
                     });
                 }else{
                     res.render('login', {object: user, error: "Passwords are not equals."});
