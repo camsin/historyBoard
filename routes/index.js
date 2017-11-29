@@ -17,9 +17,8 @@ router.post('/login', passport.authenticate('local-login', {
 
 
 router.get('/logout', (req, res) => {
-    req.session.destroy(function (err) {
-    res.redirect('/'); 
-});
+    req.logout();
+    res.redirect('/');
 });
 
 router.get('/auth/facebook', passport.authenticate('facebook', {

@@ -154,7 +154,7 @@ passport.deserializeUser(function(id, done) {
  * Revisa si existe un user logueado a la aplicación, en caso de no existir redireciona al inicio de sesión.
  */
 function isLoggedIn(req, res, next) {
-    if (req.user.authenticated){
+    if (req.user){
         return next();
     } else {
         res.redirect('/');

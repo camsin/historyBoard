@@ -26,7 +26,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // required for passport
-app.use(session({ secret: 'mexicohistoryboard', cookie : { secure: false },resave:false,
+app.use(session({ secret: 'mexicohistoryboard',resave:false,
     saveUninitialized: false
 })); // session secret
 app.use(passport.initialize());
