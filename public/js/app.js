@@ -89,7 +89,7 @@ app.controller('myPublicationsController', ['$scope', '$http', 'toastr', 'socket
       );
     };
     $scope.getMyPublications = function(){
-        $http.get('getMyPublications').success(data => {
+        $http.get('/publications/getMyPublications').success(data => {
             $scope.myPublications = data;
         }).error(err => {
             toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
@@ -235,6 +235,7 @@ app.controller('newPublication',['$scope','$http', 'socket', function($scope, $h
 
 app.controller('commentsController', ['$scope', '$http','socket', function ($scope, $http, socket) {
 
+    $scope.likes = 0;
     $scope.vm = {object:{
       date : new Date(),
     }};
@@ -296,6 +297,25 @@ app.controller('commentsController', ['$scope', '$http','socket', function ($sco
             console.log("ERR",err);
           });
     };
+
+    $scope.updateLikes = function (idPublicacion) {
+        console.log('id de la publicacion', idPublicacion);
+        $scope.likes++;
+        console.log('id de la publicacion aumentada', $scope.likes);
+
+        $http({
+           method: 'POST',
+            url: '/publications/updatelikes/'+ idPublicacion,
+            data: {likes: $scope.likes}
+        }).then(function successCallback(res) {
+            },function errorCallback(err) {
+                console.log("ERR",err);
+
+        });
+    };
+
+
+
 }]);
 
 
@@ -311,7 +331,7 @@ app.controller('notificationController', ['$scope', '$http','socket','$window', 
     $scope.init = function(){
         $scope.getNotifications();
     };
-    //SE LANZA ERROR PORQUE NO EXISTE EN LA BASE DE DATOS notifications
+
     $scope.getLimitNotifications = function(){
         $http.get('/notifications/getLimit').success(data => {
             $scope.notifications = data;
@@ -364,6 +384,7 @@ app.controller('editPublication',['$scope','$http', function($scope, $http){
           date : new Date()
         }};
     }]);
+
 app.controller('publicationByStateController', ['$scope','$http', 'socket', 'toastr','$location',function($scope, $http, socket, toastr, $location){
 
     // socket.emit('newNotification');
@@ -421,3 +442,64 @@ app.controller('userPublicationsController', ['$scope', '$http', 'toastr', funct
 
 
 }]);
+
+app.controller('publicationsByDateController', ['$scope', '$http', 'toastr', function($scope, $http, toastr){
+
+    $scope.init = function(){
+        $scope.getAllPublications();
+    };
+
+    $scope.getAllPublications = function(){
+        $http.get('/publications/getAllPublications').success(data => {
+            $scope.publications = data;
+    }).error(err => {
+            toastr.error('Hubo un error obteniendo publicaciones', 'Error');
+    });
+    };
+
+    // $scope.getCommentsCount = function(idPublication, index){
+    //     $http.get('/publications/getCommentsCount/'+ idPublication).success(data => {
+    //         $scope.userPublications[index].commentsCount = data;
+    // });
+    // };
+
+}]);
+
+// parse a date in dd-mm-yyyy format
+function parseDate(input) {
+    console.log("INPUT", input);
+    var parts = input.split('-');
+    // Note: months are 0-based
+    return new Date(parts[2], parts[1]-1, parts[0]);
+}
+
+app.filter("myfilter", function($filter) {
+    return function(items, from) {
+        console.log("ITEMS", items);
+        console.log("FROM", from);
+        // var df = parseDate(from);
+        // var dt = parseDate(to);
+        var publications = [];
+        if(!from){
+            publications = items;
+            return publications;
+        }else{
+            for (var i=0; i<items.length; i++){
+                var tf = new Date(items[i].date);
+                // tt = new Date($filter('date')(items[i].date, "dd-MM-yyyy"));
+                var year = tf.getFullYear();
+                console.log("TF", tf);
+                console.log("YEAR", year);
+                if (parseInt(from) === year)  {
+                    console.log("SON IGUALES");
+                    publications.push(items[i]);
+                }
+            }
+
+            // console.log("ARRAY TO RETURN", arrayToReturn);
+
+            return publications;
+
+        }
+    };
+});

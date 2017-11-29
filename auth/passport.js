@@ -57,8 +57,7 @@ passport.use('google', new GoogleStrategy({
                             });
                             img.save();
                             user = new User({
-                                name: profile.name.givenName,
-                                lastName: profile.name.familyName,
+                                name: profile.name.givenName + ' ' + profile.name.familyName,
                                 email: profile.emails[0].value,
                                 profilePicture: img._id,
                                 provider:'google',
@@ -114,8 +113,7 @@ passport.use('facebook', new FacebookStrategy({
                             });
                             img.save();
                             user = new User({
-                                name: profile.name.givenName,
-                                lastName: profile.name.familyName,
+                                name: profile.name.givenName + ' ' + profile.name.familyName,
                                 email: profile.emails[0].value,
                                 provider:'facebook',
                                 profilePicture: img._id,

@@ -29,7 +29,7 @@ block content
             .like-btn
               div(class="")
                 i.fa.fa-heart(aria-hidden='true')
-                p(class='p-likes') 100 likes
+                p(class='p-likes') {{publication.likes}} like(s)
             .comment-btn
               div(class="")
                 i.fa.fa-comment(aria-hidden='true')
@@ -50,5 +50,5 @@ block content
         img(src='/images/pedroSad.png')
         p Achis achis los mariachis, esto esta mas vacío que un desierto!
         p puedes hacer
-          a(href='/publications/new/publication') clic aquí
+          a(href='/publications/new') clic aquí
           | para crear una nueva publicación

@@ -3,7 +3,7 @@ extends ../layout
 block content
 
 
-  .home-page.col-xs-12
+  .home-page.col-xs-12(ng-controller="publicationsByDateController", ng-init="init()")
     .img-container
       //img(src='/images/plaza.jpg', alt='Smiley face', height='100%', width='100%')
       .img-header
@@ -14,154 +14,48 @@ block content
         .row
           .input-field.col.s10.m-l-8pct.m-t-60
             i.prefix.fa.fa-search
-            input#icon_prefix.validate(type='text')
-            label(for='icon_prefix') Fecha
+            input#icon_prefix1(type='text' ng-model="dateFrom")
     .fixed-action-btn(style='bottom: 45px; right: 24px;')
       a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
         i.fa.fa-angle-up.icon-go-top
-    .cards.col-xs-12
-      .card-container.col-md-4
+    .cards.col-xs-12(ng-show="filterData.length > 0")
+      .card-container.col-md-4(ng-repeat="publication in filterData = (publications | myfilter:dateFrom)")
         .card-rect.col-xs-12
           .header.col-xs-12
-            label Chihuahua
-            label.pull-right 11/05/1970
+            label {{publication.state}}
+            label.pull-right {{publication.date | date}}
           .img-card
-            a(href='#')
+            //aqui seria enviarlo mejor con angular
+            a(href='/publications/byId/{{publication._id}}')
 
-              img(src='/images/plaza.jpg', height='100%')
+              img(ng-src='/publications/getImages/{{publication.imagePreview}}', height='100%')
               div(class='ref-link')
                 .black-link
                   img(src='/images/logo.png', width='100%')
                   p Ver mas
           .info-container
-            .like-btn
-              div(class="")
-                i.fa.fa-heart(aria-hidden='true')
-                p(class='p-likes') 100 likes
-            .comment-btn
-              div(class="")
-                i.fa.fa-comment(aria-hidden='true')
-                p(class='p-likes') 100 comentarios
-            label(class="title-card") La Triple Alianza y los señorios independientes
-            p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
+            //.like-btn
+            //  div(class="")
+            //    i.fa.fa-heart(aria-hidden='true')
+            //    p(class='p-likes') {{publication.like}} likes
+            //.comment-btn
+            //  div(class="")
+            //    i.fa.fa-comment(aria-hidden='true')
+            //    p(class='p-likes') {{publication.commentsCount}} comentarios
+            label(class="title-card") {{publication.title}}
+            p(class="info-card") {{publication.content}}
             .user-autor
               .perfil-img
                 img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
-              p.col-xs-12.p-name Ararat Mendez
+              p.col-xs-12.p-name {{publication.author.name}}
               p.col-xs-12.p-date 14/01/2017
-      .card-container.col-md-4
-        .card-rect.col-xs-12
-          .header.col-xs-12
-            label Chihuahua
-            label.pull-right 11/05/1970
-          .img-card
-            a(href='#')
-
-              img(src='/images/plaza.jpg', height='100%')
-              div(class='ref-link')
-                .black-link
-                  img(src='/images/logo.png', width='100%')
-                  p Ver mas
-          .info-container
-            .like-btn
-              div(class="")
-                i.fa.fa-heart(aria-hidden='true')
-                p(class='p-likes') 100 likes
-            .comment-btn
-              div(class="")
-                i.fa.fa-comment(aria-hidden='true')
-                p(class='p-likes') 100 comentarios
-            label(class="title-card") La Triple Alianza y los señorios independientes
-            p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-            .user-autor
-              .perfil-img
-                img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
-              p.col-xs-12.p-name Ararat Mendez
-              p.col-xs-12.p-date 14/01/2017
-      .card-container.col-md-4
-        .card-rect.col-xs-12
-          .header.col-xs-12
-            label Chihuahua
-            label.pull-right 11/05/1970
-          .img-card
-            a(href='#')
-
-              img(src='/images/plaza.jpg', height='100%')
-              div(class='ref-link')
-                .black-link
-                  img(src='/images/logo.png', width='100%')
-                  p Ver mas
-          .info-container
-            .like-btn
-              div(class="")
-                i.fa.fa-heart(aria-hidden='true')
-                p(class='p-likes') 100 likes
-            .comment-btn
-              div(class="")
-                i.fa.fa-comment(aria-hidden='true')
-                p(class='p-likes') 100 comentarios
-            label(class="title-card") La Triple Alianza y los señorios independientes
-            p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-            .user-autor
-              .perfil-img
-                img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
-              p.col-xs-12.p-name Ararat Mendez
-              p.col-xs-12.p-date 14/01/2017
-      .card-container.col-md-4
-        .card-rect.col-xs-12
-          .header.col-xs-12
-            label Chihuahua
-            label.pull-right 11/05/1970
-          .img-card
-            a(href='#')
-
-              img(src='/images/plaza.jpg', height='100%')
-              div(class='ref-link')
-                .black-link
-                  img(src='/images/logo.png', width='100%')
-                  p Ver mas
-          .info-container
-            .like-btn
-              div(class="")
-                i.fa.fa-heart(aria-hidden='true')
-                p(class='p-likes') 100 likes
-            .comment-btn
-              div(class="")
-                i.fa.fa-comment(aria-hidden='true')
-                p(class='p-likes') 100 comentarios
-            label(class="title-card") La Triple Alianza y los señorios independientes
-            p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-            .user-autor
-              .perfil-img
-                img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
-              p.col-xs-12.p-name Ararat Mendez
-              p.col-xs-12.p-date 14/01/2017
-      .card-container.col-md-4
-        .card-rect.col-xs-12
-          .header.col-xs-12
-            label Chihuahua
-            label.pull-right 11/05/1970
-          .img-card
-            a(href='#')
-
-              img(src='/images/plaza.jpg', height='100%')
-              div(class='ref-link')
-                .black-link
-                  img(src='/images/logo.png', width='100%')
-                  p Ver mas
-          .info-container
-            .like-btn
-              div(class="")
-                i.fa.fa-heart(aria-hidden='true')
-                p(class='p-likes') 100 likes
-            .comment-btn
-              div(class="")
-                i.fa.fa-comment(aria-hidden='true')
-                p(class='p-likes') 100 comentarios
-            label(class="title-card") La Triple Alianza y los señorios independientes
-            p(class="info-card") La triple alianza fueron formados por Tenochtitlan, Tlacopan y Texcoco. Formaron la útima confederación ubicados en el valle de México.
-            .user-autor
-              .perfil-img
-                img(src='https://www.debate.com.mx/__export/1483142977600/sites/debate/img/2016/12/30/princess-leia.jpg_1810791533.jpg', height='100%', width='100%')
-              p.col-xs-12.p-name Ararat Mendez
-              p.col-xs-12.p-date 14/01/2017
+    .fixed-action-btn(style='bottom: 45px; right: 24px;')
+      a.btn-floating.btn-large.bgm-blue.tippy-up(href="#", title="Ir hacia arriba")
+        i.fa.fa-angle-up.icon-go-top
+    .col-xs-12.text-align-c(ng-show="filterData.length == 0")
+      .empty-state-holder
+        img(src='/images/pedroSad.png')
+        p Achis achis los mariachis, esto esta mas vacío que un desierto!
+        p puedes hacer
+          a(href='/publications/new') clic aquí
+          | para crear una nueva publicación
