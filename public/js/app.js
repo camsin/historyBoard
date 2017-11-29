@@ -346,9 +346,7 @@ app.controller('editPublication',['$scope','$http', function($scope, $http){
   // $scope.reload = function(){
   //     $('select').material_select();
   // };
-        $scope.vm = {object:{
-          date : new Date()
-        }};
+
         $scope.publications = {};
         $scope.estados = ['Aguascalientes','Baja California','Baja California Sur', 'Campeche', 'Coahuila de Zaragoza', 'Colima',
             'Chiapas', 'Chihuahua', 'Distrito Federal', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'México',
@@ -359,17 +357,13 @@ app.controller('editPublication',['$scope','$http', function($scope, $http){
         $scope.init = function(publication){
           //$scope.reload();
           publication = JSON.parse(publication);
-          console.log(publication);
           let keys = Object.keys(publication);
           for (var i = 0; i < keys.length; i++) {
-            console.log(keys[i]);
             if(keys[i]=="date"){
               let date = new Date(publication.date);
               $scope.publications.date = new Date(date.getFullYear() +"-"+ date.getMonth() +"-"+ date.getDate());
-              console.log($scope.publications.date);
             } else {
               $scope.publications[keys[i]] = publication[keys[i]];
-
             }
           }
         }
