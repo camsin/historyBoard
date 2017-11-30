@@ -16,11 +16,15 @@ passport.use('local-login', new LocalStrategy({
             if (err) { return done(err); }
             if (!user) {
                 return done(null, false, { message: 'Incorrect username.' });
+            }else{
+                if(user.password === undefined){
+                    return done(null, false, { message: 'No cuentas con una contraseña asignada.' });
+                }
+                if (!user.validatePass(password)) {
+                    return done(null, false, { message: 'Incorrect password.' });
+                }
+                return done(null, user);
             }
-            if (!user.validatePass(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, user);
         });
     }
 ));
