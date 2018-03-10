@@ -30,7 +30,7 @@ io.attach(server);
 
 /* Database connection */
 
-mongoose.connect("mongodb://camendez:123qwe@ds123956.mlab.com:23956/history-board",{
+mongoose.connect("mongodb://localhost/historyBoard",{
   useMongoClient: true
 });
 
@@ -108,3 +108,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+server.close();
