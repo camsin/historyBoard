@@ -18,7 +18,7 @@ block content
         .row.col-xs-12
           .input-field.col.s12(name=title)
             label.active.label-act(for='title') Nombre
-            input#title.validate(type='text', placeholder, value="{{userInfo.name}}", name="name", ng-model="userInfo.name")
+            input#title.validate.name-change-test(type='text', placeholder, value="{{userInfo.name}}", name="name", ng-model="userInfo.name")
         .row.col-xs-12
           .input-field.col.s12(name=email)
             label.active.label-act(for='title') Correo
@@ -26,18 +26,18 @@ block content
         .row.col-xs-12
           .input-field.col.s12(name=newPassword)
             label.active.label-act(for='title') Nueva Contraseña
-            input#title.validate(type='password', placeholder, name="password", ng-model="password")
+            input#title.validate.new-psw-change-test(type='password', placeholder, name="password", ng-model="password")
         .row.col-xs-12
           .input-field.col.s12(name=confirmPassword)
             label.active.label-act(for='title') Confirma Contraseña
-            input#title.validate(type='password', placeholder, ng-model="confirmPassword")
+            input#title.validate.confirm-new-psw-change-test(type='password', placeholder, ng-model="confirmPassword")
         .col-xs-12
           form.col-md-12(action='#')
             p.description-p Nueva imagen de perfil
             .file-field.input-field
               .btn
                 span Img
-                input(name="profilePicture",type='file',ng-click="click()")
+                input.img-change-test(name="profilePicture",type='file',ng-click="click()")
               .file-path-wrapper
                 input.file-path.validate(type='text')
         .col-xs-12.text-center.m-t-30
