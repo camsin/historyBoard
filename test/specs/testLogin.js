@@ -114,7 +114,7 @@ describe('Pruebas de Registrarse y Entrar',function(){
 describe('Pruebas de actualizar perfil',function(){
     browser.url('http://localhost:3000/publications/lastPublications');
 
-    //Prueba de intentar ingresar con datos correctos
+    //Prueba de cambiar info sin llenar datos
     it('Prueba de no llenar datos. Debe salir toast de error',function(){
         if(browser.isExisting('.home-page')){
 
@@ -439,6 +439,7 @@ describe('Pruebas de publicacion',function(){
             browser.waitForVisible('.register-modal', 10000);
             browser.click('.btn-public-now-test');
             browser.waitForExist('.home-test',10000);
+            browser.pause(2000);
             // browser.waitForExist('#toast-container',10000);
             // expect(browser.getText('.toast-success')).to.be.equal('Tu publicacion fue guardada exitosamente');
             // expect(browser.getText('.toast-message')).to.be.equal('Llena todos los campos');
@@ -446,6 +447,24 @@ describe('Pruebas de publicacion',function(){
         }
     });
 
+    //Prueba de eliminar publicacion :c
+    it('Prueba de eliminar publicacion. Debe salir toast de success',function(){
+        if(browser.isExisting('.home-page')){
+
+            browser.click('#hamburguer');
+            browser.pause(1000);
+            browser.click('.misPublicacionesTest');
+            browser.waitForVisible('.delete-test', 10000);
+            browser.click('.delete-btn');
+            browser.waitForVisible('#deleteModal', 10000);
+            browser.click('.btn-danger');
+            browser.waitForExist('.toast-success',10000);
+            expect(browser.getText('.toast-success')).to.be.equal('Tu publicacion fue eliminada :(');
+            browser.click('.home-test');
+            browser.pause(3000);
+
+        }
+    });
 
 
 });
