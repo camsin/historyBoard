@@ -23,7 +23,7 @@ block content
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="preview",required)
+              input#preview(type='file',name="preview",required)
             .file-path-wrapper
               input.file-path.validate(type='text',required)
         .col-md-6
@@ -31,11 +31,11 @@ block content
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="head", ng-model="vm.object.head", required)
+              input#head(type='file',name="head", ng-model="vm.object.head", required)
             .file-path-wrapper
               input.file-path.validate(type='text')
       .row.col-xs-12.m-t-15
-        .input-field.col.s12
+        .input-field.col.s12.estado-test
           label.active.label-act(for='state') De qué estado de México es tu publicación?
           select(ng-model="vm.object.state", name='state', id="state")
             option(value='', disabled='', selected='') Selecciona tu estado
@@ -57,35 +57,35 @@ block content
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img1",ng-model="vm.object.img1",required)
+              input#img1(type='file',name="img1",ng-model="vm.object.img1",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img2",ng-model="vm.object.img2",required)
+              input#img2(type='file',name="img2",ng-model="vm.object.img2",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img3",ng-model="vm.object.img3",required)
+              input#img3(type='file',name="img3",ng-model="vm.object.img3",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img4", ng-model="vm.object.img4",required)
+              input#img4(type='file',name="img4", ng-model="vm.object.img4",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
         .col-md-12.p-0
           .file-field.input-field
             .btn
               span Img
-              input(type='file',name="img5", ng-model="vm.object.img5",required)
+              input#img5(type='file',name="img5", ng-model="vm.object.img5",required)
             .file-path-wrapper
               input.file-path.validate(type='text')
       .col-xs-12.text-center.m-t-30
