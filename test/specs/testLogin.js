@@ -119,6 +119,8 @@ describe('Pruebas de actualizar perfil',function(){
         if(browser.isExisting('.home-page')){
 
             browser.click('#hamburguer');
+            browser.pause(1000);
+            browser.waitForVisible('.side-nav', 30000);
             browser.click('.perfil-boton');
             browser.waitForVisible('.name-change-test', 30000);
             browser.setValue('.name-change-test ','');
@@ -185,19 +187,59 @@ describe('Pruebas de actualizar perfil',function(){
 
     //Prueba de cambiar nombre
     it('Prueba de cambiar nombre',function(){
+        var toUpload = path.join(__dirname, '..', '..', 'fixtures', 'cat-to-upload.gif')
         if(browser.isExisting('.home-page')){
 
             browser.waitForVisible('.name-change-test', 30000);
             browser.setValue('.name-change-test ','Buffy');
             browser.setValue('.new-psw-change-test ','321');
             browser.setValue('.confirm-new-psw-change-test ','321');
-            browser.chooseFile('.img-change-test', path.resolve('./test/specs/', './img/doggo.jpg'));
+            browser.chooseFile('.img-change-test', path.resolve(__dirname, './img/doggo.jpg'));
             browser.click('.btn-primary');
             browser.waitForExist('#toast-container',30000);
             expect(browser.getText('.toast-success')).to.be.equal('Tu perfil se ha actualizado\nCORRECTAMENTE');
             browser.click('#toast-container');
+            // browser.pause(3000);
+            browser.click('#hamburguer');
+            // browser.pause(3000);
         }
     });
+
+});
+
+
+describe('Pruebas de publicacion',function(){
+    browser.url('http://localhost:3000/publications/lastPublications');
+
+    //Prueba de intentar publicar sin llenar los campos
+    it('Prueba de no llenar datos. Debe salir toast de warning',function(){
+        if(browser.isExisting('.container-nav')){
+            browser.click('.make-publication');
+            browser.waitForVisible('.publication-test', 30000);
+            browser.click('.btn-public-test');
+            browser.waitForVisible('.register-modal', 30000);
+            browser.click('.btn-public-now-test');
+            browser.waitForExist('#toast-container',30000);
+            expect(browser.getText('.toast-warning')).to.be.equal('Llena todos los campos');
+            browser.click('#toast-container');
+        }
+    });
+
+    //Prueba de intentar publicar llenando: titulo
+    // it('Prueba de llenar: titulo. Debe salir toast de warning',function(){
+    //     if(browser.isExisting('.container-nav')){
+    //         browser.waitForVisible('.titulo-test', 30000);
+    //         browser.setValue('.titulo-test','Soy un titulo de prueba');
+    //         browser.click('.btn-public-test');
+    //         browser.waitForVisible('.register-modal', 30000);
+    //         browser.click('.btn-public-now-test');
+    //         browser.waitForExist('#toast-container',30000);
+    //         expect(browser.getText('.toast-message')).to.be.equal('Llena todos los campos');
+    //         browser.click('#toast-container');
+    //     }
+    // });
+
+
 
 });
 
