@@ -199,9 +199,32 @@ describe('Pruebas de actualizar perfil',function(){
             browser.waitForExist('#toast-container',10000);
             expect(browser.getText('.toast-success')).to.be.equal('Tu perfil se ha actualizado\nCORRECTAMENTE');
             browser.click('#toast-container');
+            browser.pause(4000);
+            // browser.click('#hamburguer');
             // browser.pause(3000);
+        }
+    });
+
+    //Prueba de cerrar sesion
+    it('Prueba de cerrar sesion',function(){
+        if(browser.isExisting('.home-page')){
             browser.click('#hamburguer');
-            // browser.pause(3000);
+            browser.pause(1000);
+            browser.click('.logout-test');
+            browser.pause(1000);
+        }
+    });
+
+    //Prueba de intentar ingresar con nueva contra
+    it('Debe entrar al home si el login es correcto',function(){
+        if(browser.isExisting('.login-view')){
+            browser.click('.btn-white');
+            browser.waitForVisible('.login-modal', 10000);
+            browser.setValue('.email-login-test ','willow@gmail.com');
+            browser.setValue('.password-login-test ','321');
+            browser.click('.btn-primary');
+            browser.waitForVisible('.home-page', 10000);
+            browser.pause(1000);
         }
     });
 
@@ -239,7 +262,7 @@ describe('Pruebas de publicacion',function(){
         }
     });
 
-    //Prueba de intentar publicar llenando: titulo
+    //Prueba de intentar publicar llenando: titulo y estado
     it('Prueba de llenar solo: titulo, estado. Debe salir toast de warning',function(){
         if(browser.isExisting('.home-page')){
             browser.waitForVisible('.titulo-test', 10000);
@@ -278,6 +301,7 @@ describe('Pruebas de publicacion',function(){
 
     //Prueba de publicar subiendo 1 imagen
     it('Prueba de publicar subiendo 1 imagen. Debe salir toast de warning',function(){
+        // browser.refresh();
         if(browser.isExisting('.container-nav')){
             browser.waitForVisible('.titulo-test', 10000);
             browser.setValue('.titulo-test','Soy un titulo de prueba');
@@ -299,6 +323,7 @@ describe('Pruebas de publicacion',function(){
 
     //Prueba de publicar subiendo 2 imagenes
     it('Prueba de publicar subiendo 2 imagenes. Debe salir toast de warning',function(){
+        browser.refresh();
         if(browser.isExisting('.container-nav')){
             browser.waitForVisible('.titulo-test', 10000);
             browser.setValue('.titulo-test','Soy un titulo de prueba');
@@ -321,6 +346,7 @@ describe('Pruebas de publicacion',function(){
 
     //Prueba de publicar subiendo 3 imagenes
     it('Prueba de publicar subiendo 3 imagenes. Debe salir toast de warning',function(){
+        browser.refresh();
         if(browser.isExisting('.container-nav')){
             browser.waitForVisible('.titulo-test', 10000);
             browser.setValue('.titulo-test','Soy un titulo de prueba');
@@ -344,6 +370,7 @@ describe('Pruebas de publicacion',function(){
 
     //Prueba de publicar subiendo 4 imagenes
     it('Prueba de publicar subiendo 4 imagenes. Debe salir toast de warning',function(){
+        browser.refresh();
         if(browser.isExisting('.container-nav')){
             browser.waitForVisible('.titulo-test', 10000);
             browser.setValue('.titulo-test','Soy un titulo de prueba');
@@ -363,14 +390,13 @@ describe('Pruebas de publicacion',function(){
             browser.waitForExist('.toast-warning',10000);
             expect(browser.getText('.toast-warning')).to.be.equal('Llena todos los campos');
             browser.click('.toast-warning');
-            browser.pause(1000);
         }
     });
 
     //Prueba de publicar sin imagen preview
     it('Prueba de publicar sin imagen preview',function(){
+        browser.refresh();
         if(browser.isExisting('.container-nav')){
-            browser.refresh();
             browser.waitForVisible('.titulo-test', 10000);
             browser.setValue('.titulo-test','Soy un titulo de prueba');
             browser.chooseFile('#head',  path.resolve('./test/specs/', './img/2.png'));
@@ -415,12 +441,12 @@ describe('Pruebas de publicacion',function(){
             browser.waitForExist('.toast-warning',10000);
             expect(browser.getText('.toast-warning')).to.be.equal('Llena todos los campos');
             browser.click('.toast-warning');
-            browser.pause(1000);
         }
     });
 
     //Prueba de publicar
     it('Prueba de publicar',function(){
+        // browser.refresh();
         if(browser.isExisting('.container-nav')){
             browser.waitForVisible('.titulo-test', 10000);
             browser.setValue('.titulo-test','Soy un titulo de prueba');
@@ -439,7 +465,6 @@ describe('Pruebas de publicacion',function(){
             browser.waitForVisible('.register-modal', 10000);
             browser.click('.btn-public-now-test');
             browser.waitForExist('.home-test',10000);
-            browser.pause(2000);
             // browser.waitForExist('#toast-container',10000);
             // expect(browser.getText('.toast-success')).to.be.equal('Tu publicacion fue guardada exitosamente');
             // expect(browser.getText('.toast-message')).to.be.equal('Llena todos los campos');
@@ -450,19 +475,17 @@ describe('Pruebas de publicacion',function(){
     //Prueba de eliminar publicacion :c
     it('Prueba de eliminar publicacion. Debe salir toast de success',function(){
         if(browser.isExisting('.home-page')){
-
+            browser.pause(3000);
             browser.click('#hamburguer');
             browser.pause(1000);
             browser.click('.misPublicacionesTest');
             browser.waitForVisible('.delete-test', 10000);
+            browser.pause(1000);
             browser.click('.delete-btn');
             browser.waitForVisible('#deleteModal', 10000);
             browser.click('.btn-danger');
             browser.waitForExist('.toast-success',10000);
             expect(browser.getText('.toast-success')).to.be.equal('Tu publicacion fue eliminada :(');
-            browser.click('.home-test');
-            browser.pause(3000);
-
         }
     });
 
