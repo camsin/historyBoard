@@ -4,6 +4,7 @@ const passport = require('./../auth/passport.js').passport;
 const User = require('../models/user.js').User;
 const Image = require('./../models/image.js');
 const fs = require('fs');
+const forumController = require('../controllers/forum/forum');
 
 router.get('/', (req, res, next) => {
     if(req.user){
@@ -14,7 +15,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/publications/lastPublications', // redirect to the secure profile section
+    successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));

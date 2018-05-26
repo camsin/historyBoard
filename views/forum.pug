@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+    .home-page.col-xs-12(ng-controller="forumController")
+
+        h1 FORO
+
+
+        ul
+            li(ng-repeat="m in mensajes track by $index") {{m}}
+
+        //form(action='/postMessagePopo', method='post')
+        input(type='text', name="newMessage", ng-model="newMessage")
+        a.btn.btn-primary.m-b-50(href="",ng-click="sendMessage(newMessage)") ENVIAR
+        //a.btn.btn-primary.m-b-50(href="",ng-click="popo(newMessage)") ALV
+

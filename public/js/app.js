@@ -486,6 +486,61 @@ app.controller('publicationsByDateController', ['$scope', '$http', 'toastr', fun
 
 }]);
 
+app.controller('forumController', ['$scope', '$http', 'socket', function($scope, $http, socket){
+
+    $scope.mensajes = [];
+
+    // var messageList = '#chat-list';
+
+    // socket.emit('messages');
+
+    // socket.on('getLimitNotifications', function (data) {
+    //     $scope.getLimitNotifications();
+    //     $scope.$apply();
+    // });
+
+
+    // $scope.init = function(){
+        socket.on('message', displayMessage);
+    // };
+
+    $scope.sendMessage = function(msg){
+        console.log("ENTRE", msg);
+        $http.post('/newMessage', {newMessage:msg}).then(
+            function successCallback(){
+                console.log("okey");
+                // socket.emit('message', msg);
+            },
+            function errorCallback(error){
+                console.log(error);
+            }
+        );
+        // $(messageList).append(getMessageHTML(msg))
+    };
+
+    function displayMessage(msg){
+        console.log("NOSE QUE TRAE", msg);
+        $scope.mensajes.push(msg);
+        console.log("MENSAJES", $scope.mensajes);
+        // $(messageList).append(getMessageHTML(msg))
+    }
+
+    $scope.popo = function(msg){
+        console.log("POPO");
+        $scope.mensajes.push(msg);
+    };
+
+    function getMessageHTML(msg){
+        return '<li class="chat-message"><strong>' + msg.text + '</strong>&nbsp;<i class=\"msg-date\">'+ moment(new Date(msg.date)).format('MMMM Do YYYY, h:mm:ss a') + '</i>' +  '</li>'
+    }
+
+    // socket.on('getMessages', function (data) {
+    //     $scope.mensaje = data;
+    //     $scope.$apply();
+    // });
+
+}]);
+
 // parse a date in dd-mm-yyyy format
 function parseDate(input) {
     console.log("INPUT", input);
