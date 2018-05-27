@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    ul(ng-controller='chatController')
+        li(ng-repeat='mensaje in mensajes track by $index') {{mensaje}}
+    input#texto(ng-model='input')
+    button#boton Enviar
+    
+    

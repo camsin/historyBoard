@@ -20,7 +20,7 @@ var ux = require('./routes/ux');
 var publications = require('./routes/publications')(io);
 var users = require('./routes/users');
 var notifications = require('./routes/notifications');
-
+var chat = require('./routes/chat');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -46,7 +46,7 @@ app.use('/ux', ux);
 app.use('/publications', publications);
 app.use('/users', users);
 app.use('/notifications', notifications);
-
+app.use('/chat',chat);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.render('err404');

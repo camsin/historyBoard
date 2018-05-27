@@ -524,3 +524,15 @@ app.filter("myfilter", function($filter) {
         }
     };
 });
+app.controller('chatController',['$scope',function($scope) {
+    const socket = io('/chat');
+    $scope.mensajes = new Array();
+    $('#boton').on('click',()=>{
+        socket.emit('mensaje',$scope.input);
+    })
+
+    socket.on('mensaje',function(msg){
+        $scope.mensajes.push(msg);
+        $scope.$apply();
+    });
+}]);

@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('historyboard:server');
 var http = require('http');
 const mongoose = require('mongoose');
-
+const amqp = require('amqplib/callback_api');
 /**
  * Get port from environment and store in Express.
  */
@@ -27,6 +27,7 @@ var server = http.createServer(app);
 
 var io = app.io;
 io.attach(server);
+const chat = io.of('/chat');
 
 /* Database connection */
 
@@ -36,11 +37,15 @@ mongoose.connect("mongodb://localhost/historyBoard",{
 
 const db = mongoose.connection;
 db.on('open',() => {
+    rabbit();
+    console.log('Conectado')
   server.listen(port);
   server.on('error', onError);
   server.on('listening', onListening);
 });
-
+db.on('error',(err)=>{
+    console.log('Error al conectar a la base de datos');
+});
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -108,5 +113,27 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+function rabbit() {
+    amqp.connect('amqp://sxvsjtcd:mOrhabcXKa3-tm7AxgOR19ZVtza3DDPO@emu.rmq.cloudamqp.com/sxvsjtcd', function(err, conn) {
 
+        conn.createChannel(function(err, ch) {
+            var ROUTING_KEY = 'chat';
+            var EXCHANGE = 'amq.fanout';
+
+            ch.assertExchange(EXCHANGE, 'fanout', { durable: true });
+            chat.on('connection',function(socket) {
+                socket.on('mensaje',(msg)=>{
+                    let new_msg = Buffer.from(msg, 'binary');
+                    ch.publish('amq.fanout', ROUTING_KEY, new_msg);
+                });
+            });
+            ch.assertQueue('', { exclusive: false }, function(err, q) {
+                ch.bindQueue(q.queue, 'amq.fanout', 'message_queues');
+                ch.consume(q.queue, function(msg) {
+                    chat.emit('mensaje', msg.content.toString());
+                }, { noAck: true });
+            });
+        });
+    });
+}
 server.close();
