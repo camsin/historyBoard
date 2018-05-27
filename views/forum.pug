@@ -2,16 +2,28 @@ extends layout
 
 block content
 
-    .home-page.col-xs-12(ng-controller="forumController")
+    .home-page.col-xs-12.p-t-110.bg-chat(ng-controller="forumController")
 
-        h1 FORO
-
-
-        ul
-            li(ng-repeat="m in mensajes track by $index") {{m}}
-
-        //form(action='/postMessagePopo', method='post')
-        input(type='text', name="newMessage", ng-model="newMessage")
-        a.btn.btn-primary.m-b-50(href="",ng-click="sendMessage(newMessage)") ENVIAR
-        //a.btn.btn-primary.m-b-50(href="",ng-click="popo(newMessage)") ALV
+        div.msg-box-container
+            .chat-style
+                section
+                    div
+                        .from-them.msg-cont
+                            p Hola! aqui puedes iniciar un tema de discución
+                        .clear
+                    div(ng-repeat="m in mensajes track by $index")
+                        .msg-text
+                            .from-me.msg-cont
+                                p {{m}}
+                            .clear
+                        //.msg-text
+                            .from-them.msg-cont
+                                p {{m}}
+                            .clear
+            .msg-send
+                //form(action='/postMessagePopo', method='post')
+                input(type='text', name="newMessage", ng-model="newMessage")
+                a.btn.btn-primary.m-b-50(href="",ng-click="sendMessage(newMessage)")
+                    i.fa.fa-send
+                //a.btn.btn-primary.m-b-50(href="",ng-click="popo(newMessage)") ALV
 

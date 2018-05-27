@@ -521,6 +521,7 @@ app.controller('forumController', ['$scope', '$http', 'socket', function($scope,
     function displayMessage(msg){
         console.log("NOSE QUE TRAE", msg);
         $scope.mensajes.push(msg);
+        $scope.$apply;
         console.log("MENSAJES", $scope.mensajes);
         // $(messageList).append(getMessageHTML(msg))
     }
