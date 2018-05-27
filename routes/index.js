@@ -19,6 +19,15 @@ router.post('/login', passport.authenticate('local-login', {
     failureFlash : true // allow flash messages
 }));
 
+router.post('/login/android',passport.authenticate('local-login'), (req,res)=>{
+    if (req.user) {
+        console.log(req.user);
+        return res.sendStatus(200);
+    } else {
+        console.log('NEL PRRO ALV');
+        return res.sendStatus(401);
+    }
+});
 
 router.get('/logout', (req, res) => {
     req.logout();

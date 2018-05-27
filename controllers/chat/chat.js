@@ -1,5 +1,6 @@
 const amqp = require('amqplib/callback_api');
 exports.chat = (req,res,next)=>{
+    console.log(req.user);
     return res.render('chat');
 }
 exports.getMessages = (req,res,next) => {
