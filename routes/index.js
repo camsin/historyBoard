@@ -22,9 +22,9 @@ router.post('/login', passport.authenticate('local-login', {
 router.post('/login/android',passport.authenticate('local-login'), (req,res)=>{
     if (req.user) {
         console.log(req.user);
-        return res.sendStatus(200);
+        return res.send(200, req.user);
+        // return res.sendStatus(200);
     } else {
-        console.log('NEL PRRO ALV');
         return res.sendStatus(401);
     }
 });

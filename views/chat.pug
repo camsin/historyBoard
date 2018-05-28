@@ -19,14 +19,20 @@ block content
                         .clear
                     div(ng-repeat='mensaje in mensajes track by $index')
                         .msg-text(ng-show=`mensaje.user._id==='${user._id}'`)
+                            div
+                                img(ng-src='/publications/getImages/{{publication.author.profilePicture}}', height='100%', width='100%')
                             .from-me.msg-cont
-                                p.m-b-0 {{mensaje}}
+                                p.name {{mensaje.user.name}}
+                                p {{mensaje.mensaje}}
+                                p.date {{mensaje.date | date}}
                             .clear
                         .msg-text(ng-show=`mensaje.user._id!=='${user._id}'`)
                             .from-them.msg-cont
-                                p.m-b-0 {{mensaje}}
+                                p.name {{mensaje.user.name}}
+                                p {{mensaje.mensaje}}
+                                p.date {{mensaje.date | date}}
                             .clear
             .msg-send
-                input#texto(ng-model='input')
+                input#texto(ng-model='input' required)
                 button#boton.btn.btn-primary.m-b-50(ng-disabled="input.length === 0")
                     i.fa.fa-send

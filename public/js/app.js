@@ -546,7 +546,7 @@ app.controller('chatController',['$scope','$http',function($scope,$http) {
 
     socket.on('mensaje',function(msg){
         var mensajeJson = JSON.parse(msg);
-        $scope.getUser(mensajeJson.user);
+        // $scope.getUser(mensajeJson.user);
         $http.get('/users/getUserById/'+ mensajeJson.user).success(data => {
             mensajeJson.user = data;
             $scope.mensajes.push(mensajeJson);

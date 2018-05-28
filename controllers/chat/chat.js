@@ -24,7 +24,7 @@ function chat(req, res ,next){
 };
 
 function getMessages(req, res, next){
-    amqp.connect('amqp://sxvsjtcd:mOrhabcXKa3-tm7AxgOR19ZVtza3DDPO@emu.rmq.cloudamqp.com/sxvsjtcd', function(err, conn) {
+    amqp.connect('amqp://dtnjyulk:yJ27rs4eQUW1ek6URIP35iR6MDgpgSvT@wasp.rmq.cloudamqp.com/dtnjyulk', function(err, conn) {
       conn.createChannel(function(err, ch) {
         var q = 'hello';
 

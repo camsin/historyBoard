@@ -1770,6 +1770,20 @@ textarea:focus, input:focus, a:focus{
   font-family: "Helvetica Neue";
   font-size: 14px;
   font-weight: normal;
+  .date {
+    position: absolute;
+    right: 23px;
+    color: rgba(0,0,0,0.4);
+    font-size: 11px;
+    bottom: -9px;
+  }
+  .name {
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    position: absolute;
+    top: -23px;
+    left: 21px;
+  }
   section {
     max-width: 90%;
     margin: 50px auto;
@@ -1777,8 +1791,9 @@ textarea:focus, input:focus, a:focus{
     .msg-cont {
       max-width: 355px;
       word-wrap: break-word;
-      margin-bottom: 12px;
+      margin-bottom: 35px;
       line-height: 24px;
+      min-width: 200px;
       &:after {
         content: "";
         display: table;
@@ -1874,7 +1889,7 @@ textarea:focus, input:focus, a:focus{
   border-radius: 10px;
   .msg-text {
     p {
-      margin-bottom: 0px;
+      //margin-bottom: 0px;
     }
   }
 }
