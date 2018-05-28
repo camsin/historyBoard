@@ -113,23 +113,28 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+//Exchange: Recibe mensajes de productores y los empuja a colas dependiendo de las reglas definidas por el tipo de exchange
+//Existen varios tipos de EXCHANGES, escogimos el FANOUT: Redirigen los mensajes recibidos a todas las colas enlazadas al mismo.
+//ROUTING_KEY: es una llave que el exchange mira para decidir como enrutar el mensaje a las queues
+
 function rabbit() {
     amqp.connect('amqp://dtnjyulk:yJ27rs4eQUW1ek6URIP35iR6MDgpgSvT@wasp.rmq.cloudamqp.com/dtnjyulk', function(err, conn) {
 
         conn.createChannel(function(err, ch) {
             var ROUTING_KEY = 'chat';
-            var EXCHANGE = 'amq.fanout';
+            var EXCHANGE = 'history';
 
             ch.assertExchange(EXCHANGE, 'fanout', { durable: true });
             chat.on('connection',function(socket) {
                 socket.on('mensaje',(msg)=>{
                     console.log("MENSAJE", msg);
                     let new_msg = new Buffer(JSON.stringify(msg));
-                    ch.publish('amq.fanout', ROUTING_KEY, new_msg);
+                    ch.publish('history', ROUTING_KEY, new_msg);
                 });
             });
-            ch.assertQueue('', { exclusive: false }, function(err, q) {
-                ch.bindQueue(q.queue, 'amq.fanout', 'message_queues');
+            ch.assertQueue('history', { exclusive: false }, function(err, q) {
+                ch.bindQueue(q.queue, 'history', 'message_queues');
                 ch.consume(q.queue, function(msg) {
                     chat.emit('mensaje', msg.content.toString());
                 }, { noAck: true });
