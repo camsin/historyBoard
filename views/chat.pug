@@ -16,13 +16,13 @@ block content
                             div
                                 img(ng-src='/publications/getImages/{{publication.author.profilePicture}}', height='100%', width='100%')
                             .from-me.msg-cont
-                                p.name {{mensaje.user.name}}
+                                p.name(style="overflow: hidden;display: -webkit-box !important; -webkit-line-clamp: 1; -webkit-box-orient: vertical;") {{mensaje.user.name}}
                                 p {{mensaje.mensaje}}
                                 p.date {{mensaje.date | date:'dd/MM/yyyy h:mma'}}
                             .clear
                         .msg-text(ng-show=`mensaje.user._id!=='${user._id}'`)
                             .from-them.msg-cont
-                                p.name {{mensaje.user.name}}
+                                p.name(style="overflow: hidden;display: -webkit-box !important; -webkit-line-clamp: 1; -webkit-box-orient: vertical;") {{mensaje.user.name}}
                                 p {{mensaje.mensaje}}
                                 p.date {{mensaje.date | date:'dd/MM/yyyy h:mma'}}
                             .clear
