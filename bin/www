@@ -123,7 +123,8 @@ function rabbit() {
             ch.assertExchange(EXCHANGE, 'fanout', { durable: true });
             chat.on('connection',function(socket) {
                 socket.on('mensaje',(msg)=>{
-                    let new_msg = Buffer.from(msg, 'binary');
+                    console.log("MENSAJE", msg);
+                    let new_msg = new Buffer(JSON.stringify(msg));
                     ch.publish('amq.fanout', ROUTING_KEY, new_msg);
                 });
             });

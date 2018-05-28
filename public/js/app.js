@@ -524,15 +524,36 @@ app.filter("myfilter", function($filter) {
         }
     };
 });
-app.controller('chatController',['$scope',function($scope) {
+app.controller('chatController',['$scope','$http',function($scope,$http) {
+
+    $scope.input = "";
+
     const socket = io('/chat');
+
     $scope.mensajes = new Array();
     $('#boton').on('click',()=>{
-        socket.emit('mensaje',$scope.input);
+        socket.emit('mensaje',{mensaje:$scope.input, date:new Date(), user: $scope.userId});
+        $scope.input = "";
     })
 
+    var wage = document.getElementById("texto");
+    wage.addEventListener("keydown", function (e) {
+        if (e.keyCode === 13) {
+            socket.emit('mensaje',{mensaje:$scope.input, date:new Date(), user: $scope.userId});
+            $scope.input = "";
+        }
+    });
+
     socket.on('mensaje',function(msg){
-        $scope.mensajes.push(msg);
-        $scope.$apply();
+        var mensajeJson = JSON.parse(msg);
+        $scope.getUser(mensajeJson.user);
+        $http.get('/users/getUserById/'+ mensajeJson.user).success(data => {
+            mensajeJson.user = data;
+            $scope.mensajes.push(mensajeJson);
+        }).error(err => {
+                toastr.error('Hubo un error obteniendo el usuario', 'Error');
+        });
+            $scope.$apply();
+
     });
 }]);

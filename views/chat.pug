@@ -1,9 +1,32 @@
 extends layout
 
 block content
-    ul(ng-controller='chatController')
-        li(ng-repeat='mensaje in mensajes track by $index') {{mensaje}}
-    input#texto(ng-model='input')
-    button#boton Enviar
-    
-    
+    //ul(ng-controller='chatController')
+    //    li(ng-repeat='mensaje in mensajes track by $index') {{mensaje}}
+    //input#texto(ng-model='input')
+    //button#boton Enviar
+    //
+
+
+    .home-page.col-xs-12.p-t-110.bg-chat(ng-controller='chatController', ng-init=`userId = '${user._id}'`)
+
+        div.msg-box-container
+            .chat-style
+                section
+                    div
+                        .from-them.msg-cont
+                            p.m-b-0 Hola! aqui puedes iniciar un tema de discución
+                        .clear
+                    div(ng-repeat='mensaje in mensajes track by $index')
+                        .msg-text(ng-show=`mensaje.user._id==='${user._id}'`)
+                            .from-me.msg-cont
+                                p.m-b-0 {{mensaje}}
+                            .clear
+                        .msg-text(ng-show=`mensaje.user._id!=='${user._id}'`)
+                            .from-them.msg-cont
+                                p.m-b-0 {{mensaje}}
+                            .clear
+            .msg-send
+                input#texto(ng-model='input')
+                button#boton.btn.btn-primary.m-b-50(ng-disabled="input.length === 0")
+                    i.fa.fa-send

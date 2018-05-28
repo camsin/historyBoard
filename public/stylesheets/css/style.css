@@ -43,6 +43,9 @@ textarea:focus, input:focus, a:focus {
 .p-t-35 {
   padding-top: 35px; }
 
+.p-t-110 {
+  padding-top: 110px !important; }
+
 .m-t-15 {
   margin-top: 15px; }
 
@@ -1175,3 +1178,76 @@ textarea:focus, input:focus, a:focus {
 
 .bgm-blue {
   background-color: #2d4250 !important; }
+
+.chat-style {
+  overflow: auto;
+  height: 100%;
+  padding-bottom: 30px;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  font-weight: normal; }
+  .chat-style section {
+    max-width: 90%;
+    margin: 50px auto; }
+    .chat-style section .msg-cont {
+      max-width: 355px;
+      word-wrap: break-word;
+      margin-bottom: 12px;
+      line-height: 24px; }
+      .chat-style section .msg-cont:after {
+        content: "";
+        display: table;
+        clear: both; }
+  .chat-style .clear {
+    clear: both; }
+  .chat-style .from-me {
+    position: relative;
+    padding: 10px 20px;
+    color: white;
+    background: #0B93F6;
+    border-radius: 25px;
+    float: right; }
+  .chat-style .from-them {
+    position: relative;
+    padding: 10px 20px;
+    background: #E5E5EA;
+    border-radius: 25px;
+    color: black;
+    float: left; }
+
+.bg-chat {
+  height: 100vh;
+  width: 100%;
+  background-image: url(http://data.freehdw.com/church-in-mexico.jpg);
+  background-size: cover; }
+
+.msg-box-container {
+  margin-top: 50px;
+  width: 90%;
+  height: 90%;
+  background: rgba(255, 255, 255, 0.9);
+  position: relative;
+  margin: auto;
+  border-radius: 10px; }
+  .msg-box-container .msg-text p {
+    margin-bottom: 0px; }
+
+.msg-send {
+  position: absolute;
+  bottom: 0;
+  background: white;
+  width: 100%;
+  border-radius: 0 0 10px 10px; }
+  .msg-send input {
+    width: calc(100% - 117px) !important;
+    margin-left: 30px !important; }
+  .msg-send button {
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    border-radius: 50% !important;
+    width: 40px;
+    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    padding: 0px !important; }
