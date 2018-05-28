@@ -385,7 +385,7 @@ textarea:focus, input:focus, a:focus{
   background-attachment: fixed;
   background-size:  cover;
   padding: 80px 50px;
-
+  height: 100vh;
   .dark-cover {
     position: fixed;
     padding: 0;
@@ -1766,7 +1766,7 @@ textarea:focus, input:focus, a:focus{
 .chat-style {
   overflow: auto;
   height: 100%;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
   font-family: "Helvetica Neue";
   font-size: 14px;
   font-weight: normal;

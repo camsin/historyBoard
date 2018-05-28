@@ -21,11 +21,27 @@ function getMyProfile(req, res, next){
 
 function getUserById(req, res, next){
     User.findOne({"_id": req.params.id}).exec(function(err, user){
+
         if(err){
             res.json(err);
         }
 
         res.json(user);
+    });
+};
+
+function getUserByIdAndroid(req, res, next){
+    console.log('entre 🥑');
+    console.log('entre 🥑', req.params.id);
+    User.findOne({"_id": req.params.id}).exec(function(err, user){
+
+        if(err){
+            console.log('entre al error🍇');
+            return res.send(500, err);
+        }
+
+        console.log('imprimi un usuario, 🍌', user);
+        return res.send(200, user);
     });
 };
 
@@ -66,5 +82,6 @@ module.exports = {
     myProfile,
     getMyProfile,
     updateMyProfile,
-    getUserById
+    getUserById,
+    getUserByIdAndroid
 };

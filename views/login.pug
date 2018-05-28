@@ -21,7 +21,7 @@ block content
       div(class="title-container")
         label(class="subtitle") MÉXICO
         label(class="title") HISTORY BOARD
-        label(class="slogan") "Aprendamos del presente con nuestro pasado"
+        label(class="slogan") Aprendamos del presente con nuestro pasado
     .modal.fade.register-modal(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
         .modal-dialog.modal-lg
             .modal-content
@@ -34,18 +34,19 @@ block content
                         .col-xs-12.col-md-4.responsive-img-cactus
                             .text-align-c
                                 img.max-w-230(src="/images/logo.png")
-                            //.col-xs-12
-                            //    .col-xs-12
-                            //        p(class="social-register") O REGISTRATE CON
-                            //    .col-xs-6.text-align-r
-                            //        a(href="/auth/facebook")
-                            //            img(src="/images/fb-icon.png", class="max-w-40")
-                            //    //.col-xs-4
-                            //    //    a(href="/auth/twitter")
-                            //    //        img(src="/images/tw-icon.png")
-                            //    .col-xs-6
-                            //        a(href="/auth/google")
-                            //            img(src="/images/gl-icon.png", class="max-w-40")
+                            .col-xs-12
+                                .col-xs-12
+                                    p(class="social-register") O REGISTRATE CON
+                                .col-xs-12.text-align-r
+                                    .col-xs-12(style="text-align:  center;")
+                                        a(href="/auth/google")
+                                            img(src="/images/gl-icon.png", class="max-w-40")
+                                    //a(href="/auth/facebook")
+                                    //    img(src="/images/fb-icon.png", class="max-w-40")
+                                //.col-xs-4
+                                //    a(href="/auth/twitter")
+                                //        img(src="/images/tw-icon.png")
+
                         form.col-xs-12.col-md-8.material-input(method="POST" action="/registrar")
                             .input-field.col.s6
                                 input#name.name-register-test(type='text' name="name" required)
@@ -74,9 +75,13 @@ block content
                         .col-xs-12.col-md-4
                             .text-align-c
                                 img.max-w-230(src="/images/logo.png")
-                            //.col-xs-12
-                            //    .col-xs-12
-                            //        p(class="social-register") O INICIA SESION CON
+                            .col-xs-12
+                                .col-xs-12
+                                    p(class="social-register") O INICIA SESION CON
+                                .col-xs-12.text-align-r
+                                    .col-xs-12(style="text-align:  center;")
+                                        a(href="/auth/google")
+                                            img(src="/images/gl-icon.png", class="max-w-40")
                                 //.col-xs-6.text-align-r
                                 //    a(href="/auth/facebook")
                                 //        img(src="/images/fb-icon.png", class="max-w-40")

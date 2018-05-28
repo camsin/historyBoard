@@ -186,7 +186,8 @@ textarea:focus, input:focus, a:focus {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  padding: 80px 50px; }
+  padding: 80px 50px;
+  height: 100vh; }
   .login-view .dark-cover {
     position: fixed;
     padding: 0;
@@ -1182,7 +1183,7 @@ textarea:focus, input:focus, a:focus {
 .chat-style {
   overflow: auto;
   height: 100%;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
   font-family: "Helvetica Neue";
   font-size: 14px;
   font-weight: normal; }
