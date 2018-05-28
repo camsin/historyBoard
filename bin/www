@@ -31,7 +31,7 @@ const chat = io.of('/chat');
 
 /* Database connection */
 
-mongoose.connect("mongodb://localhost/historyBoard",{
+mongoose.connect("mongodb://camendez:123qwe@ds123956.mlab.com:23956/history-board",{
   useMongoClient: true
 });
 
