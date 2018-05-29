@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('historyboard:server');
 var http = require('http');
 const mongoose = require('mongoose');
-const amqp = require('amqplib/callback_api');
+// const amqp = require('amqplib/callback_api');
 /**
  * Get port from environment and store in Express.
  */
@@ -27,17 +27,17 @@ var server = http.createServer(app);
 
 var io = app.io;
 io.attach(server);
-const chat = io.of('/chat');
+// const chat = io.of('/chat');
 
 /* Database connection */
 
-mongoose.connect("mongodb://camendez:123qwe@ds123956.mlab.com:23956/history-board",{
+mongoose.connect("mongodb://localhost/history-board",{
   useMongoClient: true
 });
 
 const db = mongoose.connection;
 db.on('open',() => {
-    rabbit();
+    // rabbit();
     console.log('Conectado')
   server.listen(port);
   server.on('error', onError);
@@ -118,28 +118,28 @@ function onListening() {
 //Existen varios tipos de EXCHANGES, escogimos el FANOUT: Redirigen los mensajes recibidos a todas las colas enlazadas al mismo.
 //ROUTING_KEY: es una llave que el exchange mira para decidir como enrutar el mensaje a las queues
 
-function rabbit() {
-    amqp.connect('amqp://dtnjyulk:yJ27rs4eQUW1ek6URIP35iR6MDgpgSvT@wasp.rmq.cloudamqp.com/dtnjyulk', function(err, conn) {
-
-        conn.createChannel(function(err, ch) {
-            var ROUTING_KEY = 'chat';
-            var EXCHANGE = 'history';
-
-            ch.assertExchange(EXCHANGE, 'fanout', { durable: true });
-            chat.on('connection',function(socket) {
-                socket.on('mensaje',(msg)=>{
-                    console.log("MENSAJE", msg);
-                    let new_msg = new Buffer(JSON.stringify(msg));
-                    ch.publish('history', ROUTING_KEY, new_msg);
-                });
-            });
-            ch.assertQueue('history', { exclusive: false }, function(err, q) {
-                ch.bindQueue(q.queue, 'history', 'message_queues');
-                ch.consume(q.queue, function(msg) {
-                    chat.emit('mensaje', msg.content.toString());
-                }, { noAck: true });
-            });
-        });
-    });
-}
+// function rabbit() {
+//     amqp.connect('amqp://dtnjyulk:yJ27rs4eQUW1ek6URIP35iR6MDgpgSvT@wasp.rmq.cloudamqp.com/dtnjyulk', function(err, conn) {
+//
+//         conn.createChannel(function(err, ch) {
+//             var ROUTING_KEY = 'chat';
+//             var EXCHANGE = 'history';
+//
+//             ch.assertExchange(EXCHANGE, 'fanout', { durable: true });
+//             chat.on('connection',function(socket) {
+//                 socket.on('mensaje',(msg)=>{
+//                     console.log("MENSAJE", msg);
+//                     let new_msg = new Buffer(JSON.stringify(msg));
+//                     ch.publish('history', ROUTING_KEY, new_msg);
+//                 });
+//             });
+//             ch.assertQueue('history', { exclusive: false }, function(err, q) {
+//                 ch.bindQueue(q.queue, 'history', 'message_queues');
+//                 ch.consume(q.queue, function(msg) {
+//                     chat.emit('mensaje', msg.content.toString());
+//                 }, { noAck: true });
+//             });
+//         });
+//     });
+// }
 server.close();

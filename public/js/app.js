@@ -524,23 +524,44 @@ app.filter("myfilter", function($filter) {
         }
     };
 });
-app.controller('chatController',['$scope','$http',function($scope,$http) {
+app.controller('chatController',['$scope','$http','socket',function($scope,$http,socket) {
 
     $scope.input = "";
 
-    const socket = io('/chat');
+    // const socket = io('/chat');
 
     $scope.mensajes = new Array();
-    $('#boton').on('click',()=>{
-        socket.emit('mensaje',{mensaje:$scope.input, date:new Date(), user: $scope.userId});
-        $scope.input = "";
-    })
+
+    $scope.sendMessage = function(){
+        var msg = {mensaje:$scope.input, date:new Date(), user: $scope.userId};
+        $http.post('/chat/m', msg).then(data => {
+            console.log("DATA", data);
+            $scope.input = "";
+            $scope.getMessages();
+        });
+    };
+
+    $scope.getMessages = function(){
+        $http.get('/chat/g').success(data => {
+            console.log("DATA", data);
+        $scope.mensajes.push(data);
+    }).error(err => {
+            console.log("ERR", err);
+        // toastr.error('Hubo un error obteniendo tus publicaciones', 'Error');
+    });
+    }
+
+    // $('#boton').on('click',()=>{
+    //     socket.emit('mensajeToSend',{mensaje:$scope.input, date:new Date(), user: $scope.userId});
+    //     $scope.input = "";
+    // })
 
     var wage = document.getElementById("texto");
     wage.addEventListener("keydown", function (e) {
         if (e.keyCode === 13) {
-            socket.emit('mensaje',{mensaje:$scope.input, date:new Date(), user: $scope.userId});
-            $scope.input = "";
+            $scope.sendMessage();
+            // socket.emit('mensajeToSend',{mensaje:$scope.input, date:new Date(), user: $scope.userId});
+            // $scope.input = "";
         }
     });
 

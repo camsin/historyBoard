@@ -15,12 +15,12 @@ var app = express();
 var io = socket();
 app.io = io;
 
-var login = require('./routes/index');
+var login = require('./routes/index')(io);
 var ux = require('./routes/ux');
 var publications = require('./routes/publications')(io);
 var users = require('./routes/users');
 var notifications = require('./routes/notifications');
-var chat = require('./routes/chat');
+var chat = require('./routes/chat')(io);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

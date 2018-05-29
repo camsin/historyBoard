@@ -28,5 +28,5 @@ block content
                             .clear
             .msg-send
                 input#texto(ng-model='input')
-                button#boton.btn.btn-primary.m-b-50.btn-send-msg(ng-disabled="input.length === 0")
+                button#boton.btn.btn-primary.m-b-50.btn-send-msg(ng-disabled="input.length === 0", ng-click="sendMessage()")
                     i.fa.fa-send

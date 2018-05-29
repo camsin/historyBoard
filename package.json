@@ -2,9 +2,9 @@
   "name": "historyboard",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
+//  "scripts": {
+//    "start": "node ./bin/www"
+//  },
   "dependencies": {
     "amqplib": "^0.5.2",
     "angular-toastr": "^2.1.1",

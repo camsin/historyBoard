@@ -4,9 +4,16 @@ const passport = require('./../auth/passport.js').passport;
 const User = require('../models/user.js').User;
 const Image = require('./../models/image.js');
 const fs = require('fs');
+var amqp = require('amqplib/callback_api');
 
-router.get('/', (req, res, next) => {
+
+module.exports = function(io) {
+
+    // const chat = io.of('/chat');
+
+    router.get('/', (req, res, next) => {
     if(req.user){
+
         res.render('publications/lastPublications', {showSideNav: true, user: req.user});
     }else{
         res.render('login', {showSideNav: false, error: req.flash('error')});
@@ -14,7 +21,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/publications/lastPublications', // redirect to the secure profile section
+    successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));
@@ -94,5 +101,8 @@ router.post('/registrar', function (req, res) {
     }
 });
 
+    return router;
+};
 
-module.exports = router;
+
+// module.exports = router;
