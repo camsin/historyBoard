@@ -24,17 +24,17 @@ function chat(req, res ,next){
 };
 
 function getMessages(req, res, next){
-    amqp.connect('amqp://dtnjyulk:yJ27rs4eQUW1ek6URIP35iR6MDgpgSvT@wasp.rmq.cloudamqp.com/dtnjyulk', function(err, conn) {
-      conn.createChannel(function(err, ch) {
-        var q = 'hello';
-
-        ch.assertQueue(q, {durable: false});
-        // Note: on Node 6 Buffer.from(msg) should be used
-        ch.sendToQueue(q, new Buffer('Hello World!'));
-        console.log(" [x] Sent 'Hello World!'");
-        conn.close();
-      });
-    });
+    // amqp.connect('amqp://http://localhost:15672/#/queues', function(err, conn) {
+    //   conn.createChannel(function(err, ch) {
+    //     var q = 'hello';
+    //
+    //     ch.assertQueue(q, {durable: false});
+    //     // Note: on Node 6 Buffer.from(msg) should be used
+    //     ch.sendToQueue(q, new Buffer('Hello World!'));
+    //     console.log(" [x] Sent 'Hello World!'");
+    //     conn.close();
+    //   });
+    // });
 };
 
 module.exports = {

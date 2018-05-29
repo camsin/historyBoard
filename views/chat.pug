@@ -13,8 +13,6 @@ block content
                         .clear
                     div(ng-repeat='mensaje in mensajes track by $index')
                         .msg-text(ng-show=`mensaje.user._id==='${user._id}'`)
-                            div
-                                img(ng-src='/publications/getImages/{{publication.author.profilePicture}}', height='100%', width='100%')
                             .from-me.msg-cont
                                 p.name(style="overflow: hidden;display: -webkit-box !important; -webkit-line-clamp: 1; -webkit-box-orient: vertical;") {{mensaje.user.name}}
                                 p {{mensaje.mensaje}}

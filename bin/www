@@ -13,7 +13,7 @@ const amqp = require('amqplib/callback_api');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
 
 /**
@@ -123,21 +123,21 @@ function rabbit() {
 
         conn.createChannel(function(err, ch) {
             var ROUTING_KEY = 'chat';
-            var EXCHANGE = 'history';
+            var EXCHANGE = 'amq.fanout';
 
             ch.assertExchange(EXCHANGE, 'fanout', { durable: true });
             chat.on('connection',function(socket) {
                 socket.on('mensaje',(msg)=>{
                     console.log("MENSAJE", msg);
                     let new_msg = new Buffer(JSON.stringify(msg));
-                    ch.publish('history', ROUTING_KEY, new_msg);
+                    ch.publish('amq.fanout', ROUTING_KEY, new_msg);
                 });
             });
-            ch.assertQueue('history', { exclusive: false }, function(err, q) {
-                ch.bindQueue(q.queue, 'history', 'message_queues');
+            ch.assertQueue('', { exclusive: true }, function(err, q) {
+                ch.bindQueue(q.queue, 'amq.fanout', 'message_queues');
                 ch.consume(q.queue, function(msg) {
                     chat.emit('mensaje', msg.content.toString());
-                }, { noAck: true });
+                }, { noAck: false });
             });
         });
     });
